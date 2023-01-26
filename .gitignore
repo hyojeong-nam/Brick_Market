@@ -4,3 +4,5 @@ Servers
 .settings
 .classpath
 .project
+web.xml
+MANIFEST.MF
