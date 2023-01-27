@@ -7,13 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form name="imgUpload" method="post" action="imgUpload_ok.jsp"
-enctype=""multipart/form-data"">
+<form name="imgUpload" method="post" action="/brick_market/bbs/imgUpload_ok.jsp"
+enctype="multipart/form-data">
 <h3>이미지 선택하기</h3>
 <input type="file" name="img">
 <div><input type="submit" value="이미지 첨부하기"></div>
-
 </form>
-
 </body>
 </html>
