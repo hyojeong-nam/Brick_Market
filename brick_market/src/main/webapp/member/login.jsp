@@ -5,12 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="styLesheet" type="text/css" href="../css/maincss.css">
+<link rel="styLesheet" type="text/css" href="/brick_market/css/maincss.css">
 <style>
-table{
-border-spacing: 10px;
-margin-left:300px;
-margin-right:auto;
+body
+{
+  margin: 0px auto;
 }
 h1{
 text-align: center;

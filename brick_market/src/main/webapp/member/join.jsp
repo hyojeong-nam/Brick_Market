@@ -5,19 +5,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="styLesheet" type="text/css" href="../css/maincss.css">
+<link rel="styLesheet" type="text/css" href="/brick_market/css/maincss.css">
 <style>
-table{
-border-spacing: 10px;
-margin-left:300px;
-margin-right:auto;
+body
+{
+  margin: 0 auto;
 }
 th {
   text-align: right;
 }
 </style>
+<script>
+function open_idcheck(){
+window.open('idCheck.jsp','idCheck','width=450, height=150')
+}
+</script>
 </head>
-<body>
+<body >
 	<%@include file="/header.jsp"%>
 	<section>
 		<form name="join" action="join_ok.jsp">
@@ -31,25 +35,26 @@ th {
 				</tr>
 				<tr>
 					<th>아이디</th>
-					<td><input type="text" name="id" required> 
-					<input type="submit" name="idCheck" value="중복확인"></td>
+					<td><input type="text" name="id" required readonly onclick="open_idcheck()"> 
+					<input type="button" value="중복확인" onclick="open_idcheck()">
+					</td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td><input type="text" name="pwd"></td>
+					<td><input type="password" name="pwd" required></td>
 				</tr>
 				<tr>
 					<th>비밀번호 확인</th>
-					<td><input type="text"> <input type="submit" value="확인"></td>
+					<td><input type="password" name="pwdCheck"> <input type="submit" value="확인" required></td>
 				</tr>
 				<tr>
 					<th>닉네임</th>
-					<td><input type="text" name="nickname"></td>
+					<td><input type="text" name="nick" required></td>
 				</tr>
 				<tr>
 					<th>이메일</th>
 					<td>
-					<input type="text" name="email_id"> @
+					<input type="text" name="email" required> @
 					<input type="text" name="domail" readonly>
 					<select>
 					<option value="naver.com">naver.com</option>

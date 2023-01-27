@@ -2,6 +2,8 @@ package com.team4.member;
 
 import java.sql.*;
 import java.util.*;
+import javax.sql.*;
+import javax.naming.*;
 
 public class MemberDAO {
 	
@@ -127,6 +129,29 @@ public class MemberDAO {
 			// TODO: handle finally clause
 		}
 		
+	}
+	
+	public boolean idCheck(String userid) {
+		try{
+			conn=com.team4.db.Team4DB.getConn();
+			String sql="select member_id from member_table where member_id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, userid);
+			rs=ps.executeQuery();
+			
+			return rs.next();
+			
+		}catch(Exception e) {
+			return false;
+		}finally {
+		try {
+			if(rs!=null) rs.close();
+			if(ps!=null) ps.close();
+			if(conn!=null) conn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		}
 	}
 	
 	
