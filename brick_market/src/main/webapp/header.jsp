@@ -13,7 +13,7 @@
 		<input type="submit" value="검색">
 		</form>
 	<div class="style">
-		<span>내상점</span> <span>상품등록</span>
+		<span>내상점</span> <span><a href="/brick_market/bbs/write.jsp">상품등록</a></span>
 	</div>
 	<nav>
 		
