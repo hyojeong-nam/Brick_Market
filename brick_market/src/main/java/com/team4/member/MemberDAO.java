@@ -100,4 +100,34 @@ public class MemberDAO {
 			}
 		}
 	}
+	
+	/**비밀번호 확인*/
+	public boolean checkPwd(int idx, String pwd) {
+		try {
+			conn = com.team4.db.Team4DB.getConn();
+			String sql = "select * from member_table where idx = ?, pwd = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1,idx);
+			ps.setString(2, pwd);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			// TODO: handle finally clause
+		}
+		
+	}
+	
+	
 }
