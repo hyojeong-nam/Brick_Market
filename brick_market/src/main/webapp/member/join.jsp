@@ -5,25 +5,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="styLesheet" type="text/css" href="../css/maincss.css">
+<style>
+table{
+border-spacing: 10px;
+margin-left:300px;
+margin-right:auto;
+}
+th {
+  text-align: right;
+}
+</style>
 </head>
 <body>
 	<%@include file="/header.jsp"%>
 	<section>
-		<h2>회원가입</h2>
-		<form name="join">
+		<form name="join" action="join_ok.jsp">
 			<table>
+			<tr>
+			<td><h2>회원가입</h2></td>
+			</tr>
 				<tr>
 					<th>이름</th>
-					<td><input type="text"></td>
+					<td><input type="text" name="name" required></td>
 				</tr>
 				<tr>
 					<th>아이디</th>
-					<td><input type="text"> 
-					<input type="submit" value="중복확인"></td>
+					<td><input type="text" name="id" required> 
+					<input type="submit" name="idCheck" value="중복확인"></td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td><input type="text"></td>
+					<td><input type="text" name="pwd"></td>
 				</tr>
 				<tr>
 					<th>비밀번호 확인</th>
@@ -31,13 +44,13 @@
 				</tr>
 				<tr>
 					<th>닉네임</th>
-					<td><input type="text"></td>
+					<td><input type="text" name="nickname"></td>
 				</tr>
 				<tr>
 					<th>이메일</th>
 					<td>
-					<input type="text"> @
-					<input type="text" readonly>
+					<input type="text" name="email_id"> @
+					<input type="text" name="domail" readonly>
 					<select>
 					<option value="naver.com">naver.com</option>
 					<option value="gmail.com">gmail.com</option>
@@ -49,9 +62,9 @@
 					</td>
 				</tr>
 				<tr>
-				<td colspan="3"> <input type="submit" value="가입하기">
+				<td colspan="3" style="text-align:center"> <input type="submit" value="가입하기">
 				<input type="reset" value="다시 작성">
-				<input type="button" value="취소하기" onclick="history.back();">
+				<input type="button" value="취소하기" onclick="history.back()">
 				</td>
 				</tr>
 			</table>
