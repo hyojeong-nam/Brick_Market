@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="styLesheet" type="text/css" href="css/maincss.css">
+<link rel="styLesheet" type="text/css" href="/brick_market/css/maincss.css">
 <style type="text/css">
 body {
 	width: 1200px;
