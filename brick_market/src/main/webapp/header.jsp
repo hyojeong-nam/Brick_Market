@@ -25,7 +25,7 @@
 		</ul>
 	</nav>
 	<div class="aa">
-		<a>이용가이드</a> <a>신고조회</a>
+		<a>이용가이드</a> <a href="/brick_market/report/reportList.jsp">신고조회</a>
 	</div>
 	<hr>
 </header>

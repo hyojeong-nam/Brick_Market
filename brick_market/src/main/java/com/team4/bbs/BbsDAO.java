@@ -36,7 +36,29 @@ public class BbsDAO {
 			}
 		}
 	}
-	
+	 public int getTotalCnt() {
+		 try {
+			 conn=com.team4.db.Team4DB.getConn();
+			 String sql="select count(*) from bbs_table";
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+			// TODO: handle exception
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+			
+		}
+	 }
 	
 	/**글 보기 (페이징)*/
 	public ArrayList<BbsDTO> bbsList(int size, int page, int extra){

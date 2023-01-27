@@ -6,7 +6,7 @@
 <ul>
 <li>사이트소개</li>
 <li>이용약관</li>
-<li>신고하기</li>
+<li><a href="/brick_market/report.jsp">신고하기</a></li>
 
 </ul>
 </nav>
