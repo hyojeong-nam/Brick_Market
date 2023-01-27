@@ -15,6 +15,7 @@ public class BbsDTO {
 	private int bbs_status;
 	private String bbs_place;
 	private int bbs_how;
+	private String bbs_date_s;
 	public BbsDTO() {
 		super();
 	}
@@ -33,6 +34,30 @@ public class BbsDTO {
 		this.bbs_status = bbs_status;
 		this.bbs_place = bbs_place;
 		this.bbs_how = bbs_how;
+	}
+	public BbsDTO(int bbs_idx, String bbs_subject, String bbs_content, int bbs_price, String bbs_img, Date bbs_date,
+			int bbs_readnum, int bbs_writer_idx, int bbs_category, int bbs_status, String bbs_place, int bbs_how,
+			String bbs_date_s) {
+		super();
+		this.bbs_idx = bbs_idx;
+		this.bbs_subject = bbs_subject;
+		this.bbs_content = bbs_content;
+		this.bbs_price = bbs_price;
+		this.bbs_img = bbs_img;
+		this.bbs_date = bbs_date;
+		this.bbs_readnum = bbs_readnum;
+		this.bbs_writer_idx = bbs_writer_idx;
+		this.bbs_category = bbs_category;
+		this.bbs_status = bbs_status;
+		this.bbs_place = bbs_place;
+		this.bbs_how = bbs_how;
+		this.bbs_date_s = bbs_date_s;
+	}
+	public String getBbs_date_s() {
+		return bbs_date_s;
+	}
+	public void setBbs_date_s(String bbs_date_s) {
+		this.bbs_date_s = bbs_date_s;
 	}
 	public int getBbs_idx() {
 		return bbs_idx;

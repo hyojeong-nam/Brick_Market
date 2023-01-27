@@ -36,6 +36,7 @@ public class BbsDAO {
 			}
 		}
 	}
+	/**총페이지수 구하기*/
 	 public int getTotalCnt() {
 		 try {
 			 conn=com.team4.db.Team4DB.getConn();
@@ -81,14 +82,15 @@ public class BbsDAO {
 				String bbs_content = rs.getString("bbs_content");
 				int bbs_price = rs.getInt("bbs_price");
 				String bbs_img = rs.getString("bbs_img");
-				java.sql.Date bbs_date = rs.getDate("bbs_date");
+				String bbs_date_s = rs.getString("bbs_date");
+				java.sql.Date bbs_date=rs.getDate("bbs_date");
 				int bbs_readnum = rs.getInt("bbs_readnum");
 				int bbs_writer_idx = rs.getInt("bbs_writer_idx");
 				int bbs_category = rs.getInt("bbs_category");
 				int bbs_status = rs.getInt("bbs_status");
 				String bbs_place = rs.getString("bbs_place");
 				int bbs_how = rs.getInt("bbs_how");
-				BbsDTO dto = new BbsDTO(bbs_idx, bbs_subject, bbs_content, bbs_price, bbs_img, bbs_date, bbs_readnum, bbs_writer_idx, bbs_category, bbs_status, bbs_place, bbs_how);
+				BbsDTO dto = new BbsDTO(bbs_idx, bbs_subject, bbs_content, bbs_price, bbs_img, bbs_date, bbs_readnum, bbs_writer_idx, bbs_category, bbs_status, bbs_place, bbs_how,bbs_date_s);
 				arr.add(dto);
 			}
 			return arr;
