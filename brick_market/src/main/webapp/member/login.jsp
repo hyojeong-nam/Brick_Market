@@ -5,19 +5,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="styLesheet" type="text/css" href="../css/maincss.css">
+<style>
+table{
+border-spacing: 10px;
+margin-left:300px;
+margin-right:auto;
+}
+h1{
+text-align: center;
+}
+</style>
 </head>
 <body>
 	<%@include file="/header.jsp"%>
-	<h1>로그인</h1>
+
 	<section>
-		<form>
+		<form name="login" action="login_ok.jsp">
 			<table>
+			<tr>
+			<td><h1>로그인</h1></td>
+			</tr>
 				<tr>
-					<td>그림 <input type="text" placeholder="ID">
+					<td>그림 <input type="text" name="id" placeholder="ID">
 					</td>
 				</tr>
 				<tr>
-					<td>열쇠 <input type="text" placeholder="PASSWORD">
+					<td>열쇠 <input type="text" name="password" placeholder="PASSWORD">
 					</td>
 				</tr>
 				<tr>
