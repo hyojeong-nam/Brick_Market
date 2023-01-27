@@ -19,6 +19,10 @@ table{
 	text-align: center;
 	margin: 0px auto;
 }
+img{
+	width: 50px;
+	height: 50px;
+}
 </style>
 </head>
 <body>
@@ -39,7 +43,7 @@ table{
 								<option value="취미/게임/음반">취미/게임/음반</option></td>
 						</select>
 						<td colspan="4" rowspan="3">
-						<img src="img/disk.png" alt="이미지 첨부">
+						<img src="/brick_market/img/disk.png" alt="이미지 첨부">
 						<div>이미지 첨부하기</div>
 						<div>(jpg,png 파일만 가능)</div>
 						</td>
