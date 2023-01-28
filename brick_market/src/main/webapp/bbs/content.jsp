@@ -7,103 +7,80 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/brick_market/css/maincss.css">
 <style>
-
-section {
-	margin: 0px auto;
-	text-align: center;
-	height: 400px;
-}
-section article {
-	margin: 0px auto;
-	text-align: center;
-}
-
-section article div {
-	display: inline-block;
-	float:left;
-	text-align: center;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-size: 0;
-    letter-spacing: 0;
-    word-spacing: 0;
+.container {
+	text-align:center;
+	margin:0px auto;
+	width:800px;
+	display:grid;
+	grid-template-columns: 50% 10% 40%;
+	grid-template-rows: 40px 40px 40px 40px 240px auto;
+	grid-template-areas:
+		"item  title  title"
+		"item  price  price"
+		"item  proimg  nick"
+		"item  proimg  star"
+		"item   text   text"
+		;
 }
 
-.content {
-	width: 800px;
-	height: 400px;
+.item_img {
+	height:400px;
+	width:400px;
+	object-fit: cover;
+	grid-area:item;
 }
 
-.content_left {
-	width: 50%;
-	height: 100%;
-	background-color: rgb(50,50,50);
+.title_text {
+	grid-area:title;
+	margin:0px 0px;
 }
 
-.content_right {
-	width: 50%;
-	height: 100%;
-	background-color: rgb(150,150,150);
+.price_text {
+	grid-area:price;
+	margin:10px 10px;
+	text-align: right;
+	color: red;
 }
 
-.content_right_head {
-	width: 100%;
-	height: 40%;
-	background-color: rgb(200,200,200);
+.profile_img {
+	height:80px;
+	width:80px;
+	object-fit: cover;
+	grid-area:proimg;
+}
+.profile_nick {
+	grid-area:nick;
+	text-align: left;
+}
+.profile_star {
+	grid-area:star;
+	text-align: left;
 }
 
-.content_right_head_title {
-	width: 100%;
-	height: 40%;
-	background-color: rgb(50,250,250);
+.item_text {
+	grid-area:text;
 }
-.content_right_head_price {
-	width: 100%;
-	height: 20%;
-	background-color: rgb(250,50,250);
-}
-.content_right_head_profile {
-	width: 100%;
-	height: 40%;
-	background-color: rgb(250,250,50);
-}
-
-.content_right_head_profile_left {
-
-}
-.content_right_head_profile_right {
-
-}
-
-
 </style>
 </head>
 <body>
 <%@include file="/header.jsp" %>
 <section>
-	<article>
-		<div class="content">
-			<div class="content_left">
-			
-			</div>
-			
-			<div class="content_right">
-				<div class="content_right_head">
-					<div class="content_right_head_title"></div>
-					<div class="content_right_head_price"></div>
-					<div class="content_right_head_profile">
-						<div class="content_right_head_profile_left">
-						
-						</div>
-						<div class="content_right_head_profile_right">
-							<div class="content_right_head_profile_right_nick"></div>
-							<div class="content_right_head_profile_right_review"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	<article class="container">
+		<img class="item_img" alt="test" src="/brick_market/img/test.png">
+		<h2 class="title_text">제목이 들어갑니다</h2>
+		<p class="price_text">가격이 들어갑니다</p>
+		<img class="profile_img" alt="test" src="/brick_market/img/disk.png">
+		<p class="profile_nick">별명이 들어갑니다</p>
+		<p class="profile_star">별점이 들어갑니다</p>
+		<pre>
+지금까지 간단하게 display 속성값인 inline과 block, 
+inline-block에 대해서 알아보았습니다. 참고로 span로
+마크업된 엘리먼트가 inline 속성값을 가지고, div로 마크업된
+엘리먼트가 block 속성값을 가지는 이유는 소위 user agent
+stylesheet라고 불리는 브라우저의 내장 스타일이 적용되서 그렇습니다.
+이렇게 HTML 태그 별로 기본적으로 적용되어 있는 display 속성값은
+원하는 값으로 CSS를 이용하서 자유롭게 변경이 가능합니다.
+		</pre>
 	</article>
 </section>
 <%@include file="/footer.jsp" %>
