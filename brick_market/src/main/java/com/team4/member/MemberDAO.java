@@ -41,14 +41,20 @@ public class MemberDAO {
 	/**로그인*/
 	public boolean checkLogin(String id, String pwd) {
 		try {
+			boolean result=false;
+			
 			conn = com.team4.db.Team4DB.getConn();
-			String sql = "select * from member_table where id = ?, pwd = ?";
+			String sql = "select * from member_table where member_id = ?, member_pwd = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.setString(2, pwd);
 			rs = ps.executeQuery();
 			
-			boolean result = rs.next();
+			if(rs.next()) {
+			result=true;	
+			}
+			
+			//boolean result = rs.next();
 			return result;
 			
 		} catch (Exception e) {
