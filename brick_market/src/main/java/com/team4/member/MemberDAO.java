@@ -107,7 +107,7 @@ public class MemberDAO {
 	public boolean checkPwd(int idx, String pwd) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			String sql = "select * from member_table where idx = ?, pwd = ?";
+			String sql = "select * from member_table where member_idx = ?, member_pwd = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1,idx);
 			ps.setString(2, pwd);
@@ -141,16 +141,16 @@ public class MemberDAO {
 			
 			return rs.next();
 			
-		}catch(Exception e) {
-			return false;
-		}finally {
-		try {
-			if(rs!=null) rs.close();
-			if(ps!=null) ps.close();
-			if(conn!=null) conn.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+			}catch(Exception e) {
+				return false;
+			}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

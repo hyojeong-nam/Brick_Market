@@ -16,7 +16,7 @@ location.href='idCheck.jsp';
 	%>
 	<script>
 	window.alert('<%=userid%>는 사용 가능한 아이디입니다.');
-	opener.document.join.id.value='<%=userid%>';
+	opener.document.join.member_id.value='<%=userid%>';
 	self.close();
 	</script>
 	<%
