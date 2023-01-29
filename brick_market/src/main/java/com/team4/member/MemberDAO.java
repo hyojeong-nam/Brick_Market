@@ -12,7 +12,7 @@ public class MemberDAO {
 	ResultSet rs;
 	
 	/**회원 가입*/
-	public int joinMember(MemberDTO dto) {
+	public int joinMember(MemberDTO dto,String email) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
 			String sql = "insert into member_table values (member_table_idx.nextval,?,?,?,?,?,sysdate,'img',0)";
@@ -21,7 +21,7 @@ public class MemberDAO {
 			ps.setString(2, dto.getMember_pwd());
 			ps.setString(3, dto.getMember_name());
 			ps.setString(4, dto.getMember_nick());
-			ps.setString(5, dto.getMember_email());
+			ps.setString(5, dto.getMember_email()+email);
 			int count = ps.executeUpdate();
 			return count;
 			
