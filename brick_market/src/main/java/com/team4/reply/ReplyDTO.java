@@ -13,6 +13,9 @@ public class ReplyDTO {
 	private int reply_sunbun;
 	private String reply_date_s;
 
+	public ReplyDTO() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public ReplyDTO(int reply_idx, int reply_bbs_idx, int reply_write_idx, String reply_content, Date reply_date,
 			int reply_ref, int reply_lev, int reply_sunbun) {
@@ -26,6 +29,7 @@ public class ReplyDTO {
 		this.reply_lev = reply_lev;
 		this.reply_sunbun = reply_sunbun;
 	}
+
 	public ReplyDTO(int reply_idx, int reply_bbs_idx, int reply_write_idx, String reply_content, Date reply_date,
 			int reply_ref, int reply_lev, int reply_sunbun, String reply_date_s) {
 		super();
@@ -39,10 +43,11 @@ public class ReplyDTO {
 		this.reply_sunbun = reply_sunbun;
 		this.reply_date_s = reply_date_s;
 	}
+
 	public String getReply_date_s() {
 		return reply_date_s;
 	}
-	
+
 	public void setReply_date_s(String reply_date_s) {
 		this.reply_date_s = reply_date_s;
 	}
