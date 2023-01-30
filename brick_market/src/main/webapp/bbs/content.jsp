@@ -1,8 +1,10 @@
+<%@page import="com.team4.member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
-<%@page import="java.util.*"%>
+<jsp:useBean id="mdao" class="com.team4.member.MemberDAO" scope="session"></jsp:useBean>
 <%@page import="com.team4.bbs.BbsDTO"%>
+<%@page import="com.team4.member.MemberDTO"%>
 
 <!DOCTYPE html>
 <html>
@@ -72,30 +74,43 @@ int bbs_idx = 0;
 if(bbs_idx_s != null && bbs_idx_s.length() != 0){
 	bbs_idx = Integer.parseInt(bbs_idx_s);
 }
-bdao.bbsContent(bbs_idx);
 if (bbs_idx == 0){
-	
+	%>
+	<script>
+	window.alert('잘못된 접근입니다.');	
+	window.location.href='/brick_market/index.jsp';
+	</script>
+	<%
+	return;
 }
+BbsDTO bdto = bdao.bbsContent(bbs_idx);
+
+if (bdto.equals(null)){
+	%>
+	<script>
+	window.alert('존재하지 않는 게시글입니다.');	
+	window.location.href='/brick_market/index.jsp';
+	</script>
+	<%
+	return;
+}
+int user_idx = bdto.getBbs_writer_idx();
+System.out.println(user_idx);
+MemberDTO mdto = mdao.searchIdx(user_idx);
 %>
 </head>
 <body>
 <%@include file="/header.jsp" %>
 <section>
 	<article class="container">
-		<img class="item_img" alt="test" src="/brick_market/img/test.png">
-		<h2 class="title_text">이런저런거 팔아요</h2>
-		<p class="price_text">300만원</p>
-		<img class="profile_img" alt="test" src="/brick_market/img/profile.png">
-		<p class="profile_nick">김똘똘이</p>
-		<p class="profile_star">★★★★☆(23 리뷰) 평점 4.2</p>
+		<img class="item_img" alt="test" src="<%=bdto.getBbs_img()%>">
+		<h2 class="title_text"><%=bdto.getBbs_subject() %></h2>
+		<p class="price_text"><%=bdto.getBbs_price() %>원</p>
+		<img class="profile_img" alt="test" src="<%=mdto.getMember_img()%>">
+		<p class="profile_nick"><%=mdto.getMember_nick() %></p>
+		<p class="profile_star">거래완료조회해서만들어야됨 ★★★★☆(23 리뷰) 평점 4.2</p>
 		<pre class="item_text">
-지금까지 간단하게 display 속성값인 inline과 block, 
-inline-block에 대해서 알아보았습니다. 참고로 span로
-마크업된 엘리먼트가 inline 속성값을 가지고, div로 마크업된
-엘리먼트가 block 속성값을 가지는 이유는 소위 user agent
-stylesheet라고 불리는 브라우저의 내장 스타일이 적용되서 그렇습니다.
-이렇게 HTML 태그 별로 기본적으로 적용되어 있는 display 속성값은
-원하는 값으로 CSS를 이용하서 자유롭게 변경이 가능합니다.
+		<%=bdto.getBbs_content().replaceAll("\n", "<br>") %>
 		</pre>
 	</article>
 </section>
