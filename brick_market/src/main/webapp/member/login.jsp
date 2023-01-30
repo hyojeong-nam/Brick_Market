@@ -16,6 +16,18 @@ text-align: center;
 }
 </style>
 </head>
+<%
+	String saveid ="";
+	Cookie cks[] = request.getCookies();
+	if(cks!=null){
+		for(int i=0;i<cks.length;i++){
+			if(cks[i].getName().equals("saveid")){
+				saveid = cks[i].getValue();
+				
+			}
+		}
+	}
+%>
 <body>
 	<%@include file="/header.jsp"%>
 
@@ -31,6 +43,10 @@ text-align: center;
 				</tr>
 				<tr>
 					<td>열쇠 <input type="password" name="userpwd" placeholder="PASSWORD">
+					</td>
+				</tr>
+				<tr>
+					<td> <input type = "checkbox" name = "saveid" value ="on" <%=saveid.equals("")?"":"checked" %>>아이디 저장
 					</td>
 				</tr>
 				<tr>

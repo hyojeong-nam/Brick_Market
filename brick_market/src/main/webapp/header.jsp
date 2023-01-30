@@ -3,9 +3,10 @@
 <header>
 	<div class="log">
 	<%
-	String sid =(String) session.getAttribute("sid");
+	int midx=0;
 	
-	if(sid == null) {%>
+	if(session.getAttribute("midx")==null) {
+	%>
 		<a href="/brick_market/member/login.jsp">로그인</a> | 
 		<a href="/brick_market/member/join.jsp">회원가입</a>
 			<%} else {
