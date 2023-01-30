@@ -15,7 +15,7 @@ public class MemberDAO {
 	public int joinMember(MemberDTO dto,String email) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			String sql = "insert into member_table values (member_table_idx.nextval,?,?,?,?,?,sysdate,'img',0)";
+			String sql = "insert into member_table values (member_table_idx.nextval,?,?,?,?,?,sysdate,'/brick_market/img/profile.png',0)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, dto.getMember_id());
 			ps.setString(2, dto.getMember_pwd());
@@ -44,7 +44,7 @@ public class MemberDAO {
 			boolean result=false;
 			
 			conn = com.team4.db.Team4DB.getConn();
-			String sql = "select * from member_table where member_id = ?, member_pwd = ?";
+			String sql = "select * from member_table where member_id = ? and member_pwd = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, id);
 			ps.setString(2, pwd);
@@ -75,8 +75,9 @@ public class MemberDAO {
 	public MemberDTO searchIdx(int idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			String sql = "select * from idx = ?";
+			String sql = "select * from member_table where member_idx = ?";
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, idx);
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
