@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO" scope="session">
+</jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,9 +30,9 @@ section article table img {
 	<h3>상품등록</h3>
 	<section>
 		<article>
-			<form name="imgUpload" method="post"
+			<form name="imgUpload" 
 				action="/brick_market/bbs/write_ok.jsp"
-				enctype="multipart/form-data">
+				>
 				<table border="0">
 					<tr>
 						<th colspan="3">작성자</th>
