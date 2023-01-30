@@ -11,7 +11,7 @@
 		<a href="/brick_market/member/join.jsp">회원가입</a>
 			<%} else {
 				%>
-			<a href="/brick_market/member/myPage.jsp">마이 페이지</a> |
+			<a href="/brick_market/member/reJoin.jsp">회원정보</a> |
 			<a href="/brick_market/member/logout.jsp">로그아웃</a>
 		</div>
 		<%
