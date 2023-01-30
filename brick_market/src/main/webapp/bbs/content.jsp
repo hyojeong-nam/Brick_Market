@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
-<%@ page import class="" %>
+<%@page import="java.util.*"%>
+<%@page import="com.team4.bbs.BbsDTO"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,6 +67,15 @@
 }
 </style>
 <%
+String bbs_idx_s = request.getParameter("bbs_idx");
+int bbs_idx = 0;
+if(bbs_idx_s != null && bbs_idx_s.length() != 0){
+	bbs_idx = Integer.parseInt(bbs_idx_s);
+}
+bdao.bbsContent(bbs_idx);
+if (bbs_idx == 0){
+	
+}
 %>
 </head>
 <body>
