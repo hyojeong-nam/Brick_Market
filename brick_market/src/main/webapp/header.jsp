@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <header>
 	<div class="log">
 	<%
@@ -12,7 +11,7 @@
 			<%} else {
 				%>
 			<a href="/brick_market/member/myPage.jsp">마이 페이지</a> |
-			<a href="#" onclick="Logout();">로그아웃</a>
+			<a href="/brick_market/member/logout.jsp">로그아웃</a>
 		</div>
 		<%
 			}
