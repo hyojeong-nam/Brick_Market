@@ -18,19 +18,6 @@ public class ReplyDTO {
 	}
 
 	public ReplyDTO(int reply_idx, int reply_bbs_idx, int reply_write_idx, String reply_content, Date reply_date,
-			int reply_ref, int reply_lev, int reply_sunbun) {
-		super();
-		this.reply_idx = reply_idx;
-		this.reply_bbs_idx = reply_bbs_idx;
-		this.reply_write_idx = reply_write_idx;
-		this.reply_content = reply_content;
-		this.reply_date = reply_date;
-		this.reply_ref = reply_ref;
-		this.reply_lev = reply_lev;
-		this.reply_sunbun = reply_sunbun;
-	}
-
-	public ReplyDTO(int reply_idx, int reply_bbs_idx, int reply_write_idx, String reply_content, Date reply_date,
 			int reply_ref, int reply_lev, int reply_sunbun, String reply_date_s) {
 		super();
 		this.reply_idx = reply_idx;
