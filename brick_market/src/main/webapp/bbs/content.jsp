@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
+<%@ page import class="" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,20 +61,24 @@
 
 .item_text {
 	grid-area:text;
+	text-align: left;
 }
 </style>
+<%
+request.getParameter(arg0)
+%>
 </head>
 <body>
 <%@include file="/header.jsp" %>
 <section>
 	<article class="container">
 		<img class="item_img" alt="test" src="/brick_market/img/test.png">
-		<h2 class="title_text">제목이 들어갑니다</h2>
-		<p class="price_text">가격이 들어갑니다</p>
-		<img class="profile_img" alt="test" src="/brick_market/img/disk.png">
-		<p class="profile_nick">별명이 들어갑니다</p>
-		<p class="profile_star">별점이 들어갑니다</p>
-		<pre>
+		<h2 class="title_text">이런저런거 팔아요</h2>
+		<p class="price_text">300만원</p>
+		<img class="profile_img" alt="test" src="/brick_market/img/profile.png">
+		<p class="profile_nick">김똘똘이</p>
+		<p class="profile_star">★★★★☆(23 리뷰) 평점 4.2</p>
+		<pre class="item_text">
 지금까지 간단하게 display 속성값인 inline과 block, 
 inline-block에 대해서 알아보았습니다. 참고로 span로
 마크업된 엘리먼트가 inline 속성값을 가지고, div로 마크업된
@@ -83,6 +89,7 @@ stylesheet라고 불리는 브라우저의 내장 스타일이 적용되서 그�
 		</pre>
 	</article>
 </section>
+<%@include file="reply.jsp" %>
 <%@include file="/footer.jsp" %>
 </body>
 </html>
