@@ -19,9 +19,22 @@
 			%>
 	<a href="/brick_market/index.jsp"><img
 		src="/brick_market/img/logo.png" alt="메인로고"></a> 
-		<form action="">
-		<input type="text" id="star">
-		<input type="submit" value="검색">
+		<form name="search" action="/brick_market/bbs/list.jsp">
+			<select name="status">
+				<option value="0" selected="selected">판매중</option>
+				<option value="1">예약 완료</option>
+				<option value="2">거래 완료</option>
+			</select>
+			<select name="category">
+				<option value="-1" selected="selected"><%=bdao.stringCategory(-1) %></option>
+				<option value="0"><%=bdao.stringCategory(0) %></option>
+				<option value="1"><%=bdao.stringCategory(1) %></option>
+				<option value="2"><%=bdao.stringCategory(2) %></option>
+				<option value="3"><%=bdao.stringCategory(3) %></option>
+				<option value="4"><%=bdao.stringCategory(4) %></option>
+			</select>
+			<input type="text" name="keyword">
+			<input type="submit" value="검색">
 		</form>
 	<div class="style">
 		<span>내상점</span> <span><a href="/brick_market/bbs/write.jsp">상품등록</a></span>

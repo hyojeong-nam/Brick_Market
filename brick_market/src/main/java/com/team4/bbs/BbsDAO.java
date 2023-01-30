@@ -39,8 +39,8 @@ public class BbsDAO {
 	/**총페이지수 구하기*/
 	 public int getTotalCnt() {
 		 try {
-			 conn=com.team4.db.Team4DB.getConn();
-			 String sql="select count(*) from bbs_table";
+			conn=com.team4.db.Team4DB.getConn();
+			String sql="select count(*) from bbs_table";
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			rs.next();
@@ -57,8 +57,49 @@ public class BbsDAO {
 			} catch (Exception e2) {
 				// TODO: handle exception
 			}
-			
 		}
+	 }
+	 
+	 /**검색 결과에서 총페이지수 구하기*/
+	 public int getTotalCnt(String keyword, int category, int status) {
+		 try {
+			String keywordsql1 = "";
+			String keywordsql2 = "";
+			if(!(keyword.equals("") || keyword.length() == 0)) {
+				keywordsql1 = ", instr(bbs_subject,'"
+				+keyword+"') as result "; 
+				keywordsql2 = " and result > 0";
+			}
+			String categorysql = "";
+			if(category != -1) {
+				categorysql = " and bbs_category = "+String.valueOf(category);
+			}
+			String statussql = "";
+			if(status != -1) {
+				statussql = " and bbs_status = "+String.valueOf(status);
+			}
+			conn=com.team4.db.Team4DB.getConn();
+			String sql = "select count(*) from "
+					 + "(select rownum as rnum, a.* "+keywordsql1+" from "
+					 + "(select * from bbs_table order by bbs_idx desc)a)b "
+					 + "where rnum >= ? and rnum <= ?"+keywordsql2+categorysql+statussql;
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		 } catch (Exception e) {
+			 e.printStackTrace();
+			 return 0;
+			 // TODO: handle exception
+		 }finally {
+			 try {
+				 if(rs!=null)rs.close();
+				 if(ps!=null)ps.close();
+				 if(conn!=null)conn.close();
+			 } catch (Exception e2) {
+				 // TODO: handle exception
+			 }
+		 }
 	 }
 	
 	/**글 보기 (페이징)*/
@@ -106,8 +147,71 @@ public class BbsDAO {
 				e2.printStackTrace();
 			}
 		}
-		
 	}
+	
+	/**글 검색 후 보기 (페이징)*/
+	public ArrayList<BbsDTO> bbsList(int size, int page, int extra, String keyword, int category, int status){
+		try {
+			String keywordsql1 = "";
+			String keywordsql2 = "";
+			if(!(keyword.equals("") || keyword.length() == 0)) {
+				keywordsql1 = ", instr(bbs_subject,'"
+			+keyword+"') as result "; 
+				keywordsql2 = " and result > 0";
+			}
+			String categorysql = "";
+			if(category != -1) {
+				categorysql = " and bbs_category = "+String.valueOf(category);
+			}
+			String statussql = "";
+			if(status != -1) {
+				statussql = " and bbs_status = "+String.valueOf(status);
+			}
+			conn = com.team4.db.Team4DB.getConn();
+			String sql = "select * from "
+					+ "(select rownum as rnum, a.* "+keywordsql1+" from "
+					+ "(select * from bbs_table order by bbs_idx desc)a)b "
+					+ "where rnum >= ? and rnum <= ?"+keywordsql2+categorysql+statussql;
+			ps = conn.prepareStatement(sql);
+			int start = (page - 1) * size + 1;
+			int end = page * size + extra;
+			ps.setInt(1, start);
+			ps.setInt(2, end);
+			rs = ps.executeQuery();
+			ArrayList<BbsDTO> arr = new ArrayList<BbsDTO>();
+			while(rs.next()) {
+				int bbs_idx = rs.getInt("bbs_idx");
+				String bbs_subject = rs.getString("bbs_subject");
+				String bbs_content = rs.getString("bbs_content");
+				int bbs_price = rs.getInt("bbs_price");
+				String bbs_img = rs.getString("bbs_img");
+				String bbs_date_s = rs.getString("bbs_date");
+				java.sql.Date bbs_date=rs.getDate("bbs_date");
+				int bbs_readnum = rs.getInt("bbs_readnum");
+				int bbs_writer_idx = rs.getInt("bbs_writer_idx");
+				int bbs_category = rs.getInt("bbs_category");
+				int bbs_status = rs.getInt("bbs_status");
+				String bbs_place = rs.getString("bbs_place");
+				int bbs_how = rs.getInt("bbs_how");
+				BbsDTO dto = new BbsDTO(bbs_idx, bbs_subject, bbs_content, bbs_price, bbs_img, bbs_date, bbs_readnum, bbs_writer_idx, bbs_category, bbs_status, bbs_place, bbs_how,bbs_date_s);
+				arr.add(dto);
+			}
+			return arr;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	
 	
 	/**글 하나보기*/
 	public BbsDTO bbsContent(int idx) {
@@ -153,7 +257,6 @@ public class BbsDAO {
 	/**글 조회수*/
 	public void bbsReadnum(int idx) {
 		try {
-//			conn = com.team4.db.Team4DB.getConn();
 			String sql = "update bbs_table set bbs_readnum = bbs_readnum+1 where bbs_idx = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, idx);
@@ -197,6 +300,27 @@ public class BbsDAO {
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			} 
+		}
+	}
+	
+	
+	/**카테고리 이름 불러오기*/
+	public String stringCategory(int category) {
+		switch (category) {
+		case -1:
+			return "전체";
+		case 0:
+			return "디지털 기기";
+		case 1:
+			return "의류";
+		case 2:
+			return "생활 잡화";
+		case 3:
+			return "뷰티 / 미용";
+		case 4:
+			return "취미 / 게임 / 음반";
+		default:
+			return "등록된 카테고리가 아닙니다";
 		}
 	}
 	
