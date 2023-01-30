@@ -65,7 +65,6 @@
 }
 </style>
 <%
-request.getParameter(arg0)
 %>
 </head>
 <body>
