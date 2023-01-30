@@ -36,11 +36,6 @@ section legend {
 	text-align: center;
 }
 </style>
-<script type="text/javascript">
-function date() {
-	date=new Date();
-}
-</script>
 </head>
 <%
 String page_s = request.getParameter("page");
@@ -91,19 +86,19 @@ ArrayList<BbsDTO> arr = bdao.bbsList(1, pagenum, select);
 						var date=new Date(strY,strM,strD,strH,strMi,strS);
 						var today=new Date();
 						var dayma= today-date;
-						if(dayma<60000){
+						if(dayma<60*1000){//1분
 							document.write('방금전');
-						}else if(dayma<3600000){
-							var mi=Math.floor(dayma/60000);
+						}else if(dayma<1000*60*60){//1시간
+							var mi=Math.floor(dayma/(1000*60));//분구하기
 							document.write(mi+'분전');
-						}else if(dayma<86400000){
-							var h=Math.floor(dayma/3600000);
+						}else if(dayma<1000*60*60*24){//24시간
+							var h=Math.floor(dayma/(1000*60*60));//시간구하기
 							document.write(h+'시간전');
-						}else if(dayma<2592000000){
-							var d=Math.floor(dayma/86400000);
+						}else if(dayma<1000*60*60*24*7){
+							var d=Math.floor(dayma/(1000*60*60*24));
 							document.write(d+'일전');
 						}else{
-							document.write(str);
+							document.write('일주일 이상');
 						}
 						</script></td>
 						<%
@@ -115,7 +110,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(1, pagenum, select);
 						for (int i = 0; i < arr.size(); i++) {
 						%>
 
-						<td><img src="<%=arr.get(i).getBbs_img()%>"></td>
+						<td><a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>"><img src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>"></a></td>
 
 						<%
 						}
@@ -126,7 +121,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(1, pagenum, select);
 						for (int i = 0; i < arr.size(); i++) {
 						%>
 
-						<td><%=arr.get(i).getBbs_subject()%></td>
+						<td><a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>"><%=arr.get(i).getBbs_subject()%></a></td>
 
 						<%
 						}
