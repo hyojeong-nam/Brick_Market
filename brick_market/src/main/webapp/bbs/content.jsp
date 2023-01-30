@@ -108,7 +108,7 @@ MemberDTO mdto = mdao.searchIdx(user_idx);
 		<p class="price_text"><%=bdto.getBbs_price() %>원</p>
 		<img class="profile_img" alt="test" src="<%=mdto.getMember_img()%>">
 		<p class="profile_nick"><%=mdto.getMember_nick() %></p>
-		<p class="profile_star">거래완료조회해서만들어야됨 ★★★★☆(23 리뷰) 평점 4.2</p>
+		<p class="profile_star">거래완료조회 ★★★★☆(23 리뷰) 평점 4.2</p>
 		<pre class="item_text">
 		<%=bdto.getBbs_content().replaceAll("\n", "<br>") %>
 		</pre>

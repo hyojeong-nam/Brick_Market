@@ -39,9 +39,9 @@ public class MemberDAO {
 	}
 	
 	/**로그인*/
-	public boolean checkLogin(String id, String pwd) {
+	public int checkLogin(String id, String pwd) {
 		try {
-			boolean result=false;
+			int result=-1;
 			
 			conn = com.team4.db.Team4DB.getConn();
 			String sql = "select * from member_table where member_id = ? and member_pwd = ?";
@@ -51,15 +51,14 @@ public class MemberDAO {
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
-			result=true;	
+				result=rs.getInt("member_idx");	
 			}
 			
-			//boolean result = rs.next();
 			return result;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return -1;
 		} finally {
 			try {
 				if(rs!=null)rs.close();
