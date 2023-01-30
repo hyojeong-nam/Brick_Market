@@ -5,14 +5,21 @@
 <%@ page import="com.oreilly.servlet.*"%>
 <%request.setCharacterEncoding("utf-8"); %>
 <jsp:useBean id="wdto" class="com.team4.bbs.BbsDTO" scope="page"></jsp:useBean>
-<jsp:setProperty property="*" name="wdto"/>
 <jsp:useBean id="wdao" class="com.team4.bbs.BbsDAO"></jsp:useBean>
-
 <%
-
-%>
-
-<%int result=wdao.bbsWrite(wdto); 
+String savepath=request.getRealPath("/bbs/img");
+MultipartRequest mr=
+	new MultipartRequest(request,savepath,2097152,"utf-8");
+int idx = (int)session.getAttribute("midx");
+String imgname = mr.getOriginalFileName("upload");
+/*
+File orifile = new File(savepath+"/"+imgname);
+if(orifile.exists()){
+	File newfile = new file(savepath+"/"+idx);	
+	orifile.renameTo();
+}
+*/
+int result=wdao.bbsWrite(mr,idx); 
 String msg=result>0?"상품등록 완료!":"상품등록 실패!";
 %>
 <script>

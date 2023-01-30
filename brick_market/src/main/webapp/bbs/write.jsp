@@ -31,8 +31,7 @@ section article table img {
 	<section>
 		<article>
 			<form name="imgUpload" 
-				action="/brick_market/bbs/write_ok.jsp"
-				>
+				action="/brick_market/bbs/write_ok.jsp"method="post" enctype="multipart/form-data">
 				<table border="0">
 					<tr>
 						<th colspan="3">작성자</th>
