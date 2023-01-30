@@ -9,11 +9,7 @@
 <jsp:useBean id="wdao" class="com.team4.bbs.BbsDAO"></jsp:useBean>
 
 <%
-String savepath=request.getRealPath("/gallery/img");
-MultipartRequest mr=
-	new MultipartRequest(request,savepath,2097152,"utf-8");
-String bbs_subject=mr.getParameter("subject");
-String bbs_content=mr.getParameter("bbs_content");
+
 %>
 
 <%int result=wdao.bbsWrite(wdto); 
@@ -21,5 +17,5 @@ String msg=result>0?"상품등록 완료!":"상품등록 실패!";
 %>
 <script>
 window.alert("<%=msg %>");
-location.href="/brick_market/bbs/list.jsp";
+location.href="/brick_market/index.jsp";
 </script>
