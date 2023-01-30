@@ -9,7 +9,7 @@ request.setCharacterEncoding("utf-8");
 <jsp:useBean id="mdao" class="com.team4.member.MemberDAO"></jsp:useBean>
 <%
 String email="@"+request.getParameter("email2");
-
+//mdto.getMember_email(mdto.setMember_email(email));
 int result=mdao.joinMember(mdto, email);
 
 String msg=result>0?"회원가입을 축하합니다.":"회원가입에 실패하였습니다.";

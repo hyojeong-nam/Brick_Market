@@ -3,9 +3,20 @@
 
 <header>
 	<div class="log">
-		<a href="/brick_market/member/login.jsp">로그인</a> | <a
-			href="/brick_market/member/join.jsp">회원가입</a>
-	</div>
+	<%
+	String sid =(String) session.getAttribute("sid");
+	
+	if(sid == null) {%>
+		<a href="/brick_market/member/login.jsp">로그인</a> | 
+		<a href="/brick_market/member/join.jsp">회원가입</a>
+			<%} else {
+				%>
+			<a href="/brick_market/member/myPage.jsp">마이 페이지</a> |
+			<a href="#" onclick="Logout();">로그아웃</a>
+		</div>
+		<%
+			}
+			%>
 	<a href="/brick_market/index.jsp"><img
 		src="/brick_market/img/logo.png" alt="메인로고"></a> 
 		<form action="">

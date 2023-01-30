@@ -81,7 +81,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(1, pagenum, select);
 						<%
 						for (int i = 0; i < arr.size(); i++) {
 						%>
-						<td><script>var str = '<%=arr.get(i).getBbs_date_s()%>'
+						<td><script>var str = '<%=arr.get(i).getBbs_date_s()%>';
 						var strY=str.substring(0,4);
 						var strM=parseInt(str.substring(5,7))-1;
 						var strD=str.substring(8,10);

@@ -22,10 +22,10 @@ function test() {
 	var pwd1 = document.getElementById('member_pwd1').value;
     var pwd2 = document.getElementById('member_pwd2').value;
     
-    if(pwd1.length < 4) {
+    /*if(pwd1.length < 4) {
             alert('입력한 글자가 4글자 이상이어야 합니다.');
             return false;
-        }
+        }*/
         
         if( pwd1 != pwd2 ) {
           alert("비밀번호 불일치");
