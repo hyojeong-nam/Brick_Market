@@ -4,8 +4,8 @@
 	<div class="log">
 		<%
 		int midx = 0;
-		if (session.getAttribute("midx") == null && session.getAttribute("midx").equals("")
-				&& session.getAttribute("midx").equals("0")) {
+		if (session.getAttribute("midx") == null || session.getAttribute("midx").equals("")
+				|| session.getAttribute("midx").equals("0")) {
 		%>
 		<a href="/brick_market/member/login.jsp">로그인</a> | <a
 			href="/brick_market/member/join.jsp">회원가입</a>
