@@ -30,7 +30,6 @@ text-align: center;
 %>
 <body>
 	<%@include file="/header.jsp"%>
-
 	<section>
 		<form name="login" action="login_ok.jsp" method="post">
 			<table>
@@ -38,7 +37,7 @@ text-align: center;
 			<td><h1>로그인</h1></td>
 			</tr>
 				<tr>
-					<td>그림 <input type="text" name="userid" placeholder="ID">
+					<td>그림 <input type="text" name="userid" placeholder="ID" value="<%=saveid %>">
 					</td>
 				</tr>
 				<tr>
@@ -46,7 +45,7 @@ text-align: center;
 					</td>
 				</tr>
 				<tr>
-					<td> <input type = "checkbox" name = "saveid" value ="on" <%=saveid.equals("")?"":"checked" %>>아이디 저장
+					<td><input type = "checkbox" name = "saveid" value ="on" <%=saveid.equals("")?"":"checked" %>>ID 기억하기
 					</td>
 				</tr>
 				<tr>
