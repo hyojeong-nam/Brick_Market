@@ -87,14 +87,14 @@ if (totalRef % 5 == 0) {
 						}
 						%>
 					</tr>
-					<th>
+					<tr>
 						<%
-						for (int i = 1; i >= totalpage; i++) {
-						%><a href=""><td><%=i%></td></a>
+						for (int i = 1; i <= totalpage; i++) {
+						%><td><a href="">왼쪽</a><a href=""><%=i%></a><a href="">오른쪽</a></td>
 						<%
 						}
 						%>
-					</th>
+					</tr>
 				</table>
 			</fieldset>
 		</form>

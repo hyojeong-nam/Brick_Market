@@ -12,7 +12,7 @@ public class ReplyDAO {
 	public ArrayList<ReplyDTO> replyList(int bbs_idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			String sql = "select * from reply_table where reply_bbs_idx=?";
+			String sql = "select * from reply_table where reply_bbs_idx=? order by reply_ref desc";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, bbs_idx);
 			rs = ps.executeQuery();
@@ -52,15 +52,41 @@ public class ReplyDAO {
 		}
 	}
 
+	public int getMaxRef() {
+		try {
+			String sql = "select max(reply_ref) from reply_table";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			int max = 0;
+			if (rs.next()) {
+				max = rs.getInt(1);
+			}
+			return max;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return 0;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+	}
 	public int replyWrite(int bbs_idx, int write_idx, String reply_content) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
+			int maxref=getMaxRef();
 			String sql = "insert into reply_table values (reply_table_idx.nextval,?,?,?,sysdate,?,?,?)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, bbs_idx);
 			ps.setInt(2, write_idx);
 			ps.setString(3, reply_content);
-			ps.setInt(4, 0);
+			ps.setInt(4, maxref+1);
 			ps.setInt(5, 0);
 			ps.setInt(6, 0);
 			return ps.executeUpdate();
