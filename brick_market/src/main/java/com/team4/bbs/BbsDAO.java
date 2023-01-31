@@ -97,7 +97,7 @@ public class BbsDAO {
 			if(!(keyword.equals("") || keyword.length() == 0)) {
 				keywordsql1 = ", instr(bbs_subject,'"
 				+keyword+"') as result "; 
-				keywordsql2 = " and result > 0";
+				keywordsql2 = " and result > 0 ";
 			}
 			String categorysql = "";
 			if(category != -1) {
@@ -111,7 +111,7 @@ public class BbsDAO {
 			String sql = "select count(*) from "
 					 + "(select rownum as rnum, a.* "+keywordsql1+" from "
 					 + "(select * from bbs_table order by bbs_idx desc)a)b "
-					 + "where rnum >= ? and rnum <= ?"+keywordsql2+categorysql+statussql;
+					 + "where rnum > 0"+keywordsql2+categorysql+statussql;
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			rs.next();

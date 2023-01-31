@@ -59,10 +59,11 @@ String page_s = request.getParameter("page");
 if (page_s == null || page_s.equals("")) {
 	page_s = "1";
 }
+int size = 1;
 int pagenum = Integer.parseInt(page_s);
 int select = 3;
 int totalcnt = bdao.getTotalCnt();
-ArrayList<BbsDTO> arr = bdao.bbsList(1, pagenum, select);
+ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 %>
 <body>
 	<%@ include file="header.jsp"%>
@@ -119,8 +120,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(1, pagenum, select);
 				<tr>
 					<td class="side">
 						<%
-						if (pagenum <= 1) {
-						} else {
+						if (pagenum > 1) {
 							%>
 							<a href="index.jsp?page=<%=pagenum - 1%>">
 							<img class="img" src="/brick_market/img/left.jpg" alt="왼쪽 페이지 이동">
@@ -143,8 +143,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(1, pagenum, select);
 					%>
 					<td class="side">
 						<%
-						if (pagenum >= totalcnt - select) {
-						} else {
+						if (pagenum * size + select < totalcnt) {
 							%>
 							<a href="index.jsp?page=<%=pagenum + 1%>">
 							<img class="img" src="/brick_market/img/right.jpg" alt="오른쪽 페이지 이동">
