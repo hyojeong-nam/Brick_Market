@@ -46,7 +46,7 @@ window.location.href='/brick_market/index.jsp';
 <td>개인 정보를 보호하기 위해 비밀번호를 다시 한 번 입력해 주세요.</td>
 </tr>
 <tr>
-<td>비밀번호 <input type="password" name="pwdcheck"> <input type="submit" value="확인"></td>
+<td>비밀번호 <input type="password" name="userpwd"> <input type="submit" value="확인"></td>
 </tr>
 </table>
 </form>
