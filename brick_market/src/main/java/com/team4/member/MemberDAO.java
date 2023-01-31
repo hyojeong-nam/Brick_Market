@@ -144,6 +144,7 @@ public class MemberDAO {
 		
 	}
 	
+	/**아이디 중복 체크*/
 	public boolean idCheck(String userid) {
 		try{
 			conn=com.team4.db.Team4DB.getConn();
@@ -167,5 +168,6 @@ public class MemberDAO {
 		}
 	}
 	
+	/**정보 수정 */
 	
 }

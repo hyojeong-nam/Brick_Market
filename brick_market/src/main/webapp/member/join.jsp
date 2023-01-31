@@ -92,7 +92,8 @@ function test() {
 					<input type="text" name="member_email" id="email1" class="box"> @
 					<input type="text" name="email2" id="email2" class="box">
 					
-					<select name="email_select" class="box" id="email_select" onChange="checkMail();">
+					<select name="email_select" class="box" id="email_select" 
+					onChange="checkMail();">
 					<option value="" selected>선택해 주세요</option>
 					<option value="naver.com">naver.com</option>
 					<option value="gmail.com">gmail.com</option>
