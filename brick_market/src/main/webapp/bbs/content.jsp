@@ -27,7 +27,7 @@
 	grid-template-rows: 40px 40px 40px 40px 240px auto;
 	grid-template-areas: "item  title  title" "item  price  price"
 		"item  proimg  nick" "item  proimg  star" "item   text   text"
-		"reply reply  reply";
+		"reply reply reply";
 }
 
 .item_img {
@@ -141,11 +141,7 @@ totalpage--;
 		<%=bdto.getBbs_content().replaceAll("\n", "<br>")%>
 <a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>">수정하기</a>
 		</pre>
-		</article>
-
-		<article class="reply">
-			<hr>
-			<form action="reply_ok.jsp">
+			<form class="reply" action="reply_ok.jsp">
 				<fieldset class="test">
 					<legend>댓글</legend>
 					<table border="1">
@@ -203,7 +199,7 @@ totalpage--;
 							} else {
 							%>
 
-							<td><%=mdto.getMember_nick()%> <input type="text"
+							<td><%=mdto.getMember_nick()%> <input type="text" 
 								name="reply_content" placeholder="댓글을 입력해보세요"> <input
 								type="submit" value="등록"><input type="hidden"
 								name="reply_bbs_idx" value="<%=bbs_idx%>"> <input
@@ -225,7 +221,6 @@ totalpage--;
 					</table>
 				</fieldset>
 			</form>
-
 		</article>
 	</section>
 	<%@include file="/footer.jsp"%>
