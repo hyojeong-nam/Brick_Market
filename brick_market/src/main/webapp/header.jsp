@@ -42,11 +42,11 @@
 	<nav>
 
 		<ul>
-			<li><a href="/brick_market/bbs/list?category=0"><%=bdao.stringCategory(0)%></a></li>
-			<li><a href="/brick_market/bbs/list?category=1"><%=bdao.stringCategory(1)%></a></li>
-			<li><a href="/brick_market/bbs/list?category=2"><%=bdao.stringCategory(2)%></a></li>
-			<li><a href="/brick_market/bbs/list?category=3"><%=bdao.stringCategory(3)%></a></li>
-			<li><a href="/brick_market/bbs/list?category=4"><%=bdao.stringCategory(4)%></a></li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=0&keyword="><%=bdao.stringCategory(0)%></a></li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=1&keyword="><%=bdao.stringCategory(1)%></a></li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=2&keyword="><%=bdao.stringCategory(2)%></a></li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=3&keyword="><%=bdao.stringCategory(3)%></a></li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=4&keyword="><%=bdao.stringCategory(4)%></a></li>
 		</ul>
 	</nav>
 	<div class="aa">
