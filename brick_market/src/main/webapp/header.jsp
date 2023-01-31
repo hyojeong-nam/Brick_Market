@@ -42,10 +42,11 @@
 	<nav>
 
 		<ul>
-			<li>1번</li>
-			<li>2번</li>
-			<li>3번</li>
-			<li>4번</li>
+			<li><a href="/brick_market/bbs/list?category=0"><%=bdao.stringCategory(0)%></a></li>
+			<li><a href="/brick_market/bbs/list?category=1"><%=bdao.stringCategory(1)%></a></li>
+			<li><a href="/brick_market/bbs/list?category=2"><%=bdao.stringCategory(2)%></a></li>
+			<li><a href="/brick_market/bbs/list?category=3"><%=bdao.stringCategory(3)%></a></li>
+			<li><a href="/brick_market/bbs/list?category=4"><%=bdao.stringCategory(4)%></a></li>
 		</ul>
 	</nav>
 	<div class="aa">
