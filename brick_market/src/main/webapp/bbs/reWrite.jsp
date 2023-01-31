@@ -105,22 +105,25 @@ MemberDTO mdto = mdao.searchIdx(user_idx);
 <body>
 <%@include file="/header.jsp" %>
 <h3>상품등록 정보수정</h3>
+<form name=reWrite action="rewhtie_ok.jsp">
 <section class="section">
 	<article class="container">
 		<img class="item_img" alt="test" src="<%=bdto.getBbs_img()%>">
-		<h2 class="title_text"><%=bdto.getBbs_subject() %></h2>
-		<p class="price_text"><%=bdto.getBbs_price() %>원</p>
+		<h2 class="title_text"><input type="text" value="<%=bdto.getBbs_subject() %>"></h2>
+		<p class="price_text"><input type="text" value="<%=bdto.getBbs_price() %>">원</p>
 		<img class="profile_img" alt="test" src="<%=mdto.getMember_img()%>">
+		<input type="file" name="bbs_img"
+							value="이미지 수정하기">
 		<p class="profile_nick"><%=mdto.getMember_nick() %></p>
 		<p class="profile_star">거래완료조회 ★★★★☆(23 리뷰) 평점 4.2</p>
 		<pre class="item_text">
-		<%=bdto.getBbs_content().replaceAll("\n", "<br>") %>
+		<textarea rows="12" cols="50" name="bbs_content" placeholder="<%=bdto.getBbs_content().replaceAll("\n", "<br>") %>"></textarea>
 		</pre>
 		<P class="modify_button"><input type="submit" value="수정하기"></P>
 		<p><input type="button" value="취소하기" onclick="location.href='/brick_market/index.jsp'"></p>
 	</article>
 </section>
-<%@include file="reply.jsp" %>
+</form>
 <%@include file="/footer.jsp" %>
 </body>
 </html>
