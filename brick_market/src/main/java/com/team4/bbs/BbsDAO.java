@@ -2,6 +2,7 @@ package com.team4.bbs;
 import java.util.*;
 import java.sql.*;
 import com.team4.member.*;
+import com.oreilly.servlet.MultipartRequest;
 
 public class BbsDAO {
 	Connection conn;
@@ -9,19 +10,47 @@ public class BbsDAO {
 	ResultSet rs;
 	
 	/**글쓰기*/
-	public int bbsWrite(BbsDTO dto) {
+	public int bbsWrite(MultipartRequest mr, int writer_idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
 			String sql = "insert into bbs_table values (bbs_table_idx.nextval,?,?,?,?,sysdate,0,?,?,0,?,?)";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, dto.getBbs_subject());
-			ps.setString(2, dto.getBbs_content());
-			ps.setInt(3, dto.getBbs_price());
-			ps.setString(4, dto.getBbs_img());
-			ps.setInt(5, dto.getBbs_writer_idx());
-			ps.setInt(6, dto.getBbs_category());
-			ps.setString(7, dto.getBbs_place());
-			ps.setInt(8, dto.getBbs_how());
+			String subject = mr.getParameter("bbs_subject");
+			ps.setString(1, subject);
+			String content = mr.getParameter("bbs_content");
+			ps.setString(2, content);
+			String price_s = mr.getParameter("bbs_price");
+			int price = 0;
+			if (price_s != null && price_s.length() != 0) {
+				price = Integer.parseInt(price_s);
+			}
+			ps.setInt(3, price);
+			String imgname = mr.getFilesystemName("bbs_img");
+			String img = "/brick_market/bbs/img/"+imgname;
+			ps.setString(4,img);
+			ps.setInt(5, writer_idx);
+			String category_s = mr.getParameter("bbs_category");
+			int category = -1;
+			if (category_s != null && category_s.length() != 0) {
+				category = Integer.parseInt(category_s);
+			}
+			ps.setInt(6, category);
+			String place = mr.getParameter("bbs_place");
+			ps.setString(7, place);
+			String how_s = mr.getParameter("bbs_how");
+			int how = -1;
+			if (how_s != null && how_s.length() != 0) {
+				how = Integer.parseInt(how_s);
+			}
+			ps.setInt(8, how);
+			System.out.println(subject);
+			System.out.println(content);
+			System.out.println(price);
+			System.out.println(img);
+			System.out.println(writer_idx);
+			System.out.println(category);
+			System.out.println(place);
+			System.out.println(how);
 			int count = ps.executeUpdate();
 			return count;
 		} catch (Exception e) {

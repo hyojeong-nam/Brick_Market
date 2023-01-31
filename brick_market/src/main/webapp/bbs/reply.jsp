@@ -5,20 +5,24 @@
 <%@page import="com.team4.reply.ReplyDTO"%>
 <%
 ArrayList<ReplyDTO> arr = rdao.replyList(bbs_idx);
-String ref_s =request.getParameter("ref");
-int ref=0;
-if(ref_s!=null&&ref_s.length()!=0){
-	ref=Integer.parseInt(ref_s);
+String ref_s = request.getParameter("ref");
+int ref = 0;
+if (ref_s != null && ref_s.length() != 0) {
+	ref = Integer.parseInt(ref_s);
 }
 %>
-
+<style>
+.test {
+	border: solid 1px;
+}
+</style>
 <section>
 	<article>
 		<hr>
 		<form action="reply_ok.jsp">
-			<fieldset>
+			<fieldset class="test">
 				<legend>댓글</legend>
-				<table>
+				<table border="1">
 					<tr>
 						<%
 						if (arr == null || arr.size() == 0) {
@@ -29,29 +33,47 @@ if(ref_s!=null&&ref_s.length()!=0){
 						%>
 					
 					<tr>
+						<%
+						MemberDTO marr = mdao.searchIdx(arr.get(i).getReply_write_idx());
+						%>
+						<td><%=marr.getMember_nick()%></td>
 						<td><%=arr.get(i).getReply_content()%></td>
 						<td><%=arr.get(i).getReply_date()%></td>
-						<td><a href="content.jsp?bbs_idx=<%=bbs_idx%>&ref=<%=arr.get(i).getReply_ref()%>">답글</a></td>
+						<td><a
+							href="content.jsp?bbs_idx=<%=bbs_idx%>&ref=<%=arr.get(i).getReply_ref()%>">답글</a></td>
 					</tr>
-					<%if(ref==arr.get(i).getReply_ref()){
-						%><tr><td><%@include file="rereply.jsp" %></td></tr><%
-						
-					} %>
 					<%
+					if (midx == arr.get(i).getReply_write_idx()) {
+					%><tr>
+						<td><a href="">수정</a> <a href="">삭제</a></td>
+					</tr>
+					<%
+					}
+					if (ref == arr.get(i).getReply_ref()) {
+					%><tr>
+						<td><%@include file="rereply.jsp"%></td>
+					</tr>
+					<%
+					}
 					}
 
 					}
 					%>
-					</tr>
 					<tr>
-						<td><%=mdto.getMember_nick()%></td>
-						<td><input type="text" name="reply_content"
-							placeholder="댓글을 입력해보세요"></td>
-						<td><input type="submit" value="등록"></td>
-						<td><input type="hidden" name="reply_bbs_idx"
-							value="<%=bbs_idx%>"></td>
-						<td><input type="hidden" name="reply_write_idx"
-							value="<%=user_idx%>"></td>
+						<%
+						if (midx == 0) {
+						%><td>로그인후 댓글입력가능</td>
+						<%
+						} else {
+						%>
+
+						<td><%=mdto.getMember_nick()%>
+						<input type="text" name="reply_content" placeholder="댓글을 입력해보세요">
+						<input type="submit" value="등록"><input type="hidden" name="reply_bbs_idx" value="<%=bbs_idx%>">
+						<input type="hidden" name="reply_write_idx" value="<%=midx%>"></td>
+						<%
+						}
+						%>
 					</tr>
 				</table>
 			</fieldset>
