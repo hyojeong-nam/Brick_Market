@@ -25,11 +25,15 @@ table {
 		<form name='rejoin' action='rejoin_ok.jsp'>
 			<table border='1'>
 				<tr>
-					<td><h2>회원 정보</h2></td>
+					<td colspan="2"><h2>회원 정보</h2></td>
+				</tr>
+				<tr>
+					<td>이미지 영역</td>
+					<td rowspan="2">닉네임님은 일반 회원입니다.<br>
+					가입일 2XXX년 X월 X일</td>
 				</tr>
 				<tr>
 					<td><input type="button" value="프로필 사진 변경"></td>
-					<td>닉네임님은 일반 회원입니다.</td>
 				</tr>
 				<tr>
 					<td>이름</td>
@@ -62,10 +66,7 @@ table {
 					</select></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="로그인"></td>
-				</tr>
-				<tr>
-					<td><input type="button" value="취소하기"></td>
+					<td colspan="2"><input type="submit" value="로그인"> <input type="button" value="취소하기"></td>
 				</tr>
 			</table>
 		</form>

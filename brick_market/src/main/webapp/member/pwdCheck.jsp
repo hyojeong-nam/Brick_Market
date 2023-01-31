@@ -18,7 +18,6 @@ table {
 }
 </style>
 <%
-int user_idx = 0;
 if (session.getAttribute("midx") == null 
 	|| session.getAttribute("midx").equals("")
 	|| session.getAttribute("midx").equals("0")) {
@@ -29,8 +28,6 @@ window.location.href='/brick_market/index.jsp';
 </script>	
 <%
 	return;
-} else {
-	user_idx = (Integer) session.getAttribute("midx");
 }
 %>
 </head>

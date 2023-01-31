@@ -7,14 +7,19 @@ String userpwd=request.getParameter("userpwd");
 int user_idx=(int)session.getAttribute("midx");
 
 boolean result=mdao.checkPwd(user_idx, userpwd);
-if(true){
+
+if(result){
 	%>
 	<script>
-	window.alert('완료');
-	window.location.href='/brick_market/rejoin.jsp';
+	window.location.href='/brick_market/member/reJoin.jsp';
 	</script>
 	<%
 } else{
-
+	%>
+	<script>
+	window.alert('비밀번호가 틀렸습니다. 다시 입력해 주세요.');
+	window.location.href='/brick_market/member/pwdCheck.jsp';
+	</script>
+	<%
 }
 %>
