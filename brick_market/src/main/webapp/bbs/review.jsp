@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<section class="section">
 거래 완료 및 리뷰
+</section>
 </body>
 </html>

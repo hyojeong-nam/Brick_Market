@@ -49,7 +49,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(1, pagenum, select);
 %>
 <body>
 	<%@ include file="header.jsp"%>
-	<section>
+	<section class="section">
 		<article>
 			<fieldset>
 				<%

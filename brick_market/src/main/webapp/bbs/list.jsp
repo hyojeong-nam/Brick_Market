@@ -77,7 +77,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(4, pagenum, select, keyword, category, stat
 %>
 <body>
 	<%@ include file="/header.jsp"%>
-	<section>
+	<section class="section">
 		<article>
 			<fieldset>
 				<%

@@ -44,7 +44,7 @@ window.location.href='/brick_market/index.jsp';
 </head>
 <body>
 	<%@include file="/header.jsp"%>
-	<section>
+	<section class="section">
 	<h3>상품등록</h3>
 		<article>
 			<form name="imgUpload" 

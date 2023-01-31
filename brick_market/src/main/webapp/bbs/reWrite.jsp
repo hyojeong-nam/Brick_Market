@@ -105,7 +105,7 @@ MemberDTO mdto = mdao.searchIdx(user_idx);
 <body>
 <%@include file="/header.jsp" %>
 <h3>상품등록 정보수정</h3>
-<section>
+<section class="section">
 	<article class="container">
 		<img class="item_img" alt="test" src="<%=bdto.getBbs_img()%>">
 		<h2 class="title_text"><input type="text" value="<%=bdto.getBbs_subject() %>"></h2>
