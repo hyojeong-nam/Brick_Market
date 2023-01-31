@@ -26,6 +26,7 @@
 		"item  proimg  nick"
 		"item  proimg  star"
 		"item   text   text"
+		"reply reply  reply"
 		;
 }
 
@@ -65,6 +66,11 @@
 
 .item_text {
 	grid-area:text;
+	text-align: left;
+}
+
+.reply {
+	grid-area:reply;
 	text-align: left;
 }
 </style>
