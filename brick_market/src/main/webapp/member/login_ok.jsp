@@ -8,8 +8,6 @@ String saveid = request.getParameter("saveid");
 int result=mdao.checkLogin(userid, userpwd);
 
 if(result != -1) {
-	
-	session.setAttribute("sid",userid);
 	session.setAttribute("midx",result);
 		
 		if (saveid!=null){

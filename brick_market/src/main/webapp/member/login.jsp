@@ -8,13 +8,14 @@
 <title>Insert title here</title>
 <link rel="styLesheet" type="text/css" href="/brick_market/css/maincss.css">
 <style>
-body
-{
-  margin: 0px auto;
-}
 h1{
 text-align: center;
 }
+table {
+	text-align: center;
+	margin: 0px auto;
+}
+
 </style>
 </head>
 <%

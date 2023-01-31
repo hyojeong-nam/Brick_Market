@@ -13,7 +13,7 @@
 		} else {
 		midx = (Integer) session.getAttribute("midx");
 		%>
-		<a href="/brick_market/member/reJoin.jsp">회원정보</a> | <a
+		<a href="/brick_market/member/pwdCheck.jsp">회원정보</a> | <a
 			href="/brick_market/member/logout.jsp">로그아웃</a>
 	</div>
 	<%
