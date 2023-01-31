@@ -76,10 +76,10 @@ window.location.href='/brick_market/index.jsp';
 						<td><select name="bbs_category">
 								<option>카테고리 목록</option>
 								<option value="0"><%=bdao.stringCategory(0) %></option>
-								<option value="0"><%=bdao.stringCategory(1) %></option>
-								<option value="0"><%=bdao.stringCategory(2) %></option>
-								<option value="0"><%=bdao.stringCategory(3) %></option>
-								<option value="0"><%=bdao.stringCategory(4) %></option>
+								<option value="1"><%=bdao.stringCategory(1) %></option>
+								<option value="2"><%=bdao.stringCategory(2) %></option>
+								<option value="3"><%=bdao.stringCategory(3) %></option>
+								<option value="4"><%=bdao.stringCategory(4) %></option>
 						</select></td>
 						<td colspan="4" rowspan="3"><img
 							src="/brick_market/img/disk.png" alt="이미지 첨부">
