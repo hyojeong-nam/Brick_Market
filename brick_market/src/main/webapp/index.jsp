@@ -174,7 +174,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(1, pagenum, select);
 					<%
 					for (int i = 0; i < arr.size(); i++) {
 					%>
-					<td class="content"><%=arr.get(i).getBbs_price()%></td>
+					<td class="content"><%=arr.get(i).getBbs_price()%> 원</td>
 
 					<%
 					}
