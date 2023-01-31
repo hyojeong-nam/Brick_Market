@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO" scope="session">
-</jsp:useBean>
+<jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="mdao" class="com.team4.member.MemberDAO" scope="session"></jsp:useBean>
+<%@page import="com.team4.member.MemberDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,18 +25,34 @@ section article table img {
 	height: 50px;
 }
 </style>
+<%
+int user_idx = 0;
+if (session.getAttribute("midx") == null 
+	|| session.getAttribute("midx").equals("")
+	|| session.getAttribute("midx").equals("0")) {
+%>
+<script>
+window.alert('로그인 후 이용 가능합니다.');	
+window.location.href='/brick_market/index.jsp';
+</script>	
+<%
+	return;
+} else {
+	user_idx = (Integer) session.getAttribute("midx");
+}
+%>
 </head>
 <body>
 	<%@include file="/header.jsp"%>
-	<h3>상품등록</h3>
 	<section>
+	<h3>상품등록</h3>
 		<article>
 			<form name="imgUpload" 
 				action="/brick_market/bbs/write_ok.jsp"method="post" enctype="multipart/form-data">
 				<table border="0">
 					<tr>
 						<th colspan="3">작성자</th>
-						<td><input type="text" name="writer_idx"></td>
+						<td><input type="text" name="writer_idx" value="<%=mdao.searchIdx(user_idx).getMember_nick()%>" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<th colspan="3">거래장소</th>
@@ -58,11 +75,11 @@ section article table img {
 						<th colspan="3">카테고리</th>
 						<td><select name="bbs_category">
 								<option>카테고리 목록</option>
-								<option value="0">디지털기기</option>
-								<option value="1">의류</option>
-								<option value="2">생활잡화</option>
-								<option value="3">뷰티/미용</option>
-								<option value="4">취미/게임/음반</option>
+								<option value="0"><%=bdao.stringCategory(0) %></option>
+								<option value="1"><%=bdao.stringCategory(1) %></option>
+								<option value="2"><%=bdao.stringCategory(2) %></option>
+								<option value="3"><%=bdao.stringCategory(3) %></option>
+								<option value="4"><%=bdao.stringCategory(4) %></option>
 						</select></td>
 						<td colspan="4" rowspan="3"><img
 							src="/brick_market/img/disk.png" alt="이미지 첨부">

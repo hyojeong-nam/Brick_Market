@@ -3,14 +3,13 @@
 <%
 request.setCharacterEncoding("utf-8");
 %>
-
 <jsp:useBean id="mdto" class="com.team4.member.MemberDTO"></jsp:useBean>
 <jsp:setProperty property="*" name="mdto"/>
 <jsp:useBean id="mdao" class="com.team4.member.MemberDAO"></jsp:useBean>
 <%
-String email="@"+request.getParameter("email2");
-//mdto.getMember_email(mdto.setMember_email(email));
-int result=mdao.joinMember(mdto, email);
+String email2="@"+request.getParameter("email2");
+//mdto.getMember_email(request.getParameter("email1")+email2);
+int result=mdao.joinMember(mdto,email2);
 
 String msg=result>0?"회원가입을 축하합니다.":"회원가입에 실패하였습니다.";
 %>

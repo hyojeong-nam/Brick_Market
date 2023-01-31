@@ -11,6 +11,10 @@
 th {
   text-align: right;
 }
+table {
+	text-align: center;
+	margin: 0px auto;
+}
 </style>
 <script>
 function open_idcheck(){
@@ -54,7 +58,7 @@ function test() {
 	<%@include file="/header.jsp"%>
 	<section>
 		<form name="join" action="join_ok.jsp" method="post">
-			<table>
+			<table border='1'>
 			<tr>
 			<td><h2>회원가입</h2></td>
 			</tr>

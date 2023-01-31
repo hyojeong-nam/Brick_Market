@@ -13,7 +13,7 @@
 		} else {
 		midx = (Integer) session.getAttribute("midx");
 		%>
-		<a href="/brick_market/member/reJoin.jsp">회원정보</a> | <a
+		<a href="/brick_market/member/pwdCheck.jsp">회원정보</a> | <a
 			href="/brick_market/member/logout.jsp">로그아웃</a>
 	</div>
 	<%
@@ -42,10 +42,11 @@
 	<nav>
 
 		<ul>
-			<li>1번</li>
-			<li>2번</li>
-			<li>3번</li>
-			<li>4번</li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=0&keyword="><%=bdao.stringCategory(0)%></a></li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=1&keyword="><%=bdao.stringCategory(1)%></a></li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=2&keyword="><%=bdao.stringCategory(2)%></a></li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=3&keyword="><%=bdao.stringCategory(3)%></a></li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=4&keyword="><%=bdao.stringCategory(4)%></a></li>
 		</ul>
 	</nav>
 	<div class="aa">
