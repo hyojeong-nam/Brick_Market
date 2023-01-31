@@ -10,14 +10,25 @@ int ref = 0;
 if (ref_s != null && ref_s.length() != 0) {
 	ref = Integer.parseInt(ref_s);
 }
+String repage_s = request.getParameter("repage");
+if (repage_s == null || repage_s.equals("0") || repage_s.equals("")) {
+	repage_s = "1";
+}
+int repage = Integer.parseInt(repage_s);
+int totalRef = rdao.totalRef();
+int pageSize=5;//한번에 보여줄 페이지갯수
+int listSize=5;//페이지당 보여줄 메인댓글개수
+int totalpage = (totalRef / listSize) + 1;
+if (totalRef % 5 == 0) {
+	totalpage--;
+}
 %>
 <style>
 .test {
 	border: solid 1px;
 }
 </style>
-<section>
-	<article>
+	<article class="reply">
 		<hr>
 		<form action="reply_ok.jsp">
 			<fieldset class="test">
@@ -67,17 +78,25 @@ if (ref_s != null && ref_s.length() != 0) {
 						} else {
 						%>
 
-						<td><%=mdto.getMember_nick()%>
-						<input type="text" name="reply_content" placeholder="댓글을 입력해보세요">
-						<input type="submit" value="등록"><input type="hidden" name="reply_bbs_idx" value="<%=bbs_idx%>">
-						<input type="hidden" name="reply_write_idx" value="<%=midx%>"></td>
+						<td><%=mdto.getMember_nick()%> <input type="text"
+							name="reply_content" placeholder="댓글을 입력해보세요"> <input
+							type="submit" value="등록"><input type="hidden"
+							name="reply_bbs_idx" value="<%=bbs_idx%>"> <input
+							type="hidden" name="reply_write_idx" value="<%=midx%>"></td>
 						<%
 						}
 						%>
 					</tr>
+					<th>
+						<%
+						for (int i = 1; i >= totalpage; i++) {
+						%><a href=""><td><%=i%></td></a>
+						<%
+						}
+						%>
+					</th>
 				</table>
 			</fieldset>
 		</form>
 
 	</article>
-</section>
