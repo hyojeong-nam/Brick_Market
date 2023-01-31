@@ -108,13 +108,12 @@ MemberDTO mdto = mdao.searchIdx(user_idx);
 <section>
 	<article class="container">
 		<img class="item_img" alt="test" src="<%=bdto.getBbs_img()%>">
-		<h2 class="title_text"><%=bdto.getBbs_subject() %></h2>
-		<p class="price_text"><%=bdto.getBbs_price() %>원</p>
+		<h2 class="title_text"><input type="text" value="<%=bdto.getBbs_subject() %>"></h2>
+		<p class="price_text"><input type="text" value="<%=bdto.getBbs_price() %>">원</p>
 		<img class="profile_img" alt="test" src="<%=mdto.getMember_img()%>">
-		<p class="profile_nick"><%=mdto.getMember_nick() %></p>
+		<p class="profile_nick"><input type="text" value="<%=mdto.getMember_nick() %>"></p>
 		<p class="profile_star">거래완료조회 ★★★★☆(23 리뷰) 평점 4.2</p>
-		<pre class="item_text">
-		<%=bdto.getBbs_content().replaceAll("\n", "<br>") %>
+		<pre class="item_text"><input type="text" value="<%=bdto.getBbs_content().replaceAll("\n", "<br>") %>">
 		</pre>
 		<P class="modify_button"><input type="submit" value="수정하기"></P>
 		<p><input type="button" value="취소하기" onclick="location.href='/brick_market/index.jsp'"></p>
