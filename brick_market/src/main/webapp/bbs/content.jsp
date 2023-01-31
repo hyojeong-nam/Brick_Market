@@ -113,8 +113,8 @@ MemberDTO mdto = mdao.searchIdx(user_idx);
 		<%=bdto.getBbs_content().replaceAll("\n", "<br>") %>
 		</pre>
 	</article>
-</section>
 <%@include file="reply.jsp" %>
+</section>
 <%@include file="/footer.jsp" %>
 </body>
 </html>
