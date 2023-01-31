@@ -110,8 +110,10 @@ public class BbsDAO {
 			conn=com.team4.db.Team4DB.getConn();
 			String sql = "select count(*) from "
 					 + "(select rownum as rnum, a.* "+keywordsql1+" from "
-					 + "(select * from bbs_table order by bbs_idx desc)a)b "
-					 + "where rnum > 0"+keywordsql2+categorysql+statussql;
+					 + "(select * from bbs_table where bbs_idx > 0 "+categorysql+statussql
+					 + " order by bbs_idx desc)a)b "
+					 + "where rnum > 0"+keywordsql2;
+			System.out.println(sql);
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			rs.next();
@@ -199,8 +201,9 @@ public class BbsDAO {
 			conn = com.team4.db.Team4DB.getConn();
 			String sql = "select * from "
 					+ "(select rownum as rnum, a.* "+keywordsql1+" from "
-					+ "(select * from bbs_table order by bbs_idx desc)a)b "
-					+ "where rnum >= ? and rnum <= ?"+keywordsql2+categorysql+statussql;
+					+ "(select * from bbs_table where bbs_idx > 0 " +categorysql+statussql
+					+ " order by bbs_idx desc)a)b "
+					+ "where rnum >= ? and rnum <= ?"+keywordsql2;
 			ps = conn.prepareStatement(sql);
 			int start = (page - 1) * size + 1;
 			int end = page * size + extra;
