@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+* {
+	padding:0; 
+	margin:0;
+}
 
 body {
 	text-align:center;
@@ -10,13 +14,25 @@ body {
 	grid-template-rows: 150px auto 150px;
 	grid-template-areas:
 		"header header header"
-		".      section   .     "
+		"left   mid    right"
 		"footer footer footer"
 		;
 }
 
-.section {
-	grid-area: header;
+.left {
+	grid-area: left;
+	text-align: left;
+}
+
+.right {
+	grid-area: right;
+	text-align: right;
+}
+
+.mid {
+	grid-area: mid;
+	text-align: center;
+	
 }
 header {
 	width: 1200px;

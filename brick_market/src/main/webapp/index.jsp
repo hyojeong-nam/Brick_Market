@@ -12,27 +12,44 @@
 <link rel="styLesheet" type="text/css"
 	href="/brick_market/css/maincss.css">
 <style type="text/css">
-section {
-	grid-area:item;
+
+.inline{
+	display: inline;
 }
 
-section table img {
-	width: 200px;
-	margin: 10px;
-	height: 220px;
-}
-
-section table {
-	text-align: center;
-	border: 0px;
+table.content{
 	margin: auto;
+	witdh: 1000px;
 }
 
-section fieldset {
-	border: 0px;
+
+.imgarea {
+	line-height: 220px;
 }
 
-section legend {
+.imgarea .img {
+	width: 200px;
+	height: 220px;
+	object-fit: cover;
+	vertical-align: middle;
+}
+
+.side .img {
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	vertical-align: middle;
+}
+table.content td.content{
+	text-align:center;
+	width: 200px;
+}
+
+table.content td.side{
+	text-align:center;
+	width: 100px;
+}
+h3 {
 	text-align: center;
 }
 </style>
@@ -49,111 +66,126 @@ ArrayList<BbsDTO> arr = bdao.bbsList(1, pagenum, select);
 %>
 <body>
 	<%@ include file="header.jsp"%>
-	<section class="section">
-		<article>
-			<fieldset>
+	<section>
+		<h3>최신글 보기</h3>
+		<article class="mid">
+			<table class="content">
 				<%
-				if (pagenum <= 1) {
-				%>왼쪽<%
+				if (arr == null || arr.size() == 0) {
+				%>
+				<tr class="content">
+					<td class="side"></td>
+					<td class="content">등록된 최신글이 없습니다</td>
+					<td class="side"></td>
+				</tr>
+				<%
 				} else {
 				%>
-				<a href="index.jsp?page=<%=pagenum - 1%>">왼쪽</a>
-				<%
-				}
-				%>
-				<legend>최신글 보기</legend>
-				<table>
+				<tr>
+					<td class="side"></td>
 					<%
-					if (arr == null || arr.size() == 0) {
+					for (int i = 0; i < arr.size(); i++) {
 					%>
-					<tr>
-						<td>등록된 최신글이 없습니다</td>
-					</tr>
-					<%
-					} else {
-					%>
-					<tr>
-						<%
-						for (int i = 0; i < arr.size(); i++) {
-						%>
-						<td><script>var str = '<%=arr.get(i).getBbs_date_s()%>';
-						var strY=str.substring(0,4);
-						var strM=parseInt(str.substring(5,7))-1;
-						var strD=str.substring(8,10);
-						var strH=str.substring(11,13);
-						var strMi=str.substring(14,16);
-						var strS=str.substring(17,19);
-						var date=new Date(strY,strM,strD,strH,strMi,strS);
-						var today=new Date();
-						var dayma= today-date;
-						if(dayma<60*1000){//1분
-							document.write('방금전');
-						}else if(dayma<1000*60*60){//1시간
-							var mi=Math.floor(dayma/(1000*60));//분구하기
-							document.write(mi+'분전');
-						}else if(dayma<1000*60*60*24){//24시간
-							var h=Math.floor(dayma/(1000*60*60));//시간구하기
-							document.write(h+'시간전');
-						}else if(dayma<1000*60*60*24*7){
-							var d=Math.floor(dayma/(1000*60*60*24));
-							document.write(d+'일전');
-						}else{
-							document.write('일주일 이상');
-						}
-						</script></td>
-						<%
-						}
-						%>
-					</tr>
-					<tr>
-						<%
-						for (int i = 0; i < arr.size(); i++) {
-						%>
-
-						<td><a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>"><img src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>"></a></td>
-
-						<%
-						}
-						%>
-					</tr>
-					<tr>
-						<%
-						for (int i = 0; i < arr.size(); i++) {
-						%>
-
-						<td><a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>"><%=arr.get(i).getBbs_subject()%></a></td>
-
-						<%
-						}
-						%>
-					</tr>
-					<tr>
-						<%
-						for (int i = 0; i < arr.size(); i++) {
-						%>
-
-						<td><%=arr.get(i).getBbs_price()%></td>
-
-						<%
-						}
-						%>
-					</tr>
+					<td class="content"><script>var str = '<%=arr.get(i).getBbs_date_s()%>';
+					var strY=str.substring(0,4);
+					var strM=parseInt(str.substring(5,7))-1;
+					var strD=str.substring(8,10);
+					var strH=str.substring(11,13);
+					var strMi=str.substring(14,16);
+					var strS=str.substring(17,19);
+					var date=new Date(strY,strM,strD,strH,strMi,strS);
+					var today=new Date();
+					var dayma= today-date;
+					if(dayma<60*1000){//1분
+						document.write('방금전');
+					}else if(dayma<1000*60*60){//1시간
+						var mi=Math.floor(dayma/(1000*60));//분구하기
+						document.write(mi+'분전');
+					}else if(dayma<1000*60*60*24){//24시간
+						var h=Math.floor(dayma/(1000*60*60));//시간구하기
+						document.write(h+'시간전');
+					}else if(dayma<1000*60*60*24*7){
+						var d=Math.floor(dayma/(1000*60*60*24));
+						document.write(d+'일전');
+					}else{
+						document.write('일주일 이상');
+					}
+					</script></td>
 					<%
 					}
 					%>
-				</table>
-				<%
-				if (pagenum >= totalcnt - select) {
-				%>오른쪽<%
-				} else {
-				%>
-				<a href="index.jsp?page=<%=pagenum + 1%>">오른쪽</a>
+					<td class="side"></td>
+				</tr>
+				<tr>
+					<td class="side">
+						<%
+						if (pagenum <= 1) {
+						} else {
+							%>
+							<a href="index.jsp?page=<%=pagenum - 1%>">
+							<img class="img" src="/brick_market/img/left.jpg" alt="왼쪽 페이지 이동">
+							</a>
+							<%
+						}
+						%>
+					</td>
+					<%
+					for (int i = 0; i < arr.size(); i++) {
+					%>
+
+					<td class="imgarea content">
+					<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
+					<img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>">
+					</a></td>
+
+					<%
+					}
+					%>
+					<td class="side">
+						<%
+						if (pagenum >= totalcnt - select) {
+						} else {
+							%>
+							<a href="index.jsp?page=<%=pagenum + 1%>">
+							<img class="img" src="/brick_market/img/right.jpg" alt="오른쪽 페이지 이동">
+							</a>
+							<%
+						}
+						%>
+					</td>
+				</tr>
+				<tr>
+					<td class="side"></td>
+					<%
+					for (int i = 0; i < arr.size(); i++) {
+					%>
+
+					<td class="content">
+					<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>"><%=arr.get(i).getBbs_subject()%>
+					</a></td>
+
+					<%
+					}
+					%>
+					<td class="side"></td>
+				</tr>
+				<tr>
+					<td class="side"></td>
+					<%
+					for (int i = 0; i < arr.size(); i++) {
+					%>
+					<td class="content"><%=arr.get(i).getBbs_price()%></td>
+
+					<%
+					}
+					%>
+					<td class="side"></td>
+				</tr>
 				<%
 				}
 				%>
-			</fieldset>
+			</table>
 		</article>
-
 	</section>
 	<%@ include file="footer.jsp"%>
 </body>
