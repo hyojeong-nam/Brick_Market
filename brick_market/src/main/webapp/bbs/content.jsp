@@ -117,6 +117,7 @@ MemberDTO mdto = mdao.searchIdx(user_idx);
 		<p class="profile_star">거래완료조회 ★★★★☆(23 리뷰) 평점 4.2</p>
 		<pre class="item_text">
 		<%=bdto.getBbs_content().replaceAll("\n", "<br>") %>
+<a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>">수정하기</a>
 		</pre>
 	</article>
 <%@include file="reply.jsp" %>
