@@ -13,7 +13,7 @@
 	href="/brick_market/css/maincss.css">
 <style type="text/css">
 section {
-	width: 1200px;
+	grid-area:item;
 }
 
 section table img {

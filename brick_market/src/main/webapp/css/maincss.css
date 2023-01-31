@@ -1,11 +1,26 @@
 @charset "UTF-8";
 
+
 body {
-	width: 1200px;
-	margin: 0px auto;
+	text-align:center;
+	margin:0px auto;
+	width:1200px;
+	display:grid;
+	grid-template-columns: 100px 1000px 100px;
+	grid-template-rows: 150px auto 150px;
+	grid-template-areas:
+		"header header header"
+		".      section   .     "
+		"footer footer footer"
+		;
+}
+
+.section {
+	grid-area: header;
 }
 header {
 	width: 1200px;
+	grid-area: header;
 }
 
 #star {
@@ -25,8 +40,8 @@ header form {
 }
 
 footer {
-	width: 1200px;
 	background-color: #DDDDDD;
+	grid-area: footer;
 }
 
 header img {

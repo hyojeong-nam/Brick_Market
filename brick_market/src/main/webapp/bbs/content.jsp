@@ -26,6 +26,7 @@
 		"item  proimg  nick"
 		"item  proimg  star"
 		"item   text   text"
+		"reply reply  reply"
 		;
 }
 
@@ -67,6 +68,11 @@
 	grid-area:text;
 	text-align: left;
 }
+
+.reply {
+	grid-area:reply;
+	text-align: left;
+}
 </style>
 <%
 String bbs_idx_s = request.getParameter("bbs_idx");
@@ -101,7 +107,7 @@ MemberDTO mdto = mdao.searchIdx(user_idx);
 </head>
 <body>
 <%@include file="/header.jsp" %>
-<section>
+<section class="section">
 	<article class="container">
 		<img class="item_img" alt="test" src="<%=bdto.getBbs_img()%>">
 		<h2 class="title_text"><%=bdto.getBbs_subject() %></h2>

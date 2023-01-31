@@ -28,7 +28,7 @@ if (totalRef % 5 == 0) {
 	border: solid 1px;
 }
 </style>
-	<article>
+	<article class="reply">
 		<hr>
 		<form action="reply_ok.jsp">
 			<fieldset class="test">

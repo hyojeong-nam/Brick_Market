@@ -21,7 +21,7 @@ table {
 </head>
 <body>
 	<%@include file="/header.jsp"%>
-	<section>
+	<section class="section">
 		<form name='rejoin' action='rejoin_ok.jsp'>
 			<table border='1'>
 				<tr>
