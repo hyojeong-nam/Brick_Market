@@ -9,12 +9,15 @@ public class ReplyDAO {
 	ResultSet rs;
 
 	/** 댓글조회 */
-	public ArrayList<ReplyDTO> replyList(int bbs_idx) {
+	public ArrayList<ReplyDTO> replyList(int bbs_idx ,int ls ,int cp) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			String sql = "select * from reply_table where reply_bbs_idx=? order by reply_ref desc";
+			int start = (cp - 1) * ls + 1;
+			int end = cp * ls;
+			String sql = "select * from (select rownum as rnum, a.* from (select * from reply_table where reply_bbs_idx=9 order by reply_ref desc)a)b where rnum >= ? and rnum <= ? and reply_lev=0";
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, bbs_idx);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
 			rs = ps.executeQuery();
 			ArrayList<ReplyDTO> arr = new ArrayList<ReplyDTO>();
 			while (rs.next()) {
@@ -77,7 +80,7 @@ public class ReplyDAO {
 			}
 		}
 	}
-	public int replyWrite(int bbs_idx, int write_idx, String reply_content) {
+	public int replyWrite(int bbs_idx, int write_idx, String reply_content,int lev) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
 			int maxref=getMaxRef();
@@ -87,7 +90,7 @@ public class ReplyDAO {
 			ps.setInt(2, write_idx);
 			ps.setString(3, reply_content);
 			ps.setInt(4, maxref+1);
-			ps.setInt(5, 0);
+			ps.setInt(5, lev);
 			ps.setInt(6, 0);
 			return ps.executeUpdate();
 		} catch (Exception e) {
@@ -129,6 +132,56 @@ public class ReplyDAO {
 				if (conn != null)
 					conn.close();
 
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+	}public int updateReply(String content,int idx) {
+		try {
+			conn = com.team4.db.Team4DB.getConn();
+			String sql="update reply_table set reply_content =? where reply_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, content);
+			ps.setInt(2, idx);
+			return ps.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return-1;
+		}finally {
+			try {
+				
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+				
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+	}
+	public int dedleteReply(int idx) {
+		try {
+			conn = com.team4.db.Team4DB.getConn();
+			String sql="delete from reply_table where reply_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, idx);
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return -1;
+			
+		}finally {
+			try {
+				
+				
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
 			} catch (Exception e2) {
 				// TODO: handle exception
 			}

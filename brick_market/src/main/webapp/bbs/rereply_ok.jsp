@@ -10,11 +10,13 @@ request.setCharacterEncoding("utf-8");
 int bbs_idx = rdto.getReply_bbs_idx();
 int write_idx = rdto.getReply_write_idx();
 String reply_content = rdto.getReply_content();
-int a = rdao.replyWrite(bbs_idx, write_idx, reply_content,0);
+int a = rdao.replyWrite(bbs_idx, write_idx, reply_content,1);
+int ref=Integer.parseInt(request.getParameter("ref"));
+int cp=Integer.parseInt(request.getParameter("cp"));
 if(a==-1){
 	%><script>document.alert('댓글 작성 실패');
 	</script><%
 }%>
 <script>
-location.href='content.jsp?bbs_idx=<%=bbs_idx%>';
+location.href='content.jsp?bbs_idx=<%=bbs_idx%>&cp=<%=cp%>&ref=<%=ref%>';
 </script>

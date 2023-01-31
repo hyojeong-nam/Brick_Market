@@ -1,22 +1,17 @@
-<%@page import="com.team4.member.MemberDAO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
-<jsp:useBean id="mdao" class="com.team4.member.MemberDAO"
-	scope="session"></jsp:useBean>
+<jsp:useBean id="mdao" class="com.team4.member.MemberDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="rdao" class="com.team4.reply.ReplyDAO" scope="session"></jsp:useBean>
 <%@page import="java.util.*"%>
 <%@page import="com.team4.reply.ReplyDTO"%>
 <%@page import="com.team4.bbs.BbsDTO"%>
 <%@page import="com.team4.member.MemberDTO"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css"
-	href="/brick_market/css/maincss.css">
+<link rel="stylesheet" type="text/css" href="/brick_market/css/maincss.css">
 <style>
 .container {
 	text-align: center;
@@ -27,7 +22,7 @@
 	grid-template-rows: 40px 40px 40px 40px 240px auto;
 	grid-template-areas: "item  title  title" "item  price  price"
 		"item  proimg  nick" "item  proimg  star" "item   text   text"
-		"reply reply reply";
+		"reply reply  reply";
 }
 
 .item_img {
@@ -92,7 +87,6 @@ if (bbs_idx == 0) {
 return;
 }
 BbsDTO bdto = bdao.bbsContent(bbs_idx);
-
 if (bdto.equals(null)) {
 %>
 <script>
@@ -103,28 +97,37 @@ if (bdto.equals(null)) {
 return;
 }
 int user_idx = bdto.getBbs_writer_idx();
-System.out.println(user_idx);
 MemberDTO mdto = mdao.searchIdx(user_idx);
-
-ArrayList<ReplyDTO> arr = rdao.replyList(bbs_idx);
 String ref_s = request.getParameter("ref");
 int ref = 0;
 if (ref_s != null && ref_s.length() != 0) {
 ref = Integer.parseInt(ref_s);
 }
-String repage_s = request.getParameter("repage");
-if (repage_s == null || repage_s.equals("0") || repage_s.equals("")) {
-repage_s = "1";
+int totalCnt = rdao.totalRef();//db
+int listSize = 5;//
+int pageSize = 5;//
+String cp_s = request.getParameter("cp");
+if (cp_s == null || cp_s.equals("")) {
+cp_s = "1";
 }
-int repage = Integer.parseInt(repage_s);
-int totalRef = rdao.totalRef();
-int pageSize = 5;//한번에 보여줄 페이지갯수
-int listSize = 5;//페이지당 보여줄 메인댓글개수
-int totalpage = (totalRef / listSize) + 1;
-if (totalRef % 5 == 0) {
-totalpage--;
+int cp = Integer.parseInt(cp_s);
+int totalPage = totalCnt / listSize + 1;
+if (totalCnt % listSize == 0) {
+totalPage--;
 }
+int userGroup = cp / pageSize;
+if (cp % pageSize == 0)
+userGroup--;
+ArrayList<ReplyDTO> arr = rdao.replyList(bbs_idx,listSize,cp);
 %>
+<script>
+function delete_reply(a) {
+	var bl =window.confirm('삭제하시겠습니까?');
+	if(bl){
+		location.href='deleteReply.jsp?reply_idx='+a+'&bbs_idx=<%=bbs_idx%>';
+	}
+}
+</script>
 </head>
 <body>
 	<%@include file="/header.jsp"%>
@@ -141,86 +144,119 @@ totalpage--;
 		<%=bdto.getBbs_content().replaceAll("\n", "<br>")%>
 <a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>">수정하기</a>
 		</pre>
-			<form class="reply" action="reply_ok.jsp">
-				<fieldset class="test">
-					<legend>댓글</legend>
-					<table border="1">
-						<tr>
-							<%
-							if (arr == null || arr.size() == 0) {
-							%><td>등록된 댓글이 없습니다.</td>
-							<%
-							} else {
-							for (int i = 0; i < arr.size(); i++) {
-							%>
-						
-						<tr>
-							<%
-							MemberDTO marr = mdao.searchIdx(arr.get(i).getReply_write_idx());
-							%>
-							<td><%=marr.getMember_nick()%></td>
-							<td><%=arr.get(i).getReply_content()%></td>
-							<td><%=arr.get(i).getReply_date()%></td>
-							<td><a
-								href="content.jsp?bbs_idx=<%=bbs_idx%>&ref=<%=arr.get(i).getReply_ref()%>">답글</a></td>
-						</tr>
-						<%
-						if (midx == arr.get(i).getReply_write_idx()) {
-						%><tr>
-							<td><a href="">수정</a> <a href="">삭제</a></td>
-						</tr>
-						<%
-						}
-						if (ref == arr.get(i).getReply_ref()) {
-						%><tr>
-							<td><script>
-								document.write('<section>');
-								document.write('<article>');
-								document.write('<div><%=mdto.getMember_nick() %></div>');
-								document.write('<form action="rereply_ok.jsp">');
-								document.write('<input type="text" name="rereply">');
-								document.write('<input type="submit" value="답글달기">');
-								document.write('</form>');
-								document.write('</article>');
-								document.write('</section>');
-							</script></td>
-						</tr>
-						<%
-						}
-						}
+		</article>
+		<article class="reply">
+			<hr>
+			<table border="1">
+				<tr>
+					<%
+					if (arr == null || arr.size() == 0) {
+					%><td>등록된 댓글이 없습니다.</td>
+					<%
+					} else {
+					for (int i = 0; i < arr.size(); i++) {
+					%>
+				<tr>
+					<%
+					MemberDTO marr = mdao.searchIdx(arr.get(i).getReply_write_idx());
+					%>
+					<td><%=marr.getMember_nick()%></td>
+					<td><%=arr.get(i).getReply_content()%></td>
+					<td><%=arr.get(i).getReply_date()%></td>
+					<td>
+					<a href="content.jsp?bbs_idx=<%=bbs_idx%>&ref=<%=arr.get(i).getReply_ref()%>&cp=<%=cp%>">답글</a>
+					</td>
+				</tr>
+				<%
+				if (midx == arr.get(i).getReply_write_idx()) {
+				%><tr>
+					<td>
+					    <a href="javascript:location.href='content.jsp?bbs_idx=<%=bbs_idx%>&reply_idx=<%=arr.get(i).getReply_idx()%>&cp=<%=cp%>';">수정</a>
+						<a href="javascript:delete_reply(<%=arr.get(i).getReply_idx()%>);">삭제</a>
+					</td>
+					<%
+					if (request.getParameter("reply_idx") != null
+							&& Integer.parseInt(request.getParameter("reply_idx")) == arr.get(i).getReply_idx()) {
+						int reply_idx = Integer.parseInt(request.getParameter("reply_idx"));
+					%><td>
+					<form action="updateReply.jsp" method="post">
+							<input type="text" name="content" value="<%=arr.get(i).getReply_content()%>"> 
+							<input type="hidden" name="reply_idx" value="<%=reply_idx%>"> 
+							<input type="hidden" name="bbs_idx" value="<%=bbs_idx%>">
+							<input type="hidden" name="cp" value="<%=cp%>">
+							<input type="submit" value="수정하기"> 
+							<input type="button" value="취소" onclick="javascript:location.href='content.jsp?bbs_idx=<%=bbs_idx%>&cp=<%=cp%>';">
+						</form></td>
+					<%
+					}
+					%>
+				</tr>
+				<%
+				}
+				if (ref == arr.get(i).getReply_ref()) {
+				%><tr>
+					<td><script>
+							document.write('<section>');
+							document.write('<article>');
+							document.write('<div><%=mdto.getMember_nick()%></div>');
+						document.write('<form action="rereply_ok.jsp?cp=<%=cp%>&ref=<%=ref%>" method="post">');
+						document.write('<input type="text" name="reply_content">');
+						document.write('<input type="hidden" name="reply_bbs_idx" value="<%=bbs_idx%>">');
+						document.write('<input type="hidden" name="reply_write_idx"  value="<%=midx%>">');
+						document.write('<input type="submit" value="답글달기">');
+						document.write('</form>');
+						document.write('</article>');
+						document.write('</section>');
+					</script></td>
+				</tr>
+				<%
+				}
+				}
+				}
+				%>
+				<tr>
+					<%
+					if (midx == 0) {
+					%><td>로그인후 댓글입력가능</td>
+					<%
+					} else {
+					%>
 
+					<td>
+						<form action="reply_ok.jsp?" method="post">
+							<%=mdto.getMember_nick()%>
+							<input type="text" name="reply_content" placeholder="댓글을 입력해보세요">
+							<input type="submit" value="등록">
+							<input type="hidden" name="reply_bbs_idx" value="<%=bbs_idx%>">
+							<input type="hidden" name="reply_write_idx" value="<%=midx%>">
+						</form>
+					</td>
+					<%
+					}
+					%>
+				</tr>
+				<tr>
+					<td>
+						<%
+						if (userGroup != 0) {
+						%><a
+						href="content.jsp?cp=<%=(userGroup - 1) * pageSize + 1%>&bbs_idx=<%=bbs_idx%>">&lt;&lt;</a>
+						<%
 						}
-						%>
-						<tr>
-							<%
-							if (midx == 0) {
-							%><td>로그인후 댓글입력가능</td>
-							<%
-							} else {
-							%>
-
-							<td><%=mdto.getMember_nick()%> <input type="text" 
-								name="reply_content" placeholder="댓글을 입력해보세요"> <input
-								type="submit" value="등록"><input type="hidden"
-								name="reply_bbs_idx" value="<%=bbs_idx%>"> <input
-								type="hidden" name="reply_write_idx" value="<%=midx%>"></td>
-							<%
+						for (int i = userGroup * pageSize + 1; i <= userGroup * pageSize + pageSize; i++) {
+						%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+						href="content.jsp?cp=<%=i%>&bbs_idx=<%=bbs_idx%>"><%=i%></a> <%
+ if (i == totalPage)
+ 	break;
+ }
+ if (userGroup != (totalPage / pageSize - (totalPage % pageSize == 0 ? 1 : 0))) {
+ %><a href="content.jsp?cp=<%=(userGroup + 1) * pageSize + 1%>&bbs_idx=<%=bbs_idx%>">
+							&gt;&gt;<%
 							}
 							%>
-						</tr>
-						<tr>
-							<td><a href="">왼쪽</a></td>
-							<%
-							for (int i = 1; i <= totalpage; i++) {
-							%><td><a href=""><%=i%></a></td>
-							<%
-							}
-							%>
-							<td><a href="">오른쪽</a></td>
-						</tr>
-					</table>
-				</fieldset>
-			</form>
+					</td>
+				</tr>
+			</table>
 		</article>
 	</section>
 	<%@include file="/footer.jsp"%>
