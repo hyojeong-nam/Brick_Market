@@ -113,7 +113,6 @@ public class BbsDAO {
 					 + "(select * from bbs_table where bbs_idx > 0 "+categorysql+statussql
 					 + " order by bbs_idx desc)a)b "
 					 + "where rnum > 0"+keywordsql2;
-			System.out.println(sql);
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			rs.next();
