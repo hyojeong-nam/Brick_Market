@@ -10,11 +10,11 @@ boolean result=mdao.checkPwd(user_idx, userpwd);
 if(true){
 	%>
 	<script>
-	window.alert('<%=msg %>');
-	window.location.href='/brick_market/index.jsp';
+	window.alert('완료');
+	window.location.href='/brick_market/rejoin.jsp';
 	</script>
-	
+	<%
 } else{
-	
+
 }
 %>

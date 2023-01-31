@@ -294,7 +294,7 @@ public class BbsDAO {
 			e.printStackTrace();
 			
 		} finally {
-			try {
+			try {			
 				if(ps!=null)ps.close();
 			} catch (Exception e2) {
 				e2.printStackTrace();
@@ -325,7 +325,8 @@ public class BbsDAO {
 			return -1;
 		} finally {
 			try {
-				
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			} 
