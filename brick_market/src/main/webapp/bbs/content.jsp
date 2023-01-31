@@ -107,7 +107,7 @@ MemberDTO mdto = mdao.searchIdx(user_idx);
 </head>
 <body>
 <%@include file="/header.jsp" %>
-<section>
+<section class="section">
 	<article class="container">
 		<img class="item_img" alt="test" src="<%=bdto.getBbs_img()%>">
 		<h2 class="title_text"><%=bdto.getBbs_subject() %></h2>

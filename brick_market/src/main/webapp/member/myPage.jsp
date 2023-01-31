@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<section class="section">
 <h2>myPage.jsp</h2>
+
+</section>
 </body>
 </html>

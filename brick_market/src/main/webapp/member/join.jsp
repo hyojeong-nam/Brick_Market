@@ -56,7 +56,7 @@ function test() {
 </head>
 <body >
 	<%@include file="/header.jsp"%>
-	<section>
+	<section class="section">
 		<form name="join" action="join_ok.jsp" method="post">
 			<table border='1'>
 			<tr>

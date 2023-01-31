@@ -36,7 +36,7 @@ window.location.href='/brick_market/index.jsp';
 </head>
 <body>
 <%@include file="/header.jsp"%>
-<section>
+<section class="section">
 <form name="pwdCheck" action="pwdCheck_ok.jsp" method="post">
 <table>
 <tr>
