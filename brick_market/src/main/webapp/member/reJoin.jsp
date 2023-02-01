@@ -6,7 +6,7 @@
 <%@ page import="java.util.*" %>
 
 <jsp:useBean id="mdao" class="com.team4.member.MemberDAO" scope="session"></jsp:useBean>
-<jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,7 +100,7 @@ String joindate =sdf.format(original_date);
 				<tr>
 					<td>아이디</td>
 					<td><input type="text" name="member_id"
-						value="<%=dto.getMember_id()%>" readonly></td>
+						value="<%=dto.getMember_id()%>"></td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
