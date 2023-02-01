@@ -14,10 +14,11 @@ public class ReplyDAO {
 			conn = com.team4.db.Team4DB.getConn();
 			int start = (cp - 1) * ls + 1;
 			int end = cp * ls;
-			String sql = "select * from (select rownum as rnum, a.* from (select * from reply_table where reply_bbs_idx=9 order by reply_ref desc)a)b where rnum >= ? and rnum <= ? and reply_lev=0";
+			String sql = "select * from (select rownum as rnum, a.* from (select * from reply_table where reply_bbs_idx=? and reply_lev=0 order by reply_ref desc)a)b where rnum >= ? and rnum <= ? ";
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, start);
-			ps.setInt(2, end);
+			ps.setInt(1, bbs_idx);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 			rs = ps.executeQuery();
 			ArrayList<ReplyDTO> arr = new ArrayList<ReplyDTO>();
 			while (rs.next()) {
@@ -80,18 +81,43 @@ public class ReplyDAO {
 			}
 		}
 	}
-	public int replyWrite(int bbs_idx, int write_idx, String reply_content,int lev) {
+	public int getMaxSunbun(int ref) {
+		try {
+			String sql="select max(reply_sunbun) from reply_table where reply_ref=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, ref);
+			rs=ps.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return -1;
+			
+		}finally {
+			
+		}
+	}
+	public int replyWrite(int bbs_idx, int write_idx, String reply_content,int lev,int ref) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
 			int maxref=getMaxRef();
+			int maxsunbun=0;
+			if(lev==0) {
+				maxref++;
+			}else {
+				maxref=ref;
+				maxsunbun=getMaxSunbun(ref)+1;
+			}
+			
 			String sql = "insert into reply_table values (reply_table_idx.nextval,?,?,?,sysdate,?,?,?)";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, bbs_idx);
 			ps.setInt(2, write_idx);
 			ps.setString(3, reply_content);
-			ps.setInt(4, maxref+1);
+			ps.setInt(4, maxref);
 			ps.setInt(5, lev);
-			ps.setInt(6, 0);
+			ps.setInt(6, maxsunbun);
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -182,6 +208,50 @@ public class ReplyDAO {
 					ps.close();
 				if (conn != null)
 					conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+	}
+	/** 댓글조회 */
+	public ArrayList<ReplyDTO> rereplyList(int bbs_idx,int ref) {
+		try {
+			conn = com.team4.db.Team4DB.getConn();
+			String sql = "select * from reply_table where reply_bbs_idx=? and reply_ref=? and reply_lev=1 order by reply_sunbun asc ";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bbs_idx);
+			ps.setInt(2, ref);
+			rs = ps.executeQuery();
+			ArrayList<ReplyDTO> arr = new ArrayList<ReplyDTO>();
+			while (rs.next()) {
+				int reply_idx = rs.getInt("reply_idx");
+				int reply_bbs_idx = rs.getInt("reply_bbs_idx");
+				int reply_write_idx = rs.getInt("reply_write_idx");
+				String reply_content = rs.getString("reply_content");
+				java.sql.Date reply_date = rs.getDate("reply_date");
+				int reply_ref = rs.getInt("reply_ref");
+				int reply_lev = rs.getInt("reply_lev");
+				int reply_sunbun = rs.getInt("reply_sunbun");
+				String reply_date_s = rs.getString("reply_date");
+				ReplyDTO dto = new ReplyDTO(reply_idx, reply_bbs_idx, reply_write_idx, reply_content, reply_date,
+						reply_ref, reply_lev, reply_sunbun, reply_date_s);
+				arr.add(dto);
+			}
+			return arr;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+			// TODO: handle exception
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+
 			} catch (Exception e2) {
 				// TODO: handle exception
 			}

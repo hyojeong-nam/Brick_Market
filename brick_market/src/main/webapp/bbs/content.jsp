@@ -194,10 +194,24 @@ function delete_reply(a) {
 				<%
 				}
 				if (ref == arr.get(i).getReply_ref()) {
+					ArrayList<ReplyDTO> arr2=rdao.rereplyList(bbs_idx, ref);
 				%><tr>
 					<td><script>
 							document.write('<section>');
 							document.write('<article>');
+							<%if(arr2!=null||arr2.size()!=0){
+								for(int j=0;j<arr2.size();j++){
+									MemberDTO marr2 = mdao.searchIdx(arr2.get(j).getReply_write_idx());	
+								%>
+							document.write('<%=marr2.getMember_nick()%>');
+							document.write('<%=arr2.get(j).getReply_content()%>');
+							document.write('<%=arr2.get(j).getReply_date()%>');
+							document.write('<br>');
+								
+								<%	
+								}
+							}%>
+							
 							document.write('<div><%=mdto.getMember_nick()%></div>');
 						document.write('<form action="rereply_ok.jsp?cp=<%=cp%>&ref=<%=ref%>" method="post">');
 						document.write('<input type="text" name="reply_content">');
