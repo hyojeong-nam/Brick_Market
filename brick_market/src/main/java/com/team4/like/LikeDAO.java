@@ -34,7 +34,7 @@ public class LikeDAO {
 	public int updateLike(int check,int bbs_idx,int user_idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			String sql="update like_table set like_check=? where bbs_idx=? and user_idx=?";
+			String sql="update like_table set like_check=? where like_bbs_idx=? and like_user_idx=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, check);
 			ps.setInt(2, bbs_idx);

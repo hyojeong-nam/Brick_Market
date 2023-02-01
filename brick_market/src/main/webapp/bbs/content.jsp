@@ -2,6 +2,7 @@
 <jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="mdao" class="com.team4.member.MemberDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="rdao" class="com.team4.reply.ReplyDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="ldao" class="com.team4.like.LikeDAO"></jsp:useBean>
 <%@page import="java.util.*"%>
 <%@page import="com.team4.reply.ReplyDTO"%>
 <%@page import="com.team4.bbs.BbsDTO"%>
@@ -133,7 +134,7 @@ ArrayList<ReplyDTO> arr = rdao.replyList(bbs_idx,listSize,cp);
 function delete_reply(a) {
 	var bl =window.confirm('삭제하시겠습니까?');
 	if(bl){
-		location.href='deleteReply.jsp?reply_idx='+a+'&bbs_idx=<%=bbs_idx%>';
+		location.href='deleteReply.jsp?ref='+a+'&bbs_idx=<%=bbs_idx%>';
 	}
 }
 function openDel(){
@@ -159,6 +160,22 @@ function openDel(){
 		<%=bdto.getBbs_content().replaceAll("\n", "<br>")%>
 			<a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>">수정하기</a>
 			<input type="button" onclick="openDel();" value="삭제하기">
+			<%
+			int like=-1;
+			if(midx!=0){
+				like=ldao.checkLike(bbs_idx, midx);
+				
+				if(like==1){
+					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=1" >좋아요 취소하기</a><% 
+				}else if(like==0){
+					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=0" >좋아요 하기</a><%
+				}else{
+					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=2" >좋아요 하기</a><%
+				}
+			}else{
+				%><span>로그인후 이용가능</span><% 
+			}
+			 %>
 		</pre>
 		</article>
 		<article class="reply">
@@ -199,7 +216,7 @@ function openDel(){
 					    <a href="javascript:location.href='content.jsp?bbs_idx=<%=bbs_idx%>&reply_idx=<%=arr.get(i).getReply_idx()%>&cp=<%=cp%>';">수정</a>
 					</td>
 					<td>
-						<a href="javascript:delete_reply(<%=arr.get(i).getReply_idx()%>);">삭제</a>
+						<a href="javascript:delete_reply(<%=arr.get(i).getReply_ref()%>);">삭제</a>
 					</td>
 				</tr>
 					<%
@@ -263,6 +280,8 @@ function openDel(){
 						%>
 						document.write('<form action="rereply_ok.jsp?cp=<%=cp%>&ref=<%=ref%>" method="post">');
 				</script>
+				<%if(midx!=0){
+					%>
 					<td>
 						답글달기
 					</td>
@@ -281,6 +300,7 @@ function openDel(){
 					</td>
 				</tr>
 				<%
+				}
 				}
 				}
 				}

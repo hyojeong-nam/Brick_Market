@@ -4,9 +4,9 @@
 <jsp:useBean id="rdao" class="com.team4.reply.ReplyDAO" scope="session"></jsp:useBean>
 <%
 int bbs_idx=0;
-int reply_idx=0;
+int ref=0;
 request.getParameter("bbs_idx");
-request.getParameter("reply_idx");
+request.getParameter("ref");
 if(request.getParameter("bbs_idx")!=null||request.getParameter("bbs_idx").equals("0")){
 	bbs_idx=Integer.parseInt(request.getParameter("bbs_idx"));
 }else{
@@ -16,10 +16,10 @@ if(request.getParameter("bbs_idx")!=null||request.getParameter("bbs_idx").equals
 	</script>
 	<%
 }
-if(request.getParameter("reply_idx")!=null||request.getParameter("reply_idx").equals("0")){
-	reply_idx=Integer.parseInt(request.getParameter("reply_idx"));
-	int resert=rdao.dedleteReply(reply_idx);
-	if(resert==1){
+if(request.getParameter("ref")!=null||request.getParameter("ref").equals("0")){
+	ref=Integer.parseInt(request.getParameter("ref"));
+	int resert=rdao.dedleteReply(ref);
+	if(resert>=1){
 		
 	%>
 	<script>

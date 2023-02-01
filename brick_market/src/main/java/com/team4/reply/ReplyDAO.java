@@ -196,12 +196,12 @@ public class ReplyDAO {
 			}
 		}
 	}
-	public int dedleteReply(int idx) {
+	public int dedleteReply(int ref) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			String sql="delete from reply_table where reply_idx=?";
+			String sql="delete from reply_table where reply_ref=?";
 			ps=conn.prepareStatement(sql);
-			ps.setInt(1, idx);
+			ps.setInt(1, ref);
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
