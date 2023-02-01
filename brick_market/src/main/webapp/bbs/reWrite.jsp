@@ -59,6 +59,7 @@ MemberDTO mdto = mdao.searchIdx(user_idx);
 		<article>
 			<form name="reWrite" action="/brick_market/bbs/reWrite_ok.jsp"
 				method="post" enctype="multipart/form-data">
+				<input type="hidden" name="bbs_idx" value="<%=request.getParameter("bbs_idx")%>">
 				<table border="0">
 					<tr>
 						<th colspan="3">작성자</th>
@@ -151,9 +152,9 @@ MemberDTO mdto = mdao.searchIdx(user_idx);
 					</tr>
 					<tr>
 						<th rowspan="4">상품 내용</th>
-						<td colspan="4" rowspan="4"><textarea rows="12" cols="22"
-								name="bbs_content"
-								placeholder="<%=bdto.getBbs_content().replaceAll("\n", "<br>")%>"></textarea></td>
+						<td colspan="4" rowspan="4">
+							<textarea rows="12" cols="22" name="bbs_content"><%=bdto.getBbs_content().replaceAll("\n", "<br>")%></textarea>
+						</td>
 					</tr>
 					<tr colspan="3">
 						<td colspan="4"><input type="file" name="bbs_img"

@@ -14,10 +14,10 @@ int size = 1024*1024*15;
 MultipartRequest mr=
 	new MultipartRequest(request, savepath, size, "utf-8", new DefaultFileRenamePolicy());
 
-int idx = (int)session.getAttribute("midx");
+int bbs_idx = Integer.parseInt(mr.getParameter("bbs_idx"));
 String imgname = mr.getOriginalFileName("upload");
 
-int result=redao.bbsReWrite(mr,idx); 
+int result=redao.bbsReWrite(mr, bbs_idx); 
 String msg=result>0?"상품정보 수정완료!":"상품정보 수정실패!";
 %>
 <script>

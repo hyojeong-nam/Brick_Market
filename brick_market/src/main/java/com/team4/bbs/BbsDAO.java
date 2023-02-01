@@ -69,9 +69,20 @@ public class BbsDAO {
 	/**글수정*/
 	public int bbsReWrite(MultipartRequest mr, int bbs_idx) {
 		try {
+			
+			String imgname = mr.getFilesystemName("bbs_img");
+			String img = "/brick_market/bbs/img/"+imgname;
+			String imgsql = "bbs_img = '"+img+"' , ";
+			
+			if(imgname == null){
+				imgsql = "";
+			}
+			
 			conn = com.team4.db.Team4DB.getConn();
-			String sql = "insert bbs_table set() where idx = bbs_idx";
+			String sql = "update bbs_table set bbs_subject = ?, bbs_content = ?, bbs_price = ?,"+imgsql+"bbs_category = ?, bbs_place = ?, bbs_how = ? where bbs_idx = ?";
 			ps = conn.prepareStatement(sql);
+			
+			
 			String subject = mr.getParameter("bbs_subject");
 			ps.setString(1, subject);
 			String content = mr.getParameter("bbs_content");
@@ -82,29 +93,26 @@ public class BbsDAO {
 				price = Integer.parseInt(price_s);
 			}
 			ps.setInt(3, price);
-			String imgname = mr.getFilesystemName("bbs_img");
-			String img = "/brick_market/bbs/img/"+imgname;
-			ps.setString(4,img);
-			ps.setInt(5, writer_idx);
 			String category_s = mr.getParameter("bbs_category");
 			int category = -1;
 			if (category_s != null && category_s.length() != 0) {
 				category = Integer.parseInt(category_s);
 			}
-			ps.setInt(6, category);
+			ps.setInt(4, category);
 			String place = mr.getParameter("bbs_place");
-			ps.setString(7, place);
+			ps.setString(5, place);
 			String how_s = mr.getParameter("bbs_how");
 			int how = -1;
 			if (how_s != null && how_s.length() != 0) {
 				how = Integer.parseInt(how_s);
 			}
-			ps.setInt(8, how);
+			ps.setInt(6, how);
+			ps.setInt(7, bbs_idx);
+
 			System.out.println(subject);
 			System.out.println(content);
 			System.out.println(price);
-			System.out.println(img);
-			System.out.println(writer_idx);
+			System.out.println(imgsql);
 			System.out.println(category);
 			System.out.println(place);
 			System.out.println(how);
@@ -363,10 +371,6 @@ public class BbsDAO {
 			}
 		}
 	}
-	
-	/**글 수정*/
-	
-	
 	
 	/**글 삭제*/
 	public int bbsDelete(int bbs_idx, int bbs_writer_idx, String pwd) {
