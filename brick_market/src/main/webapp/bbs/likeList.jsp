@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/brick_market/css/maincss.css">
 </head>
 <body>
 <%@include file="/header.jsp" %>
@@ -18,9 +19,9 @@
 <table>
 <%
 int size=1;
-int pag=1;
-int extra=3;
-ArrayList<BbsDTO> arr=bdao.bbsList(size, pag, extra, midx);
+int cp=1;
+int extra=1;
+ArrayList<BbsDTO> arr=bdao.bbsList(size, cp, extra, 1);
 
 %>
 <tr>
@@ -60,15 +61,7 @@ ArrayList<BbsDTO> arr=bdao.bbsList(size, pag, extra, midx);
 				</tr>
 				<tr>
 					<td class="side">
-						<%
-						if (pagenum > 1) {
-							%>
-							<a href="/brick_market/bbs/list.jsp?page=<%=pagenum-1 %>">
-							<img class="img" src="/brick_market/img/left.jpg" alt="왼쪽 페이지 이동">
-							</a>
-							<%
-						}
-						%>
+						
 					</td>
 					<%
 					for (int i = 0; i < arr.size(); i++) {
@@ -85,7 +78,7 @@ ArrayList<BbsDTO> arr=bdao.bbsList(size, pag, extra, midx);
 					<td class="side">
 						<%
 							%>
-							<a href="/brick_market/bbs/list.jsp?page=<%=pagenum+1 %>&status=<%=status %>&category=<%=category %>&keyword=<%=keyword%>">
+							<a href="/brick_market/bbs/list.jsp?page=<%=cp+1 %>">
 							<img class="img" src="/brick_market/img/right.jpg" alt="오른쪽 페이지 이동">
 							</a>
 							<%

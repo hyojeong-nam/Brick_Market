@@ -255,8 +255,9 @@ public class BbsDAO {
 			ps = conn.prepareStatement(sql);
 			int start = (page - 1) * size + 1;
 			int end = page * size + extra;
-			ps.setInt(1, start);
-			ps.setInt(2, end);
+			ps.setInt(1, useridx);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 			rs = ps.executeQuery();
 			ArrayList<BbsDTO> arr = new ArrayList<BbsDTO>();
 			while(rs.next()) {

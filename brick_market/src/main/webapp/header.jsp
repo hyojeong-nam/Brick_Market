@@ -38,6 +38,7 @@
 	</form>
 	<div class="style">
 		<span>내상점</span> <span><a href="/brick_market/bbs/write.jsp">상품등록</a></span>
+		<span><a href="/brick_market/bbs/likeList.jsp">좋아하는 글</a></span>
 	</div>
 	<nav>
 
