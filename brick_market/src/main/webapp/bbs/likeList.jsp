@@ -1,35 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO"></jsp:useBean>
-<%@page import="com.team4.bbs.BbsDTO" %>
-<%@page import="java.util.*" %>
+<%@page import="com.team4.bbs.BbsDTO"%>
+<%@page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/brick_market/css/maincss.css">
-</head>
-<body>
-<%@include file="/header.jsp" %>
-<section>
-<article>
-<fieldset>
-<legend>좋아하는 글 목록</legend>
-<table>
-<%
-int size=1;
-int cp=1;
-int extra=1;
-ArrayList<BbsDTO> arr=bdao.bbsList(size, cp, extra, 1);
+<link rel="stylesheet" type="text/css"
+	href="/brick_market/css/maincss.css">
+<style type="text/css">
+body {
+	width: 1000px;
+}
 
+table img {
+	width: 100px;
+	height: 100px;
+}
+</style>
+</head>
+<%
+int size = 5;
+int cp = 0;
+if (request.getParameter("cp") != null) {
+	cp = Integer.parseInt(request.getParameter("cp"));
+} else {
+	cp = 1;
+}
+int extra = 1;
 %>
-<tr>
-					<td class="side"></td>
+<body>
+	<%@include file="/header.jsp"%>
+	<%
+	if (midx == 0) {
+	%><script>
+		window.alert('로그인후 이용 가능합니다');
+		window.location.href = '/brick_market/member/login.jsp';
+		</script>
+	<%
+	}
+	ArrayList<BbsDTO> arr = bdao.bbsList(cp, midx);
+	%>
+	<section>
+		<article>
+			<fieldset>
+				<legend>좋아하는 글 목록</legend>
+				<table>
 					<%
 					for (int i = 0; i < arr.size(); i++) {
 					%>
-					<td class="content"><script>var str = '<%=arr.get(i).getBbs_date_s()%>';
+					<tr>
+						<td class="content"><script>var str = '<%=arr.get(i).getBbs_date_s()%>';
 					var strY=str.substring(0,4);
 					var strM=parseInt(str.substring(5,7))-1;
 					var strD=str.substring(8,10);
@@ -54,70 +77,28 @@ ArrayList<BbsDTO> arr=bdao.bbsList(size, cp, extra, 1);
 						document.write('일주일 이상');
 					}
 					</script></td>
+						<td class="imgarea content"><a
+							href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
+								<img class="img" src="<%=arr.get(i).getBbs_img()%>"
+								alt="<%=arr.get(i).getBbs_subject()%>">
+						</a></td>
+						<td class="content"><a
+							href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>"><%=arr.get(i).getBbs_subject()%>
+						</a></td>
+						<td class="content"><%=arr.get(i).getBbs_price()%> 원</td>
+					</tr>
 					<%
 					}
 					%>
-					<td class="side"></td>
-				</tr>
-				<tr>
-					<td class="side">
-						
-					</td>
-					<%
-					for (int i = 0; i < arr.size(); i++) {
-					%>
-
-					<td class="imgarea content">
-					<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
-					<img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>">
-					</a></td>
-
-					<%
-					}
-					%>
-					<td class="side">
-						<%
-							%>
-							<a href="/brick_market/bbs/list.jsp?page=<%=cp+1 %>">
-							<img class="img" src="/brick_market/img/right.jpg" alt="오른쪽 페이지 이동">
-							</a>
-							<%
-						%>
-					</td>
-				</tr>
-				<tr>
-					<td class="side"></td>
-					<%
-					for (int i = 0; i < arr.size(); i++) {
-					%>
-
-					<td class="content">
-					<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>"><%=arr.get(i).getBbs_subject()%>
-					</a></td>
-
-					<%
-					}
-					%>
-					<td class="side"></td>
-				</tr>
-				<tr>
-					<td class="side"></td>
-					<%
-					for (int i = 0; i < arr.size(); i++) {
-					%>
-					<td class="content"><%=arr.get(i).getBbs_price()%> 원</td>
-
-					<%
-					}
-					%>
-					<td class="side"></td>
-				</tr>
-
-
-</table>
-</fieldset>
-</article>
-</section>
-<%@include file="/footer.jsp" %>
+					<tr>
+						<td class="side"><a
+							href="/brick_market/bbs/likeList.jsp?cp=<%=cp + 1%>"> 좋아요 글
+								더보기 </a></td>
+					</tr>
+				</table>
+			</fieldset>
+		</article>
+	</section>
+	<%@include file="/footer.jsp"%>
 </body>
 </html>
