@@ -95,9 +95,9 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select, keyword, category, s
 %>
 <body>
 	<%@ include file="/header.jsp"%>
-	<section>
+	<section class="mid">
 		<h3>검색어 : "<%=keyword %>" 카테고리 : "<%=bdao.stringCategory(category) %>" 상태 : <%=str_status %></h3>
-		<article class="mid">
+		<article>
 			<table class="content">
 				<%
 				if (arr == null || arr.size() == 0) {

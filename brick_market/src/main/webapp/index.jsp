@@ -67,9 +67,9 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 %>
 <body>
 	<%@ include file="header.jsp"%>
-	<section>
-		<h3>최신글 보기</h3>
-		<article class="mid">
+	<section class="mid">
+		<article>
+			<h3>최신글 보기</h3>
 			<table class="content">
 				<%
 				if (arr == null || arr.size() == 0) {
