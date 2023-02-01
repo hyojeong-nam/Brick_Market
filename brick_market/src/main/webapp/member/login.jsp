@@ -32,7 +32,7 @@ table {
 %>
 <body>
 	<%@include file="/header.jsp"%>
-	<section class="section">
+	<section class="mid">
 		<form name="login" action="login_ok.jsp" method="post">
 			<table>
 			<tr>

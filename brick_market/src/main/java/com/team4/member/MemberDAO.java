@@ -172,11 +172,18 @@ public class MemberDAO {
 	/**회원 정보 수정 */
 	public int joinUpdate(MultipartRequest mr, int idx, String email2) {
 		try {
+			String imgname=mr.getFilesystemName("member_img");
+			String img="/brick_market/member/img/"+imgname;
+			String imgsql="member_img='"+img+"',";
+			
+			if(imgname==null) {
+				imgsql="";
+			}
+			
 			conn=com.team4.db.Team4DB.getConn();
 			
-			String sql = "update member_table set member_id =? ,"
-					+ "member_pwd=? , member_name=?,"
-					+ "member_nick=?, member_email=?,member_img=? "
+			String sql = "update member_table set member_id =?,"
+					+ "member_pwd=? , member_name=?, member_nick=?,"+imgsql+"member_email=? "
 					+ "where member_idx="+idx;
 			ps = conn.prepareStatement(sql);
 			
@@ -194,10 +201,6 @@ public class MemberDAO {
 			
 			String email=mr.getParameter("member_email")+email2;
 			ps.setString(5, email);
-			
-			String imgname= mr.getFilesystemName("member_img");
-			String img="/brick_markcet/member/img/"+imgname;
-			ps.setString(6, img);
 			
 			int count = ps.executeUpdate();
 			return count;

@@ -246,18 +246,15 @@ public class BbsDAO {
 			}
 		}
 	}
-	public ArrayList<BbsDTO> bbsList(int size, int page, int extra,int useridx){
+	public ArrayList<BbsDTO> bbsList(int page,int useridx){
 		try {
 			conn = com.team4.db.Team4DB.getConn();
 			String sql = "select * from (select rownum as rnum, a.* from "
 					+ "(select * from bbs_table,like_table where bbs_idx=like_bbs_idx and like_user_idx=? "
-					+ "and like_check=1 order by bbs_idx desc)a)b where rnum >= ? and rnum <= ?";
+					+ "and like_check=1 order by bbs_idx desc)a)b where rnum >= 1 and rnum <= ?";
 			ps = conn.prepareStatement(sql);
-			int start = (page - 1) * size + 1;
-			int end = page * size + extra;
 			ps.setInt(1, useridx);
-			ps.setInt(2, start);
-			ps.setInt(3, end);
+			ps.setInt(2, 5*page);
 			rs = ps.executeQuery();
 			ArrayList<BbsDTO> arr = new ArrayList<BbsDTO>();
 			while(rs.next()) {
