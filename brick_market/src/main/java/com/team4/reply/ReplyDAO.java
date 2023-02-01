@@ -58,7 +58,7 @@ public class ReplyDAO {
 
 	public int getMaxRef() {
 		try {
-			String sql = "select max(reply_ref) from reply_table";
+			String sql = "select count(*) from reply_table where reply_lev=0";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			int max = 0;
