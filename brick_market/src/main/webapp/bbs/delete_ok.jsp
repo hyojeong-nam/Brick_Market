@@ -7,7 +7,7 @@
 <%
 int bbs_idx=Integer.parseInt(request.getParameter("bidx"));
 int bbs_writer_idx=(int)session.getAttribute("midx");
-String pwd=request.getParameter("password");
+String pwd=request.getParameter("pwd");
 int result=ddao.bbsDelete(bbs_idx, bbs_writer_idx, pwd);
 
 if(result==1){
@@ -20,10 +20,19 @@ if(result==1){
 	<%		
 	}else if(result==0){
 			%>
+			<script>
 			window.alert("비밀번호가 틀렸습니다.");
-			location.href="/brick_market/bbs/content.jsp?bbs_idx=<%=bbs_idx %>";
+			location.href='/brick_market/bbs/content.jsp?bbs_idx=<%=bbs_idx%>';
+			</script>
 			<% 
-			}else{}
+			}else if(result==-1){
+					%>
+					<script>
+					window.alert("게시글이 없습니다.");	
+					location.href="/brick_market/bbs/content.jsp?bbs_idx=<%=bbs_idx%>";
+					</script>
+					<%
+			}
 
 %>
 <!DOCTYPE html>

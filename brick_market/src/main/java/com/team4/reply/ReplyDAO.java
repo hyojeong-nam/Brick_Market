@@ -144,11 +144,12 @@ public class ReplyDAO {
 		}
 	}
 
-	public int totalRef() {
+	public int totalRef(int bbs_idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			String sql = "select count(*) from reply_table where reply_lev=0";
+			String sql = "select count(*) from reply_table where reply_lev=0 and reply_bbs_idx=?";
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bbs_idx);
 			rs = ps.executeQuery();
 			rs.next();
 			return rs.getInt(1);
