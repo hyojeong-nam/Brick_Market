@@ -196,7 +196,7 @@ public class MemberDAO {
 			ps.setString(5, email);
 			
 			String imgname= mr.getFilesystemName("member_img");
-			String img="/brick_markcet/member/img/"+imgname;
+			String img="/brick_market/member/img/"+imgname;
 			ps.setString(6, img);
 			
 			int count = ps.executeUpdate();
