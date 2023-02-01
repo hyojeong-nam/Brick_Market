@@ -168,6 +168,40 @@ public class MemberDAO {
 		}
 	}
 	
-	/**정보 수정 */
-	
+	/**회원 정보 수정 */
+	public int joinUpdate(MemberDTO dto, int idx, String email) {
+		try {
+			conn=com.team4.db.Team4DB.getConn();
+			
+			String sql = "update member_table set member_id =? ,"
+					+ "member_pwd=? , member_name=?,"
+					+ "member_nick=?, member_email=?,"
+					+ "member_img='/brick_market/img/profile.png' "
+					+ "where member_idx="+idx;
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getMember_id());
+			ps.setString(2, dto.getMember_pwd());
+			ps.setString(3, dto.getMember_name());
+			ps.setString(4, dto.getMember_nick());
+			ps.setString(5, dto.getMember_email()+email);
+			
+			int count = ps.executeUpdate();
+			return count;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+
+		}
+	}
 }
