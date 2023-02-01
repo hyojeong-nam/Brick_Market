@@ -108,15 +108,19 @@ int ref = 0;
 if (ref_s != null && ref_s.length() != 0) {
 ref = Integer.parseInt(ref_s);
 }
-int totalCnt = rdao.totalRef();//db
+int totalCnt = rdao.totalRef(bbs_idx);//db
+
 int listSize = 5;//
 int pageSize = 5;//
 String cp_s = request.getParameter("cp");
 if (cp_s == null || cp_s.equals("")) {
 cp_s = "1";
 }
+int totalPage=0;
 int cp = Integer.parseInt(cp_s);
-int totalPage = totalCnt / listSize + 1;
+if(totalCnt!=0){
+ totalPage = totalCnt / listSize + 1;
+}
 if (totalCnt % listSize == 0) {
 totalPage--;
 }
@@ -311,7 +315,7 @@ function delete_reply(a) {
 						for (int i = userGroup * pageSize + 1; i <= userGroup * pageSize + pageSize; i++) {
 						%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
 						href="content.jsp?cp=<%=i%>&bbs_idx=<%=bbs_idx%>"><%=i%></a> <%
-						 if (i == totalPage)
+						 if (i >= totalPage)
 						 	break;
 						 }
 						 if (userGroup != (totalPage / pageSize - (totalPage % pageSize == 0 ? 1 : 0))) {
