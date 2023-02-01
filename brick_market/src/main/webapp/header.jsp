@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <jsp:useBean id="mdaoheader" class="com.team4.member.MemberDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="mdtoheader" class="com.team4.member.MemberDTO" scope="session"></jsp:useBean>
+<jsp:useBean id="bdtoheader" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
 <header>
 	<div class="log">
 		<%
@@ -31,12 +32,12 @@
 				<option value="1">예약 완료</option>
 				<option value="2">거래 완료</option>
 			</select> <select name="category">
-				<option value="-1" selected="selected"><%=bdao.stringCategory(-1)%></option>
-				<option value="0"><%=bdao.stringCategory(0)%></option>
-				<option value="1"><%=bdao.stringCategory(1)%></option>
-				<option value="2"><%=bdao.stringCategory(2)%></option>
-				<option value="3"><%=bdao.stringCategory(3)%></option>
-				<option value="4"><%=bdao.stringCategory(4)%></option>
+				<option value="-1" selected="selected"><%=bdtoheader.stringCategory(-1)%></option>
+				<option value="0"><%=bdtoheader.stringCategory(0)%></option>
+				<option value="1"><%=bdtoheader.stringCategory(1)%></option>
+				<option value="2"><%=bdtoheader.stringCategory(2)%></option>
+				<option value="3"><%=bdtoheader.stringCategory(3)%></option>
+				<option value="4"><%=bdtoheader.stringCategory(4)%></option>
 			</select> 
 				<input type="text" name="keyword"> <input type="submit" value="검색">
 		</form>
@@ -45,11 +46,11 @@
 	</div>
 	<nav>
 		<ul>
-			<li><a href="/brick_market/bbs/list.jsp?status=0&category=0&keyword="><%=bdao.stringCategory(0)%></a></li>
-			<li><a href="/brick_market/bbs/list.jsp?status=0&category=1&keyword="><%=bdao.stringCategory(1)%></a></li>
-			<li><a href="/brick_market/bbs/list.jsp?status=0&category=2&keyword="><%=bdao.stringCategory(2)%></a></li>
-			<li><a href="/brick_market/bbs/list.jsp?status=0&category=3&keyword="><%=bdao.stringCategory(3)%></a></li>
-			<li><a href="/brick_market/bbs/list.jsp?status=0&category=4&keyword="><%=bdao.stringCategory(4)%></a></li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=0&keyword="><%=bdtoheader.stringCategory(0)%></a></li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=1&keyword="><%=bdtoheader.stringCategory(1)%></a></li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=2&keyword="><%=bdtoheader.stringCategory(2)%></a></li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=3&keyword="><%=bdtoheader.stringCategory(3)%></a></li>
+			<li><a href="/brick_market/bbs/list.jsp?status=0&category=4&keyword="><%=bdtoheader.stringCategory(4)%></a></li>
 		</ul>
 	</nav>
 	<div class="aa">
