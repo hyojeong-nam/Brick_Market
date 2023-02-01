@@ -143,6 +143,7 @@ function delete_reply(a) {
 			<pre class="item_text">
 		<%=bdto.getBbs_content().replaceAll("\n", "<br>")%>
 <a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>">수정하기</a>
+<a href="delete.jsp?bbs_idx=<%=bbs_idx%>?bbs_wireter_idx=<%=mdto.getMember_id()%>">삭제하기</a>
 		</pre>
 		</article>
 		<article class="reply">
