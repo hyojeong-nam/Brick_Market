@@ -24,13 +24,15 @@ if(result==1){
 			<script>
 			window.alert("비밀번호가 틀렸습니다.");
 			location.href='/brick_market/bbs/content.jsp?bbs_idx=<%=bbs_idx%>';
+			window.close();
 			</script>
 			<% 
 			}else if(result==-1){
 					%>
 					<script>
 					window.alert("게시글이 없습니다.");	
-					location.href="/brick_market/bbs/content.jsp?bbs_idx=<%=bbs_idx%>";
+					location.href="/brick_market/bbs/index.jsp";
+					window.close();
 					</script>
 					<%
 			}

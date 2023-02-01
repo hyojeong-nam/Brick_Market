@@ -15,8 +15,7 @@ if(widx!=midx){
 	%>
 	<script>
 	window.alert("삭제권한이 없습니다.");
-	location.href='/brick_market/bbs/content.jsp?bbs_idx=<%=bidx%>';
-	
+	window.self.close();
 	</script>
 	<% 
 	
