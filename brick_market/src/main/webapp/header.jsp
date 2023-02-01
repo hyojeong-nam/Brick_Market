@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<jsp:useBean id="mdaoheader" class="com.team4.member.MemberDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="mdtoheader" class="com.team4.member.MemberDTO" scope="session"></jsp:useBean>
 <header>
 	<div class="log">
 		<%
@@ -12,8 +14,9 @@
 		<%
 		} else {
 		midx = (Integer) session.getAttribute("midx");
+		mdtoheader = mdaoheader.searchIdx(midx);
 		%>
-		<%=session.getAttribute("mnick")%> 님 안녕하세요~  <a href="/brick_market/member/pwdCheck.jsp">회원정보</a> | <a
+		<%=mdtoheader.getMember_nick()%> 님 안녕하세요~  <a href="/brick_market/member/pwdCheck.jsp">회원정보</a> | <a
 			href="/brick_market/member/logout.jsp">로그아웃</a>
 	</div>
 	<%

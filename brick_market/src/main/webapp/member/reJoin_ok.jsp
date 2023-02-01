@@ -8,7 +8,9 @@ request.setCharacterEncoding("utf-8");
 <jsp:useBean id="mdto" class="com.team4.member.MemberDTO" scope="session"></jsp:useBean>
 <%
 int user_idx = (int) session.getAttribute("midx");
-
+mdto = mdao.searchIdx(user_idx);
+String nick = mdto.getMember_nick();
+session.setAttribute("mnick",nick);
 //mdto.setMember_email(mdto.getMember_email()+email2);
 
 String savepath = request.getRealPath("/member/img");
@@ -23,5 +25,4 @@ String msg=result>0?"회원 정보가 수정되었습니다.":"회원 정보 수
 <script>
 window.alert('<%=msg %>');
 window.location.href='/brick_market/member/reJoin.jsp';
-
 </script>
