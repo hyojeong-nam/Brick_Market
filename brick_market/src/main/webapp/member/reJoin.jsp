@@ -5,9 +5,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.*" %>
 
-
-<jsp:useBean id="mdao" class="com.team4.member.MemberDAO"
-	scope="session"></jsp:useBean>
+<jsp:useBean id="mdao" class="com.team4.member.MemberDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
@@ -75,16 +73,18 @@ String joindate =sdf.format(original_date);
 <body>
 	<%@include file="/header.jsp"%>
 	<section class="section">
-		<form name="rejoin" action="rejoin_ok.jsp" method="post" enctype="multipart/form-data">
+		<article>
+		<form name="rejoin" action="reJoin_ok.jsp" method="post">
 			<table border='1'>
 				<tr>
 					<td colspan="2"><h2>회원 정보</h2></td>
 				</tr>
 				<tr>
-					<td><img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
-						<input type="button" value="업로드" onclick="document.all.file.click();">
+					<!-- <td><img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
+						<input type="button" value="프로필 변경" onclick="document.all.file.click();">
 						<input type="file" name="file" id="file" style="display: none;"/>
 						</td>
+						--------- -->
 					<td><%=dto.getMember_nick()%>님은 <%=result%>입니다.<br> 가입일: <%=joindate %>
 						</td>
 				</tr>
@@ -96,7 +96,7 @@ String joindate =sdf.format(original_date);
 				<tr>
 					<td>아이디</td>
 					<td><input type="text" name="member_id"
-						value="<%=dto.getMember_id()%>"></td>
+						value="<%=dto.getMember_id()%>" readonly></td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
@@ -133,7 +133,8 @@ String joindate =sdf.format(original_date);
 						type="button" value="취소하기" onclick="history.back()"></td>
 				</tr>
 			</table>
-		</form>
+		  </form>
+		</article>
 	</section>
 	<%@include file="/footer.jsp"%>
 </body>
