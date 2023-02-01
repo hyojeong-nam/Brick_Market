@@ -95,7 +95,14 @@ public class ReplyDAO {
 			return -1;
 			
 		}finally {
-			
+		try {
+			if (rs != null)
+				rs.close();
+			if (ps != null)
+				ps.close();
+		} catch (Exception e2) {
+			// TODO: handle exception
+		}
 		}
 	}
 	public int replyWrite(int bbs_idx, int write_idx, String reply_content,int lev,int ref) {
