@@ -23,6 +23,12 @@ table {
 	text-align: center;
 	margin: 0px auto;
 }
+
+.profile_img {
+	height: 150px;
+	width: 150px;
+	object-fit: cover;
+}
 </style>
 <%
 int user_idx = (int) session.getAttribute("midx");
@@ -72,7 +78,7 @@ String joindate =sdf.format(original_date);
 </head>
 <body>
 	<%@include file="/header.jsp"%>
-	<section class="section">
+	<section class="mid">
 		<article>
 		<form name="rejoin" action="reJoin_ok.jsp" method="post" enctype="multipart/form-data">
 			<table border='1'>

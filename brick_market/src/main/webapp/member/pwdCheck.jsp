@@ -33,9 +33,9 @@ window.location.href='/brick_market/index.jsp';
 </head>
 <body>
 <%@include file="/header.jsp"%>
-<section class="section">
+<section class="mid">
 <form name="pwdCheck" action="pwdCheck_ok.jsp" method="post">
-<table>
+<table style="height: 200px; width: 600px;">
 <tr>
 <td><h2>비밀번호 확인</h2></td>
 </tr>
@@ -45,6 +45,7 @@ window.location.href='/brick_market/index.jsp';
 <tr>
 <td>비밀번호 <input type="password" name="userpwd"> <input type="submit" value="확인"></td>
 </tr>
+<tr> </tr>
 </table>
 </form>
 </section>
