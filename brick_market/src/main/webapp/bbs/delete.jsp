@@ -7,7 +7,7 @@ request.setCharacterEncoding("utf-8");
 <jsp:useBean id="mdao" class="com.team4.member.MemberDAO"
 	scope="session"></jsp:useBean>
 <%int bidx=Integer.parseInt(request.getParameter("bbs_idx"));
-int widx='1';
+int widx=21;
 int midx=(int)session.getAttribute("midx");
 
 if(widx!=midx){
