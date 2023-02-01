@@ -153,7 +153,7 @@ MemberDTO mdto = mdao.searchIdx(user_idx);
 					<tr>
 						<th rowspan="4">상품 내용</th>
 						<td colspan="4" rowspan="4">
-							<textarea rows="12" cols="22" name="bbs_content"><%=bdto.getBbs_content().replaceAll("\n", "<br>")%></textarea>
+							<textarea rows="12" cols="22" name="bbs_content"><%=bdto.getBbs_content()%></textarea>
 						</td>
 					</tr>
 					<tr colspan="3">
