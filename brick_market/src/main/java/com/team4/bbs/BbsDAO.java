@@ -246,6 +246,50 @@ public class BbsDAO {
 			}
 		}
 	}
+	public ArrayList<BbsDTO> bbsList(int size, int page, int extra,int useridx){
+		try {
+			conn = com.team4.db.Team4DB.getConn();
+			String sql = "select * from (select rownum as rnum, a.* from "
+					+ "(select * from bbs_table,like_table where bbs_idx=like_bbs_idx and like_user_idx=? "
+					+ "and like_check=1 order by bbs_idx desc)a)b where rnum >= ? and rnum <= ?";
+			ps = conn.prepareStatement(sql);
+			int start = (page - 1) * size + 1;
+			int end = page * size + extra;
+			ps.setInt(1, start);
+			ps.setInt(2, end);
+			rs = ps.executeQuery();
+			ArrayList<BbsDTO> arr = new ArrayList<BbsDTO>();
+			while(rs.next()) {
+				int bbs_idx = rs.getInt("bbs_idx");
+				String bbs_subject = rs.getString("bbs_subject");
+				String bbs_content = rs.getString("bbs_content");
+				int bbs_price = rs.getInt("bbs_price");
+				String bbs_img = rs.getString("bbs_img");
+				String bbs_date_s = rs.getString("bbs_date");
+				java.sql.Date bbs_date=rs.getDate("bbs_date");
+				int bbs_readnum = rs.getInt("bbs_readnum");
+				int bbs_writer_idx = rs.getInt("bbs_writer_idx");
+				int bbs_category = rs.getInt("bbs_category");
+				int bbs_status = rs.getInt("bbs_status");
+				String bbs_place = rs.getString("bbs_place");
+				int bbs_how = rs.getInt("bbs_how");
+				BbsDTO dto = new BbsDTO(bbs_idx, bbs_subject, bbs_content, bbs_price, bbs_img, bbs_date, bbs_readnum, bbs_writer_idx, bbs_category, bbs_status, bbs_place, bbs_how,bbs_date_s);
+				arr.add(dto);
+			}
+			return arr;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
 	
 	/**글 검색 후 보기 (페이징)*/
 	public ArrayList<BbsDTO> bbsList(int size, int page, int extra, String keyword, int category, int status){
