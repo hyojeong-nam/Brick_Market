@@ -429,6 +429,8 @@ public class BbsDAO {
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, bbs_idx);
 				count = ps.executeUpdate();
+			}else {
+				count=0;
 			}
 			return count;
 		} catch (Exception e) {
