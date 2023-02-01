@@ -74,17 +74,15 @@ String joindate =sdf.format(original_date);
 	<%@include file="/header.jsp"%>
 	<section class="section">
 		<article>
-		<form name="rejoin" action="reJoin_ok.jsp" method="post">
+		<form name="rejoin" action="reJoin_ok.jsp" method="post" enctype="multipart/form-data">
 			<table border='1'>
 				<tr>
 					<td colspan="2"><h2>회원 정보</h2></td>
 				</tr>
 				<tr>
-					<!-- <td><img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
-						<input type="button" value="프로필 변경" onclick="document.all.file.click();">
-						<input type="file" name="file" id="file" style="display: none;"/>
+					<td><img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
+						<input type="file" name="member_img"/>
 						</td>
-						--------- -->
 					<td><%=dto.getMember_nick()%>님은 <%=result%>입니다.<br> 가입일: <%=joindate %>
 						</td>
 				</tr>

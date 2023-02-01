@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 import javax.sql.*;
 import javax.naming.*;
+import com.oreilly.servlet.MultipartRequest;
 
 public class MemberDAO {
 	
@@ -169,21 +170,34 @@ public class MemberDAO {
 	}
 	
 	/**회원 정보 수정 */
-	public int joinUpdate(MemberDTO dto, int idx, String email) {
+	public int joinUpdate(MultipartRequest mr, int idx, String email2) {
 		try {
 			conn=com.team4.db.Team4DB.getConn();
 			
 			String sql = "update member_table set member_id =? ,"
 					+ "member_pwd=? , member_name=?,"
-					+ "member_nick=?, member_email=?,"
-					+ "member_img='/brick_market/img/profile.png' "
+					+ "member_nick=?, member_email=?,member_img=? "
 					+ "where member_idx="+idx;
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, dto.getMember_id());
-			ps.setString(2, dto.getMember_pwd());
-			ps.setString(3, dto.getMember_name());
-			ps.setString(4, dto.getMember_nick());
-			ps.setString(5, dto.getMember_email()+email);
+			
+			String id=mr.getParameter("member_id");
+			ps.setString(1, id);
+			
+			String pwd=mr.getParameter("member_pwd");
+			ps.setString(2, pwd);
+			
+			String name=mr.getParameter("member_name");
+			ps.setString(3, name);
+			
+			String nick=mr.getParameter("member_nick");
+			ps.setString(4, nick);
+			
+			String email=mr.getParameter("member_email")+email2;
+			ps.setString(5, email);
+			
+			String imgname= mr.getFilesystemName("member_img");
+			String img="/brick_markcet/member/img/"+imgname;
+			ps.setString(6, img);
 			
 			int count = ps.executeUpdate();
 			return count;
@@ -193,10 +207,8 @@ public class MemberDAO {
 
 		} finally {
 			try {
-				if (ps != null)
-					ps.close();
-				if (conn != null)
-					conn.close();
+				if (ps != null) ps.close();
+				if (conn != null) conn.close();
 
 			} catch (Exception e2) {
 				e2.printStackTrace();
