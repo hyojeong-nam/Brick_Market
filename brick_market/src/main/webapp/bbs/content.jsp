@@ -136,6 +136,12 @@ function delete_reply(a) {
 		location.href='deleteReply.jsp?reply_idx='+a+'&bbs_idx=<%=bbs_idx%>';
 	}
 }
+function openDel(){
+	
+	window.open('delete.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>',
+			'delPage','width=520,height=250');
+	
+}
 </script>
 </head>
 <body>
@@ -151,8 +157,8 @@ function delete_reply(a) {
 			<p class="profile_star">거래완료조회 ★★★★☆(23 리뷰) 평점 4.2</p>
 			<pre class="item_text">
 		<%=bdto.getBbs_content().replaceAll("\n", "<br>")%>
-<a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>">수정하기</a>
-<a href="delete.jsp?bbs_idx=<%=bbs_idx%>&bbs_wireter_idx=<%=bdto.getBbs_writer_idx()%>">삭제하기</a>
+			<a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>">수정하기</a>
+			<input type="button" onclick="openDel();" value="삭제하기">
 		</pre>
 		</article>
 		<article class="reply">

@@ -15,7 +15,8 @@ if(result==1){
 	%>
 	<script>
 	window.alert("게시글 삭제 성공!");
-	location.href="/brick_market/index.jsp";
+	opener.location.href="/brick_market/index.jsp";
+	window.close();
 	</script>
 	<%		
 	}else if(result==0){

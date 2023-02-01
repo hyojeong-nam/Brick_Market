@@ -6,14 +6,14 @@ request.setCharacterEncoding("utf-8");
 <jsp:useBean id="ddao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="mdao" class="com.team4.member.MemberDAO"
 	scope="session"></jsp:useBean>
-<%int bidx=Integer.parseInt(request.getParameter("bbs_idx"));
-int widx=21;
+<%
+int bidx=Integer.parseInt(request.getParameter("bbs_idx"));
+int widx=Integer.parseInt(request.getParameter("bbs_writer_idx"));
 int midx=(int)session.getAttribute("midx");
 
 if(widx!=midx){
 	%>
 	<script>
-	out.println(midx);
 	window.alert("삭제권한이 없습니다.");
 	location.href='/brick_market/bbs/content.jsp?bbs_idx=<%=bidx%>';
 	
