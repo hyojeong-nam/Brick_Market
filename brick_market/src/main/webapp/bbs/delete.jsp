@@ -6,18 +6,18 @@ request.setCharacterEncoding("utf-8");
 <jsp:useBean id="ddao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="mdao" class="com.team4.member.MemberDAO"
 	scope="session"></jsp:useBean>
-<%
-String bidx_s = request.getParameter("bbs_idx");
-int bidx = Integer.parseInt(bidx_s);
-String widx=request.getParameter("writer_idx");
-String uidx=(String)session.getAttribute("uidx");
+<%int bidx=Integer.parseInt(request.getParameter("bbs_idx"));
+String widx=request.getParameter("bbs_writer_idx");
+int midx=(int)session.getAttribute("midx");
 
-if(widx!=uidx){%>
-	
+if(bidx!=midx){
+	%>
 	<script>
-	window.alert('삭제권한이 없습니다.');	
-	window.location.href='/brick_market/bbs/content.jsp?bbs_idx=<%=bidx%>';
-	</script><%	
+	window.alert("삭제권한이 없습니다.");
+	location.href='/brick_market/bbs/content.jsp?bbs_idx=<%=bidx%>';
+	</script>
+	<% 
+	
 }
 %>
 <!DOCTYPE html>
@@ -31,7 +31,10 @@ if(widx!=uidx){%>
 		<article>
 			<form name=delBbs action="delete_ok.jsp">
 				<div>삭제된 게시글은 복구할 수 없습니다.</div>
-				<div>삭제하시겠습니까?</div>
+				<div>삭제하시겠습니까?(원할시 비밀번호 입력)</div>
+				<input type="hidden" value=<%=midx %>>
+				<input type="hidden" value=<%=bidx %>>
+				<input type="password" placeholder="비밀번호">
 				<input type="submit" value="삭제하기">
 				<input type="button" value="취소하기" 
 				onclick="location.href='/brick_market/bbs/content.jsp?bbs_idx=<%=bidx%>'">
