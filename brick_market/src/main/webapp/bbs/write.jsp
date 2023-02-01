@@ -44,8 +44,8 @@ window.location.href='/brick_market/index.jsp';
 </head>
 <body>
 	<%@include file="/header.jsp"%>
-	<section class="section">
-	<h3>상품등록</h3>
+	<section class="mid">
+		<h3>상품등록</h3>
 		<article>
 			<form name="imgUpload" 
 				action="/brick_market/bbs/write_ok.jsp"method="post" enctype="multipart/form-data">

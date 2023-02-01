@@ -15,6 +15,16 @@
 <link rel="stylesheet" type="text/css"
 	href="/brick_market/css/maincss.css">
 <style>
+<style>
+h3 {
+	text-align: center;
+}
+
+table {
+	text-align: center;
+	margin: 0px auto;
+}
+
 .reItem_img {
 	height: 200px;
 	width: 200px;
@@ -54,8 +64,8 @@ MemberDTO mdto = mdao.searchIdx(user_idx);
 <body>
 	<%@include file="/header.jsp"%>
 
-	<h3>상품등록 정보수정</h3>
-	<section>
+	<section class="mid">
+		<h3>상품등록 정보수정</h3>
 		<article>
 			<form name="reWrite" action="/brick_market/bbs/reWrite_ok.jsp"
 				method="post" enctype="multipart/form-data">
