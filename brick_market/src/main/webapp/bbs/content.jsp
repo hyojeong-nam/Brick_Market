@@ -162,9 +162,10 @@ function openDel(){
 			<p class="profile_star">거래완료조회 ★★★★☆(23 리뷰) 평점 4.2</p>
 			<pre class="item_text">
 		<%=bdto.getBbs_content().replaceAll("\n", "<br>")%>
+			<%if(midx!=0) {%>
 			<a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>">수정하기</a>
 			<input type="button" onclick="openDel();" value="삭제하기">
-			<%
+			<%}else{ %><%}
 			int like=-1;
 			if(midx!=0){
 				like=ldao.checkLike(bbs_idx, midx);
