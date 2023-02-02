@@ -74,8 +74,8 @@ window.location.href='/brick_market/member/login.jsp';
 					</tr>
 					<tr>
 						<th colspan="3">카테고리</th>
-						<td><select name="bbs_category">
-								<option>카테고리 목록</option>
+						<td><select name="bbs_category" required>
+								<option value="">카테고리 목록</option>
 								<option value="0"><%=bdao.stringCategory(0) %></option>
 								<option value="1"><%=bdao.stringCategory(1) %></option>
 								<option value="2"><%=bdao.stringCategory(2) %></option>

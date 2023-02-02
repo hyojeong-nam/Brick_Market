@@ -83,7 +83,7 @@ if(widx!=uidx){
 		<article>
 			<form name="reWrite" action="/brick_market/bbs/reWrite_ok.jsp"
 				method="post" enctype="multipart/form-data">
-				<input type="hidden" name="bbs_idx" value="<%=request.getParameter("bbs_idx")%>">
+				<input type="hidden" name="bbs_idx" value="<%=request.getParameter("bbs_idx")%>" required>
 				<table border="0">
 					<tr>
 						<th colspan="3">작성자</th>
@@ -92,7 +92,7 @@ if(widx!=uidx){
 					<tr>
 						<th colspan="3">거래장소</th>
 						<td><input type="text" name="bbs_place"
-							value="<%=bdto.getBbs_place()%>"></td>
+							value="<%=bdto.getBbs_place()%>" required></td>
 					</tr>
 					<tr>
 						<th colspan="3">거래방법</th>
@@ -149,8 +149,8 @@ if(widx!=uidx){
 						}
 						%>
 						<td>
-						<select name="bbs_category">
-								<option>카테고리 목록</option>
+						<select name="bbs_category" required>
+								<option value="">카테고리 목록</option>
 								<option value="0" <%=ca0 %>><%=bdao.stringCategory(0) %></option>
 								<option value="1" <%=ca1 %>><%=bdao.stringCategory(1) %></option>
 								<option value="2" <%=ca2 %>><%=bdao.stringCategory(2) %></option>
@@ -167,17 +167,17 @@ if(widx!=uidx){
 					<tr>
 						<th>상품명</th>
 						<td colspan="3"><input type="text" name="bbs_subject"
-							value="<%=bdto.getBbs_subject()%>"></td>
+							value="<%=bdto.getBbs_subject()%>" required></td>
 					</tr>
 					<tr>
 						<th>상품가격</th>
 						<td colspan="3"><input type="text" name="bbs_price"
-							value="<%=bdto.getBbs_price()%>"></td>
+							value="<%=bdto.getBbs_price()%>" required></td>
 					</tr>
 					<tr>
 						<th rowspan="4">상품 내용</th>
 						<td colspan="4" rowspan="4">
-							<textarea rows="12" cols="22" name="bbs_content"><%=bdto.getBbs_content()%></textarea>
+							<textarea rows="12" cols="22" name="bbs_content" required><%=bdto.getBbs_content()%></textarea>
 						</td>
 					</tr>
 					<tr colspan="3">
