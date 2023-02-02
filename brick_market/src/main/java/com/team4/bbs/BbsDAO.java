@@ -27,6 +27,9 @@ public class BbsDAO {
 			ps.setInt(3, price);
 			String imgname = mr.getFilesystemName("bbs_img");
 			String img = "/brick_market/bbs/img/"+imgname;
+			if(imgname == null){
+				img = "/brick_market/bbs/img/test.png";
+			}
 			ps.setString(4,img);
 			ps.setInt(5, writer_idx);
 			String category_s = mr.getParameter("bbs_category");
