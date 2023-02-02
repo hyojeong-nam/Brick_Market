@@ -34,6 +34,15 @@ body {
 .alignleft{text-align: left;}
 .alignright{text-align: right;}
 	
+.header a {
+	text-decoration: none;
+	color: black;
+}
+
+.header a:hover {
+	text-decoration: underline;
+	color: skyblue;
+}
 
 .header {
 	grid-area: header;
@@ -92,6 +101,17 @@ header .line {
 	background-color: #DDDDDD;
 	grid-area: footer;
 }
+
+.footer a {
+	text-decoration: none;
+	color: black;
+}
+
+.footer a:hover {
+	text-decoration: underline;
+	color: skyblue;
+}
+
 
 footer nav.nav li {
 	display:inline; 

@@ -26,7 +26,8 @@
 	</span>
 	<a class="logo" href="/brick_market/index.jsp"><img 
 		src="/brick_market/img/logo.png" alt="메인로고"></a>
-	<form class="search" action="/brick_market/bbs/list.jsp">
+	<form action="/brick_market/bbs/list.jsp">
+		<div class="search">
 		<select name="status">
 			<option value="0" selected="selected">판매중</option>
 			<option value="1">예약 완료</option>
@@ -40,8 +41,9 @@
 			<option value="3"><%=bdtoheader.stringCategory(3)%></option>
 			<option value="4"><%=bdtoheader.stringCategory(4)%></option>
 		</select> 
-		<input type="text" name="keyword">
+		<input type="text" name="keyword" placeholder="검색어 입력">
 		<input type="submit" value="검색">
+		</div>
 	</form>
 	<span class="mypage">
 		<span class="alignright">내상점</span>
