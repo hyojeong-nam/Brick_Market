@@ -21,9 +21,13 @@
 	display: grid;
 	grid-template-columns: 50% 10% 40%;
 	grid-template-rows: 40px 40px 40px 40px 240px auto;
-	grid-template-areas: "item  title  title" "item  price  price"
-		"item  proimg  nick" "item  proimg  star" "item   text   text"
-		"reply reply  reply";
+	grid-template-areas:
+	"item  title  title" 
+	"item  price  price"
+	"item  proimg  nick" 
+	"item  proimg  star" 
+	"item   text   text"
+	"reply reply  reply";
 }
 
 .item_img {
