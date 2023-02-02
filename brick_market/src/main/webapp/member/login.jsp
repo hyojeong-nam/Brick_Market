@@ -37,11 +37,11 @@ table {
 			<td><h1>로그인</h1></td>
 			</tr>
 				<tr>
-					<td>그림 <input type="text" name="userid" placeholder="ID" value="<%=saveid %>">
+					<td>그림 <input type="text" name="userid" placeholder="ID" value="<%=saveid %>" required>
 					</td>
 				</tr>
 				<tr>
-					<td>열쇠 <input type="password" name="userpwd" placeholder="PASSWORD">
+					<td>열쇠 <input type="password" name="userpwd" placeholder="PASSWORD" required>
 					</td>
 				</tr>
 				<tr>

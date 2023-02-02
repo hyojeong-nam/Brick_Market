@@ -56,7 +56,8 @@ window.location.href='/brick_market/member/login.jsp';
 					</tr>
 					<tr>
 						<th colspan="3">거래장소</th>
-						<td><input type="text" name="bbs_place"></td>
+						<td><input type="text" name="bbs_place" placeholder="거래장소를 입력하세요." 
+						required></td>
 					</tr>
 					<tr>
 						<th colspan="3">거래방법</th>
@@ -89,17 +90,17 @@ window.location.href='/brick_market/member/login.jsp';
 					<tr>
 						<th>상품명</th>
 						<td colspan="3"><input type="text" name="bbs_subject"
-							placeholder="상품명을 입력하세요."></td>
+							placeholder="상품명을 입력하세요." required></td>
 					</tr>
 					<tr>
 						<th>상품가격</th>
 						<td colspan="3"><input type="text" name="bbs_price"
-							placeholder="상품의 가격을 적어주세요"></td>
+							placeholder="상품의 가격을 숫자로 적어주세요" required></td>
 					</tr>
 					<tr>
 						<th rowspan="4">상품 내용</th>
 						<td colspan="4" rowspan="4"><textarea rows="12" cols="22"
-								name="bbs_content" placeholder="내용을 입력해주세요"></textarea></td>
+								name="bbs_content" placeholder="내용을 입력해주세요" required></textarea></td>
 					</tr>
 					<tr colspan="3">
 						<td colspan="4"><input type="file" name="bbs_img"
