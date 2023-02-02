@@ -137,14 +137,14 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 			document.write(msg);
 			</script>
 			</div>
-			<div class="imgarea">
 			<a class="subject" href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
+			<div class="imgarea">
 				<img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>">
 			</div>
 			<div>
 				<span><%=arr.get(i).getBbs_subject()%></span>
-			</a>
 			</div>
+			</a>
 			<div>
 			<%
 			int price = arr.get(i).getBbs_price();
