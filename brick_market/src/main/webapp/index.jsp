@@ -43,6 +43,16 @@ article.content{
 h3 {
 	text-align: center;
 }
+
+.subject {
+	text-decoration: none;
+	color: black;
+}
+
+.subject:hover {
+	text-decoration: underline;
+	color: skyblue;
+}
 </style>
 <script>
 function articleTime(str){
@@ -127,14 +137,14 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 			document.write(msg);
 			</script>
 			</div>
-			<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
 			<div class="imgarea">
+			<a class="subject" href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
 				<img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>">
 			</div>
 			<div>
 				<span><%=arr.get(i).getBbs_subject()%></span>
-			</div>
 			</a>
+			</div>
 			<div>
 				<span><%=arr.get(i).getBbs_price()%> 원</span>
 			</div>
