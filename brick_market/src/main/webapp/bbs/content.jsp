@@ -80,6 +80,54 @@
 	width: 750px;
 	margin: 0px auto;
 }
+fieldset table{
+	width: 800px;
+}
+table .nick{
+	text-align: left;
+	font-size: 15px;
+	height: 10px;
+	float: left;
+}
+.content{
+	width: 580px;
+	font-size: 18px;
+	margin-left: 50px;
+	margin-top: 0px;
+}
+.img img{
+width: 50px;
+height: 50px;
+float: left;
+}
+.date{
+text-align: right;
+margin-top: 0px;
+font-size: 10px;
+}
+.sese{
+text-align: right;
+font-size: 15px;
+}
+tbody{
+text-align: center;
+}
+tbody textarea{
+ float: left;
+ margin-left: 30px;
+}
+tfoot {
+	text-align: center;
+}
+table tbody .nick{
+	margin-left: 10px;
+	margin-top: 10px;
+}
+table tbody .sese{
+	text-align: center;
+	margin-top: 30px;
+	
+}
 </style>
 <%
 String bbs_idx_s = request.getParameter("bbs_idx");
@@ -108,6 +156,7 @@ return;
 }
 int user_idx = bdto.getBbs_writer_idx();
 MemberDTO mdto = mdao.searchIdx(user_idx);
+
 String ref_s = request.getParameter("ref");
 int ref = 0;
 if (ref_s != null && ref_s.length() != 0) {
@@ -133,6 +182,7 @@ int userGroup = cp / pageSize;
 if (cp % pageSize == 0)
 userGroup--;
 ArrayList<ReplyDTO> arr = rdao.replyList(bbs_idx,listSize,cp);
+
 %>
 <script>
 function delete_reply(a) {
@@ -151,6 +201,15 @@ function openDel(){
 </head>
 <body>
 	<%@include file="/header.jsp"%>
+	<%
+	String mnick="";
+	String mimg="";
+	if(midx!=0){
+		
+			 mnick=mdao.searchIdx(midx).getMember_nick();
+			 mimg=mdao.searchIdx(midx).getMember_img();
+	}
+	%>
 	<section class="mid">
 		<article class="container">
 			<img class="item_img" alt="test" src="<%=bdto.getBbs_img()%>">
@@ -162,20 +221,21 @@ function openDel(){
 			<p class="profile_star">거래완료조회 ★★★★☆(23 리뷰) 평점 4.2</p>
 			<pre class="item_text">
 		<%=bdto.getBbs_content().replaceAll("\n", "<br>")%>
-			<%if(midx!=0) {%>
+			<%if(midx!=0) {
+				
+			%>
 			<a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>">수정하기</a>
 			<input type="button" onclick="openDel();" value="삭제하기">
 			<%}else{ %><%}
 			int like=-1;
 			if(midx!=0){
 				like=ldao.checkLike(bbs_idx, midx);
-				
 				if(like==1){
-					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=1" >좋아요 취소하기</a><% 
+					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=1" >취소</a><% 
 				}else if(like==0){
-					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=0" >좋아요 하기</a><%
+					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=0" >&hearts;</a><%
 				}else{
-					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=2" >좋아요 하기</a><%
+					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=2" >&hearts;</a><%
 				}
 			}else{
 				%><span>로그인후 이용가능</span><% 
@@ -185,11 +245,15 @@ function openDel(){
 		</article>
 		<article class="reply">
 			<hr>
+			<fieldset>
+			<legend>댓글</legend>
+			
 			<table border="1">
-				<tr>
+			<thead>
 					<%
 					if (arr == null || arr.size() == 0) {
-					%><td>등록된 댓글이 없습니다.</td>
+					%>
+					<tr><td>등록된 댓글이 없습니다.</td></tr>
 					<%
 					} else {
 					for (int i = 0; i < arr.size(); i++) {
@@ -198,109 +262,93 @@ function openDel(){
 					<%
 					MemberDTO marr = mdao.searchIdx(arr.get(i).getReply_write_idx());
 					%>
-					<td><%=marr.getMember_nick()%></td>
-					<td><%=arr.get(i).getReply_content()%></td>
-					<td><%=arr.get(i).getReply_date()%></td>
 					<td>
-					<a href="content.jsp?bbs_idx=<%=bbs_idx%>&ref=<%=arr.get(i).getReply_ref()%>&cp=<%=cp%>">답글</a>
-					</td>
+					<div class="img"><img src="<%=marr.getMember_img() %>"></div>
+					<div class="nick"><%=marr.getMember_nick()%></div>
+					<div class="date"><%=arr.get(i).getReply_date()%></div>
+					<div class="content"><%=arr.get(i).getReply_content()%></div>
+					<div class="sese"><a href="content.jsp?bbs_idx=<%=bbs_idx%>&ref=<%=arr.get(i).getReply_ref()%>&cp=<%=cp%>">답글</a>
 					<%
 					if (midx != arr.get(i).getReply_write_idx()) {
 					%>
-					<td>
 					    수정
-					</td>
-					<td>
 						삭제
-					</td>
-				</tr>
 					<%
 					}else {
 					%>
-					<td>
+					
 					    <a href="javascript:location.href='content.jsp?bbs_idx=<%=bbs_idx%>&reply_idx=<%=arr.get(i).getReply_idx()%>&cp=<%=cp%>';">수정</a>
-					</td>
-					<td>
+					
 						<a href="javascript:delete_reply(<%=arr.get(i).getReply_ref()%>);">삭제</a>
-					</td>
-				</tr>
+				
 					<%
 					if (request.getParameter("reply_idx") != null
 							&& Integer.parseInt(request.getParameter("reply_idx")) == arr.get(i).getReply_idx()) {
 						int reply_idx = Integer.parseInt(request.getParameter("reply_idx"));
-					%>
+					%></div>
+					</td>
+				</tr>
+						<form action="updateReply.jsp" method="post">
 				<tr>
 					<td>댓글수정
-					</td>
-					<td colspan="2">
-						<form action="updateReply.jsp" method="post">
+					
 						<input type="text" name="content" value="<%=arr.get(i).getReply_content()%>"> 
 						<input type="hidden" name="reply_idx" value="<%=reply_idx%>"> 
 						<input type="hidden" name="bbs_idx" value="<%=bbs_idx%>">
 						<input type="hidden" name="cp" value="<%=cp%>">
-					</td>
-					<td>
-					</td>
-					<td>
 						<input type="submit" value="수정"> 
-					</td>
-					<td>
 						<input type="button" value="취소" onclick="javascript:location.href='content.jsp?bbs_idx=<%=bbs_idx%>&cp=<%=cp%>';">
-						</form>
 					</td>
 					<%
 					}
 					%>
 				</tr>
+						</form>
+			
+				
 				<%
 				}
 				if (ref == arr.get(i).getReply_ref()) {
 					ArrayList<ReplyDTO> arr2=rdao.rereplyList(bbs_idx, ref);
 				%>
 				<script>
-				//기존 댓글 페이지
+				//기존 대댓글 페이지
 						<%
 						if(arr2!=null||arr2.size()!=0){
-							%>
-							<%
+						
 							for(int j=0;j<arr2.size();j++){
 								MemberDTO marr2 = mdao.searchIdx(arr2.get(j).getReply_write_idx());	
 								%>
 								document.write('<tr>');
 								document.write('<td>');
-								document.write('ㄴ><%=marr2.getMember_nick()%>');
-								document.write('</td>');
-								document.write('<td>');
+								document.write('&hookrightarrow;');
+								document.write('<%=marr2.getMember_nick()%>');
 								document.write('<%=arr2.get(j).getReply_content()%>');
-								document.write('</td>');
-								document.write('<td>');
 								document.write('<%=arr2.get(j).getReply_date()%>');
+								document.write('수정');
+								document.write('삭제');
 								document.write('</td>');
 								document.write('</tr>');
+							
 								<%	
 							}
-							%>
-						<%
 						}
 						%>
-						document.write('<form action="rereply_ok.jsp?cp=<%=cp%>&ref=<%=ref%>" method="post">');
 				</script>
 				<%if(midx!=0){
 					%>
-					<td>
+					<tr>
+					<td><%= mnick%>
 						답글달기
-					</td>
-					<td colspan="4">
+						
 					<script>
-						document.write('<input type="text" name="reply_content" placeholder="답글을 입력해보세요">');
+						document.write('<form action="rereply_ok.jsp?cp=<%=cp%>&ref=<%=ref%>" method="post">');
+						document.write('<textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content"></textarea>');
 						document.write('<input type="hidden" name="reply_bbs_idx" value="<%=bbs_idx%>">');
 						document.write('<input type="hidden" name="reply_write_idx"  value="<%=midx%>">');
-					</script>
-					</td>
-					<td>
-					<script>
 						document.write('<input type="submit" value="등록">');
 						document.write('</form>');
+					
 					</script>
 					</td>
 				</tr>
@@ -310,33 +358,11 @@ function openDel(){
 				}
 				}
 				%>
+					</thead>
+								<tfoot>
+							
 				<tr>
-					<%
-					if (midx == 0) {
-					%><td colspan="6">로그인후 댓글입력가능</td>
-					<%
-					} else {
-					%>
-
-						<td>
-							<%=mdto.getMember_nick()%>
-						</td>
-						<td colspan="4">
-							<form action="reply_ok.jsp?" method="post">
-							<input type="text" name="reply_content" placeholder="댓글을 입력해보세요">
-							<input type="hidden" name="reply_bbs_idx" value="<%=bbs_idx%>">
-							<input type="hidden" name="reply_write_idx" value="<%=midx%>">
-						</td>
-						<td>
-							<input type="submit" value="등록">
-							</form>
-						</td>
-					<%
-					}
-					%>
-				</tr>
-				<tr>
-					<td colspan="6">
+					<td>
 						<%
 						if (userGroup != 0) {
 						%><a
@@ -360,7 +386,35 @@ function openDel(){
 						%>
 					</td>
 				</tr>
+				</tfoot>
+					<tbody>
+							<form action="reply_ok.jsp?" method="post">
+					
+				<tr>
+					<%
+					if (midx == 0) {
+					%><td>로그인후 댓글입력가능</td>
+					<%
+					} else {
+					%>
+
+						<td>
+						<div class="img"><img src="<%=mimg%>" alt="내사진"></div>
+							<div class="nick"><%=mnick%></div>
+							<textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content"></textarea>
+							<input type="hidden" name="reply_bbs_idx" value="<%=bbs_idx%>">
+							<div class="sese">
+							<input type="submit" value="등록">
+							</div>
+						</td>
+					<%
+					}
+					%>
+				</tr>
+							</form>
+							</tbody>
 			</table>
+			</fieldset>
 		</article>
 	</section>
 	<%@include file="/footer.jsp"%>
