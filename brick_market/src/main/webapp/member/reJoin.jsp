@@ -130,7 +130,7 @@ String joindate =sdf.format(original_date);
 							<option value="kakao.com">kakao.com</option>
 							<option value="nate.com">nate.com</option>
 							<option value="write">직접 입력</option>
-					</select></td>
+						</select></td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="submit" value="수정하기"> <input
