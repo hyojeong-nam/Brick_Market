@@ -7,13 +7,7 @@
 <title>Insert title here</title>
 <link rel="styLesheet" type="text/css" href="/brick_market/css/maincss.css">
 <style>
-th {
-  text-align: right;
-}
-table {
-	text-align: center;
-	margin: 0px auto;
-}
+
 </style>
 <script>
 function open_idcheck(){
@@ -105,39 +99,25 @@ function join_check(){
 	<%@include file="/header.jsp"%>
 	<section class="mid">
 		<form name="join" id="join">
-			<table border='1'>
-			<tr>
-			<td><h2>회원가입</h2></td>
-			</tr>
-				<tr>
-					<th>이름</th>
-					<td><input type="text" name="member_name" id="name"></td>
-				</tr>
-				<tr>
-					<th>아이디</th>
-					<td><input type="text" name="member_id" id="id" readonly onclick="open_idcheck();"> 
-					<input type="button" value="중복확인" onclick="open_idcheck();">
-					</td>
-				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td><input type="password" name="member_pwd" id="pwd1" onchange="check_pwd()"></td>
-				</tr>
-				<tr>
-					<th>비밀번호 확인</th>
-					<td><input type="password" name="member_pwd2" id="pwd2" onChange="check_pwd()">
+			<p><h2>회원가입</h2>
+			<div>
+			이름 <input type="text" name="member_name" id="name">
+			</div>
+			<div>
+			아이디 <input type="text" name="member_id" id="id" readonly onclick="open_idcheck();"> 
+			<input type="button" value="중복확인" onclick="open_idcheck();">
+			</div>
+			<div>비밀번호<input type="password" name="member_pwd" id="pwd1" onchange="check_pwd()"></div>
+			<div>
+			비밀번호 확인<input type="password" name="member_pwd2" id="pwd2" onChange="check_pwd()">
 					<br>
-					<span id="check"></span></td>
-					
-				</tr>
-				<tr>
-					<th>닉네임</th>
-					<td><input type="text" name="member_nick" id="nick"></td>
-				</tr>
-				<tr>
-					<th>이메일</th>
-					<td>
-					<input type="text" name="member_email" id="email1" class="box"> @
+					<span id="check"></span>
+				</div>
+				<div>
+				닉네임<input type="text" name="member_nick" id="nick"></td>
+				</div>
+				<div>
+				이메일<input type="text" name="member_email" id="email1" class="box"> @
 					<input type="text" name="email2" id="email2" class="box">
 					
 					<select name="email_select" id="email_select" onChange="checkMail();">
@@ -149,16 +129,12 @@ function join_check(){
 					<option value="nate.com">nate.com</option>
 					<option value="write">직접 입력</option>
 					</select>
-					</td>
-				</tr>
-				<tr>
-				<td colspan="3" style="text-align:center"> 
+				</div>
+				<div>
 				<input type="button" value="가입하기" onclick="join_check();">
 				<input type="reset" value="다시 작성">
 				<input type="button" value="취소하기" onclick="history.back();">
-				</td>
-				</tr>
-			</table>
+				</div>
 		</form>
 	</section>
 	<%@include file="/footer.jsp"%>

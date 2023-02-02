@@ -10,11 +10,20 @@
 h1{
 text-align: center;
 }
-table {
-	text-align: center;
-	margin: 0px auto;
+button {
+width:40%;
+font-size: 24px;
+padding: 10px;
+border-radius: 5px;
+background-color: #2991b1;
+border : none;
+color : #fff;
+margin-top: 30px;
 }
-
+button:hover{
+cursor: pointer;
+background-color: #2c778e;
+}
 </style>
 </head>
 <%
@@ -32,29 +41,23 @@ table {
 	<%@include file="/header.jsp"%>
 	<section class="mid">
 		<form name="login" action="login_ok.jsp" method="post">
-			<table>
-			<tr>
-			<td><h1>로그인</h1></td>
-			</tr>
-				<tr>
-					<td>그림 <input type="text" name="userid" placeholder="ID" value="<%=saveid %>" required>
-					</td>
-				</tr>
-				<tr>
-					<td>열쇠 <input type="password" name="userpwd" placeholder="PASSWORD" required>
-					</td>
-				</tr>
-				<tr>
-					<td><input type = "checkbox" name = "saveid" value ="on" <%=saveid.equals("")?"":"checked" %>>ID 기억하기
-					</td>
-				</tr>
-				<tr>
-				<td><input type="submit" value="로그인"></td>
-				</tr>
-				<tr>
-				<td><input type="button" value="아이디/비밀번호 찾기"></td>				
-				</tr>
-			</table>
+			<p><h1>로그인</h1>
+			<div>
+				<label><input type="text" name="userid" placeholder="ID" value="<%=saveid %>" required></label>
+			</div>
+			<div>
+				<label><input type="password" name="userpwd" placeholder="PASSWORD" required></label>
+			</div>
+			<div>
+			<label><input type = "checkbox" name = "saveid" value ="on" 
+			<%=saveid.equals("")?"":"checked" %>>아이디 저장</label>
+			</div>
+			<div>
+			<label><input type="submit" value="로그인"></label>
+			</div>
+			<div>
+			<label><input type="button" value="아이디/비밀번호 찾기"></label>
+			</div>
 		</form>
 	</section>
 		<%@include file="/footer.jsp"%>

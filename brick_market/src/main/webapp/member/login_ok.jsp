@@ -8,11 +8,11 @@ String userpwd = request.getParameter("userpwd");
 String saveid = request.getParameter("saveid");
 int idx=mdao.checkLogin(userid, userpwd);
 mdto = mdao.searchIdx(idx);
-String nick = mdto.getMember_nick();
+
 if(idx != -1) {
+	String nick = mdto.getMember_nick();
 	session.setAttribute("midx",idx);
 	session.setAttribute("mnick",nick);
-		
 		if (saveid!=null){
 			Cookie ck = new Cookie("saveid",userid);
 			ck.setMaxAge(60*60*24*30);
