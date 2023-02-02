@@ -235,24 +235,7 @@ ArrayList<ReplyDTO> arr = rdao.replyList(bbs_idx,listSize,cp);//댓글 가져오
 
 %>
 <script>
-function eventreply(a) {
-	document.querySelector('.eventreply').innerHTML=''+
-	'<div class="rereply">&hookrightarrow;</div>'+
-	'<div class="img"><img src=""></div>'+
-	'<div class= "date"></div>'+
-	'<div class="nick"></div>'+
-	'<div class="content"></div>'+
-	'<div class="sese">수정 삭제</div>'+
-	'<div class="rereply">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>'+
-	'<div class="img"><img src=""></div>'+
-	'<form action="rereply_ok.jsp?cp=<%=cp%>&ref=<%=ref%>" method="post">'+
-	'<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea></div>'+
-	'<input type="hidden" name="reply_bbs_idx" value="<%=bbs_idx%>">'+
-	'<input type="hidden" name="reply_write_idx"  value="">'+
-	'<div class="sese"><input type="submit" value="등록"></div>'+
-	'</form>';
-	
-}
+
 function delete_reply(a) {
 	var bl =window.confirm('삭제하시겠습니까?');
 	if(bl){
@@ -315,12 +298,31 @@ function openDel(){
 					%>
 					<tr><td>등록된 댓글이 없습니다.</td></tr>
 					<%
+						//댓글없음출력
 					} else {
 					for (int i = 0; i < arr.size(); i++) {
-					System.out.print(	arr.get(i).getReply_write_idx());
 						MemberDTO writemember= mdao.searchIdx(arr.get(i).getReply_write_idx());
-						//댓글없음출력
 					//댓글 출력//%>
+					<script>
+					function eventreply(a) {
+		document.querySelector('.eventreply').innerHTML=''+
+			'<div class="rereply">&hookrightarrow;</div>'+
+		'<div class="img"><img src=""></div>'+
+			'<div class= "date"></div>'+
+		'<div class="nick"></div>'+
+		'<div class="content"></div>'+
+		'<div class="sese">수정 삭제</div>'+
+		'<div class="rereply">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>'+
+		'<div class="img"><img src=""></div>'+
+		'<form action="rereply_ok.jsp?cp=<%=cp%>&ref=<%=ref%>" method="post">'+
+		'<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea></div>'+
+		'<input type="hidden" name="reply_bbs_idx" value="<%=bbs_idx%>">'+
+		'<input type="hidden" name="reply_write_idx"  value="">'+
+		'<div class="sese"><input type="submit" value="등록"></div>'+
+		'</form>';
+	
+}
+					</script>
 				<tr>
 					<td>
 					<div class="img"><img src="<%=writemember.getMember_img() %>"></div>
@@ -329,6 +331,7 @@ function openDel(){
 					<div class="content"><%=arr.get(i).getReply_content()%></div>
 					<div class="sese"><a href="content.jsp?bbs_idx=<%=bbs_idx%>&ref=<%=arr.get(i).getReply_ref()%>&cp=<%=cp%>">답글</a>
 					<a onclick="eventreply(<%=arr.get(i).getReply_ref()%>);">test</a>
+					
 					<%//댓글출력
 					//수정삭제여부
 					if (midx != arr.get(i).getReply_write_idx()) {

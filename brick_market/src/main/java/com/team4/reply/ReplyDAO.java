@@ -56,10 +56,11 @@ public class ReplyDAO {
 		}
 	}
 
-	public int getMaxRef() {
+	public int getMaxRef(int bbs_idx) {//해당 게시글에 max ref구하기
 		try {
-			String sql = "select max(reply_ref) from reply_table";
+			String sql = "select max(reply_ref) from reply_table where bbs_idx=?";
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bbs_idx);
 			rs = ps.executeQuery();
 			int max = 0;
 			if (rs.next()) {
@@ -108,7 +109,7 @@ public class ReplyDAO {
 	public int replyWrite(int bbs_idx, int write_idx, String reply_content,int lev,int ref) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			int maxref=getMaxRef();
+			int maxref=getMaxRef(bbs_idx);
 			int maxsunbun=0;
 			if(lev==0) {
 				maxref++;
@@ -196,12 +197,13 @@ public class ReplyDAO {
 			}
 		}
 	}
-	public int dedleteReply(int ref) {
+	public int dedleteReply(int ref, int bbs_idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			String sql="delete from reply_table where reply_ref=?";
+			String sql="delete from reply_table where reply_ref=? and bbs_idx=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, ref);
+			ps.setInt(2, bbs_idx);
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -225,7 +227,8 @@ public class ReplyDAO {
 	public ArrayList<ReplyDTO> rereplyList(int bbs_idx,int ref) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			String sql = "select * from reply_table where reply_bbs_idx=? and reply_ref=? and reply_lev=1 order by reply_sunbun asc ";
+			String sql = "select * from reply_table ,member_table where reply_table.reply_write_idx=member_table.member_idx and "
+					+ "reply_bbs_idx=? and reply_ref=? and reply_lev=1 order by reply_sunbun asc";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, bbs_idx);
 			ps.setInt(2, ref);
@@ -241,8 +244,10 @@ public class ReplyDAO {
 				int reply_lev = rs.getInt("reply_lev");
 				int reply_sunbun = rs.getInt("reply_sunbun");
 				String reply_date_s = rs.getString("reply_date");
+				String member_nick=rs.getString("member_nick");
+				String member_img=rs.getString("member_img");
 				ReplyDTO dto = new ReplyDTO(reply_idx, reply_bbs_idx, reply_write_idx, reply_content, reply_date,
-						reply_ref, reply_lev, reply_sunbun, reply_date_s);
+						reply_ref, reply_lev, reply_sunbun, reply_date_s,member_nick,member_img);
 				arr.add(dto);
 			}
 			return arr;

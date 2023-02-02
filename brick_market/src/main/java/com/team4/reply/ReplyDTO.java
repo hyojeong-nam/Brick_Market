@@ -12,6 +12,9 @@ public class ReplyDTO {
 	private int reply_lev;
 	private int reply_sunbun;
 	private String reply_date_s;
+	private String member_nick;
+	
+	private String member_img;
 
 	public ReplyDTO() {
 		// TODO Auto-generated constructor stub
@@ -29,6 +32,39 @@ public class ReplyDTO {
 		this.reply_lev = reply_lev;
 		this.reply_sunbun = reply_sunbun;
 		this.reply_date_s = reply_date_s;
+	}
+	
+	public ReplyDTO(int reply_idx, int reply_bbs_idx, int reply_write_idx, String reply_content, Date reply_date,
+			int reply_ref, int reply_lev, int reply_sunbun, String reply_date_s, String member_nick,
+			String member_img) {
+		super();
+		this.reply_idx = reply_idx;
+		this.reply_bbs_idx = reply_bbs_idx;
+		this.reply_write_idx = reply_write_idx;
+		this.reply_content = reply_content;
+		this.reply_date = reply_date;
+		this.reply_ref = reply_ref;
+		this.reply_lev = reply_lev;
+		this.reply_sunbun = reply_sunbun;
+		this.reply_date_s = reply_date_s;
+		this.member_nick = member_nick;
+		this.member_img = member_img;
+	}
+
+	public String getMember_nick() {
+		return member_nick;
+	}
+
+	public void setMember_nick(String member_nick) {
+		this.member_nick = member_nick;
+	}
+
+	public String getMember_img() {
+		return member_img;
+	}
+
+	public void setMember_img(String member_img) {
+		this.member_img = member_img;
 	}
 
 	public String getReply_date_s() {
