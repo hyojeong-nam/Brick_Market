@@ -7,6 +7,20 @@
 <%@page import="com.team4.bbs.BbsDTO"%>
 <%@page import="com.team4.member.MemberDTO"%>
 
+<% int widx=Integer.parseInt(request.getParameter("bbs_writer_idx"));
+int uidx=(int)session.getAttribute("midx");
+
+if(widx!=uidx){
+	%>
+	<script>
+	window.alert("수정권한이 없습니다.");
+	location.href='/brick_market/bbs/content.jsp?bbs_idx=<%=bbs_idx%>';
+	window.self.close();
+	</script>
+	<% 
+
+}%>
+
 <!DOCTYPE html>
 <html>
 <head>

@@ -163,7 +163,7 @@ function openDel(){
 			<pre class="item_text">
 		<%=bdto.getBbs_content().replaceAll("\n", "<br>")%>
 			<%if(midx!=0) {%>
-			<a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>">수정하기</a>
+			<a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>">수정하기</a>
 			<input type="button" onclick="openDel();" value="삭제하기">
 			<%}else{ %><%}
 			int like=-1;
