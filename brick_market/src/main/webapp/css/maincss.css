@@ -1,20 +1,17 @@
 @charset "UTF-8";
 
-* {
-	padding:0; 
-	margin:0;
-}
-
 body {
 	text-align:center;
 	margin:0px auto;
 	width:1200px;
 	display:grid;
 	grid-template-columns: 100px 1000px 100px;
-	grid-template-rows: 150px auto 150px;
+	grid-template-rows: 160px 20px minmax(400px, auto) 20px 150px;
 	grid-template-areas:
 		"header header header"
-		"left   mid    right"
+		"line   line   line  "
+		"left   mid    right "
+		".      .      .     "
 		"footer footer footer"
 		;
 }
@@ -32,46 +29,72 @@ body {
 .mid {
 	grid-area: mid;
 	text-align: center;
+}
+
+.alignleft{text-align: left;}
+.alignright{text-align: right;}
 	
-}
-header {
-	width: 1200px;
+
+.header {
 	grid-area: header;
+	justify-items: stretch;
+	margin:0px auto;
+	display:grid;
+	align-items:center;
+	grid-template-columns: 350px 550px 300px;
+	grid-template-rows: 30px 100px 30px;
+	grid-template-areas:
+		"login  login  login "
+		"logo  search  mypage"
+		"nav   nav     report"
+		"line  line    line  "
+		;
 }
-
-#star {
-	width: 300px;
-	height: 30px;
-	margin-top: 35px;
-	margin-left: 100px;
-}
-
-header form {
-	float: left;
-}
-
-.log {
-	text-align: right;
+header .logo {grid-area: logo;}
+header .logo img {
+	height: 80px;
+	width: 250px;
+	object-fit: cover;}
+header .login {
+	margin: 0px 0px;
+	grid-area: login;
+	justify-self:right;
+	font-size: 15px;}
+header .mypage {
+	margin: 0px 0px;
+	grid-area: mypage;
+	justify-self:right;
+	font-size: 15px;}
+header .search {
+	grid-area: search;
+	justify-self:left;
+	font-size: 15px;}
+header .report {
+	grid-area: report;
+	font-size: 15px;}
+header .nav {
+	grid-area: nav;
 	font-size: 15px;
 }
+header ul {
+	display:inline; 
+}
+header ul li {
+	display:inline; 
+	margin: 10px;
+}
+header .line {
+	width:100%;
+	grid-area: line;
+}
 
-footer {
+.footer {
 	background-color: #DDDDDD;
 	grid-area: footer;
 }
 
-header img {
-	width: 300px;
-	float: left;
-}
-
-header nav li {
-	display: inline;
-	margin: 10px;
-}
-
-footer nav li {
-	display: inline;
+footer nav.nav li {
+	display:inline; 
 	margin: 10px;
 }
 
@@ -79,11 +102,4 @@ footer div {
 	text-align: right;
 }
 
-.style {
-	margin-top: 45px;
-	text-align: center;
-}
 
-.aa {
-	text-align: right;
-}
