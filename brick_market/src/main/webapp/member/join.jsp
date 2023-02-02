@@ -55,13 +55,47 @@ function join_check(){
 	var pwd1 = document.getElementById('pwd1').value;
     var pwd2 = document.getElementById('pwd2').value;
     
+    if(document.getElementById('name').value==null||document.getElementById('name').value==""){
+    	
+    	alert("이름을 입력해주세요.");
+    	return false;
+    }
+    
+	if(document.getElementById('id').value==null||document.getElementById('id').value==""){
+    	
+    	alert("아이디를 입력해주세요.");
+    	return false;
+    }
+	if(document.getElementById('pwd1').value==null||document.getElementById('pwd1').value==""){
+    	
+    	alert("비밀번호를 입력해주세요.");
+    	return false;
+    }    
 	if( pwd1 != pwd2 ) {
 		alert("비밀번호를 확인해 주세요.");
 		return false;
 		} 
-		join.action = "join_ok.jsp";
-		join.method = "post";
-		join.submit();
+		
+	
+	if(document.getElementById('nick').value==null||document.getElementById('nick').value==""){
+			
+			alert("닉네임을 입력해주세요.");
+			return false;
+		}	
+		
+	if(document.getElementById('email1').value==null||document.getElementById('email1').value==""){
+		
+		alert("이메일을 입력해주세요.");
+		return false;
+	}
+	if(document.getElementById('email2').value==null||document.getElementById('email2').value==""){
+		
+		alert("도메인을 선택해주세요.");
+		return false;
+	}
+	join.action = "join_ok.jsp";
+	join.method = "post";
+	join.submit();
 }
 
 
@@ -77,17 +111,17 @@ function join_check(){
 			</tr>
 				<tr>
 					<th>이름</th>
-					<td><input type="text" name="member_name" required></td>
+					<td><input type="text" name="member_name" id="name"></td>
 				</tr>
 				<tr>
 					<th>아이디</th>
-					<td><input type="text" name="member_id" required readonly onclick="open_idcheck();"> 
+					<td><input type="text" name="member_id" id="id" readonly onclick="open_idcheck();"> 
 					<input type="button" value="중복확인" onclick="open_idcheck();">
 					</td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td><input type="password" name="member_pwd" id="pwd1" onchange="check_pwd()" required></td>
+					<td><input type="password" name="member_pwd" id="pwd1" onchange="check_pwd()"></td>
 				</tr>
 				<tr>
 					<th>비밀번호 확인</th>
@@ -98,12 +132,12 @@ function join_check(){
 				</tr>
 				<tr>
 					<th>닉네임</th>
-					<td><input type="text" name="member_nick" required></td>
+					<td><input type="text" name="member_nick" id="nick"></td>
 				</tr>
 				<tr>
 					<th>이메일</th>
 					<td>
-					<input type="text" name="member_email" id="email1" class="box" required> @
+					<input type="text" name="member_email" id="email1" class="box"> @
 					<input type="text" name="email2" id="email2" class="box">
 					
 					<select name="email_select" id="email_select" onChange="checkMail();">
