@@ -23,8 +23,7 @@ table {
 	if(cks!=null){
 		for(int i=0;i<cks.length;i++){
 			if(cks[i].getName().equals("saveid")){
-				saveid = cks[i].getValue();
-				
+				saveid = cks[i].getValue();	
 			}
 		}
 	}

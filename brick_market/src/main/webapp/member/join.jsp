@@ -63,7 +63,7 @@ function join_check(){
 		join.method = "post";
 		join.submit();
 }
-	
+
 
 </script>
 </head>

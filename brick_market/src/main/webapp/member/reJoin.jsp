@@ -74,7 +74,6 @@ String joindate =sdf.format(original_date);
 		}
 	}
 </script>
-
 </head>
 <body>
 	<%@include file="/header.jsp"%>
