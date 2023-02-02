@@ -146,18 +146,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 			</a>
 			</div>
 			<div>
-			<%
-			int price = arr.get(i).getBbs_price();
-			String price_s = "";
-			if (price >= 100000000){
-				price_s = (price / 100000000) + "억 원";
-			}else if(price >= 10000){
-				price_s = (price / 10000) + "만 원";
-			}else {
-				price_s = price + "원";
-			}
-			%>
-				<span><%=price_s%></span>
+				<span><%=arr.get(i).getBbs_price()%> 원</span>
 			</div>
 			
 		</article>
