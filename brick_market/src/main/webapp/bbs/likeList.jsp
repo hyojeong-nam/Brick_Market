@@ -30,6 +30,7 @@ if (request.getParameter("cp") != null) {
 	cp = 1;
 }
 int extra = 1;
+
 %>
 <body>
 	<%@include file="/header.jsp"%>
@@ -48,7 +49,7 @@ int extra = 1;
 			<fieldset>
 				<legend>좋아하는 글 목록</legend>
 				<table>
-					<%
+					<%if(arr!=null&&arr.size()!=0){
 					for (int i = 0; i < arr.size(); i++) {
 					%>
 					<tr>
@@ -95,6 +96,15 @@ int extra = 1;
 							href="/brick_market/bbs/likeList.jsp?cp=<%=cp + 1%>"> 좋아요 글
 								더보기 </a></td>
 					</tr>
+					<%}else{
+					%>
+					<tr>
+					<td>좋아하는 게시글이 없습니다</td>
+					</tr>
+					<%
+						
+					}
+					%>
 				</table>
 			</fieldset>
 		</article>
