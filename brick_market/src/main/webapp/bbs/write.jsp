@@ -33,7 +33,7 @@ if (session.getAttribute("midx") == null
 %>
 <script>
 window.alert('로그인 후 이용 가능합니다.');	
-window.location.href='/brick_market/index.jsp';
+window.location.href='/brick_market/member/login.jsp';
 </script>	
 <%
 	return;
