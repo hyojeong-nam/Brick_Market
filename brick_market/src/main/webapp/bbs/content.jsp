@@ -344,10 +344,13 @@ function openDel(){
 						<%
 						}
 						for (int i = userGroup * pageSize + 1; i <= userGroup * pageSize + pageSize; i++) {
-						%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-						href="content.jsp?cp=<%=i%>&bbs_idx=<%=bbs_idx%>"><%=i%></a> <%
-						 if (i >= totalPage)
+						%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%if(i==cp){
+							%><%=i%><%
+						}else{ %>
+						<a href="content.jsp?cp=<%=i%>&bbs_idx=<%=bbs_idx%>"><%=i%></a> <%
+						}if (i >= totalPage)
 						 	break;
+						 
 						 }
 						 if (userGroup != (totalPage / pageSize - (totalPage % pageSize == 0 ? 1 : 0))) {
 						 %><a href="content.jsp?cp=<%=(userGroup + 1) * pageSize + 1%>&bbs_idx=<%=bbs_idx%>">
