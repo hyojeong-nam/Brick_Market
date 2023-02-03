@@ -7,6 +7,12 @@
 <title>Insert title here</title>
 <link rel="styLesheet" type="text/css" href="/brick_market/css/maincss.css">
 <style>
+#wrap{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  min-height: 50vh;
+}
 
 </style>
 <script>
@@ -98,6 +104,7 @@ function join_check(){
 <body >
 	<%@include file="/header.jsp"%>
 	<section class="mid">
+		<article id="wrap">
 		<form name="join" id="join">
 			<p><h2>회원가입</h2>
 			<div>
@@ -114,7 +121,7 @@ function join_check(){
 					<span id="check"></span>
 				</div>
 				<div>
-				닉네임<input type="text" name="member_nick" id="nick"></td>
+				닉네임<input type="text" name="member_nick" id="nick">
 				</div>
 				<div>
 				이메일<input type="text" name="member_email" id="email1" class="box"> @
@@ -136,6 +143,7 @@ function join_check(){
 				<input type="button" value="취소하기" onclick="history.back();">
 				</div>
 		</form>
+		</article>
 	</section>
 	<%@include file="/footer.jsp"%>
 </body>

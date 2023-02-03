@@ -7,22 +7,42 @@
 <title>Insert title here</title>
 <link rel="styLesheet" type="text/css" href="/brick_market/css/maincss.css">
 <style>
-h1{
-text-align: center;
+.account {
+	width: 220px;
+    margin-bottom: 3px;
+    padding: 13px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
 }
-button {
-width:40%;
-font-size: 24px;
-padding: 10px;
-border-radius: 5px;
-background-color: #2991b1;
-border : none;
-color : #fff;
-margin-top: 30px;
+#h{
+font-size:30px;
+margin-top: 0px;
+margin-bottom: 40px;
 }
-button:hover{
-cursor: pointer;
-background-color: #2c778e;
+#wrap{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  min-height: 45vh;
+}
+#login {
+    width: 80%;
+    background-color: skyblue;
+    border-color: transparent;
+    color: white;
+    padding: 8px;
+    margin-bottom: 5px;
+}
+#idk {
+    width: 80%;
+    background-color: lightgrey;
+    border-color: transparent;
+    color: black;
+    padding: 8px;
+}
+#saveid{
+margin-top:10px;
+margin-bottom: 10px;
 }
 </style>
 </head>
@@ -40,25 +60,24 @@ background-color: #2c778e;
 <body>
 	<%@include file="/header.jsp"%>
 	<section class="mid">
+		<article id="wrap">
 		<form name="login" action="login_ok.jsp" method="post">
-			<p><h1>로그인</h1>
 			<div>
-				<label><input type="text" name="userid" placeholder="ID" value="<%=saveid %>" required></label>
-			</div>
-			<div>
-				<label><input type="password" name="userpwd" placeholder="PASSWORD" required></label>
-			</div>
-			<div>
-			<label><input type = "checkbox" name = "saveid" value ="on" 
+			<h1 id="h">로그인</h1>
+			
+				<label><input type="text" name="userid" id="userid" placeholder="Id" class="account" value="<%=saveid %>" required></label>
+			
+				<label><br><input type="password" name="userpwd" id="userpwd" placeholder="Password" class="account" required></label>
+			
+			<label><br><input type = "checkbox" name = "saveid" id="saveid" value ="on" 
 			<%=saveid.equals("")?"":"checked" %>>아이디 저장</label>
-			</div>
-			<div>
-			<label><input type="submit" value="로그인"></label>
-			</div>
-			<div>
-			<label><input type="button" value="아이디/비밀번호 찾기"></label>
+			
+			<label><input type="submit" id="login" value="로그인"></label>
+			
+			<label><input type="button" id="idk" value="아이디/비밀번호 찾기"></label>
 			</div>
 		</form>
+		</article>
 	</section>
 		<%@include file="/footer.jsp"%>
 </body>
