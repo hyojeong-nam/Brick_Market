@@ -27,6 +27,28 @@ if(widx!=midx){
 }
 %>
 <style>
+
+body{
+	text-align: center;
+}
+
+input { 
+
+	background-color: 	#E6E6FA; 
+	border-color: #FFF8DC;
+	border-width: 2px;	
+}
+
+input:focus{
+	background-color: #FFFFF0;
+}
+input::placeholder {
+  color: gray;
+  font-weight: bold;
+}
+
+
+
 #cancel:active {
 	transform: scale(1.5);
 }

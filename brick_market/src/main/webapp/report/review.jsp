@@ -44,20 +44,18 @@ fieldset input[type=button]:hover{
 	text-shadow: 2px 2px 2px #DCDCDC;
 }
 
-#cancel:active {
-	transform: scale(1.5);
-}
-
-#submit:active {
-	transform: scale(1.5);
-}
 #review_content{
 	border-style: groove;
 	border-radius:10px 10px 10px 10px;
 	border-color: #EEE8AA;
 	border-width: 2px;
-	
 }
+
+#review_content:focus { 
+	background-color: #F8F8FF; 
+}
+
+
 #submit {
     width: 5%;
     background-color: skyblue;
@@ -77,9 +75,19 @@ fieldset input[type=button]:hover{
     border-radius:10px 10px 10px 10px;
 }
 
+#cancel:active {
+	transform: scale(1.5);
+}
+
+#submit:active {
+	transform: scale(1.5);
+}
+
 body{
 	text-align: center;
 }
+
+
 </style>
 
 </head>
