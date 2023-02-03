@@ -40,7 +40,7 @@
 	font-family: NanumBarunGothic;
 }
 
-span input[type=button]:hover{
+fieldset input[type=button]:hover{
 	text-shadow: 2px 2px 2px #DCDCDC;
 }
 
@@ -75,6 +75,10 @@ span input[type=button]:hover{
     color: black;
     padding: 8px;
     border-radius:10px 10px 10px 10px;
+}
+
+body{
+	text-align: center;
 }
 </style>
 
