@@ -47,14 +47,6 @@ public class BbsDAO {
 				how = Integer.parseInt(how_s);
 			}
 			ps.setInt(8, how);
-			System.out.println(subject);
-			System.out.println(content);
-			System.out.println(price);
-			System.out.println(img);
-			System.out.println(writer_idx);
-			System.out.println(category);
-			System.out.println(place);
-			System.out.println(how);
 			int count = ps.executeUpdate();
 			return count;
 		} catch (Exception e) {
@@ -78,8 +70,6 @@ public class BbsDAO {
 			String imgname = mr.getFilesystemName("bbs_img");
 			String img = "/brick_market/bbs/img/"+imgname;
 			String imgsql = "bbs_img = '"+img+"' , ";
-			System.out.println("realpath:"+realpath);
-			System.out.println("img:"+img);
 			if(imgname == null){
 				imgsql = "";
 			}else {
@@ -116,13 +106,6 @@ public class BbsDAO {
 			ps.setInt(6, how);
 			ps.setInt(7, bbs_idx);
 
-			System.out.println(subject);
-			System.out.println(content);
-			System.out.println(price);
-			System.out.println(imgsql);
-			System.out.println(category);
-			System.out.println(place);
-			System.out.println(how);
 			int count = ps.executeUpdate();
 			return count;
 		} catch (Exception e) {
@@ -150,10 +133,8 @@ public class BbsDAO {
 				String img = rs.getString("bbs_img");
 				img = img.replaceAll("/brick_market/bbs/img/", "");
 				String realimg = realpath + img;
-				System.out.println("삭제할 이미지 :"+realimg);
 				File old = new File(realimg);
 				if(old.exists() && old.isFile() && !(img.equals("test.png"))) {
-					System.out.println("되나?");
 					old.delete();
 				}
 			}

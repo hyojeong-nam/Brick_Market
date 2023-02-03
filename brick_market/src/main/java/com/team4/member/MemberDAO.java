@@ -236,10 +236,8 @@ public class MemberDAO {
 				String img = rs.getString("member_img");
 				img = img.replaceAll("/brick_market/member/img/", "");
 				String realimg = realpath + img;
-				System.out.println("삭제할 이미지 :" + realimg);
 				File old = new File(realimg);
 				if (old.exists() && old.isFile() && !(img.equals("profile.png"))) {
-					System.out.println("되나?");
 					old.delete();
 				}
 			}
