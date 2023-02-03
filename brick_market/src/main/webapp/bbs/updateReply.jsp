@@ -27,7 +27,11 @@ if(request.getParameter("reply_idx")!=null&&request.getParameter("bbs_idx")!=nul
 	}
 }else{
 	%>
-	<script>window.alert('잘못된 접근입니다');
+	<script>
+	alert(<%=request.getParameter("reply_idx")%>);
+	alert(<%=request.getParameter("bbs_idx")%>);
+	alert(<%=request.getParameter("content")%>);
+	window.alert('잘못된 접근입니다');
 	window.location.href = '/brick_market/index.jsp';
 	</script>
 	<%

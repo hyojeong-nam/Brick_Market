@@ -173,9 +173,7 @@ text-align: center;
 margin-top: 10px;
 }
 
-footer{
-margin-top: 800px;
-}
+
 
 </style>
 <%
@@ -237,14 +235,13 @@ function cancelupdatereply(idx){
 }
 function updatereply(content,idx) {
 	document.querySelector('.updatereply'+idx).innerHTML=''+
-	'<form action="updateReply.jsp?" method="post">'+
-	'<input type="text" name="content" value="'+content+'">'+
+	'<form action="updateReply.jsp" method="post">'+
+	'<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="content" required >'+content+'</textarea></div>'+
 	'<input type="hidden" name="reply_idx" value="'+idx+'">'+
 	'<input type="hidden" name="bbs_idx" value="<%=bbs_idx%>">'+
 	'<input type="hidden" name="cp" value="<%=cp%>">'+
-	'<input type="submit" value="수정"> '+
-	'<input type="button" value="취소" onclick="javascript:cancelupdatereply('+idx+');">'+
-	'</form>';
+	'<div><input type="submit" value="수정"></div> '+
+	'<div><input type="button" value="취소" onclick="javascript:cancelupdatereply('+idx+');"><div></form>';
 
 }
 
@@ -303,44 +300,64 @@ function openDel(){
 			<hr>
 			<fieldset>
 		<script>
-		function rereplyselect(re_idx,size){
+		function noreply(idx) {
+			document.querySelector('.rereply'+idx).innerHTML='';
+		}
+		function rereplyselect(img,date,nick,content,size,idx,ref){
+			alert(ref);
 			var str='';
 			for( i=0;i<size;i++){
 			
 				str+='<div class="rereply">&hookrightarrow;</div>'+
-				'<div class="img"><img src="'+img+''+''+re_idx+[+''+i+''+]+'"></div>'+
-				'<div class= "date">'+date+''+re_idx+''+[i]+'</div>'+
-				'<div class="nick">'+nick+'+'+re_idx+''+[i]+'</div>'+
-				'<div class="content">'+content+''+re_idx+''+[i]+'</div>'+
+				'<div class="img"><img src="'+img[i]+'"></div>'+
+				'<div class= "date">'+date[i]+'</div>'+
+				'<div class="nick">'+nick[i]+'</div>'+
+				'<div class="content">'+content[i]+'</div>'+
 				'<div class="sese">수정 삭제</div>';
 			}
-			str+='<form action="rereply_ok.jsp?cp=&ref=" method="post">'+
+			if(<%=midx%>!=0){
+				
+			str+='<form action="rereply_ok.jsp?" method="post">'+
 			'<div class="rereply">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>'+
 			'<div class="img"><img src="<%=mdtoheader.getMember_img()%>"></div>'+
 			'<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea></div>'+
 			'<input type="hidden" name="reply_write_idx" value="<%=midx%>">'+
-			'<input type="hidden" name="ref" value="">'+
+			'<input type="hidden" name="ref" value="'+ref+'">'+
 			'<input type="hidden" name="cp" value="<%=cp%>">'+
+			'<input type="hidden" name="bbs_idx" value="<%=bbs_idx%>">'+
+			'<div onclick="javascript:noreply('+idx+');">숨기기</div>'+
 			'<div class="sese"><input type="submit" value="등록"></div></form>';
-			
-			document.querySelector('.rereply').innerHTML=str;
+			}else{
+				str+='<div>로그인후 작성 가능합니다</div>';
+			}
+			document.querySelector('.rereply'+idx).innerHTML=''+str;
 			
 					
 		}
 	
 		
-		function rereply() {
-			document.querySelector('.rereply').innerHTML=''+
-			'<form action="rereply_ok.jsp?cp=&ref=" method="post">'+
-			'<div class="rereply">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>'+
-			'<div class="img"><img src="<%=mdtoheader.getMember_img()%>"></div>'+
-			'<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea></div>'+
-			'<input type="hidden" name="reply_write_idx" value="<%=midx%>">'+
-			'<input type="hidden" name="ref" value="">'+
-			'<input type="hidden" name="cp" value="<%=cp%>">'+
-			'<div class="sese"><input type="submit" value="등록"></div></form>';
+		function rereply(idx,ref) {
+			str='';
+			if(<%=midx%>!=0){
+				str+='<form action="rereply_ok.jsp?bbs_idx=<%=bbs_idx%>" method="post">'+
+				'<div class="rereply">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>'+
+				'<div class="img"><img src="<%=mdtoheader.getMember_img()%>"></div>'+
+				'<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea></div>'+
+				'<input type="hidden" name="reply_write_idx" value="<%=midx%>">'+
+				'<input type="hidden" name="ref" value="'+ref+'">'+
+				'<input type="hidden" name="cp" value="<%=cp%>">'+
+				'<input type="hidden" name="bbs_idx" value="<%=bbs_idx%>">'+
+				'<div onclick="javascript:noreply('+idx+');">숨기기</div>'+
+				'<div class="sese"><input type="submit" value="등록"></div></form>';
+			}else{
+				str+='<div>로그인후 작성 가능합니다</div>';
+			}
+			document.querySelector('.rereply'+idx).innerHTML=''+str;
+			
+			
 			
 		}
+		
 		</script>
 			<legend>댓글</legend>
 			<table border="1">
@@ -359,7 +376,7 @@ function openDel(){
 					String date[]=null;
 					String content[]=null;
 					String img[]=null;
-					if(rereply!=null||rereply.size()!=0){
+					if(rereply!=null&&rereply.size()!=0){
 						%>
 						<script>
 						var nick<%=rearr.get(i).getReply_idx()%>=new Array(<%=rereply.size()%>);
@@ -373,34 +390,31 @@ function openDel(){
 							%><script>
 							nick<%=rearr.get(i).getReply_idx()%>[<%=j%>]='<%=rereply.get(j).getMember_nick()%>';
 							date<%=rearr.get(i).getReply_idx()%>[<%=j%>]='<%=rereply.get(j).getReply_date_s()%>';
-							content<%=rearr.get(i).getReply_idx()%>[<%=j%>]='<%=rereply.get(j).getReply_content()%>';
+						content<%=rearr.get(i).getReply_idx()%>[<%=j%>]='<%=rereply.get(j).getReply_content().replaceAll("\r\n", "<br>")%>';
 							img<%=rearr.get(i).getReply_idx()%>[<%=j%>]='<%=rereply.get(j).getMember_img()%>';
 							</script>
 							<%
 						}
 						%><script>
-						function test() {
-						}
+						
 						</script><%
 					}
 				%><div><img src="<%=replyMember.getMember_img()%>"></div>
-				<div onclick="javascript:test();">test</div>
 				<div><%=replyMember.getMember_nick() %></div>
 				<div><%=rearr.get(i).getReply_content() %></div>
 				<div><%=rearr.get(i).getReply_date() %></div> 
 				<div>
 				<%if(rereply.size()!=0){
 					%>
-					<span onclick="javascript:rereplyselect(<%=rearr.get(i).getReply_idx()%>,<%=rereply.size()%>);">등록된답글<%=rereply.size()%></span>
+					<span onclick="javascript:rereplyselect(img<%=rearr.get(i).getReply_idx()%>,date<%=rearr.get(i).getReply_idx()%>,nick<%=rearr.get(i).getReply_idx()%>,content<%=rearr.get(i).getReply_idx()%>,<%=rereply.size()%>,<%=rearr.get(i).getReply_idx()%>,<%=rearr.get(i).getReply_ref()%>);">등록된답글<%=rereply.size()%></span>
 					<%
 				}else{
 					
-					%><span onclick="javascript:rereply();">등록된답글<%=rereply.size() %></span> <%
+					%><span onclick="javascript:rereply(<%=rearr.get(i).getReply_idx()%>,<%=rearr.get(i).getReply_ref()%>);">등록된답글<%=rereply.size() %></span> <%
 				} %>
 				
 				
 				<%if(rearr.get(i).getReply_write_idx()==midx){
-					System.out.println(rearr.get(i).getReply_ref());
 					
 					%>
 					<span><a href="#updatereply" onclick="javascript:updatereply('<%=rearr.get(i).getReply_content()%>',<%=rearr.get(i).getReply_idx()%>);">수정</a></span>
@@ -411,7 +425,7 @@ function openDel(){
 				<span>삭제</span>
 				<%} %>
 				</div>
-				<div class="rereply<%=rearr.get(i).getReply_idx()%>">대댓칸</div>
+				<div class="rereply<%=rearr.get(i).getReply_idx()%>"></div>
 				<div class="updatereply<%=rearr.get(i).getReply_idx()%>"></div>
 				<% 
 				
@@ -463,7 +477,7 @@ function openDel(){
 						<td >
 						<div class="img"><img src="<%=mdtoheader.getMember_img()%>" alt="내사진"></div>
 							<div class="nick"><%=mdtoheader.getMember_nick()%></div>
-							<textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea>
+							<textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required ></textarea>
 							<input type="hidden" name="reply_bbs_idx" value="<%=bbs_idx%>">
 							<input type="hidden" name="reply_write_idx" value="<%=midx%>">
 							<div class="sese">
