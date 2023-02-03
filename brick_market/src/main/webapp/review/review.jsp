@@ -1,10 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<jsp:useBean id="ddao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="mdao" class="com.team4.member.MemberDAO"
+	scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%
+int bidx=Integer.parseInt(request.getParameter("bbs_idx"));
+int midx=(int)session.getAttribute("midx");
+%>
+
 <style>
 #review_star fieldset{
 	display: inline-block;
@@ -101,6 +109,8 @@ body{
 			<input type="radio" name=rate vlaue="2" id="4"><label for="4">★</label>
 			<input type="radio" name=rate vlaue="1" id="5"><label for="5">★</label>
 		</fieldset>
+		<input type="hidden" name="bbs_idx" value="<%=bidx%>">
+		<input type="hidden" name="midx" value="<%=midx%>">		
 		<div><textarea rows="20" cols="70" name="review_content" id="review_content"
 			placeholder="거래는 어떠셨나요?"></textarea></div>
 			<span><input type="submit" id="submit" value="등록하기"></span>
