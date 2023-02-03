@@ -66,40 +66,40 @@ body {
 		"line  line    line  "
 		;
 }
-header .logo {grid-area: logo;}
-header .logo img {
+.header .logo {grid-area: logo;}
+.header .logo img {
 	height: 80px;
 	width: 250px;
 	object-fit: cover;}
-header .login {
+.header .login {
 	margin: 0px 0px;
 	grid-area: login;
 	justify-self:right;
 	font-size: 15px;}
-header .mypage {
+.header .mypage {
 	margin: 0px 0px;
 	grid-area: mypage;
 	justify-self:right;
 	font-size: 15px;}
-header .search {
+.header .search {
 	grid-area: search;
 	justify-self:left;
 	font-size: 15px;}
-header .report {
+.header .report {
 	grid-area: report;
 	font-size: 15px;}
-header .nav {
+.header .nav {
 	grid-area: nav;
 	font-size: 15px;
 }
-header ul {
+.header ul {
 	display:inline; 
 }
-header ul li {
+.header ul li {
 	display:inline; 
 	margin: 10px;
 }
-header .line {
+.header .line {
 	width:100%;
 	grid-area: line;
 }
@@ -120,12 +120,12 @@ header .line {
 }
 
 
-footer nav.nav li {
+.footer nav.nav li {
 	display:inline; 
 	margin: 10px;
 }
 
-footer div {
+.footer div {
 	text-align: right;
 }
 
