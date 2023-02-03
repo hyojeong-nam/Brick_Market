@@ -75,106 +75,45 @@
 	grid-area: reply;
 	text-align: left;
 }
-
-.reply table {
-	width: 750px;
-	margin: 0px auto;
+fieldset {
+	width: 800px;
+margin: auto;
+border: 0px;
+}
+fieldset legend {
+margin-left: 50px;
 }
 fieldset table{
-	width: 800px;
-	border: 0px;
+	width: 750px;
 	margin: auto;
-}
-fieldset{
-border: 0px;
-margin: auto;
-
-}
-
-legend{
-margin-left: 50px;
-padding-top: 40px;
-}
-table .nick{
-	text-align: left;
-	font-size: 15px;
-	height: 10px;
-	float: left;
-	margin-left: 5px;
-}
-.content{
-	width: 580px;
-	font-size: 18px;
-	margin-left: 100px;
-	margin-top: 5px;
-	
-}
-.img img{
-width: 50px;
-height: 50px;
-float: left;
-}
-.date{
-text-align: right;
-margin-top: 0px;
-font-size: 10px;
-
-}
-.sese{
-text-align: right;
-font-size: 15px;
-}
-tbody{
-text-align: center;
-}
-tbody textarea{
- float: left;
- margin-left: 30px;
- height: 50px;s
-}
-tfoot {
-	text-align: center;
-	padding-top: 5px;
-}
-table tbody .nick{
-	margin-left: 10px;
 	margin-top: 10px;
 }
-table tbody .sese{
-	text-align: center;
-	margin-top: 20px;
-	
+table{
 }
-.rereply{
-margin-left: 10px;
+
+table .img{
+ width: 50px;
+ height: 50px;
+ float: left;
+ margin-left: 10px;
+ margin-top: 5px;
+}
+table .nick{
+margin-top: 5px;
 float: left;
-margin-right: 10px;
 }
-table .reply .nick{
-margin-top: 0px;
-}
-.clre .date{
-float: right;
-}
-.clre .content{
-margin-left: 150px;
-margin-top: 20px;
-}
-
-.input textarea{
-width: 450px;
-margin-left: 40px;
+.content{
 float: left;
-height: 40px;
 }
-
-table .input .sese{
-text-align: center;
-margin-top: 10px;
+.tate{
 }
-
-
-
+.mainreply{
+height:100px;
+}
+table tfoot .img{
+	width: 50px;
+	height: 50px;
+}
 </style>
 <%
 String bbs_idx_s = request.getParameter("bbs_idx");
@@ -230,8 +169,8 @@ ArrayList<ReplyDTO> arr = rdao.replyList(bbs_idx,listSize,cp);//댓글 가져오
 
 %>
 <script>
-function cancelupdatereply(idx){
-	document.querySelector('.updatereply'+idx).innerHTML='';
+function cancelupdatereply(idx,content){
+	document.querySelector('.updatereply'+idx).innerHTML=''+content;
 }
 function updatereply(content,idx) {
 	document.querySelector('.updatereply'+idx).innerHTML=''+
@@ -240,8 +179,8 @@ function updatereply(content,idx) {
 	'<input type="hidden" name="reply_idx" value="'+idx+'">'+
 	'<input type="hidden" name="bbs_idx" value="<%=bbs_idx%>">'+
 	'<input type="hidden" name="cp" value="<%=cp%>">'+
-	'<div><input type="submit" value="수정"></div> '+
-	'<div><input type="button" value="취소" onclick="javascript:cancelupdatereply('+idx+');"><div></form>';
+	'<div class="sese"><input type="submit" value="수정"></div> '+
+	'<div class+"sese"><input type="button" value="취소" onclick="javascript:cancelupdatereply('+idx+',\''+content+'\');"><div></form>';
 
 }
 
@@ -260,7 +199,7 @@ function openDel(){
 </head>
 <body>
 	<%@include file="/header.jsp"%>
-	<section>
+	<section class="mid">
 		<article class="container">
 		<a href="/brick_market/report/report.jsp?<%=bbs_idx%>">신고하기</a>
 			<img class="item_img" alt="test" src="<%=bdto.getBbs_img()%>">
@@ -296,9 +235,9 @@ function openDel(){
 		</pre>
 		</article>
 		
-		<article class="reply">
+		<article class="mid">
 			<hr>
-			<fieldset>
+		<fieldset class="mid">
 		<script>
 		function noreply(idx) {
 			document.querySelector('.rereply'+idx).innerHTML='';
@@ -308,7 +247,7 @@ function openDel(){
 			var str='';
 			for( i=0;i<size;i++){
 			
-				str+='<div class="rereply">&hookrightarrow;</div>'+
+				str+='<div class="arrow">&hookrightarrow;</div>'+
 				'<div class="img"><img src="'+img[i]+'"></div>'+
 				'<div class= "date">'+date[i]+'</div>'+
 				'<div class="nick">'+nick[i]+'</div>'+
@@ -318,8 +257,8 @@ function openDel(){
 			if(<%=midx%>!=0){
 				
 			str+='<form action="rereply_ok.jsp?" method="post">'+
-			'<div class="rereply">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>'+
-			'<div class="img"><img src="<%=mdtoheader.getMember_img()%>"></div>'+
+			'<div class="arrow">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>'+
+			'<div><img class="img" src="<%=mdtoheader.getMember_img()%>"></div>'+
 			'<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea></div>'+
 			'<input type="hidden" name="reply_write_idx" value="<%=midx%>">'+
 			'<input type="hidden" name="ref" value="'+ref+'">'+
@@ -341,7 +280,7 @@ function openDel(){
 			if(<%=midx%>!=0){
 				str+='<form action="rereply_ok.jsp?bbs_idx=<%=bbs_idx%>" method="post">'+
 				'<div class="rereply">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>'+
-				'<div class="img"><img src="<%=mdtoheader.getMember_img()%>"></div>'+
+				'<div><img class="img" src="<%=mdtoheader.getMember_img()%>"></div>'+
 				'<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea></div>'+
 				'<input type="hidden" name="reply_write_idx" value="<%=midx%>">'+
 				'<input type="hidden" name="ref" value="'+ref+'">'+
@@ -359,9 +298,9 @@ function openDel(){
 		}
 		
 		</script>
-			<legend>댓글</legend>
-			<table border="1">
-			<thead>
+			<legend class="reply">댓글</legend>
+			<table class="reply" border="1">
+			<thead class="reply">
 			<tr>
 			<%
 			ArrayList<ReplyDTO> rearr=rdao.replyList(bbs_idx, listSize, cp);
@@ -399,11 +338,11 @@ function openDel(){
 						
 						</script><%
 					}
-				%><div><img src="<%=replyMember.getMember_img()%>"></div>
-				<div><%=replyMember.getMember_nick() %></div>
-				<div><%=rearr.get(i).getReply_content() %></div>
-				<div><%=rearr.get(i).getReply_date() %></div> 
-				<div>
+				%><div class="mainreply"><div><img class="img" src="<%=replyMember.getMember_img()%>"></div>
+				<div class="nick"><%=replyMember.getMember_nick() %></div>
+				<div class="updatereply<%=rearr.get(i).getReply_idx()%>"><%=rearr.get(i).getReply_content() %></div>
+				<div class="date"><%=rearr.get(i).getReply_date() %></div> 
+				<div class="sese">
 				<%if(rereply.size()!=0){
 					%>
 					<span onclick="javascript:rereplyselect(img<%=rearr.get(i).getReply_idx()%>,date<%=rearr.get(i).getReply_idx()%>,nick<%=rearr.get(i).getReply_idx()%>,content<%=rearr.get(i).getReply_idx()%>,<%=rereply.size()%>,<%=rearr.get(i).getReply_idx()%>,<%=rearr.get(i).getReply_ref()%>);">등록된답글<%=rereply.size()%></span>
@@ -425,8 +364,7 @@ function openDel(){
 				<span>삭제</span>
 				<%} %>
 				</div>
-				<div class="rereply<%=rearr.get(i).getReply_idx()%>"></div>
-				<div class="updatereply<%=rearr.get(i).getReply_idx()%>"></div>
+				<div class="rereply<%=rearr.get(i).getReply_idx()%>"></div></div>
 				<% 
 				
 			}
@@ -475,7 +413,7 @@ function openDel(){
 					} else {
 					%>
 						<td >
-						<div class="img"><img src="<%=mdtoheader.getMember_img()%>" alt="내사진"></div>
+						<div ><img class="img" src="<%=mdtoheader.getMember_img()%>" alt="내사진"></div>
 							<div class="nick"><%=mdtoheader.getMember_nick()%></div>
 							<textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required ></textarea>
 							<input type="hidden" name="reply_bbs_idx" value="<%=bbs_idx%>">
