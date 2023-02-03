@@ -207,10 +207,7 @@ int user_idx = bdto.getBbs_writer_idx();
 MemberDTO mdto = mdao.searchIdx(user_idx);//게시물 게시자
 //////////////////////////////////////////////////////////////////
 String ref_s = request.getParameter("ref");
-int ref = 0;
-if (ref_s != null && ref_s.length() != 0) {
-ref = Integer.parseInt(ref_s);
-}
+
 int totalCnt = rdao.totalRef(bbs_idx);//db
 
 int listSize = 5;
@@ -235,6 +232,32 @@ ArrayList<ReplyDTO> arr = rdao.replyList(bbs_idx,listSize,cp);//댓글 가져오
 
 %>
 <script>
+function eventreply(img[],nick[],date[],content[],size,ref,cp,midx) {
+	if(size!=0){
+	for(int i=0;i<size;i++){
+document.querySelector('.eventreply').innerHTML=''+
+'<div class="rereply">&hookrightarrow;</div>'+
+'<div class="img"><img src="'+img[i]+'"></div>'+
+'<div class= "date">'+date[i]+'</div>'+
+'<div class="nick">'+nick[i]+'</div>'+
+'<div class="content">'+content[i]+'</div>'+
+'<div class="sese">수정 삭제</div>'+
+}if(midx!=0){
+document.querySelector('.eventreply').innerHTML=''+		
+'<div class="rereply">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>'+
+'<div class="img"><img src=""></div>'+
+'<form action="rereply_ok.jsp?cp='+cp+'&ref='+ref+'" method="post">'+
+'<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea></div>'+
+'<input type="hidden" name="reply_bbs_idx" value="<%=bbs_idx%>">'+
+'<input type="hidden" name="reply_write_idx"  value="'+midx+'">'+
+'<div class="sese"><input type="submit" value="등록"></div>'+
+'</form>';
+}
+
+	}else{
+		document.querySelector('.eventreply').innerHTML='<div>등록된 댓글이 없습니다</div>'
+	}
+}
 
 function delete_reply(a) {
 	var bl =window.confirm('삭제하시겠습니까?');
@@ -292,133 +315,48 @@ function openDel(){
 			<fieldset>
 			<legend>댓글</legend>
 			<table border="1">
-			<thead class="rereply">
-					<%//댓글 없음 출력
-					if (arr == null || arr.size() == 0) {
-					%>
-					<tr><td>등록된 댓글이 없습니다.</td></tr>
-					<%
-						//댓글없음출력
-					} else {
-					for (int i = 0; i < arr.size(); i++) {
-						MemberDTO writemember= mdao.searchIdx(arr.get(i).getReply_write_idx());
-					//댓글 출력//%>
-					<script>
-					function eventreply(a) {
-		document.querySelector('.eventreply').innerHTML=''+
-			'<div class="rereply">&hookrightarrow;</div>'+
-		'<div class="img"><img src=""></div>'+
-			'<div class= "date"></div>'+
-		'<div class="nick"></div>'+
-		'<div class="content"></div>'+
-		'<div class="sese">수정 삭제</div>'+
-		'<div class="rereply">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>'+
-		'<div class="img"><img src=""></div>'+
-		'<form action="rereply_ok.jsp?cp=<%=cp%>&ref=<%=ref%>" method="post">'+
-		'<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea></div>'+
-		'<input type="hidden" name="reply_bbs_idx" value="<%=bbs_idx%>">'+
-		'<input type="hidden" name="reply_write_idx"  value="">'+
-		'<div class="sese"><input type="submit" value="등록"></div>'+
-		'</form>';
-	
-}
-					</script>
-				<tr>
-					<td>
-					<div class="img"><img src="<%=writemember.getMember_img() %>"></div>
-					<div class="nick"><%=writemember.getMember_nick()%></div>
-					<div class="date"><%=arr.get(i).getReply_date()%></div>
-					<div class="content"><%=arr.get(i).getReply_content()%></div>
-					<div class="sese"><a href="content.jsp?bbs_idx=<%=bbs_idx%>&ref=<%=arr.get(i).getReply_ref()%>&cp=<%=cp%>">답글</a>
-					<a onclick="eventreply(<%=arr.get(i).getReply_ref()%>);">test</a>
+			<thead>
+			<tr>
+			<%
+			ArrayList<ReplyDTO> rearr=rdao.replyList(bbs_idx, listSize, cp);
+			if(rearr==null||rearr.size()==0){
+				%><td>등록된 댓글이 없습니다</td><%
+			}else{
+				%><td><% 
+				for(int i=0;i<rearr.size();i++){
+					MemberDTO replyMember=mdao.searchIdx(rearr.get(i).getReply_write_idx());//댓글 게시자의 프로필 정보
 					
-					<%//댓글출력
-					//수정삭제여부
-					if (midx != arr.get(i).getReply_write_idx()) {
-					%>
-					    수정
-						삭제
-					<%
-					}else {
-					%>
-					
-					    <a href="javascript:location.href='content.jsp?bbs_idx=<%=bbs_idx%>&reply_idx=<%=arr.get(i).getReply_idx()%>&cp=<%=cp%>';">수정</a>
-					
-						<a href="javascript:delete_reply(<%=arr.get(i).getReply_ref()%>);">삭제</a>
+				%><div><img src="<%=replyMember.getMember_img()%>"></div>
+				<div><%=replyMember.getMember_nick() %></div>
+				<div><%=rearr.get(i).getReply_content() %></div>
+				<div><%=rearr.get(i).getReply_date() %></div> 
+				<div>
+				<span>답글</span>
 				
-					<%
-					if (request.getParameter("reply_idx") != null&& Integer.parseInt(request.getParameter("reply_idx")) == arr.get(i).getReply_idx()) {
-						int reply_idx = Integer.parseInt(request.getParameter("reply_idx"));
-					%></div>
-					</td>
-				</tr>
-						<form action="updateReply.jsp" method="post">
-				<tr>
-					<td>댓글수정
+				<%if(rearr.get(i).getReply_write_idx()==midx){
+					System.out.println(rearr.get(i).getReply_ref());
 					
-						<input type="text" name="content" value="<%=arr.get(i).getReply_content()%>"> 
-						<input type="hidden" name="reply_idx" value="<%=reply_idx%>"> 
-						<input type="hidden" name="bbs_idx" value="<%=bbs_idx%>">
-						<input type="hidden" name="cp" value="<%=cp%>">
-						<input type="submit" value="수정"> 
-						<input type="button" value="취소" onclick="javascript:location.href='content.jsp?bbs_idx=<%=bbs_idx%>&cp=<%=cp%>';">
-					</td>
-					<%
-					}
 					%>
-				</tr>
-						</form>
-				<tr class="eventreply">
-				<td>숨길영역</td>
-				</tr>
-				<%
-				}//수정삭제
-					//대댓기능
-				if (ref == arr.get(i).getReply_ref()) {
-					ArrayList<ReplyDTO> arr2=rdao.rereplyList(bbs_idx, ref);
-				%>
-				<tr>
-				<script>
-				//기존 대댓글 페이지///////////////////////////////////////////////////////////////////////////
-					
-						<%
-						if(arr2!=null||arr2.size()!=0){
-							for(int j=0;j<arr2.size();j++){
-								MemberDTO marr2 = mdao.searchIdx(arr2.get(j).getReply_write_idx());	
-								%>
-								document.write('<td class="clre"><div class="rereply">&hookrightarrow;</div><div class="img"><img src="<%=marr2.getMember_img()%>"></div><div class= "date"><%=arr2.get(j).getReply_date()%></div>');
-								document.write('<div class="nick"><%=marr2.getMember_nick()%></div>'+'<div class="content"><%=arr2.get(j).getReply_content()%></div>');
-								document.write('<div class="sese">수정 삭제</div></td></tr>');
-								<%	
-							}
-						}
-						%>
-				</script>
-				<%if(midx!=0){
-					%>
-					<script>
-						document.write('<tr><td class="input"><div class="rereply">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>');
-						document.write('<div class="img"><img src="<%=mdtoheader.getMember_img() %>"></div>');
-						document.write('<div class="nick"><%= mdtoheader.getMember_nick()%></div>');
-						document.write('<form action="rereply_ok.jsp?cp=<%=cp%>&ref=<%=ref%>" method="post">');
-						document.write('<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea></div>');
-						document.write('<input type="hidden" name="reply_bbs_idx" value="<%=bbs_idx%>">');
-						document.write('<input type="hidden" name="reply_write_idx"  value="<%=midx%>">');
-						document.write('<div class="sese"><input type="submit" value="등록"></div></form></td>');
-					
-					</script>
-					</tr>
+					<span><a href="#">수정</a></span>
+					<span><a href="#" onclick="javascript:href='deleteReply.jsp?bbs_idx=<%=bbs_idx%>&ref=<%=rearr.get(i).getReply_ref()%>';">삭제</a></span>
+					<% 
+				}else{ %>
+				<span>수정</span>
+				<span>삭제</span>
+				<%} %>
+				</div>
+				<div class="rereply">대댓칸</div>
+				<div class="updatereply">수정칸</div>
+				<% 
 				
-				<%
-				}///////////////////////////////////////////////////////////대댓기능
-				}
-				
-					
-					
-					}
-				}
-				%>
-					</thead>
+			}
+				%></td><% 
+			}	
+			 %>
+			
+			</tr>
+			
+			</thead>
 								<tfoot class="reply">
 				<tr>
 					<td>

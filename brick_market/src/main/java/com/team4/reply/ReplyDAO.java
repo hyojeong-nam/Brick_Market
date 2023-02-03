@@ -200,7 +200,7 @@ public class ReplyDAO {
 	public int dedleteReply(int ref, int bbs_idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			String sql="delete from reply_table where reply_ref=? and bbs_idx=?";
+			String sql="delete from reply_table where reply_ref=? and reply_bbs_idx=?";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, ref);
 			ps.setInt(2, bbs_idx);

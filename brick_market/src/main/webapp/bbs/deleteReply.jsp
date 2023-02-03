@@ -18,7 +18,7 @@ if(request.getParameter("bbs_idx")!=null||request.getParameter("bbs_idx").equals
 }
 if(request.getParameter("ref")!=null||request.getParameter("ref").equals("0")){
 	ref=Integer.parseInt(request.getParameter("ref"));
-	int resert=rdao.dedleteReply(ref);
+	int resert=rdao.dedleteReply(ref,bbs_idx);
 	if(resert>=1){
 		
 	%>
