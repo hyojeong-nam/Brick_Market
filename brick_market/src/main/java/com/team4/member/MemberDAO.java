@@ -1,5 +1,6 @@
 package com.team4.member;
 
+import java.io.File;
 import java.sql.*;
 import java.util.*;
 import javax.sql.*;
@@ -16,7 +17,7 @@ public class MemberDAO {
 	public int joinMember(MemberDTO dto,String email) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			String sql = "insert into member_table values (member_table_idx.nextval,?,?,?,?,?,sysdate,'/brick_market/img/profile.png',0)";
+			String sql = "insert into member_table values (member_table_idx.nextval,?,?,?,?,?,sysdate,'/brick_market/member/img/profile.png',0)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, dto.getMember_id());
 			ps.setString(2, dto.getMember_pwd());
@@ -170,17 +171,20 @@ public class MemberDAO {
 	}
 	
 	/**회원 정보 수정 */
-	public int joinUpdate(MultipartRequest mr, int idx, String email2) {
+	public int joinUpdate(MultipartRequest mr, int idx, String email2, String realpath) {
 		try {
+			conn=com.team4.db.Team4DB.getConn();
+
 			String imgname=mr.getFilesystemName("member_img");
 			String img="/brick_market/member/img/"+imgname;
 			String imgsql="member_img='"+img+"',";
 			
 			if(imgname==null) {
 				imgsql="";
+			}else {
+				deleteMemberBeforeImg(realpath, idx);
 			}
 			
-			conn=com.team4.db.Team4DB.getConn();
 			
 			String sql = "update member_table set member_id =?,"
 					+ "member_pwd=? , member_name=?, member_nick=?,"+imgsql+"member_email=? "
@@ -219,4 +223,39 @@ public class MemberDAO {
 
 		}
 	}
+
+	/** 이전 파일 삭제 메소드 (수정 시 사용) */
+	public void deleteMemberBeforeImg(String realpath, int member_idx) {
+		try {
+
+			String sql = "select * from member_table where member_idx = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, member_idx);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				String img = rs.getString("member_img");
+				img = img.replaceAll("/brick_market/member/img/", "");
+				String realimg = realpath + img;
+				System.out.println("삭제할 이미지 :" + realimg);
+				File old = new File(realimg);
+				if (old.exists() && old.isFile() && !(img.equals("profile.png"))) {
+					System.out.println("되나?");
+					old.delete();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+
+	
 }
