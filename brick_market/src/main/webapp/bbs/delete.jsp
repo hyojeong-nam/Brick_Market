@@ -26,6 +26,14 @@ if(widx!=midx){
 	
 }
 %>
+
+<script>
+function back(){
+	
+	window.self.close();
+}
+
+</script>
 <style>
 
 body{
@@ -95,7 +103,7 @@ input::placeholder {
 				<input type="password" name="pwd" placeholder="비밀번호">
 				<input type="submit" id="submit"value="삭제하기">
 				<input type="button" id="cancel"value="취소하기" 
-				onclick="location.href='/brick_market/bbs/content.jsp?bbs_idx=<%=bidx%>'">
+				onclick="back();">
 			</form>
 		</article>
 	</section>
