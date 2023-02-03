@@ -32,6 +32,7 @@ margin-bottom: 40px;
     color: white;
     padding: 8px;
     margin-bottom: 5px;
+    border-radius:10px 10px 10px 10px;
 }
 #idk {
     width: 80%;
@@ -39,6 +40,7 @@ margin-bottom: 40px;
     border-color: transparent;
     color: black;
     padding: 8px;
+    border-radius:10px 10px 10px 10px;
 }
 #saveid{
 margin-top:10px;
