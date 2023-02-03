@@ -2,7 +2,8 @@ package com.team4.bbs;
 import java.util.*;
 import java.sql.*;
 import com.team4.member.*;
-import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.*;
+import java.io.*;
 
 public class BbsDAO {
 	Connection conn;
@@ -70,18 +71,21 @@ public class BbsDAO {
 	}
 	
 	/**글수정*/
-	public int bbsReWrite(MultipartRequest mr, int bbs_idx) {
+	public int bbsReWrite(MultipartRequest mr, int bbs_idx, String realpath) {
 		try {
+			conn = com.team4.db.Team4DB.getConn();
 			
 			String imgname = mr.getFilesystemName("bbs_img");
 			String img = "/brick_market/bbs/img/"+imgname;
 			String imgsql = "bbs_img = '"+img+"' , ";
-			
+			System.out.println("realpath:"+realpath);
+			System.out.println("img:"+img);
 			if(imgname == null){
 				imgsql = "";
+			}else {
+				deleteBbsBeforeImg(realpath, bbs_idx);
 			}
 			
-			conn = com.team4.db.Team4DB.getConn();
 			String sql = "update bbs_table set bbs_subject = ?, bbs_content = ?, bbs_price = ?,"+imgsql+"bbs_category = ?, bbs_place = ?, bbs_how = ? where bbs_idx = ?";
 			ps = conn.prepareStatement(sql);
 			
@@ -134,7 +138,36 @@ public class BbsDAO {
 		}
 	}
 	
-	
+	/**이전 파일 삭제 메소드 (수정 시 사용)*/
+	public void deleteBbsBeforeImg(String realpath,int bbs_idx) {
+		try {
+			
+			String sql = "select * from bbs_table where bbs_idx = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bbs_idx);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				String img = rs.getString("bbs_img");
+				img = img.replaceAll("/brick_market/bbs/img/", "");
+				String realimg = realpath + img;
+				System.out.println("삭제할 이미지 :"+realimg);
+				File old = new File(realimg);
+				if(old.exists() && old.isFile() && !(img.equals("test.png"))) {
+					System.out.println("되나?");
+					old.delete();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
 	
 	/**총페이지수 구하기*/
 	 public int getTotalCnt() {
