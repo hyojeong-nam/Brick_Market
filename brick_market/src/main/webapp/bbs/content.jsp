@@ -206,7 +206,7 @@ return;
 int user_idx = bdto.getBbs_writer_idx();
 MemberDTO mdto = mdao.searchIdx(user_idx);//게시물 게시자
 //////////////////////////////////////////////////////////////////
-String ref_s = request.getParameter("ref");
+
 
 int totalCnt = rdao.totalRef(bbs_idx);//db
 
@@ -248,29 +248,6 @@ function updatereply(content,idx) {
 
 }
 
-//function eventreply() {
-//document.querySelector('.eventreply').innerHTML=''+
-//'<div class="rereply">&hookrightarrow;</div>'+
-//'<div class="img"><img src="'+img[i]+'"></div>'+
-//'<div class= "date">'+date[i]+'</div>'+
-//'<div class="nick">'+nick[i]+'</div>'+
-//'<div class="content">'+content[i]+'</div>'+
-//'<div class="sese">수정 삭제</div>'+
-//document.querySelector('.eventreply').innerHTML=''+		
-//'<div class="rereply">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>'+
-//'<div class="img"><img src=""></div>'+
-///'<form action="rereply_ok.jsp?cp='+cp+'&ref='+ref+'" method="post">'+
-//'<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea></div>'+
-//'<input type="hidden" name="reply_write_idx"  value="'+midx+'">'+
-//'<div class="sese"><input type="submit" value="등록"></div>'+
-//'</form>';
-//}
-
-//	}else{
-//		document.querySelector('.eventreply').innerHTML='<div>등록된 댓글이 없습니다</div>'
-//	}
-//}
-//*/
 function delete_reply(a) {
 	var bl =window.confirm('삭제하시겠습니까?');
 	if(bl){
@@ -280,8 +257,7 @@ function delete_reply(a) {
 function openDel(){
 	
 	window.open('delete.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>',
-			+'delPage','width=520,height=250');
-	
+			+'delPage','width=520,height=250');	
 }
 </script>
 </head>
@@ -327,18 +303,32 @@ function openDel(){
 			<hr>
 			<fieldset>
 		<script>
-		function rereplyselect(){
-			document.querySelector('.rereply').innerHTML=''
-			for(var i=0; i<5;i++);{
-				
-			+'<div class="rereply">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>'
-			};
-				
+		function rereplyselect(re_idx,size){
+			var str='';
+			for( i=0;i<size;i++){
 			
-			////////////////////////////////////
+				str+='<div class="rereply">&hookrightarrow;</div>'+
+				'<div class="img"><img src="'+img+''+''+re_idx+[+''+i+''+]+'"></div>'+
+				'<div class= "date">'+date+''+re_idx+''+[i]+'</div>'+
+				'<div class="nick">'+nick+'+'+re_idx+''+[i]+'</div>'+
+				'<div class="content">'+content+''+re_idx+''+[i]+'</div>'+
+				'<div class="sese">수정 삭제</div>';
+			}
+			str+='<form action="rereply_ok.jsp?cp=&ref=" method="post">'+
+			'<div class="rereply">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>'+
+			'<div class="img"><img src="<%=mdtoheader.getMember_img()%>"></div>'+
+			'<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea></div>'+
+			'<input type="hidden" name="reply_write_idx" value="<%=midx%>">'+
+			'<input type="hidden" name="ref" value="">'+
+			'<input type="hidden" name="cp" value="<%=cp%>">'+
+			'<div class="sese"><input type="submit" value="등록"></div></form>';
 			
+			document.querySelector('.rereply').innerHTML=str;
 			
+					
 		}
+	
+		
 		function rereply() {
 			document.querySelector('.rereply').innerHTML=''+
 			'<form action="rereply_ok.jsp?cp=&ref=" method="post">'+
@@ -370,29 +360,38 @@ function openDel(){
 					String content[]=null;
 					String img[]=null;
 					if(rereply!=null||rereply.size()!=0){
-						nick = new String[rereply.size()];
-						date = new String[rereply.size()];
-						content = new String[rereply.size()];
-						img = new String[rereply.size()];
+						%>
+						<script>
+						var nick<%=rearr.get(i).getReply_idx()%>=new Array(<%=rereply.size()%>);
+						var date<%=rearr.get(i).getReply_idx()%>=new Array(<%=rereply.size()%>);
+						var img<%=rearr.get(i).getReply_idx()%>=new Array(<%=rereply.size()%>);
+						var content<%=rearr.get(i).getReply_idx()%>=new Array(<%=rereply.size()%>);
+						</script>
+						<%
 						
 						for(int j=0;j<rereply.size();j++){
-							nick[j]=rereply.get(j).getMember_nick();
-							date[j]=rereply.get(j).getReply_date_s();
-							content[j]=rereply.get(j).getReply_content();
-							img[j]=rereply.get(j).getMember_img();
+							%><script>
+							nick<%=rearr.get(i).getReply_idx()%>[<%=j%>]='<%=rereply.get(j).getMember_nick()%>';
+							date<%=rearr.get(i).getReply_idx()%>[<%=j%>]='<%=rereply.get(j).getReply_date_s()%>';
+							content<%=rearr.get(i).getReply_idx()%>[<%=j%>]='<%=rereply.get(j).getReply_content()%>';
+							img<%=rearr.get(i).getReply_idx()%>[<%=j%>]='<%=rereply.get(j).getMember_img()%>';
+							</script>
+							<%
 						}
+						%><script>
+						function test() {
+						}
+						</script><%
 					}
-					
-						
-					
 				%><div><img src="<%=replyMember.getMember_img()%>"></div>
+				<div onclick="javascript:test();">test</div>
 				<div><%=replyMember.getMember_nick() %></div>
 				<div><%=rearr.get(i).getReply_content() %></div>
 				<div><%=rearr.get(i).getReply_date() %></div> 
 				<div>
 				<%if(rereply.size()!=0){
 					%>
-					<span onclick="javascript:rereplyselect();">등록된답글<%=rereply.size() %></span>
+					<span onclick="javascript:rereplyselect(<%=rearr.get(i).getReply_idx()%>,<%=rereply.size()%>);">등록된답글<%=rereply.size()%></span>
 					<%
 				}else{
 					
@@ -412,7 +411,7 @@ function openDel(){
 				<span>삭제</span>
 				<%} %>
 				</div>
-				<div class="rereply">대댓칸</div>
+				<div class="rereply<%=rearr.get(i).getReply_idx()%>">대댓칸</div>
 				<div class="updatereply<%=rearr.get(i).getReply_idx()%>"></div>
 				<% 
 				
