@@ -30,6 +30,7 @@ if(widx!=midx){
 
 body{
 	text-align: center;
+	background-color: silver;
 }
 
 input { 
@@ -64,7 +65,7 @@ input::placeholder {
 	
 }
 #submit {
-    width: 5%;
+    width: 20%;
     background-color: skyblue;
     border-color: transparent;
     color: white;
@@ -74,7 +75,7 @@ input::placeholder {
 }
 
 #cancel {
-    width: 5%;
+    width: 20%;
     background-color: lightgrey;
     border-color: transparent;
     color: black;
