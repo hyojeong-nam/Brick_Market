@@ -1,12 +1,99 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+#review_star fieldset{
+	display: inline-block;
+	border: 0;
+	direction: rtl;
+}
+#review_star fieldset input{
+	
+	display: none;
+	text-align: right;
+}
+
+#review_star input[type=radio]:checked ~ label{
+	
+	text-shadow: 2px 2px 2px #FFD700;
+}
+#review_star label{
+	font-size: 3em;
+	color:transparent;
+	text-shadow: 0 0 0 #C0C0C0;
+}
+
+#review_star label:hover{
+
+	text-shadow: 2px 2px 2px #FFD700;
+}
+#review_star label:hover~label{
+
+	text-shadow: 2px 2px 2px #FFD700;
+}
+#review_star fieldset span{
+	font-size: 1em; 
+	font-family: NanumBarunGothic;
+}
+
+span input[type=button]:hover{
+	text-shadow: 2px 2px 2px #DCDCDC;
+}
+
+#cancel:active {
+	transform: scale(1.5);
+}
+
+#submit:active {
+	transform: scale(1.5);
+}
+#review_content{
+	border-style: groove;
+	border-radius:10px 10px 10px 10px;
+	border-color: #EEE8AA;
+	border-width: 2px;
+	
+}
+#submit {
+    width: 5%;
+    background-color: skyblue;
+    border-color: transparent;
+    color: white;
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius:10px 10px 10px 10px;
+}
+
+#cancel {
+    width: 5%;
+    background-color: lightgrey;
+    border-color: transparent;
+    color: black;
+    padding: 8px;
+    border-radius:10px 10px 10px 10px;
+}
+</style>
+
 </head>
 <body>
-리뷰페이지
+	<form name="review_star" id="review_star" action="review_ok.jsp">
+		<fieldset>
+			<span>!별점을 남겨주세요</span>
+			<input type="radio" name=rate vlaue="5" id="1"><label for="1">★</label>
+			<input type="radio" name=rate vlaue="4" id="2"><label for="2">★</label>
+			<input type="radio" name=rate vlaue="3" id="3"><label for="3">★</label>
+			<input type="radio" name=rate vlaue="2" id="4"><label for="4">★</label>
+			<input type="radio" name=rate vlaue="1" id="5"><label for="5">★</label>
+		</fieldset>
+		<div><textarea rows="20" cols="70" name="review_content" id="review_content"
+			placeholder="거래는 어떠셨나요?"></textarea></div>
+			<span><input type="submit" id="submit" value="등록하기"></span>
+			<span><input type="button" id="cancel" value="취소하기" onclick="location.href='/brick_market/index.jsp'"></span>
+	</form>
+	
 </body>
 </html>
