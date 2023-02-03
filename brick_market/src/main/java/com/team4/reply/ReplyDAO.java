@@ -56,11 +56,10 @@ public class ReplyDAO {
 		}
 	}
 
-	public int getMaxRef(int bbs_idx) {//해당 게시글에 max ref구하기
+	public int getMaxRef() {//해당 게시글에 max ref구하기
 		try {
-			String sql = "select max(reply_ref) from reply_table where bbs_idx=?";
+			String sql = "select max(reply_ref) from reply_table";
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, bbs_idx);
 			rs = ps.executeQuery();
 			int max = 0;
 			if (rs.next()) {
@@ -109,7 +108,7 @@ public class ReplyDAO {
 	public int replyWrite(int bbs_idx, int write_idx, String reply_content,int lev,int ref) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			int maxref=getMaxRef(bbs_idx);
+			int maxref=getMaxRef();
 			int maxsunbun=0;
 			if(lev==0) {
 				maxref++;
