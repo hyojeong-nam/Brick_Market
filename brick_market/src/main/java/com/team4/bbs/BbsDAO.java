@@ -467,15 +467,15 @@ public class BbsDAO {
 		case -1:
 			return "전체";
 		case 0:
-			return "디지털 기기";
+			return "전자기기";
 		case 1:
-			return "의류";
+			return "의류/잡화";
 		case 2:
-			return "생활 잡화";
+			return "뷰티/미용";
 		case 3:
-			return "뷰티 / 미용";
+			return "게임/음악";
 		case 4:
-			return "취미 / 게임 / 음반";
+			return "기타물품";
 		default:
 			return "등록된 카테고리가 아닙니다";
 		}
