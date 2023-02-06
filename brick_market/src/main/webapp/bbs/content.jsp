@@ -20,13 +20,14 @@
 	width: 800px;
 	display: grid;
 	grid-template-columns: 50% 10% 40%;
-	grid-template-rows: 40px 40px 40px 40px 240px auto;
+	grid-template-rows: 40px 40px 40px 40px 240px 50px auto;
 	grid-template-areas:
 	"item  title  title" 
 	"item  price  price"
 	"item  proimg  nick" 
 	"item  proimg  star" 
 	"item   text   text"
+	"btn   btn    btn  "
 	"reply reply  reply";
 }
 
@@ -69,6 +70,26 @@
 .item_text {
 	grid-area: text;
 	text-align: left;
+}
+
+.btn{
+	grid-area: btn;
+	text-align: center;
+}
+
+.btn a{
+	display: inline-block;
+	margin: 5px;
+}
+
+.btn a {
+	text-decoration: none;
+	color: black;
+}
+
+.btn a:hover {
+	text-decoration: underline;
+	color: skyblue;
 }
 
 .reply {
@@ -201,7 +222,6 @@ function openDel(){
 	<%@include file="/header.jsp"%>
 	<section class="mid">
 		<article class="container">
-		<a href="/brick_market/report/report.jsp?bbs_idx=<%=bbs_idx%>">신고하기</a>
 			<img class="item_img" alt="test" src="<%=bdto.getBbs_img()%>">
 			<h2 class="title_text"><%=bdto.getBbs_subject()%></h2>
 			<p class="price_text"><%=bdto.getBbs_price()%>원
@@ -209,31 +229,40 @@ function openDel(){
 			<img class="profile_img" alt="test" src="<%=mdto.getMember_img()%>">
 			<p class="profile_nick"><%=mdto.getMember_nick()%></p>
 			<p class="profile_star">거래완료조회 ★★★★☆(23 리뷰) 평점 4.2</p>
-			<pre class="item_text">
-		<%=bdto.getBbs_content().replaceAll("\n", "<br>")%>
+			<pre class="item_text"><%=bdto.getBbs_content().replaceAll("\n", "<br>")%></pre>
+			<div class="btn">
+			<hr>
 			<%if(midx!=0) {
-				
 			%>
-			<a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>">수정하기</a>
-			<input type="button" onclick="openDel();" value="삭제하기">
-			<a href="/brick_market/review/review.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>">리뷰하기(임시)</a>
+				<a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>">
+				수정
+				</a>
+				<a href="#" onclick="openDel();">
+				삭제
+				</a>
+				<a href="/brick_market/review/review.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>">
+				리뷰 
+				</a>
+				<a href="/brick_market/report/report.jsp?bbs_idx=<%=bbs_idx%>">
+				신고 
+				</a>
 			<%}else{ %>
 			<%}
 			int like=-1;
 			if(midx!=0){
 				like=ldao.checkLike(bbs_idx, midx);
 				if(like==1){
-					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=1" >취소</a><% 
+					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=1" >좋아요 취소</a><% 
 				}else if(like==0){
-					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=0" >&hearts;</a><%
+					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=0" >좋아요 &hearts;</a><%
 				}else{
-					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=2" >&hearts;</a><%
+					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=2" >좋아요 &hearts;</a><%
 				}
 			}else{
 				%><span>로그인후 이용가능</span><% 
 			}
 			 %>
-		</pre>
+			</div>
 		</article>
 		
 		<article class="mid">
