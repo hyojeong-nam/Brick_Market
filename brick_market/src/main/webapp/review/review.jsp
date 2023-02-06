@@ -103,14 +103,14 @@ body{
 	<form name="review_star" id="review_star" action="review_ok.jsp">
 		<fieldset>
 			<span>!별점을 남겨주세요</span>
-			<input type="radio" name=rate vlaue="5" id="1"><label for="1">★</label>
-			<input type="radio" name=rate vlaue="4" id="2"><label for="2">★</label>
-			<input type="radio" name=rate vlaue="3" id="3"><label for="3">★</label>
-			<input type="radio" name=rate vlaue="2" id="4"><label for="4">★</label>
-			<input type="radio" name=rate vlaue="1" id="5"><label for="5">★</label>
+			<input type="radio" name=review_rate value="5" id="1"><label for="1">★</label>
+			<input type="radio" name=review_rate value="4" id="2"><label for="2">★</label>
+			<input type="radio" name=review_rate value="3" id="3"><label for="3">★</label>
+			<input type="radio" name=review_rate value="2" id="4"><label for="4">★</label>
+			<input type="radio" name=review_rate value="1" id="5"><label for="5">★</label>
 		</fieldset>
-		<input type="hidden" name="bbs_idx" value="<%=bidx%>">
-		<input type="hidden" name="midx" value="<%=midx%>">		
+		<input type="hidden" name="review_bbs_idx" value="<%=bidx%>">
+		<input type="hidden" name="review_writer_idx" value="<%=midx%>">		
 		<div><textarea rows="20" cols="70" name="review_content" id="review_content"
 			placeholder="거래는 어떠셨나요?"></textarea></div>
 			<span><input type="submit" id="submit" value="등록하기"></span>
