@@ -15,5 +15,5 @@ String msg=result>0?"회원가입을 축하합니다.":"회원가입에 실패�
 %>
 <script>
 window.alert('<%=msg %>');
-window.location.href='/brick_market/index.jsp';
+window.location.href='/brick_market/member/login.jsp';
 </script>
