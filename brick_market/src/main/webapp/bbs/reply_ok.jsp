@@ -11,6 +11,7 @@ int bbs_idx = rdto.getReply_bbs_idx();
 int write_idx = rdto.getReply_write_idx();
 
 String reply_content = rdto.getReply_content();
+reply_content.replace("'", "\'").replace("\\","\\\\" );
 int a = rdao.replyWrite(bbs_idx, write_idx, reply_content,0,0);
 if(a==-1){
 	%><script>document.alert('댓글 작성 실패');
