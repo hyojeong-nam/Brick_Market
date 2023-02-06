@@ -6,8 +6,6 @@
 <ul>
 <li>사이트소개</li>
 <li>이용약관</li>
-<li><a href="/brick_market/report/report.jsp">신고하기</a></li>
-
 </ul>
 </nav>
 <div>고객문의:email cs&#64;brick.com tel 02-0000-0000</div>
