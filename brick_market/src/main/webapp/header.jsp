@@ -123,7 +123,6 @@
 	<span class="report">
 		<ul>
 			<li><a>이용가이드</a></li>
-			<li><a href="/brick_market/report/reportList.jsp">신고조회</a></li>
 		</ul>
 	</span>
 	<hr class="line">
