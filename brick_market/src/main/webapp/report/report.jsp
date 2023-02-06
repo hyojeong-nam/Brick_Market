@@ -11,39 +11,22 @@
 <title>Insert title here</title>
 <link rel="styLesheet" type="text/css" href="/brick_market/css/maincss.css">
 <%
-int user_idx=0;
-user_idx = (int) session.getAttribute("midx");
-
-if (session.getAttribute("midx") == null || session.getAttribute("midx").equals("")
-		|| session.getAttribute("midx").equals("0")) {
-%>
-<script>
-	window.alert('잘못된 접근입니다.');
-	window.location.href = '/brick_market/index.jsp';
-</script>
-<%
-return;
-}
-
+//bbs_idx 가져오기
 String bidx_s = request.getParameter("bbs_idx");
 int bidx = 0;
 if (bidx_s != null && bidx_s.length() != 0) {
 	bidx = Integer.parseInt(bidx_s);
 }
 
-if(user_idx==bidx) {
-	%>
-<script>
-	window.alert('자신의 글은 신고할 수 없습니다.');
-	window.location.href = '/brick_market/index.jsp';
-</script>
-<%
-return;
-}
+//접속 중인 유저 idx 가져오기
+int user_idx=0;
+user_idx = (int) session.getAttribute("midx");
 
 
+//bidx로 게시글 제목 가져오고, widx로 작성자 찾기
 BbsDTO bdto = bdao.bbsContent(bidx);
-MemberDTO mdto=mdao.searchIdx(bidx);
+int widx=bdto.getBbs_writer_idx();
+MemberDTO mdto=mdao.searchIdx(widx);
 
 
 %>
@@ -53,17 +36,17 @@ MemberDTO mdto=mdao.searchIdx(bidx);
 	<section class="mid">
 		<article>
 			<h1>신고하기</h1>
-			<form>
+			<form name="report" method="post" action="report_ok.jsp">
 			<div>
 			신고글 제목 <%=bdto.getBbs_subject() %>
 			</div>
 			<div>
-			신고 대상 <%=mdto.getMember_nick()%>
+			신고 대상 <%=mdto.getMember_nick() %>
 			<input type="hidden" name="report_user" value="<%=mdto.getMember_idx() %>">
 			</div>
 			<div>
 			신고 내용
-			<textarea name="report_content"> </textarea>
+			<textarea name="report_content" placeholder="신고 내용을 자세히 입력해주세요"></textarea>
 			</div>
 			<div>
 			<input type="submit" value="등록하기">
