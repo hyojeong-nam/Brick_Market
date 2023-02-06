@@ -12,7 +12,6 @@
 int bidx=Integer.parseInt(request.getParameter("bbs_idx"));
 int midx=(int)session.getAttribute("midx");
 %>
-
 <style>
 #review_star fieldset{
 	display: inline-block;
@@ -107,7 +106,7 @@ body{
 			<input type="radio" name=review_rate value="4" id="2"><label for="2">★</label>
 			<input type="radio" name=review_rate value="3" id="3"><label for="3">★</label>
 			<input type="radio" name=review_rate value="2" id="4"><label for="4">★</label>
-			<input type="radio" name=review_rate value="1" id="5"><label for="5">★</label>
+			<input type="radio" name=review_rate value="1" id="5" required="required"><label for="5">★</label>
 		</fieldset>
 		<input type="hidden" name="review_bbs_idx" value="<%=bidx%>">
 		<input type="hidden" name="review_writer_idx" value="<%=midx%>">		
