@@ -17,5 +17,5 @@ String msg=result>0?"신고가 완료되었습니다":"신고 실패하였습니
 %>
 <script>
 window.alert('<%=msg %>');
-window.location.href='/brick_market/index.jsp';
+window.history.go(-2);
 </script>
