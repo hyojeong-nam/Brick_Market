@@ -81,5 +81,28 @@ public class LikeDAO {
 			}
 		}
 	}
+	public int totalCnt(int user_idx) {
+		try {
+			conn=com.team4.db.Team4DB.getConn();
+			String sql="select count(*) from like_table where like_user_idx=? and like_check=1";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, user_idx);
+			rs=ps.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return -1;
+			
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(ps!=null)ps.close();
+				if(conn!=null)conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+	}
 	
 }

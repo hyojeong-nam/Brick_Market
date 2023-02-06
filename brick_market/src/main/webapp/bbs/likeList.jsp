@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO"></jsp:useBean>
+<jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
 <%@page import="com.team4.bbs.BbsDTO"%>
 <%@page import="java.util.*"%>
+<jsp:useBean id="ldao" class="com.team4.like.LikeDAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,6 +56,8 @@ int extra = 1;
 <body>
 	<%@include file="/header.jsp"%>
 	<%
+int list=5;
+int cnt=ldao.totalCnt(midx);
 	if (midx == 0) {
 	%><script>
 		window.alert('로그인후 이용 가능합니다');
@@ -104,20 +107,23 @@ int extra = 1;
 						<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
 							<span class="subject"><%=arr.get(i).getBbs_subject()%></span>
 							<span><img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>"></span>
-							<span><input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx %>&check=1&cp=<%=cp%>'" value="좋아요 취소"></span>
 							<span class="price"><%=arr.get(i).getBbs_price()%> 원</span></a>
-							
+							<span><input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'" value="좋아요 취소"></span>
 					</div>
-					
 					<%
 					}
-					%>
+					if(cp*list>=cnt){
+						
+						
+					}else{
+						%>
 						<a href="/brick_market/bbs/likeList.jsp?cp=<%=cp + 1%>"> 좋아요 글더보기 </a>
-					<%}else{
+						<%
+					}
+					}else{
 					%>
 			<div>좋아하는 게시글이 없습니다</div>
 					<%
-						
 					}
 					%>
 				</div>

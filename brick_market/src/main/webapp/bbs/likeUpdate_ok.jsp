@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:useBean id="ldao" class="com.team4.like.LikeDAO"></jsp:useBean>
-<script>
-alert('<%=request.getParameter("cp")%>');
-</script>
+
 <%
-request.getParameter("bbs_idx");
-request.getParameter("user_idx");
-request.getParameter("check");
+
+if(request.getParameter("bbs_idx")==null||request.getParameter("user_idx")==null||request.getParameter("check")==null){
+	%>
+	<script>
+	window.alert('잘못된 접근입니다');
+	window.location.href='/brick_market/index.jsp';
+	</script>
+	<% 
+}
 int bbs_idx=Integer.parseInt(request.getParameter("bbs_idx"));
 int user_idx=Integer.parseInt(request.getParameter("user_idx"));
 int check=Integer.parseInt(request.getParameter("check"));
