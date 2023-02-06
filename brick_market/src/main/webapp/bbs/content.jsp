@@ -238,10 +238,12 @@ function openDel(){
 				<%
 			}else {
 				int vsum = 0;
+				int vcnt = 0;
 				for(int i = 0; i < varr.size(); i++){
 					vsum += varr.get(i).getReview_rate();
+					vcnt ++;
 				}
-				double vavg = vsum / (double)arr.size();
+				double vavg = (double)vsum / vcnt;
 				String star = "";
 				if(vavg >= 4.5){
 					star = "★★★★★";
@@ -255,7 +257,7 @@ function openDel(){
 					star = "★☆☆☆☆";
 				}
 				%>
-				<p class="profile_star"><%=star %>(<%=varr.size() %> 리뷰) 평점 <%=vavg %></p>
+				<p class="profile_star"><%=star %>(<%=varr.size() %> 리뷰) 평점 <%=(double)Math.round((vavg*10))/10 %></p>
 				<%
 			}
 			%>

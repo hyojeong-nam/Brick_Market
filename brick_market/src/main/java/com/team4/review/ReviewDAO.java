@@ -53,9 +53,7 @@ public class ReviewDAO {
 				Date review_date = rs.getDate("review_date");
 				ReviewDTO dto = new ReviewDTO(review_idx, review_rate, review_content, writer_idx, review_bbs_idx, review_date);
 				arr.add(dto);
-				System.out.println("dto 추가됨");
 			}
-			System.out.println("arr 반환");
 			return arr;
 		} catch (Exception e) {
 			e.printStackTrace();
