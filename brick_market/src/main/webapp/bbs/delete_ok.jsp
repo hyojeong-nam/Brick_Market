@@ -8,7 +8,10 @@
 int bbs_idx=Integer.parseInt(request.getParameter("bidx"));
 int bbs_writer_idx=(int)session.getAttribute("midx");
 String pwd=request.getParameter("pwd");
-int result=ddao.bbsDelete(bbs_idx, bbs_writer_idx, pwd);
+
+String savepath=request.getRealPath("/bbs/img");
+
+int result=ddao.bbsDelete(bbs_idx, bbs_writer_idx, pwd, savepath+"\\");
 
 if(result==1){
 	
