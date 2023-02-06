@@ -201,7 +201,7 @@ function openDel(){
 	<%@include file="/header.jsp"%>
 	<section class="mid">
 		<article class="container">
-		<a href="/brick_market/report/report.jsp?<%=bbs_idx%>">신고하기</a>
+		<a href="/brick_market/report/report.jsp?bbs_idx=<%=bbs_idx%>">신고하기</a>
 			<img class="item_img" alt="test" src="<%=bdto.getBbs_img()%>">
 			<h2 class="title_text"><%=bdto.getBbs_subject()%></h2>
 			<p class="price_text"><%=bdto.getBbs_price()%>원
