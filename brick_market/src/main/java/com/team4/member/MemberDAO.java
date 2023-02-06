@@ -13,7 +13,11 @@ public class MemberDAO {
 	PreparedStatement ps;
 	ResultSet rs;
 	
-	/**회원 가입*/
+	/**회원 가입 관련 메서드
+	 * @param dto 멤버 정보를 담은 DTO
+	 * @param email 멤버 이메일 뒷자리 정보
+	 * @return 1이면 정상 가입 완료, -1이면 가입 실패
+	 * */
 	public int joinMember(MemberDTO dto,String email) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -40,7 +44,11 @@ public class MemberDAO {
 		}
 	}
 	
-	/**로그인*/
+	/**로그인 관련 메서드
+	 * @param id 로그인할 유저 아이디
+	 * @param pwd 로그인할 유저 비밀번호
+	 * @return 로그인 유저 고유 번호를 반환, 로그인 실패 시 -1 반환
+	 * */
 	public int checkLogin(String id, String pwd) {
 		try {
 			int result=-1;
@@ -72,7 +80,10 @@ public class MemberDAO {
 		}
 	}
 	
-	/**idx로 검색*/
+	/**유저 검색 관련 메서드
+	 * @param idx 유저 고유 번호
+	 * @return 유저 정보가 담긴 MemberDTO를 반환 검색 실패 시 null 반환
+	 * */
 	public MemberDTO searchIdx(int idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -97,8 +108,6 @@ public class MemberDAO {
 			}else {
 				return null;
 			}
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -114,7 +123,11 @@ public class MemberDAO {
 		}
 	}
 	
-	/**비밀번호 확인*/
+	/**비밀번호 확인 관련 메서드
+	 * @param idx 유저의 고유 번호
+	 * @param pwd 유저의 비밀 번호
+	 * @return 비밀번호가 맞을 경우 true, 틀렸을 경우 false를 반환
+	 * */
 	public boolean checkPwd(int idx, String pwd) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -123,13 +136,11 @@ public class MemberDAO {
 			ps.setInt(1,idx);
 			ps.setString(2, pwd);
 			rs = ps.executeQuery();
-			
 			if(rs.next()) {
 				return true;
 			}else {
 				return false;
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -146,7 +157,10 @@ public class MemberDAO {
 		
 	}
 	
-	/**아이디 중복 체크*/
+	/**아이디 중복 검사 관련 메서드
+	 * @param userid 중복 검사할 아이디
+	 * @return 중복된 아이디가 있을 경우 true, 아닐 경우 false를 반환함
+	 * */
 	public boolean idCheck(String userid) {
 		try{
 			conn=com.team4.db.Team4DB.getConn();
@@ -170,7 +184,13 @@ public class MemberDAO {
 		}
 	}
 	
-	/**회원 정보 수정 */
+	/**회원 정보 수정 관련 메서드
+	 * @param mr MultipartRequest
+	 * @param idx 정보를 수정할 회원의 고유 번호
+	 * @param email2 이메일 주소 뒷자리
+	 * @param realpath 파일 삭제를 위한 이미지 경로
+	 * @return 1이 반환될 경우 정상 수정 완료, -1이 반환된 경우 수정 실패
+	 * */
 	public int joinUpdate(MultipartRequest mr, int idx, String email2, String realpath) {
 		try {
 			conn=com.team4.db.Team4DB.getConn();
@@ -224,7 +244,11 @@ public class MemberDAO {
 		}
 	}
 
-	/** 이전 파일 삭제 메소드 (수정 시 사용) */
+	/** 이전 파일 삭제 메소드 (수정 시 사용)
+	 * @param realpath 삭제할 프로필 사진의 실제 저장 경로
+	 * @param member_idx 프로필 사진을 삭제할 회원의 고유 번호
+	 * @return void
+	 * */
 	public void deleteMemberBeforeImg(String realpath, int member_idx) {
 		try {
 

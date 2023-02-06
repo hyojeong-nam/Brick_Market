@@ -1,5 +1,8 @@
 package com.team4.bbs;
 import java.util.*;
+
+import org.eclipse.jdt.internal.compiler.ast.ReturnStatement;
+
 import java.sql.*;
 import com.team4.member.*;
 import com.oreilly.servlet.*;
@@ -10,7 +13,11 @@ public class BbsDAO {
 	PreparedStatement ps;
 	ResultSet rs;
 	
-	/**글쓰기*/
+	/**글쓰기 관련 메서드
+	 * @param mr MultipartRequest
+	 * @param writer_idx 글쓴이의 고유번호
+	 * @return 1이 나온다면 정상, -1이 나온다면 등록 실패
+	 * */
 	public int bbsWrite(MultipartRequest mr, int writer_idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -62,7 +69,12 @@ public class BbsDAO {
 		}
 	}
 	
-	/**글수정*/
+	/**글 수정 관련 메서드
+	 * @param mr MultipartRequest
+	 * @param bbs_idx 수정할 게시글의 고유번호
+	 * @param realpath 저장, 삭제할 이미지의 실제 경로
+	 * @return 1이 나온다면 정상, -1이 나온다면 수정 실패
+	 * */
 	public int bbsReWrite(MultipartRequest mr, int bbs_idx, String realpath) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -121,7 +133,11 @@ public class BbsDAO {
 		}
 	}
 	
-	/**이전 파일 삭제 메소드 (수정 시 사용)*/
+	/**이전 파일 삭제 메소드
+	 * @param realpath 삭제할 파일의 실제 저장 경로
+	 * @param bbs_idx 이미지를 삭제할 게시글의 고유 번호
+	 * @return void
+	 * */
 	public void deleteBbsBeforeImg(String realpath,int bbs_idx) {
 		try {
 			
@@ -150,7 +166,9 @@ public class BbsDAO {
 		}
 	}
 	
-	/**총페이지수 구하기*/
+	/**총페이지수 구하기
+	 * @return 총 게시글 수
+	 * */
 	 public int getTotalCnt() {
 		 try {
 			conn=com.team4.db.Team4DB.getConn();
@@ -174,7 +192,13 @@ public class BbsDAO {
 		}
 	 }
 	 
-	 /**검색 결과에서 총페이지수 구하기*/
+	 /**검색 결과에서 총페이지수 구하기
+	  * @param keyword 게시글 제목에서 키워드가 포함된 항목만 검색
+	  * @param category 게시글 카테고리가 일치하는 항목만 검색 (-1일 경우 모두 검색)
+	  * @param status 게시글 상태가 일치하는 항목만 검색 (-1일 경우 모두 검색)
+	  * @return 검색 결과에 해당하는 게시글 수
+	  * 
+	  * */
 	 public int getTotalCnt(String keyword, int category, int status) {
 		 try {
 			String keywordsql1 = "";
@@ -217,7 +241,12 @@ public class BbsDAO {
 		 }
 	 }
 	
-	/**글 보기 (페이징)*/
+	/**글 보기
+	 * @param size 한 페이지 넘길 때 넘어가는 글 갯수
+	 * @param page 현재 페이지 번호
+	 * @param extra 한 페이지에서 추가로 보여줄 글 갯수 size + extra 값이 한 페이지에서 보여주는 게시글 수가 된다
+	 * @return 찾은 게시글 정보를 Bbs_DTO에 담아 ArrayList배열로 반환
+	 *  */
 	public ArrayList<BbsDTO> bbsList(int size, int page, int extra){
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -263,6 +292,12 @@ public class BbsDAO {
 			}
 		}
 	}
+	
+	/**좋아요 한 글 보기
+	 * @param page 현재 페이지 번호
+	 * @param useridx 좋아요를 한 유저 고유번호
+	 * @return 찾은 게시글 정보를 Bbs_DTO에 담아 ArrayList배열로 반환
+	 * */
 	public ArrayList<BbsDTO> bbsList(int page,int useridx){
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -306,7 +341,15 @@ public class BbsDAO {
 		}
 	}
 	
-	/**글 검색 후 보기 (페이징)*/
+	/**글 검색 후 보기
+	 * @param size 한 페이지 넘길 때 넘어가는 글 갯수
+	 * @param page 현재 페이지 번호
+	 * @param extra 한 페이지에서 추가로 보여줄 글 갯수 size + extra 값이 한 페이지에서 보여주는 게시글 수가 된다
+	 * @param keyword 게시글 제목에서 키워드가 포함된 항목만 검색
+	 * @param category 게시글 카테고리가 일치하는 항목만 검색 (-1일 경우 모두 검색)
+	 * @param status 게시글 상태가 일치하는 항목만 검색 (-1일 경우 모두 검색)
+	 * @return 찾은 게시글 정보를 Bbs_DTO에 담아 ArrayList배열로 반환
+	 *  (페이징)*/
 	public ArrayList<BbsDTO> bbsList(int size, int page, int extra, String keyword, int category, int status){
 		try {
 			String keywordsql1 = "";
@@ -371,7 +414,10 @@ public class BbsDAO {
 	
 	
 	
-	/**글 하나보기*/
+	/**글 하나보기
+	 * @param idx 게시글 고유 번호
+	 * @return 게시글 정보를 BbsDTO에 담아 반환
+	 * */
 	public BbsDTO bbsContent(int idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -412,7 +458,10 @@ public class BbsDAO {
 	}
 	
 	
-	/**글 조회수*/
+	/**글 조회수 증가 관련 메서드
+	 * @param idx 조회수를 증가시킬 게시글 고유 번호
+	 * @return void
+	 * */
 	public void bbsReadnum(int idx) {
 		try {
 			String sql = "update bbs_table set bbs_readnum = bbs_readnum+1 where bbs_idx = ?";
@@ -431,20 +480,30 @@ public class BbsDAO {
 		}
 	}
 	
-	/**글 삭제*/
-	public int bbsDelete(int bbs_idx, int bbs_writer_idx, String pwd) {
+	/**글 삭제 관련 메서드
+	 * @param bbs_idx 삭제할 게시글 고유번호
+	 * @param bbs_writer_idx 삭제할 게시글 작성자 고유번호
+	 * @param pwd 작성자 비밀번호
+	 * @param realpath 삭제할 게시글 사진 파일 경로
+	 * @return 1이 나오면 삭제 완료, -1이 나오면 삭제 실패
+	 * */
+	public int bbsDelete(int bbs_idx, int bbs_writer_idx, String pwd, String realpath) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
 			MemberDAO mdao = new MemberDAO();
 			boolean result = mdao.checkPwd(bbs_writer_idx, pwd);
 			int count = -1;
 			if (result) {
+				
 				String sql = "delete bbs_table where bbs_idx = ?";
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, bbs_idx);
 				count = ps.executeUpdate();
+				if (count > 0) {
+					deleteBbsBeforeImg(realpath, bbs_idx);
+				}
 			}else {
-				count=0;
+				count=-1;
 			}
 			return count;
 		} catch (Exception e) {
@@ -461,7 +520,10 @@ public class BbsDAO {
 	}
 	
 	
-	/**카테고리 이름 불러오기*/
+	/**카테고리 이름 불러오기 관련 메서드
+	 * @param category 카테고리 번호
+	 * @return 카테고리 이름 문자열
+	 * */
 	public String stringCategory(int category) {
 		switch (category) {
 		case -1:
