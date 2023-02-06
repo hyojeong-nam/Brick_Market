@@ -11,14 +11,34 @@
 <link rel="stylesheet" type="text/css"
 	href="/brick_market/css/maincss.css">
 <style type="text/css">
-body {
-	width: 1000px;
+fieldset{
+border: 0px;
+}
+.main{
+text-align: left;
+}
+.main .img{
+width: 100px;
+height: 90px;
+margin-left: 40px;
+}
+.main .subject{
+font-size: 25px;
+float: left;
+margin-top: 20px;
+width: 100px;
+margin-left: 100px;
+}
+.mid .main .price{
+text-align: right;
+margin-left: 350px;
+}
+.mid .main .date{
+font-size:  10px;
+text-align: right;
+float: right;
 }
 
-table img {
-	width: 100px;
-	height: 100px;
-}
 </style>
 </head>
 <%
@@ -44,16 +64,18 @@ int extra = 1;
 	}
 	ArrayList<BbsDTO> arr = bdao.bbsList(cp, midx);
 	%>
-	<section>
+	<section class="mid">
 		<article>
 			<fieldset>
 				<legend>좋아하는 글 목록</legend>
-				<table>
+				<div>
 					<%if(arr!=null&&arr.size()!=0){
 					for (int i = 0; i < arr.size(); i++) {
 					%>
-					<tr>
-						<td class="content"><script>var str = '<%=arr.get(i).getBbs_date_s()%>';
+					<div class="main">
+					<span class="date">
+						<script>
+					var str = '<%=arr.get(i).getBbs_date_s()%>';
 					var strY=str.substring(0,4);
 					var strM=parseInt(str.substring(5,7))-1;
 					var strD=str.substring(8,10);
@@ -77,35 +99,28 @@ int extra = 1;
 					}else{
 						document.write('일주일 이상');
 					}
-					</script></td>
-						<td class="imgarea content"><a
-							href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
-								<img class="img" src="<%=arr.get(i).getBbs_img()%>"
-								alt="<%=arr.get(i).getBbs_subject()%>">
-						</a></td>
-						<td class="content"><a
-							href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>"><%=arr.get(i).getBbs_subject()%>
-						</a></td>
-						<td class="content"><%=arr.get(i).getBbs_price()%> 원</td>
-					</tr>
+					</script>
+						</span>
+						<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
+							<span class="subject"><%=arr.get(i).getBbs_subject()%></span>
+							<span><img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>"></span>
+							<span><input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx %>&check=1&cp=<%=cp%>'" value="좋아요 취소"></span>
+							<span class="price"><%=arr.get(i).getBbs_price()%> 원</span></a>
+							
+					</div>
+					
 					<%
 					}
 					%>
-					<tr>
-						<td class="side"><a
-							href="/brick_market/bbs/likeList.jsp?cp=<%=cp + 1%>"> 좋아요 글
-								더보기 </a></td>
-					</tr>
+						<a href="/brick_market/bbs/likeList.jsp?cp=<%=cp + 1%>"> 좋아요 글더보기 </a>
 					<%}else{
 					%>
-					<tr>
-					<td>좋아하는 게시글이 없습니다</td>
-					</tr>
+			<div>좋아하는 게시글이 없습니다</div>
 					<%
 						
 					}
 					%>
-				</table>
+				</div>
 			</fieldset>
 		</article>
 	</section>
