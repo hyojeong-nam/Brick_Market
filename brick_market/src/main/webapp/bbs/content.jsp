@@ -216,6 +216,7 @@ function openDel(){
 			%>
 			<a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>">수정하기</a>
 			<input type="button" onclick="openDel();" value="삭제하기">
+			<a href="/brick_market/review/review.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>">리뷰하기(임시)</a>
 			<%}else{ %>
 			<%}
 			int like=-1;
