@@ -2,11 +2,13 @@
 <jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="mdao" class="com.team4.member.MemberDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="rdao" class="com.team4.reply.ReplyDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="vdao" class="com.team4.review.ReviewDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="ldao" class="com.team4.like.LikeDAO"></jsp:useBean>
 <%@page import="java.util.*"%>
 <%@page import="com.team4.reply.ReplyDTO"%>
 <%@page import="com.team4.bbs.BbsDTO"%>
 <%@page import="com.team4.member.MemberDTO"%>
+<%@page import="com.team4.review.ReviewDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -161,8 +163,8 @@ if (bdto.equals(null)) {
 <%
 return;
 }
-int user_idx = bdto.getBbs_writer_idx();
-MemberDTO mdto = mdao.searchIdx(user_idx);//게시물 게시자
+int user_idx = bdto.getBbs_writer_idx();//게시자 인덱스
+MemberDTO mdto = mdao.searchIdx(user_idx);//게시물 게시자 정보
 //////////////////////////////////////////////////////////////////
 
 
@@ -228,7 +230,35 @@ function openDel(){
 			</p>
 			<img class="profile_img" alt="test" src="<%=mdto.getMember_img()%>">
 			<p class="profile_nick"><%=mdto.getMember_nick()%></p>
-			<p class="profile_star">거래완료조회 ★★★★☆(23 리뷰) 평점 4.2</p>
+			<%
+			ArrayList<ReviewDTO> varr = vdao.selectReview(user_idx);
+			if(varr == null || varr.size() == 0){
+				%>
+				<p class="profile_star">남겨진 리뷰가 없습니다.</p>
+				<%
+			}else {
+				int vsum = 0;
+				for(int i = 0; i < varr.size(); i++){
+					vsum += varr.get(i).getReview_rate();
+				}
+				double vavg = vsum / (double)arr.size();
+				String star = "";
+				if(vavg >= 4.5){
+					star = "★★★★★";
+				}else if(vavg >= 3.5){
+					star = "★★★★☆";
+				}else if(vavg >= 2.5){
+					star = "★★★☆☆";
+				}else if(vavg >= 1.5){
+					star = "★★☆☆☆";
+				}else{
+					star = "★☆☆☆☆";
+				}
+				%>
+				<p class="profile_star"><%=star %>(<%=varr.size() %> 리뷰) 평점 <%=vavg %></p>
+				<%
+			}
+			%>
 			<pre class="item_text"><%=bdto.getBbs_content().replaceAll("\n", "<br>")%></pre>
 			<div class="btn">
 			<hr>

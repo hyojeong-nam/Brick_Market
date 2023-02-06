@@ -1,6 +1,6 @@
 package com.team4.review;
 
-import javax.xml.crypto.Data;
+import java.sql.Date;
 
 public class ReviewDTO {
 	
@@ -9,14 +9,14 @@ public class ReviewDTO {
 	private String review_content;
 	private int review_writer_idx;
 	private int review_bbs_idx;
-	private Data reivew_date;
+	private Date reivew_date;
 	
 	public ReviewDTO() {
 		super();
 	}
 
 	public ReviewDTO(int review_idx, int review_rate, String review_content, int review_writer_idx, int review_bbs_idx,
-			Data reivew_date) {
+			Date reivew_date) {
 		super();
 		this.review_idx = review_idx;
 		this.review_rate = review_rate;
@@ -66,11 +66,11 @@ public class ReviewDTO {
 		this.review_bbs_idx = review_bbs_idx;
 	}
 
-	public Data getReivew_date() {
+	public Date getReivew_date() {
 		return reivew_date;
 	}
 
-	public void setReivew_date(Data reivew_date) {
+	public void setReivew_date(Date reivew_date) {
 		this.reivew_date = reivew_date;
 	}
 	
