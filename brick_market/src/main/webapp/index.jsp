@@ -20,11 +20,11 @@ article.content{
 }
 
 .imgarea {
-	line-height: 250px;
+	line-height: 200px;
 }
 
 .imgarea .img {
-	width: 150px;
+	width: 200px;
 	height: 200px;
 	object-fit: cover;
 	vertical-align: middle;
@@ -47,20 +47,18 @@ ul li{
 list-style-type: none;
 }
 .mid {
-width: 80vw;
+width:1000px;
 overflow: hidden;
-margin-left: 0px;
-padding-left: 0px;
 }
 .content{
-width: 240vw;
+width: 3000px;
 }
 .ultag{
-width: 240vw;
+width: 3000px;
 transition:transform 0.5s;
 }
 .litag{
-width: 20vw;
+width: 250px;
 float: left;
 
 }
@@ -131,8 +129,8 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 	</section>
 
 	<section class="mid">
-		<article class="content">
 		<h3>최신글 보기</h3>
+		<article class="content">
 		<ul class="ultag">
 		<%
 		if (arr == null || arr.size() == 0) {
