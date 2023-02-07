@@ -39,8 +39,25 @@ font-size:  10px;
 text-align: right;
 float: right;
 }
+.button{
+
+z-index: 1;
+  width: 150px;
+  height: 200px;
+ right: 0px;
+ position: fixed;
+ top:70%;
+}
+.class{
+height: 50px;
+}
 
 </style>
+<script>
+function top_scroll() {
+	document.
+}
+</script>
 </head>
 <%
 int size = 5;
@@ -68,6 +85,7 @@ int cnt=ldao.totalCnt(midx);
 	ArrayList<BbsDTO> arr = bdao.bbsList(cp, midx);
 	%>
 	<section class="mid">
+	<div class="button"  onclick="window.scrollTo(0,0);"><input type="button" value="TOP" class="class"></div>
 		<article>
 			<fieldset>
 				<legend>좋아하는 글 목록</legend>
@@ -128,7 +146,9 @@ int cnt=ldao.totalCnt(midx);
 					%>
 				</div>
 			</fieldset>
+			
 		</article>
+		
 	</section>
 	<%@include file="/footer.jsp"%>
 </body>
