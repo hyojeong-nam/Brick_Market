@@ -38,12 +38,12 @@ public class ReviewDAO {
 	}
 	
 	/**리뷰 조회 관련 매서드*/
-	public ArrayList<ReviewDTO> selectReview(int writer_idx) {
+	public ArrayList<ReviewDTO> selectReview(int review_seller_idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
 			String sql = "select * from review_table where review_writer_idx = ?";
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, writer_idx);
+			ps.setInt(1, review_seller_idx);
 			rs = ps.executeQuery();
 			ArrayList<ReviewDTO> arr = new ArrayList<ReviewDTO>();
 			while(rs.next()) {
@@ -51,9 +51,9 @@ public class ReviewDAO {
 				int review_rate = rs.getInt("review_rate");
 				String review_content = rs.getString("review_content");
 				int review_bbs_idx = rs.getInt("review_bbs_idx");
-				int review_seller_idx = rs.getInt("review_seller_idx");
+				int review_writer_idx = rs.getInt("review_writer_idx");
 				Date review_date = rs.getDate("review_date");
-				ReviewDTO dto = new ReviewDTO(review_idx, review_rate, review_content, writer_idx, review_bbs_idx,review_seller_idx, review_date);
+				ReviewDTO dto = new ReviewDTO(review_idx, review_rate, review_content, review_writer_idx, review_bbs_idx,review_seller_idx, review_date);
 				arr.add(dto);
 			}
 			return arr;
