@@ -13,12 +13,13 @@ public class ReviewDAO {
 	public int reviewWrite(ReviewDTO dto) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			String sql="insert into review_table values(review_table_idx.nextval,?,?,?,?,sysdate)";
+			String sql="insert into review_table values(review_table_idx.nextval,?,?,?,?,?,sysdate)";
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, dto.getReview_rate());
 			ps.setString(2, dto.getReview_content());
 			ps.setInt(3, dto.getReview_writer_idx());
 			ps.setInt(4, dto.getReview_bbs_idx());
+			ps.setInt(5, dto.getReview_seller_idx());
 			
 			int count=ps.executeUpdate();
 			return count;
@@ -50,8 +51,9 @@ public class ReviewDAO {
 				int review_rate = rs.getInt("review_rate");
 				String review_content = rs.getString("review_content");
 				int review_bbs_idx = rs.getInt("review_bbs_idx");
+				int review_seller_idx = rs.getInt("review_seller_idx");
 				Date review_date = rs.getDate("review_date");
-				ReviewDTO dto = new ReviewDTO(review_idx, review_rate, review_content, writer_idx, review_bbs_idx, review_date);
+				ReviewDTO dto = new ReviewDTO(review_idx, review_rate, review_content, writer_idx, review_bbs_idx,review_seller_idx, review_date);
 				arr.add(dto);
 			}
 			return arr;

@@ -9,6 +9,7 @@ public class ReviewDTO {
 	private String review_content;
 	private int review_writer_idx;
 	private int review_bbs_idx;
+	private int review_seller_idx;
 	private Date reivew_date;
 	
 	public ReviewDTO() {
@@ -16,13 +17,14 @@ public class ReviewDTO {
 	}
 
 	public ReviewDTO(int review_idx, int review_rate, String review_content, int review_writer_idx, int review_bbs_idx,
-			Date reivew_date) {
+			int review_seller_idx, Date reivew_date) {
 		super();
 		this.review_idx = review_idx;
 		this.review_rate = review_rate;
 		this.review_content = review_content;
 		this.review_writer_idx = review_writer_idx;
 		this.review_bbs_idx = review_bbs_idx;
+		this.review_seller_idx = review_seller_idx;
 		this.reivew_date = reivew_date;
 	}
 
@@ -66,6 +68,14 @@ public class ReviewDTO {
 		this.review_bbs_idx = review_bbs_idx;
 	}
 
+	public int getReview_seller_idx() {
+		return review_seller_idx;
+	}
+
+	public void setReview_seller_idx(int review_seller_idx) {
+		this.review_seller_idx = review_seller_idx;
+	}
+
 	public Date getReivew_date() {
 		return reivew_date;
 	}
@@ -73,6 +83,9 @@ public class ReviewDTO {
 	public void setReivew_date(Date reivew_date) {
 		this.reivew_date = reivew_date;
 	}
+	
+	
+	
 	
 	
 	

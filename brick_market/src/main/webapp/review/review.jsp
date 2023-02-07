@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 <%
 int bidx=Integer.parseInt(request.getParameter("bbs_idx"));
+int sidx=Integer.parseInt(request.getParameter("bbs_writer_idx"));
 int midx=(int)session.getAttribute("midx");
 %>
 <style>
@@ -110,6 +111,7 @@ body{
 		</fieldset>
 		<input type="hidden" name="review_bbs_idx" value="<%=bidx%>">
 		<input type="hidden" name="review_writer_idx" value="<%=midx%>">		
+		<input type="hidden" name="review_seller_idx" value="<%=sidx%>">		
 		<div><textarea rows="20" cols="70" name="review_content" id="review_content"
 			placeholder="거래는 어떠셨나요?"></textarea></div>
 			<span><input type="submit" id="submit" value="등록하기"></span>
