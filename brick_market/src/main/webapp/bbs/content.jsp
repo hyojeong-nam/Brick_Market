@@ -27,7 +27,7 @@
 	grid-template-rows: 40px 40px 40px 40px 240px 50px auto;
 	grid-template-areas:
 	"item  title  title" 
-	"item  price   view"
+	"item  price  price"
 	"item  proimg  nick" 
 	"item  proimg  star" 
 	"item   text   text"
@@ -50,7 +50,7 @@
 
 .view_text {
 	text-align: right;
-	grid-area: view;
+	grid-area: price;
 	margin: 0px 0px;
 }
 
