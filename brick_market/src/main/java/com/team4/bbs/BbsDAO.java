@@ -494,14 +494,12 @@ public class BbsDAO {
 			boolean result = mdao.checkPwd(bbs_writer_idx, pwd);
 			int count = -1;
 			if (result) {
-				
+				deleteBbsBeforeImg(realpath, bbs_idx);
+
 				String sql = "delete bbs_table where bbs_idx = ?";
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, bbs_idx);
 				count = ps.executeUpdate();
-				if (count > 0) {
-					deleteBbsBeforeImg(realpath, bbs_idx);
-				}
 			}else {
 				count=-1;
 			}
