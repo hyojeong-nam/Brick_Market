@@ -24,6 +24,19 @@ section article table img {
 	width: 50px;
 	height: 50px;
 }
+input:invalid{
+	background-color: ivory;
+}
+textarea:invalid{
+	background-color: ivory;
+}
+select:invalid{
+	background-color: ivory;
+}
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 </style>
 <%
 int user_idx = 0;
@@ -94,7 +107,7 @@ window.location.href='/brick_market/member/login.jsp';
 					</tr>
 					<tr>
 						<th>상품가격</th>
-						<td colspan="3"><input type="number" name="bbs_price"
+						<td colspan="3"><input type="number" name="bbs_price" pattern="[0-9]+"
 							placeholder="상품의 가격은 숫자만!" required></td>
 					</tr>
 					<tr>
