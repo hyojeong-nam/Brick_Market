@@ -24,22 +24,12 @@ article.content{
 }
 
 .imgarea .img {
-	width: 200px;
-	height: 220px;
+	width: 150px;
+	height: 200px;
 	object-fit: cover;
 	vertical-align: middle;
 }
-.left, .right {
-	display:flex;
-    justify-content:center;
-    align-items:center;
-}
-.sideimg {
-	width: 50px;
-	height: 50px;
-	object-fit: cover;
-	vertical-align: middle;
-}
+
 h3 {
 	text-align: center;
 }
@@ -53,6 +43,36 @@ h3 {
 	text-decoration: underline;
 	color: skyblue;
 }
+ul li{
+list-style-type: none;
+}
+.mid {
+width: 80vw;
+overflow: hidden;
+margin-left: 0px;
+padding-left: 0px;
+}
+.content{
+width: 240vw;
+}
+.ultag{
+width: 240vw;
+transition:transform 0.5s;
+}
+.litag{
+width: 20vw;
+float: left;
+
+}
+.button{
+margin-top: 50px;
+}
+.button input:hover {
+	text-decoration: underline;
+	color: skyblue;
+
+}
+
 </style>
 <script>
 function articleTime(str){
@@ -80,6 +100,16 @@ function articleTime(str){
 		return '일주일 이상';
 	}
 }
+
+function button1() {
+	document.querySelector('.ultag').style.transform='translate(0vw)';
+}
+function button2() {
+	document.querySelector('.ultag').style.transform='translate(-80vw)';
+}
+function button3() {
+	document.querySelector('.ultag').style.transform='translate(-160vw)';
+}
 </script>
 </head>
 <%
@@ -89,47 +119,30 @@ if (page_s == null || page_s.equals("")) {
 }
 int size = 1;
 int pagenum = Integer.parseInt(page_s);
-int select = 3;
+int select = 11;
 int totalcnt = bdao.getTotalCnt();
 ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 %>
 <body>
 	<%@ include file="header.jsp"%>
 	<section class="left">
-		<%
-		if (pagenum > 1) {
-			%>
-			<a href="index.jsp?page=<%=pagenum - 1%>">
-			<img class="sideimg" src="/brick_market/img/left.jpg" alt="왼쪽 페이지 이동">
-			</a>
-			<%
-		}
-		%>
 	</section>
 	<section class="right">
-		<%
-		if (pagenum * size + select < totalcnt) {
-			%>
-			<a href="index.jsp?page=<%=pagenum + 1%>">
-			<img class="sideimg" src="/brick_market/img/right.jpg" alt="오른쪽 페이지 이동">
-			</a>
-			<%
-		}
-		%>
 	</section>
+
 	<section class="mid">
+		<article class="content">
 		<h3>최신글 보기</h3>
+		<ul class="ultag">
 		<%
 		if (arr == null || arr.size() == 0) {
 		%>
-		<article class="content">
-			<div>등록된 최신글이 없습니다.</div>
-		</article>
+			<li><div>등록된 최신글이 없습니다.</div></li>
 		<%
 		} else {
 		for (int i = 0; i < arr.size(); i++) {
 		%>
-		<article class="content">
+			<li class="litag">
 			<div>
 			<script>
 			var str = '<%=arr.get(i).getBbs_date_s()%>';
@@ -138,13 +151,10 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 			</script>
 			</div>
 			<a class="subject" href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
-			<div class="imgarea">
-				<img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>">
-			</div>
-			<div>
-				<span><%=arr.get(i).getBbs_subject()%></span>
-			</div>
+			<div class="imgarea"><img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>"></div>
+			<div><span><%=arr.get(i).getBbs_subject()%></span></div>
 			</a>
+			
 			<div>
 			<%
 			int price = arr.get(i).getBbs_price();
@@ -159,12 +169,20 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 			%>
 				<span><%=price_s%></span>
 			</div>
-			
-		</article>
+			</li>
 		<%
 			}
 		}
 		%>
+		</ul>
+		</article>
+		<article class="mid">
+		<div class="button">
+		<input type="button" onclick="javascript:button1();" value="1">
+		<input type="button" onclick="javascript:button2();" value="2">
+		<input type="button" onclick="javascript:button3();" value="3">
+		</div>
+		</article>
 	</section>
 	<%@ include file="footer.jsp"%>
 </body>
