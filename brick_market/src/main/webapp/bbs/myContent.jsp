@@ -19,6 +19,10 @@ article.content{
 	witdh: 250px;
 }
 
+article.content:hover{
+	box-shadow: 0px 0px 3px 2px gray;
+}
+
 .imgarea {
 	line-height: 250px;
 }
