@@ -95,7 +95,7 @@ window.location.href='/brick_market/member/login.jsp';
 					<tr>
 						<th>상품가격</th>
 						<td colspan="3"><input type="number" name="bbs_price"
-							placeholder="상품의 가격을 숫자로 적어주세요" required></td>
+							placeholder="상품의 가격은 숫자만!" required></td>
 					</tr>
 					<tr>
 						<th rowspan="4">상품 내용</th>
