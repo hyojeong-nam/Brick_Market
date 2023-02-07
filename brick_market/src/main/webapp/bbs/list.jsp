@@ -88,13 +88,16 @@ String status_s = request.getParameter("status");
 
 int category = -1;
 int status = -1;
-String str_status = "판매중";
+String str_status = "";
 if (!(category_s.equals(null) || category_s.length() == 0)){
 	category = Integer.parseInt(category_s);
 }
 if (!(status_s.equals(null) || status_s.length() == 0)){
 	status = Integer.parseInt(status_s);
 	switch (status){
+	case -1:
+		str_status = "전체";
+		break;
 	case 0:
 		str_status = "판매중";
 		break;
@@ -106,8 +109,6 @@ if (!(status_s.equals(null) || status_s.length() == 0)){
 		break;
 	}
 }
-
-
 
 String page_s = request.getParameter("page");
 if (page_s == null || page_s.equals("")) {
@@ -144,7 +145,29 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select, keyword, category, s
 		%>
 	</section>
 	<section class="mid">
-		<h3>검색어 : "<%=keyword %>" 카테고리 : "<%=bdao.stringCategory(category) %>" 상태 : <%=str_status %></h3>
+		<h3>
+		<%
+		if(!(keyword==null || keyword.equals(""))){
+		%>
+		검색어 : "<%=keyword %>"
+		<%	
+		}
+		%>
+		<%
+		if(category != -1){
+		%>
+		카테고리 : "<%=bdao.stringCategory(category) %>"
+		<%	
+		}
+		%>
+		<%
+		if(status != -1){
+		%>
+		상태 : <%=str_status %>
+		<%	
+		}
+		%>
+		</h3>
 		<%
 		if (arr == null || arr.size() == 0) {
 		%>
