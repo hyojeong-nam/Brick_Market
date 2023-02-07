@@ -3,12 +3,14 @@
 <jsp:useBean id="mdao" class="com.team4.member.MemberDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="rdao" class="com.team4.reply.ReplyDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="vdao" class="com.team4.review.ReviewDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="pdao" class="com.team4.report.ReportDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="ldao" class="com.team4.like.LikeDAO" scope="session"></jsp:useBean>
 <%@page import="java.util.*"%>
 <%@page import="com.team4.reply.ReplyDTO"%>
 <%@page import="com.team4.bbs.BbsDTO"%>
 <%@page import="com.team4.member.MemberDTO"%>
 <%@page import="com.team4.review.ReviewDTO"%>
+<%@page import="com.team4.report.ReportDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +27,7 @@
 	grid-template-rows: 40px 40px 40px 40px 240px 50px auto;
 	grid-template-areas:
 	"item  title  title" 
-	"item  price  price"
+	"item  price   view"
 	"item  proimg  nick" 
 	"item  proimg  star" 
 	"item   text   text"
@@ -41,14 +43,21 @@
 }
 
 .title_text {
+	text-align: left;
 	grid-area: title;
+	margin: 0px 0px;
+}
+
+.view_text {
+	text-align: right;
+	grid-area: view;
 	margin: 0px 0px;
 }
 
 .price_text {
 	grid-area: price;
 	margin: 10px 10px;
-	text-align: right;
+	text-align: left;
 	color: red;
 }
 
@@ -249,15 +258,21 @@ function openDel(){
 		<article class="container">
 			<img class="item_img" alt="test" src="<%=bdto.getBbs_img()%>">
 			<h2 class="title_text"><%=bdto.getBbs_subject()%></h2>
-			<p class="price_text"><%=bdto.getBbs_price()%>원
-			</p>
+			<p class="price_text"><%=bdto.getBbs_price()%>원</p>
+			<p class="view_text">조회수 <%=bdto.getBbs_readnum()%></p>
 			<img class="profile_img" alt="test" src="<%=mdto.getMember_img()%>">
 			<p class="profile_nick"><%=mdto.getMember_nick()%></p>
 			<%
+			int report_cnt = pdao.cntReport(user_idx);
+			String pstr = "확인용";
+			if(report_cnt >= 5){
+				pstr = "[신고 횟수 "+report_cnt+"회]";
+			}
+			
 			ArrayList<ReviewDTO> varr = vdao.selectReview(user_idx);
 			if(varr == null || varr.size() == 0){
 				%>
-				<p class="profile_star">남겨진 리뷰가 없습니다.</p>
+				<p class="profile_star">남겨진 리뷰가 없습니다. <%=pstr %></p>
 				<%
 			}else {
 				int vsum = 0;
@@ -280,10 +295,13 @@ function openDel(){
 					star = "★☆☆☆☆";
 				}
 				%>
-				<p class="profile_star"><%=star %>(<%=varr.size() %> 리뷰) 평점 <%=(double)Math.round((vavg*10))/10 %></p>
+				<p class="profile_star"><%=star %>(<%=varr.size() %> 리뷰) 평점 <%=(double)Math.round((vavg*10))/10 %> <%=pstr %></p>
 				<%
 			}
 			%>
+			
+			
+			
 			<pre class="item_text"><%=bdto.getBbs_content().replaceAll("\n", "<br>")%></pre>
 			<div class="btn">
 			<hr>
