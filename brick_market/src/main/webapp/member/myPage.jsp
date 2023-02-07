@@ -1,12 +1,13 @@
-<%@page import="org.apache.tomcat.websocket.Transformation"%>
+<%@ page import="com.team4.review.ReviewDTO"%>
+<%@ page import="org.apache.tomcat.websocket.Transformation"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.team4.member.*"%>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.*" %>
-
+<%@ page import="com.team4.review.ReviewDTO"%>
 <jsp:useBean id="mdao" class="com.team4.member.MemberDAO" scope="session"></jsp:useBean>
-
+<jsp:useBean id="vdao" class="com.team4.review.ReviewDAO" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,6 +128,40 @@ article.info{
 				<tr>
 					<td>이메일</td>
 					<td><%=dto.getMember_email()%></td>
+				</tr>
+				<tr>
+					<td>별점</td>
+					<%	
+					ArrayList<ReviewDTO> varr = vdao.selectReview(user_idx);
+					if(varr == null || varr.size() == 0){
+					%>
+					<td>남겨진 리뷰가 없습니다.</td>
+					<%
+					}else {
+						int vsum = 0;
+						int vcnt = 0;
+						for(int i = 0; i < varr.size(); i++){
+							vsum += varr.get(i).getReview_rate();
+							vcnt ++;
+						}
+						double vavg = (double)vsum / vcnt;
+						String star = "";
+						if(vavg >= 4.5){
+							star = "★★★★★";
+						}else if(vavg >= 3.5){
+							star = "★★★★☆";
+						}else if(vavg >= 2.5){
+							star = "★★★☆☆";
+						}else if(vavg >= 1.5){
+							star = "★★☆☆☆";
+						}else{
+							star = "★☆☆☆☆";
+						}
+						%>
+						<td><%=star %>(<%=varr.size() %> 리뷰) 평점 <%=(double)Math.round((vavg*10))/10 %></td>
+						<%
+					}
+					%>
 				</tr>
 			</table>
 		</article>
