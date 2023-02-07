@@ -14,9 +14,12 @@
 <style type="text/css">
 
 article.content{
-	display: inline-block;
+	float: left;
+	width: 250px;
+	height: 280px;
 	margin: auto;
-	witdh: 250px;
+	padding-top: 10px;
+	display: inline-block;
 }
 
 article.content:hover{
@@ -24,7 +27,7 @@ article.content:hover{
 }
 
 .imgarea {
-	line-height: 250px;
+	line-height: 200px;
 }
 
 .imgarea .img {
@@ -56,6 +59,7 @@ h3 {
 	text-decoration: underline;
 	color: skyblue;
 }
+
 </style>
 <script>
 function articleTime(str){

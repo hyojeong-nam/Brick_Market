@@ -30,7 +30,7 @@ article.content{
 
 .imgarea .img {
 	width: 200px;
-	height: 200px;
+	height: 220px;
 	object-fit: cover;
 	vertical-align: middle;
 }
@@ -57,6 +57,8 @@ overflow: hidden;
 .ultag{
 width: 3000px;
 transition:transform 0.5s;
+margin: 0px 0px;
+padding: 0px;
 }
 .litag{
 float: left;

@@ -14,9 +14,12 @@
 <style type="text/css">
 
 article.content{
-	display: inline-block;
+	float: left;
+	width: 250px;
+	height: 280px;
 	margin: auto;
-	witdh: 250px;
+	padding-top: 10px;
+	display: inline-block;
 }
 
 article.content:hover{
@@ -24,7 +27,7 @@ article.content:hover{
 }
 
 .imgarea {
-	line-height: 250px;
+	line-height: 200px;
 }
 
 .imgarea .img {
@@ -133,6 +136,7 @@ ArrayList<BbsDTO> arr = bdao.bbsMyList(pagenum, size, my_idx);
 		} else {
 		for (int i = 0; i < arr.size(); i++) {
 		%>
+		<a class="subject" href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
 		<article class="content">
 			<div>
 			<script>
@@ -141,14 +145,12 @@ ArrayList<BbsDTO> arr = bdao.bbsMyList(pagenum, size, my_idx);
 			document.write(msg);
 			</script>
 			</div>
-			<a class="subject" href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
 			<div class="imgarea">
 				<img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>">
 			</div>
 			<div>
 				<span><%=arr.get(i).getBbs_subject()%></span>
 			</div>
-			</a>
 			<div>
 			<%
 			int price = arr.get(i).getBbs_price();
@@ -163,8 +165,8 @@ ArrayList<BbsDTO> arr = bdao.bbsMyList(pagenum, size, my_idx);
 			%>
 				<span><%=price_s%></span>
 			</div>
-			
 		</article>
+		</a>
 		<%
 			}
 		}
