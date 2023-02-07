@@ -134,13 +134,14 @@ function op() {
 		</span>
 		<nav class="openmenu">
 			<span class="logintext openmenu-btn">
-				내 메뉴
+				<a href="/brick_market/member/myPage.jsp">마이페이지</a>
 			</span>
 			<div class="openmenu-content">
 				<ul>
+					<li><a href="/brick_market/member/myPage.jsp">마이페이지</a></li>
+					<li><a href="/brick_market/bbs/myContent.jsp">등록한상품</a></li>
+					<li><a href="/brick_market/bbs/likeList.jsp">관심글목록</a></li>
 					<li><a href="/brick_market/member/pwdCheck.jsp">회원정보 수정</a></li>
-					<li><a href="#">내 상점</a></li>
-					<li><a href="/brick_market/bbs/likeList.jsp">좋아하는 글</a></li>
 				</ul>
 			</div>
 		</nav>
