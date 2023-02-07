@@ -26,29 +26,6 @@
 	border-radius: 3px;
 	font-family: inherit;
 }
-#wrap{
-  display: flex;
-  justify-content: center;
-  align-items:center;
-  min-height: 50vh;
-}
-#h {
-	font-size: 30px;
-	margin-top: 0px;
-	margin-bottom: 30px;
-}
-#go {
-	width: 80px;
-	background-color: skyblue;
-	border-color: transparent;
-	color: white;
-	padding: 8px;
-	margin-bottom: 5px;
-	border-radius: 10px 10px 10px 10px;
-	font-family: inherit;
-	margin-top: 13px;
-}
-
 .re {
 	width: 80px;
 	background-color: lightgrey;
@@ -72,13 +49,36 @@ margin-bottom: 10px;
 .but{
 text-align:Center;
 }
+#h {
+	font-size: 30px;
+	margin-top: 0px;
+	margin-bottom: 30px;
+}
+#go {
+	width: 80px;
+	background-color: skyblue;
+	border-color: transparent;
+	color: white;
+	padding: 8px;
+	margin-bottom: 5px;
+	border-radius: 10px 10px 10px 10px;
+	font-family: inherit;
+	margin-top: 13px;
+}
+#wrap{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  min-height: 50vh;
+}
 </style>
 <script>
 	function open_idcheck() {
 		var option="width=450, height=150, top=100, left=120";
 		window.open('idCheck.jsp', 'idCheck',option)
 	}
-
+</script>
+<script>
 	function checkMail() {
 		if (join.email_select.value == 'write') {
 			join.email2.readonly = false;

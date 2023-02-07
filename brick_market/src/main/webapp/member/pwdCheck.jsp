@@ -11,10 +11,30 @@
 h2 {
 	text-align: center;
 }
-
 table {
 	text-align: center;
 	margin: 0px auto;
+}
+#go {
+	width: 80px;
+	background-color: skyblue;
+	border-color: transparent;
+	color: white;
+	padding: 8px;
+	margin-bottom: 5px;
+	border-radius: 10px 10px 10px 10px;
+	font-family: inherit;
+	margin-top: 13px;
+}
+#textbox {
+	width: 175px;
+	height:8px;
+	margin-bottom: 3px;
+	margin-top: 4px;
+	padding: 12px;
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	font-family: inherit;
 }
 </style>
 <%
@@ -43,7 +63,7 @@ window.location.href='/brick_market/index.jsp';
 <td>개인 정보를 보호하기 위해 비밀번호를 다시 한 번 입력해 주세요.</td>
 </tr>
 <tr>
-<td>비밀번호 <input type="password" name="userpwd"> <input type="submit" value="확인"></td>
+<td>비밀번호 <input type="password" name="userpwd" id="textbox"> <input type="submit" id="go" value="확인"></td>
 </tr>
 <tr> </tr>
 </table>

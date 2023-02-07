@@ -4,7 +4,6 @@
 <%@ page import="com.team4.member.*"%>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.*" %>
-
 <jsp:useBean id="mdao" class="com.team4.member.MemberDAO" scope="session"></jsp:useBean>
 
 <!DOCTYPE html>
@@ -29,6 +28,7 @@ table {
 	width: 150px;
 	object-fit: cover;
 }
+
 </style>
 <%
 int user_idx = (int) session.getAttribute("midx");
@@ -61,7 +61,6 @@ Date original_date = dto.getMember_date();
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 String joindate =sdf.format(original_date);
 %>
-
 <script>
 	function checkMail() {
 		if (rejoin.email_select.value == 'write') {
@@ -74,54 +73,59 @@ String joindate =sdf.format(original_date);
 		}
 	}
 </script>
+<script>
+	function check_pwd() {
+		var pwd1 = document.getElementById('pwd1').value;
+		var pwd2 = document.getElementById('pwd2').value;
+		var member_pwd= document.getElementById('member_pwd').value;
+
+		if (pwd1 != '' && pwd2 != '' && member_pwd!='') {
+			if (pwd1 == pwd2) {
+				document.getElementById('check').innerHTML = '비밀번호가 일치합니다.'
+				document.getElementById('check').style.color = 'blue';
+				return true;
+			
+			} else if (pwd1 !=  pwd2) {
+				document.getElementById('check').innerHTML = '비밀번호가 일치하지 않습니다.';
+				document.getElementById('check').style.color = 'red';
+				return false;
+			} else if(member_pwd==pwd1==pwd2){
+				document.getElementById('check').innerHTML = '현재 비밀번호와 똑같은 비밀번호입니다.';
+				document.getElementById('check').style.color = 'red';
+				return false;		
+				}
+		}	
+}
+</script>
 </head>
 <body>
 	<%@include file="/header.jsp"%>
 	<section class="mid">
 		<article>
 		<form name="rejoin" action="reJoin_ok.jsp" method="post" enctype="multipart/form-data">
-			<table border='1'>
-				<tr>
-					<td colspan="2"><h2>회원 정보</h2></td>
-				</tr>
-				<tr>
-					<td><img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
-						<input type="file" name="member_img"/>
-						</td>
-					<td><%=dto.getMember_nick()%>님은 <%=result%>입니다.<br> 가입일: <%=joindate %>
-						</td>
-				</tr>
-				<tr>
-					<td>이름</td>
-					<td><input type="text" name="member_name"
-						value="<%=dto.getMember_name()%>"></td>
-				</tr>
-				<tr>
-					<td>아이디</td>
-					<td><input type="text" name="member_id"
-						value="<%=dto.getMember_id()%>"></td>
-				</tr>
-				<tr>
-					<td>비밀번호</td>
-					<td><input type="password" name="member_pwd" id="member_pwd1"
-						value="<%=dto.getMember_pwd()%>"></td>
-				</tr>
-				<tr>
-					<td>닉네임</td>
-					<td><input type="text" name="member_nick"
-						value="<%=dto.getMember_nick()%>"></td>
-				</tr>
-				<tr>
-					<td>이메일</td>
+	<div><h2>회원 정보</h2></div>
+	<div><img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
+			<input type="file" name="member_img"/></div>
+			<div><%=dto.getMember_nick()%>님은 <%=result%>입니다.<br> 가입일: <%=joindate %></div>
 
-					<td><input type="text" name="member_email" id="email1"
-						class="box" value="<%=email_id%>"> 
-						@ 
-						<input type="text" name="email2" id="email2" class="box"
-						value="<%=email2%>">
+			<div>이름 | <input type="text" name="member_name" value="<%=dto.getMember_name()%>" required></div>
 
-						<select name="email_select" class="box" id="email_select"
-						onChange="checkMail();">
+			<div>아이디 | <input type="text" name="member_id" value="<%=dto.getMember_id()%>" readonly></div>
+
+			<div>현재 비밀번호 | <input type="password" name="member_pwd" id="member_pwd" onchange="check_pwd()" value="<%=dto.getMember_pwd()%>"  required></div>
+			
+			<div>변경할 비밀번호 | <input type="password" name="pwd1" id="pwd1" onchange="check_pwd()" required> </div>
+			
+			<div>변경할 비밀번호 확인 | <input type="password" name="pwd2" id="pwd2" onchange="check_pwd()" required>
+			<br> <span id="check"></span></div>
+			
+			
+			<div>닉네임 | <input type="text" name="member_nick" value="<%=dto.getMember_nick()%>" required></div>
+
+			<div>이메일 | <input type="text" name="member_email" id="email1" class="box" value="<%=email_id%>" required> 
+					@ <input type="text" name="email2" id="email2" class="box" value="<%=email2%>" required>
+
+					<select name="email_select" class="box" id="email_select" onChange="checkMail();">
 							<option value="" selected>선택해 주세요</option>
 							<option value="naver.com">naver.com</option>
 							<option value="gmail.com">gmail.com</option>
@@ -129,13 +133,10 @@ String joindate =sdf.format(original_date);
 							<option value="kakao.com">kakao.com</option>
 							<option value="nate.com">nate.com</option>
 							<option value="write">직접 입력</option>
-						</select></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="submit" value="수정하기"> <input
-						type="button" value="취소하기" onclick="history.back()"></td>
-				</tr>
-			</table>
+						</select>
+			</div>
+				<input type="submit" value="수정하기"> 
+				<input type="button" value="취소하기" onclick="history.back()">
 		  </form>
 		</article>
 	</section>
