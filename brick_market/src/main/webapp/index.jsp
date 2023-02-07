@@ -13,6 +13,11 @@
 	href="/brick_market/css/maincss.css">
 <style type="text/css">
 
+article.content .litag:hover{
+	box-shadow: 0px 0px 3px 2px gray;
+}
+
+
 article.content{
 	display: inline-block;
 	margin: auto;
@@ -47,11 +52,7 @@ ul li{
 list-style-type: none;
 }
 .mid {
-width:1000px;
 overflow: hidden;
-}
-.content{
-width: 3000px;
 }
 .ultag{
 width: 3000px;
@@ -59,13 +60,15 @@ transition:transform 0.5s;
 }
 .litag{
 float: left;
-width: max(8.3%); 
+width: 250px;
+height: 280px;
 margin: auto;
-
+padding-top: 10px;
 }
 .button{
 margin-top: 50px;
 }
+
 .button input:hover {
 	text-decoration: underline;
 	color: skyblue;
@@ -101,13 +104,13 @@ function articleTime(str){
 }
 
 function button1() {
-	document.querySelector('.ultag').style.transform='translate(0vw)';
+	document.querySelector('.ultag').style.transform='translate(0)';
 }
 function button2() {
-	document.querySelector('.ultag').style.transform='translate(-80vw)';
+	document.querySelector('.ultag').style.transform='translate(-1000px)';
 }
 function button3() {
-	document.querySelector('.ultag').style.transform='translate(-160vw)';
+	document.querySelector('.ultag').style.transform='translate(-2000px)';
 }
 </script>
 </head>
@@ -136,6 +139,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 		} else {
 		for (int i = 0; i < arr.size(); i++) {
 		%>
+			<a class="subject" href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
 			<li class="litag">
 			<div>
 			<script>
@@ -144,10 +148,8 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 			document.write(msg);
 			</script>
 			</div>
-			<a class="subject" href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
 			<div class="imgarea"><img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>"></div>
 			<div><span><%=arr.get(i).getBbs_subject()%></span></div>
-			</a>
 			<div>
 			<%
 			int price = arr.get(i).getBbs_price();
@@ -163,6 +165,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 				<span><%=price_s%></span>
 			</div>
 			</li>
+			</a>
 		<%
 			}
 		}
