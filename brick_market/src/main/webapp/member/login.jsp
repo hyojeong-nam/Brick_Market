@@ -31,8 +31,10 @@ margin-bottom: 40px;
     border-color: transparent;
     color: white;
     padding: 8px;
+    margin-top: 8px;
     margin-bottom: 5px;
     border-radius:10px 10px 10px 10px;
+    font-family: inherit;
 }
 #idk {
     width: 80%;
@@ -41,6 +43,7 @@ margin-bottom: 40px;
     color: black;
     padding: 8px;
     border-radius:10px 10px 10px 10px;
+    font-family: inherit;
 }
 #saveid{
 margin-top:10px;

@@ -7,17 +7,66 @@
 <title>Insert title here</title>
 <link rel="styLesheet" type="text/css" href="/brick_market/css/maincss.css">
 <style>
+.textbox {
+	width: 220px;
+    margin-bottom: 3px;
+    padding: 13px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    font-family: inherit;
+}
+#h{
+font-size:30px;
+margin-top: 0px;
+margin-bottom: 40px;
+}
 #wrap{
   display: flex;
   justify-content: center;
-  align-items:center;
   min-height: 50vh;
+}
+#go {
+    width: 80px;
+    background-color: skyblue;
+    border-color: transparent;
+    color: white;
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius:10px 10px 10px 10px;
+    font-family: inherit;
+    margin-top: 18px;
+}
+#re{
+    width: 80px;
+    background-color: lightgrey;
+    border-color: transparent;
+    color: black;
+    padding: 8px;
+    border-radius:10px 10px 10px 10px;
+    font-family: inherit;
+}
+#idcheck{
+position:fixed;
+right:78px;
+botton:19px;
+}
+#idcheck:hover{
+zoom: 1.05;
+}
+
+.box {
+width: 200px; 
+padding: .8em .2em; 
+font-family: inherit;
+border-radius: 3px;
+-moz-appearance: none;
+appearance: none;
 }
 
 </style>
 <script>
 function open_idcheck(){
-window.open('idCheck.jsp','idCheck','width=450, height=150')
+window.open('idCheck.jsp','idCheck','width=450, height=150, top=500, left=200')
 }
 
 function checkMail(){
@@ -106,29 +155,40 @@ function join_check(){
 	<section class="mid">
 		<article id="wrap">
 		<form name="join" id="join">
-			<p><h2>회원가입</h2>
+			<p><h2 id="h">회원가입</h2>
 			<div>
-			이름 <input type="text" name="member_name" id="name">
+			이름<br>
+			<input type="text" name="member_name" id="name" class="textbox">
 			</div>
-			<div>
-			아이디 <input type="text" name="member_id" id="id" readonly onclick="open_idcheck();"> 
-			<input type="button" value="중복확인" onclick="open_idcheck();">
+			
+			<div id="info__id">
+			아이디<br>
+			<input type="text" name="member_id" id="id" class="textbox" readonly onclick="open_idcheck();">
+			<br>
+			<input type="button" value="중복확인" id="idcheck" onclick="open_idcheck();">
 			</div>
-			<div>비밀번호<input type="password" name="member_pwd" id="pwd1" onchange="check_pwd()"></div>
+			
+			<div>비밀번호<br>
+			<input type="password" name="member_pwd" id="pwd1" class="textbox" onchange="check_pwd()"></div>
 			<div>
-			비밀번호 확인<input type="password" name="member_pwd2" id="pwd2" onChange="check_pwd()">
-					<br>
-					<span id="check"></span>
+			
+			비밀번호 확인<br><input type="password" name="member_pwd2" id="pwd2" class="textbox" onChange="check_pwd()">
+				<br>
+				<span id="check"></span>
 				</div>
+				
 				<div>
-				닉네임<input type="text" name="member_nick" id="nick">
+				닉네임<br>
+				<input type="text" name="member_nick" id="nick" class="textbox">
 				</div>
-				<div>
-				이메일<input type="text" name="member_email" id="email1" class="box"> @
-					<input type="text" name="email2" id="email2" class="box">
+				
+				<div class="box_domain">
+				이메일<br>
+				<input type="text" name="member_email" id="email1" class="textbox"> @
+					<input type="text" name="email2" id="email2" class="textbox">
 					
-					<select name="email_select" id="email_select" onChange="checkMail();">
-					<option value="" selected>선택해 주세요</option>
+					<select name="email_select" id="email_select" onChange="checkMail();" class="box">
+					<option value="" selected >선택해 주세요</option>
 					<option value="naver.com">naver.com</option>
 					<option value="gmail.com">gmail.com</option>
 					<option value="hanmail.net">hanmail.net</option>
@@ -137,11 +197,13 @@ function join_check(){
 					<option value="write">직접 입력</option>
 					</select>
 				</div>
+				
 				<div>
-				<input type="button" value="가입하기" onclick="join_check();">
-				<input type="reset" value="다시 작성">
-				<input type="button" value="취소하기" onclick="history.back();">
+				<input type="button" value="가입하기" id="go" onclick="join_check();">
+				<input type="reset" value="다시 작성" id="re">
+				<input type="button" value="취소하기" id="re" onclick="history.back();">
 				</div>
+				
 		</form>
 		</article>
 	</section>
