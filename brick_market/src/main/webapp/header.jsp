@@ -3,6 +3,7 @@
 <jsp:useBean id="mdaoheader" class="com.team4.member.MemberDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="mdtoheader" class="com.team4.member.MemberDTO" scope="session"></jsp:useBean>
 <jsp:useBean id="bdtoheader" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <style>
 .openmenu {
 	position: relative;
@@ -51,8 +52,69 @@
 .login {
 	height: 100%;
 }
+#keyword{
+	border:0px;
+	border-bottom-color:transparent;
+	width: 0px;
+	background: transparent;
+	color: white;
+}
+#keyword:hover {
+	border:2px solid;
+border-left-color:black;
+border-right-color:black;
+border-top-color:black;
+border-bottom-color:black;
+border-radius:15px;
+stroke: #fff;
+height: 30px;
+color: #723838;
+width: 250px;
+background: transparent;
+transition: all .6s ease;
+}
+
+#keyword:focus{
+border:1px solid;
+border-left-color:transparent;
+border-right-color:transparent;
+border-top-color:transparent;
+border-bottom-color:black;
+height: 30px;
+color: #723838;
+width: 250px;
+background: transparent;
+transition: all .6s ease;
+}
+#keyword{
+border-radius:15px;
+}
+
+.material-symbols-outlined{
+	font-size: 30px;
+	display: inline-block;
+	width: 80px;
+	
+}
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48;
+  font-size: 15px;
+}
+
+
 
 </style>
+<script>
+function op() {
+	document.getElementById('serch').submit();
+}
+</script>
 <header class="header">
 	<span class="login">
 		<%
@@ -92,7 +154,7 @@
 	<div class="mypage">
 	<a href="/brick_market/bbs/write.jsp">상품등록</a>
 	</div>
-	<form action="/brick_market/bbs/list.jsp">
+	<form action="/brick_market/bbs/list.jsp" id="serch">
 		<div class="search">
 		<select name="status">
 			<option value="0" selected="selected">판매중</option>
@@ -107,8 +169,9 @@
 			<option value="3"><%=bdtoheader.stringCategory(3)%></option>
 			<option value="4"><%=bdtoheader.stringCategory(4)%></option>
 		</select> 
-		<input type="text" name="keyword" placeholder="검색어 입력">
-		<input type="submit" value="검색">
+		<label><input type="text" name="keyword" id="keyword" placeholder="검색어 입력"><a class="material-symbols-outlined" onclick="return op();"><span class="material-symbols-outlined">
+search
+</span></a></label>
 		</div>
 	</form>
 	<nav class="nav">
