@@ -58,8 +58,9 @@ width: 3000px;
 transition:transform 0.5s;
 }
 .litag{
-width: 250px;
 float: left;
+width: max(8.3%); 
+margin: auto;
 
 }
 .button{
@@ -123,11 +124,6 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 %>
 <body>
 	<%@ include file="header.jsp"%>
-	<section class="left">
-	</section>
-	<section class="right">
-	</section>
-
 	<section class="mid">
 		<h3>최신글 보기</h3>
 		<article class="content">
@@ -152,7 +148,6 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 			<div class="imgarea"><img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>"></div>
 			<div><span><%=arr.get(i).getBbs_subject()%></span></div>
 			</a>
-			
 			<div>
 			<%
 			int price = arr.get(i).getBbs_price();
