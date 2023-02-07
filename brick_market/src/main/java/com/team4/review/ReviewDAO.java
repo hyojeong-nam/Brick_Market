@@ -41,7 +41,7 @@ public class ReviewDAO {
 	public ArrayList<ReviewDTO> selectReview(int review_seller_idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
-			String sql = "select * from review_table where review_writer_idx = ?";
+			String sql = "select * from review_table where review_seller_idx = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, review_seller_idx);
 			rs = ps.executeQuery();
