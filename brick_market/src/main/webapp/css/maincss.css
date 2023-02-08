@@ -58,7 +58,7 @@ body {
 	display:grid;
 	align-items:center;
 	grid-template-columns: 350px 550px 300px;
-	grid-template-rows: 30px 100px 30px;
+	grid-template-rows: 30px 100px 30px 20px;
 	grid-template-areas:
 		"login  login  login "
 		"logo  search  mypage"

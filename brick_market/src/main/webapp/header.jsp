@@ -52,9 +52,11 @@
 .login {
 	height: 100%;
 }
+/*
 #keyword{
-	border:0px;
 	border-bottom-color:transparent;
+	outline:none;
+	border:0px;
 	width: 0px;
 	background: transparent;
 	color: white;
@@ -62,73 +64,50 @@
 #status{
 	visibility: hidden; 
 }
-.search:hover #status{
-	visibility: visible;
-}
-
 #category{
-	visibility: hidden; 
+	visibility: hidden;
 }
-.search:hover #category{
+.search:hover #status , .search:hover #category{
 	visibility: visible;
 }
-.search:hover #keyword{
+.search:focus #status , .search:focus #category{
+	visibility: visible;
+}
+*/
+.search{
+	border:2px solid;
+	border-color: red;
+	border-radius:5px;
+	padding:5px;
+	width: 454px;
+	height: 30px;
+	display: flex;
+}
+.search #keyword{
+	width: 250px;
+	outline:none;
 	border:0px;
-border-left-color:black;
-border-right-color:black;
-border-top-color:black;
-border-bottom-color:black;
-border-radius:15px;
-stroke: #fff;
-height: 30px;
-color: #723838;
-width: 250px;
-background: transparent;
-transition: all .6s ease;
+	font-size: 15px;
+	color: #723838;
+	font-weight: bold;
 }
 
-#keyword:focus{
-outline:none;
-border:0px;
-border-left-color:transparent;
-border-right-color:transparent;
-border-top-color:transparent;
-border-bottom-color:black;
-height: 30px;
-color: #723838;
-width: 250px;
-background: transparent;
-transition: all .6s ease;
-}
-#keyword{
-border-radius:15px;
-}
-
-.material-symbols-outlined{
-	font-size: 30px;
-	display: inline-block;
-	width: 80px;
-	
-}
-
-
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 48;
-  font-size: 30px;
-}
-
-select{
+.search #status, .search #category{
+	color: #723838;
 	outline: none;
 	border: 0px;
+	width:80px;
 }
-.search:hover{
-border:2px solid;
-	border-color: red;
-	width: 550px;
+.material-symbols-outlined {
+	font-variation-settings:
+	'FILL' 0,
+	'wght' 400,
+	'GRAD' 0,
+	'opsz' 48;
+	font-size: 30px;
+}
+.material-symbols-outlined:hover {
+	color: red;
 }
 
 
@@ -193,9 +172,10 @@ function op() {
 			<option value="3"><%=bdtoheader.stringCategory(3)%></option>
 			<option value="4"><%=bdtoheader.stringCategory(4)%></option>
 		</select> 
-		<label><input type="text" name="keyword" id="keyword" placeholder="검색어 입력"><a class="material-symbols-outlined" onclick="return op();"><span class="material-symbols-outlined">
-search
-</span></a></label>
+		<input type="text" name="keyword" id="keyword" placeholder="검색어 입력">
+		<a class="material-symbols-outlined" onclick="return op();">
+		<span class="material-symbols-outlined">search</span>
+		</a>
 		</div>
 	</form>
 	<nav class="nav">
