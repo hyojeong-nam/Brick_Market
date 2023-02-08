@@ -70,7 +70,7 @@ border-color: green;
 
 .button div {
 display:inline-block;
- margin: 0 auto;
+ margin: auto 5px;
         width: 15px;
         height: 15px;
         border: 0px;
