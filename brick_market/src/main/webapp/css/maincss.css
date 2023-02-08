@@ -13,10 +13,11 @@ body {
 	width:1200px;
 	display:grid;
 	grid-template-columns: 100px 1000px 100px;
-	grid-template-rows: 160px 20px minmax(400px, auto) 20px 150px;
+	grid-template-rows: 160px 20px 50px minmax(400px, auto) 50px 150px;
 	grid-template-areas:
 		"header header header"
 		"line   line   line  "
+		".      .      .     "
 		"left   mid    right "
 		".      .      .     "
 		"footer footer footer"
@@ -114,6 +115,7 @@ body {
 }
 
 .footer a:hover {
+	text-decoration: underline;
 	color: rgb(243,114,62);
 }
 
