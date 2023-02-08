@@ -82,10 +82,28 @@ div .button1 {
 
 background-color:#808080; 
 }
-.left, .right {
+.left .btn, .right .btn{
+	width:100%;
+	height:100%;
 	display:flex;
     justify-content:center;
     align-items:center;
+	margin:0px 0px;
+}
+.fake{
+	opacity: 10%;
+}
+.real{
+	opacity: 50%;
+}
+.left .btn:hover .real,.right .btn:hover .real{
+	opacity: 100%;
+}
+.sideimg {
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	vertical-align: middle;
 }
 .img {
 	width: 100px;
@@ -250,11 +268,14 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 		</div>
 	</section>
 		<section class="left">
-		<img src="img/left.jpg" onclick="javascript:pe();" class="img">
+		<span class="btn">
+		<img class="sideimg real" src="img/left.jpg" onclick="javascript:pe();">
+		</span>
 		</section>
 		<section class="right">
-		<img src="img/right.jpg" onclick="javascript:next();" class="img">
-		
+		<span class="btn">
+		<img class="sideimg real" src="img/right.jpg" onclick="javascript:next();">
+		</span>
 		</section>
 	<%@ include file="footer.jsp"%>
 </body>
