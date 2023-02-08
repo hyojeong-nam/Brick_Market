@@ -27,7 +27,7 @@ margin-bottom: 40px;
 }
 #login {
     width: 80%;
-    background-color: skyblue;
+    background-color: rgb(245,147,109);
     border-color: transparent;
     color: white;
     padding: 8px;
@@ -36,7 +36,7 @@ margin-bottom: 40px;
     border-radius:10px 10px 10px 10px;
     font-family: inherit;
 }
-#idk {
+#idk{
     width: 80%;
     background-color: lightgrey;
     border-color: transparent;

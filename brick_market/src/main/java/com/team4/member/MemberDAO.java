@@ -199,6 +199,13 @@ public class MemberDAO {
 			String img="/brick_market/member/img/"+imgname;
 			String imgsql="member_img='"+img+"',";
 			
+			String pwd=mr.getParameter("member_pwd");
+			String pwdsql="member_pwd='"+pwd+"',";
+			
+			if(pwd==null) {
+				pwd="";
+			}
+			
 			if(imgname==null) {
 				imgsql="";
 			}else {
@@ -206,25 +213,19 @@ public class MemberDAO {
 			}
 			
 			
-			String sql = "update member_table set member_id =?,"
-					+ "member_pwd=? , member_name=?, member_nick=?,"+imgsql+"member_email=? "
+			String sql = "update member_table set "
+					+ "member_name=?,"+pwdsql+" member_nick=?,"+imgsql+"member_email=? "
 					+ "where member_idx="+idx;
 			ps = conn.prepareStatement(sql);
 			
-			String id=mr.getParameter("member_id");
-			ps.setString(1, id);
-			
-			String pwd=mr.getParameter("member_pwd");
-			ps.setString(2, pwd);
-			
 			String name=mr.getParameter("member_name");
-			ps.setString(3, name);
+			ps.setString(1, name);
 			
 			String nick=mr.getParameter("member_nick");
-			ps.setString(4, nick);
+			ps.setString(2, nick);
 			
 			String email=mr.getParameter("member_email")+email2;
-			ps.setString(5, email);
+			ps.setString(3, email);
 			
 			int count = ps.executeUpdate();
 			return count;

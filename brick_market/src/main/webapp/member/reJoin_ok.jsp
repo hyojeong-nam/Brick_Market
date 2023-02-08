@@ -1,8 +1,10 @@
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@page import="com.oreilly.servlet.multipart.FileRenamePolicy"%>
 <%
 request.setCharacterEncoding("utf-8");
 %>
 <%@ page import = "com.oreilly.servlet.*"%>
+<%@ page import="java.io.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="mdao" class="com.team4.member.MemberDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="mdto" class="com.team4.member.MemberDTO" scope="session"></jsp:useBean>

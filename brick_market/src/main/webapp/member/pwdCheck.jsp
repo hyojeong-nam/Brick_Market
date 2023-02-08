@@ -17,7 +17,7 @@ table {
 }
 #go {
 	width: 80px;
-	background-color: skyblue;
+	background-color: rgb(245,147,109);
 	border-color: transparent;
 	color: white;
 	padding: 8px;

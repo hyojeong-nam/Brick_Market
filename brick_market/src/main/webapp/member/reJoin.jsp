@@ -14,8 +14,10 @@
 <link rel="styLesheet" type="text/css"
 	href="/brick_market/css/maincss.css">
 <style>
-h2 {
-	text-align: center;
+#h {
+	font-size: 30px;
+	margin-top: 0px;
+	margin-bottom: 30px;
 }
 
 table {
@@ -28,7 +30,71 @@ table {
 	width: 150px;
 	object-fit: cover;
 }
+.textbox {
+	width: 150px;
+	height:10px;
+	margin-bottom: 3px;
+	margin-top: 4px;
+	padding: 13px;
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	font-family: inherit;
+}
+.textbox2 {
+	width: 85px;
+	height:10px;
+	margin-bottom: 3px;
+	padding: 13px;
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	font-family: inherit;
+}
+.idbox{
+	width: 150px;
+	height:10px;
+	margin-bottom: 3px;
+	margin-top: 4px;
+	padding: 13px;
+	border: none;
+	border-radius: 3px
+	font-family: inherit;
+}
+.idbox input:focus{
+	outline: none;
+}
 
+.box {
+	width: 110px;
+	padding: .7em .2em;
+	font-family: inherit;
+	border-radius: 3px;
+}
+#wrap{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  min-height: 70vh;
+}
+#go {
+	width: 80px;
+	background-color: rgb(245,147,109);
+	border-color: transparent;
+	color: white;
+	padding: 8px;
+	margin-bottom: 5px;
+	border-radius: 10px 10px 10px 10px;
+	font-family: inherit;
+	margin-top: 20px;
+}
+#re {
+	width: 80px;
+	background-color: lightgrey;
+	border-color: transparent;
+	color: black;
+	padding: 8px;
+	border-radius: 10px 10px 10px 10px;
+	font-family: inherit;
+}
 </style>
 <%
 int user_idx = (int) session.getAttribute("midx");
@@ -74,56 +140,106 @@ String joindate =sdf.format(original_date);
 	}
 </script>
 <script>
-	function check_pwd() {
+function check_pwd() {
+	var pwd1 = document.getElementById('pwd1').value;
+	var pwd2 = document.getElementById('pwd2').value;
+
+	if (pwd1 != '' && pwd2 != '') {
+		if (pwd1 == pwd2) {
+			document.getElementById('check').innerHTML = '새로운 비밀번호를 입력해 주세요.'
+			document.getElementById('check').style.color = 'red';
+			return false;
+		}
+	}
+	
+function notice(){
+	var pwd2 = document.getElementById('pwd2').value;
+	if (pwd2 == ''){
+		alert("변경된 비밀번호가 없습니다.");
+		return false;
+	}
+}
+
+	function update_check(){
 		var pwd1 = document.getElementById('pwd1').value;
 		var pwd2 = document.getElementById('pwd2').value;
-		var member_pwd= document.getElementById('member_pwd').value;
 
-		if (pwd1 != '' && pwd2 != '' && member_pwd!='') {
-			if (pwd1 == pwd2) {
-				document.getElementById('check').innerHTML = '비밀번호가 일치합니다.'
-				document.getElementById('check').style.color = 'blue';
-				return true;
-			
-			} else if (pwd1 !=  pwd2) {
-				document.getElementById('check').innerHTML = '비밀번호가 일치하지 않습니다.';
-				document.getElementById('check').style.color = 'red';
-				return false;
-			} else if(member_pwd==pwd1==pwd2){
-				document.getElementById('check').innerHTML = '현재 비밀번호와 똑같은 비밀번호입니다.';
-				document.getElementById('check').style.color = 'red';
-				return false;		
-				}
-		}	
+		if (document.getElementById('name').value == null
+				|| document.getElementById('name').value == "") {
+
+			alert("이름을 입력해주세요.");
+			return false;
+		}
+
+		if (document.getElementById('id').value == null
+				|| document.getElementById('id').value == "") {
+
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+		if (document.getElementById('pwd1').value == null
+				|| document.getElementById('pwd1').value == "") {
+
+			alert("비밀번호를 입력해주세요.");
+			return false;
+		}
+		if (pwd1 != pwd2) {
+			alert("비밀번호를 확인해 주세요.");
+			return false;
+		}
+
+		if (document.getElementById('nick').value == null
+				|| document.getElementById('nick').value == "") {
+
+			alert("닉네임을 입력해주세요.");
+			return false;
+		}
+
+		if (document.getElementById('email1').value == null
+				|| document.getElementById('email1').value == "") {
+
+			alert("이메일을 입력해주세요.");
+			return false;
+		}
+		if (document.getElementById('email2').value == null
+				|| document.getElementById('email2').value == "") {
+
+			alert("도메인을 선택해주세요.");
+			return false;
+		}
+	}
 }
 </script>
 </head>
 <body>
 	<%@include file="/header.jsp"%>
 	<section class="mid">
-		<article>
-		<form name="rejoin" action="reJoin_ok.jsp" method="post" enctype="multipart/form-data">
-	<div><h2>회원 정보</h2></div>
-	<div><img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
+		<article id="wrap">
+		<form name="rejoin" id="rejoin" method="post" action="/brick_market/member/reJoin_ok.jsp" enctype="multipart/form-data">
+			<div><h2 id="h">회원 정보</h2></div>
+
+			<div id="profile"><img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
 			<input type="file" name="member_img"/></div>
+			
 			<div><%=dto.getMember_nick()%>님은 <%=result%>입니다.<br> 가입일: <%=joindate %></div>
 
-			<div>이름 | <input type="text" name="member_name" value="<%=dto.getMember_name()%>" required></div>
 
-			<div>아이디 | <input type="text" name="member_id" value="<%=dto.getMember_id()%>" readonly></div>
+			<div>이름 <input type="text" name="member_name" value="<%=dto.getMember_name()%>" class="textbox" required></div>
 
-			<div>현재 비밀번호 | <input type="password" name="member_pwd" id="member_pwd" onchange="check_pwd()" value="<%=dto.getMember_pwd()%>"  required></div>
-			
-			<div>변경할 비밀번호 | <input type="password" name="pwd1" id="pwd1" onchange="check_pwd()" required> </div>
-			
-			<div>변경할 비밀번호 확인 | <input type="password" name="pwd2" id="pwd2" onchange="check_pwd()" required>
-			<br> <span id="check"></span></div>
-			
-			
-			<div>닉네임 | <input type="text" name="member_nick" value="<%=dto.getMember_nick()%>" required></div>
+			<div>아이디 <input type="text" name="member_id" value="<%=dto.getMember_id()%>" class="idbox" readonly required></div>
 
-			<div>이메일 | <input type="text" name="member_email" id="email1" class="box" value="<%=email_id%>" required> 
-					@ <input type="text" name="email2" id="email2" class="box" value="<%=email2%>" required>
+			<div>현재 비밀번호 <input type="password" name="pwd" id="pwd1" 
+			value="<%=dto.getMember_pwd()%>" onchange="check_pwd()" class="textbox" required></div>
+			
+			<div>변경할 비밀번호 <input type="password" name="member_pwd" id="pwd2" 
+			onchange="check_pwd()" class="textbox"> 
+			<br><span id="check"></span>
+			</div>
+			
+			<div>닉네임 <input type="text" name="member_nick" value="<%=dto.getMember_nick()%>" class="textbox" required></div>
+			
+			<div>이메일 <input type="text" name="member_email" id="email1" value="<%=email_id%>" class="textbox2" required> 
+					@ <input type="text" name="email2" id="email2" class="textbox2" value="<%=email2%>" required>
 
 					<select name="email_select" class="box" id="email_select" onChange="checkMail();">
 							<option value="" selected>선택해 주세요</option>
@@ -135,8 +251,8 @@ String joindate =sdf.format(original_date);
 							<option value="write">직접 입력</option>
 						</select>
 			</div>
-				<input type="submit" value="수정하기"> 
-				<input type="button" value="취소하기" onclick="history.back()">
+				<input type="submit" value="수정하기" id="go" onclick="notice();"> 
+				<input type="button" value="취소하기" id="re" onclick="history.back();">
 		  </form>
 		</article>
 	</section>

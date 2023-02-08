@@ -56,7 +56,7 @@ text-align:Center;
 }
 #go {
 	width: 80px;
-	background-color: skyblue;
+	background-color: rgb(245,147,109);
 	border-color: transparent;
 	color: white;
 	padding: 8px;
@@ -197,7 +197,7 @@ text-align:Center;
 					이메일<br>
 					<input type="text" name="member_email" placeholder="Email" id="email1" class="textbox2"> 
 						@ 
-						<input type="text" name="email2"id="email2" class="textbox2"> 
+						<input type="text" name="email2" id="email2" class="textbox2"> 
 					<select name="email_select" id="email_select" onChange="checkMail();" class="box">
 						<option value="" selected>선택해 주세요</option>
 						<option value="naver.com">naver.com</option>
