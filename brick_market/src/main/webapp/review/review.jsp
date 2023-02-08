@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:useBean id="ddao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
+<%@page import="com.team4.bbs.BbsDTO"%>
+<jsp:useBean id="bdao" class="com.team4.bbs.BbsDAO" scope="session"></jsp:useBean>
 <jsp:useBean id="mdao" class="com.team4.member.MemberDAO"
 	scope="session"></jsp:useBean>
+<jsp:useBean id="bdto" class="com.team4.bbs.BbsDTO"></jsp:useBean>
+<jsp:setProperty property="*" name="bdto"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,7 +68,7 @@ fieldset input[type=button]:hover{
 
 
 #submit {
-    width: 5%;
+    width: 70px;
     background-color: skyblue;
     border-color: transparent;
     color: white;
@@ -75,7 +78,7 @@ fieldset input[type=button]:hover{
 }
 
 #cancel {
-    width: 5%;
+    width: 70px;
     background-color: lightgrey;
     border-color: transparent;
     color: black;
@@ -91,15 +94,31 @@ fieldset input[type=button]:hover{
 	transform: scale(1.5);
 }
 
-body{
+body section{
 	text-align: center;
 }
-
+h4{
+	color: red;
+	text-align: center;
+	margin-top: 80px;
+	margin-bottom: 0px;
+}
+div img{
+	float: left;
+	margin-left: 150px ;
+	
+}
 
 </style>
 
 </head>
 <body>
+
+
+<section>
+<div><h3>[<%=bdao.stringCategory(bdto.getBbs_category())%>]<%=bdto.getBbs_subject()%></h3></div>
+<div clss="img"><img src=<%=bdto.getBbs_img() %> width="80px" height="80px"></div>
+<h4><%=bdto.getBbs_price()%>원</h4>
 	<form name="review_star" id="review_star" action="review_ok.jsp">
 		<fieldset>
 			<span>!별점을 남겨주세요</span>
@@ -117,6 +136,7 @@ body{
 			<span><input type="submit" id="submit" value="등록하기"></span>
 			<span><input type="button" id="cancel" value="취소하기" onclick="location.href='/brick_market/index.jsp'"></span>
 	</form>
+	</section>
 	
 </body>
 </html>
