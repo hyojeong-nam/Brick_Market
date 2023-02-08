@@ -23,15 +23,27 @@
 }
 
 .openmenu-content{
-	display:none;
+	border:1px solid;
 	position: absolute;
 	z-index: 1;
 	background-color:white;
 	min-width: 150px;
+	height:0px;
+	visibility: hidden;
 }
 .openmenu-content ul, .openmenu-content ul li{
 	margin: 0px 0px;
 	padding: 0px 0px;
+	height:0px;
+	overflow: hidden;
+}
+
+.openmenu:hover .openmenu-content ul .openmenu-content ul li{
+	margin: 0px 0px;
+	padding: 0px 0px;
+	overflow: visible;
+	
+	
 }
 .openmenu-content a{
 	display:block;
@@ -39,6 +51,7 @@
 	color: black;
 	font-size: 12px;
 	padding: 10px 10px;
+	height: 25px;
 }
 
 .openmenu:hover .openmenu-content{
@@ -46,6 +59,9 @@
 	display: block;
 	margin: 0px 0px;
 	padding: 0px 0px;
+	height:180px;
+	visibility: visible;
+	transition: all .18s ease-in-out;
 }
 
 .openmenu-content a:hover{
