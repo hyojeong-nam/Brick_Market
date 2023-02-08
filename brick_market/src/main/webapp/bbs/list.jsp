@@ -36,11 +36,6 @@ article.content:hover{
 	object-fit: cover;
 	vertical-align: middle;
 }
-.left, .right {
-	display:flex;
-    justify-content:center;
-    align-items:center;
-}
 .sideimg {
 	width: 50px;
 	height: 50px;
@@ -53,6 +48,23 @@ h3 {
 .subject {
 	text-decoration: none;
 	color: black;
+}
+.left .btn, .right .btn{
+	width:100%;
+	height:100%;
+	display:flex;
+    justify-content:center;
+    align-items:center;
+	margin:0px 0px;
+}
+.fake{
+	opacity: 10%;
+}
+.real{
+	opacity: 50%;
+}
+.left .btn:hover .real,.right .btn:hover .real{
+	opacity: 100%;
 }
 
 </style>
@@ -129,22 +141,36 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select, keyword, category, s
 		<%
 		if (pagenum > 1) {
 			%>
-			<a href="/brick_market/bbs/list.jsp?page=<%=pagenum-1 %>&status=<%=status %>&category=<%=category %>&keyword=<%=keyword%>">
-			<img class="sideimg" src="/brick_market/img/left.jpg" alt="왼쪽 페이지 이동">
+			<a class="btn" href="/brick_market/bbs/list.jsp?page=<%=pagenum-1 %>&status=<%=status %>&category=<%=category %>&keyword=<%=keyword%>">
+			<img class="sideimg real" src="/brick_market/img/left.jpg" alt="왼쪽 페이지 이동">
 			</a>
 			<%
-		}
+		}else {
+			%>
+			<span class="btn">
+				<img class="sideimg fake" src="/brick_market/img/left.jpg" alt="왼쪽 페이지 이동">
+			</span>
+			<%
+			}
+			%>
 		%>
 	</section>
 	<section class="right">
 		<%
 		if (pagenum * size + select < totalcnt) {
 			%>
-			<a href="/brick_market/bbs/list.jsp?page=<%=pagenum+1 %>&status=<%=status %>&category=<%=category %>&keyword=<%=keyword%>">
-			<img class="sideimg" src="/brick_market/img/right.jpg" alt="오른쪽 페이지 이동">
+			<a class="btn" href="/brick_market/bbs/list.jsp?page=<%=pagenum+1 %>&status=<%=status %>&category=<%=category %>&keyword=<%=keyword%>">
+			<img class="sideimg real" src="/brick_market/img/right.jpg" alt="오른쪽 페이지 이동">
 			</a>
 			<%
-		}
+		}else {
+			%>
+			<span class="btn">
+				<img class="sideimg fake" src="/brick_market/img/right.jpg" alt="오른쪽 페이지 이동">
+			</span>
+			<%
+			}
+			%>
 		%>
 	</section>
 	<section class="mid">

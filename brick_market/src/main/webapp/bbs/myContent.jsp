@@ -36,11 +36,6 @@ article.content:hover{
 	object-fit: cover;
 	vertical-align: middle;
 }
-.left, .right {
-	display:flex;
-    justify-content:center;
-    align-items:center;
-}
 .sideimg {
 	width: 50px;
 	height: 50px;
@@ -54,6 +49,24 @@ h3 {
 	text-decoration: none;
 	color: black;
 }
+.left .btn, .right .btn{
+	width:100%;
+	height:100%;
+	display:flex;
+    justify-content:center;
+    align-items:center;
+	margin:0px 0px;
+}
+.fake{
+	opacity: 10%;
+}
+.real{
+	opacity: 50%;
+}
+.left .btn:hover .real,.right .btn:hover .real{
+	opacity: 100%;
+}
+
 </style>
 <script>
 function articleTime(str){
@@ -97,28 +110,40 @@ ArrayList<BbsDTO> arr = bdao.bbsMyList(pagenum, size, my_idx);
 %>
 <body>
 	<%@ include file="/header.jsp"%>
-	<section class="left">
-		<%
-		if (pagenum > 1) {
+		<section class="left">
+			<%
+			if (pagenum > 1) {
 			%>
-			<a href="/brick_market/bbs/myContent.jsp?page=<%=pagenum-1 %>">
-			<img class="sideimg" src="/brick_market/img/left.jpg" alt="왼쪽 페이지 이동">
+			<a class="btn" href="/brick_market/bbs/myContent.jsp?page=<%=pagenum-1 %>">
+				<img class="sideimg real" src="/brick_market/img/left.jpg" alt="왼쪽 페이지 이동">
 			</a>
 			<%
-		}
-		%>
-	</section>
-	<section class="right">
-		<%
-		if (pagenum * size < totalcnt) {
+			}else {
 			%>
-			<a href="/brick_market/bbs/myContent.jsp?page=<%=pagenum+1 %>">
-			<img class="sideimg" src="/brick_market/img/right.jpg" alt="오른쪽 페이지 이동">
+			<span class="btn">
+				<img class="sideimg fake" src="/brick_market/img/left.jpg" alt="왼쪽 페이지 이동">
+			</span>
+			<%
+			}
+			%>
+		</section>
+		<section class="right">
+			<%
+			if (pagenum * size < totalcnt) {
+			%>
+			<a class="btn" href="/brick_market/bbs/myContent.jsp?page=<%=pagenum+1 %>">
+				<img class="sideimg real" src="/brick_market/img/right.jpg" alt="오른쪽 페이지 이동">
 			</a>
 			<%
-		}
-		%>
-	</section>
+			}else {
+			%>
+			<span class="btn">
+				<img class="sideimg fake" src="/brick_market/img/right.jpg" alt="오른쪽 페이지 이동">
+			</span>
+			<%
+			}
+			%>
+		</section>
 	<section class="mid">
 		<h3>등록한 상품</h3>
 		<%
