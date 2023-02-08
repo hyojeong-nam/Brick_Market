@@ -61,7 +61,7 @@
 	padding: 0px 0px;
 	height:180px;
 	visibility: visible;
-	transition: all .18s ease-in-out;
+	transition: all .16s ease;
 }
 
 .openmenu-content a:hover{
