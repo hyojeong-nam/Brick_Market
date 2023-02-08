@@ -59,7 +59,7 @@ table {
 	border-radius: 3px
 	font-family: inherit;
 }
-.idbox input:focus{
+.idbox:focus{
 	outline: none;
 }
 
@@ -95,6 +95,7 @@ table {
 	border-radius: 10px 10px 10px 10px;
 	font-family: inherit;
 }
+
 </style>
 <%
 int user_idx = (int) session.getAttribute("midx");
@@ -216,31 +217,55 @@ function notice(){
 	<section class="mid">
 		<article id="wrap">
 		<form name="rejoin" id="rejoin" method="post" action="/brick_market/member/reJoin_ok.jsp" enctype="multipart/form-data">
-			<div><h2 id="h">회원 정보</h2></div>
-
-			<div id="profile"><img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
-			<input type="file" name="member_img"/></div>
+			<table border="1">
 			
-			<div><%=dto.getMember_nick()%>님은 <%=result%>입니다.<br> 가입일: <%=joindate %></div>
-
-
-			<div>이름 <input type="text" name="member_name" value="<%=dto.getMember_name()%>" class="textbox" required></div>
-
-			<div>아이디 <input type="text" name="member_id" value="<%=dto.getMember_id()%>" class="idbox" readonly required></div>
-
-			<div>현재 비밀번호 <input type="password" name="pwd" id="pwd1" 
-			value="<%=dto.getMember_pwd()%>" onchange="check_pwd()" class="textbox" required></div>
+			<tr>
+			<td colspan="2"><h2 id="h">회원 정보</h2></td>
+			</tr>
 			
-			<div>변경할 비밀번호 <input type="password" name="member_pwd" id="pwd2" 
-			onchange="check_pwd()" class="textbox"> 
+			<tr>
+			<td><img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
+			<input type="file" name="member_img"/>
+			</td>
+			<td><%=dto.getMember_nick()%>님은 <%=result%>입니다.
+			<br>가입일: <%=joindate %></td>
+			</tr>
+
+			<tr>
+			<td>이름</td>
+			<td><input type="text" name="member_name" value="<%=dto.getMember_name()%>" class="textbox" required></td>
+			</tr>
+			
+			<tr>
+			<td>아이디</td>
+			<td><input type="text" name="member_id" value="<%=dto.getMember_id()%>" class="idbox" readonly required></td>
+			</tr>
+			
+			<tr>
+			<td> 현재 비밀번호 </td>
+			<td><input type="password" name="pwd" id="pwd1" 
+			value="<%=dto.getMember_pwd()%>" onchange="check_pwd()" class="textbox" required> </td>
+			</tr>
+			
+			<tr>
+			<td>
+			변경할 비밀번호
+			</td>
+			<td>
+			 <input type="password" name="member_pwd" id="pwd2" onchange="check_pwd()" class="textbox"> 
 			<br><span id="check"></span>
-			</div>
+			</td>
+			</tr>
 			
-			<div>닉네임 <input type="text" name="member_nick" value="<%=dto.getMember_nick()%>" class="textbox" required></div>
+			<tr>
+			<td> 닉네임 </td>
+			<td><input type="text" name="member_nick" value="<%=dto.getMember_nick()%>" class="textbox" required></td>
+			</tr>
 			
-			<div>이메일 <input type="text" name="member_email" id="email1" value="<%=email_id%>" class="textbox2" required> 
+			<tr>
+			<td>이메일</td>
+			<td><input type="text" name="member_email" id="email1" value="<%=email_id%>" class="textbox2" required> 
 					@ <input type="text" name="email2" id="email2" class="textbox2" value="<%=email2%>" required>
-
 					<select name="email_select" class="box" id="email_select" onChange="checkMail();">
 							<option value="" selected>선택해 주세요</option>
 							<option value="naver.com">naver.com</option>
@@ -250,9 +275,14 @@ function notice(){
 							<option value="nate.com">nate.com</option>
 							<option value="write">직접 입력</option>
 						</select>
-			</div>
-				<input type="submit" value="수정하기" id="go" onclick="notice();"> 
+				</td>
+				</tr>
+				<tr>
+				<td colspan="2"><input type="submit" value="수정하기" id="go" onclick="notice();"> 
 				<input type="button" value="취소하기" id="re" onclick="history.back();">
+				</td>
+				</tr>
+			</table>	 
 		  </form>
 		</article>
 	</section>

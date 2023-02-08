@@ -202,9 +202,11 @@ public class MemberDAO {
 			String pwd=mr.getParameter("member_pwd");
 			String pwdsql="member_pwd='"+pwd+"',";
 			
-			if(pwd==null) {
-				pwd="";
+			
+			if(pwd==null || pwd.length() == 0) {
+				pwdsql="";
 			}
+			
 			
 			if(imgname==null) {
 				imgsql="";
