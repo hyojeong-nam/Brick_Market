@@ -8,6 +8,7 @@
 .openmenu {
 	position: relative;
 	display: inline-block;
+	width:150px;
 }
 
 .openmenu-btn{
@@ -27,53 +28,37 @@
 	z-index: 1;
 	background-color:white;
 	min-width: 150px;
+}
+.openmenu-content ul, .openmenu-content ul li{
 	margin: 0px 0px;
+	padding: 0px 0px;
 }
 .openmenu-content a{
 	display:block;
 	text-decoration: none;
 	color: black;
 	font-size: 12px;
-	padding: 12px 20px;
+	padding: 10px 10px;
 }
 
 .openmenu:hover .openmenu-content{
+	border:1px solid rgba(243,114,62,0.5);
 	display: block;
 	margin: 0px 0px;
+	padding: 0px 0px;
 }
 
 .openmenu-content a:hover{
 	color: black;
 	text-decoration: none;
-	background-color : rgb(230,230,230);
+	background-color : rgba(243,114,62,0.3);
 }
 
 
 .login {
 	height: 100%;
 }
-/*
-#keyword{
-	border-bottom-color:transparent;
-	outline:none;
-	border:0px;
-	width: 0px;
-	background: transparent;
-	color: white;
-}
-#status{
-	visibility: hidden; 
-}
-#category{
-	visibility: hidden;
-}
-.search:hover #status , .search:hover #category{
-	visibility: visible;
-}
-.search:focus #status , .search:focus #category{
-	visibility: visible;
-}
-*/
+
 .search{
 	border:2px solid;
 	border-color: rgb(243,114,62);

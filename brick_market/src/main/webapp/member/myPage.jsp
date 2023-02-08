@@ -71,7 +71,7 @@ article.list div{
 }
 
 article.list div:hover{
-	background-color : rgb(230,230,230);
+	background-color : rgba(243,114,62,0.3);
 }
 
 article.list a{
