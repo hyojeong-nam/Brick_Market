@@ -153,7 +153,6 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select, keyword, category, s
 			<%
 			}
 			%>
-		%>
 	</section>
 	<section class="right">
 		<%
@@ -171,7 +170,6 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select, keyword, category, s
 			<%
 			}
 			%>
-		%>
 	</section>
 	<section class="mid">
 		<h3>
