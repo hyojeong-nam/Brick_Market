@@ -16,14 +16,9 @@
 fieldset{
 border: 0px;
 }
-div{
-border: solid 1px;;
-}
-
 .mid{
 width: max(80%);
 margin: auto;
-
 }
 .main{
 text-align: left;
@@ -36,10 +31,8 @@ float: left;
 margin-left: 0px;
 }
 .main .img img{
-
 width: 80px;
 height: 80px;
-
 }
 .main .subject{
 font-size: 25px;
@@ -51,7 +44,6 @@ margin-top: 30px;
 .mid .main .price{
 margin-left:500px;
 display: inline-block;
-
 }
 .mid .main .date{
 float:right;
@@ -59,7 +51,6 @@ font-size:  10px;
 margin: 10px;
 }
 .button{
-
 z-index: 1;
   width: 150px;
   height: 200px;
@@ -143,10 +134,7 @@ int cnt=ldao.totalCnt(midx);
 					<span>	<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
 							<%=arr.get(i).getBbs_subject()%> 
 							</a></span></div><span class="price"><%=arr.get(i).getBbs_price()%> 원</span>
-							
-							
 							<div class="sub"><input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'" value="좋아요 취소"></div>
-						
 					</div>
 					<%
 					}
