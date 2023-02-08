@@ -59,8 +59,21 @@
 	background: transparent;
 	color: white;
 }
-#keyword:hover {
-	border:2px solid;
+#status{
+	visibility: hidden; 
+}
+.search:hover #status{
+	visibility: visible;
+}
+
+#category{
+	visibility: hidden; 
+}
+.search:hover #category{
+	visibility: visible;
+}
+.search:hover #keyword{
+	border:0px;
 border-left-color:black;
 border-right-color:black;
 border-top-color:black;
@@ -75,7 +88,8 @@ transition: all .6s ease;
 }
 
 #keyword:focus{
-border:1px solid;
+outline:none;
+border:0px;
 border-left-color:transparent;
 border-right-color:transparent;
 border-top-color:transparent;
@@ -104,9 +118,18 @@ border-radius:15px;
   'wght' 400,
   'GRAD' 0,
   'opsz' 48;
-  font-size: 15px;
+  font-size: 30px;
 }
 
+select{
+	outline: none;
+	border: 0px;
+}
+.search:hover{
+border:2px solid;
+	border-color: red;
+	width: 550px;
+}
 
 
 </style>
@@ -157,12 +180,12 @@ function op() {
 	</div>
 	<form action="/brick_market/bbs/list.jsp" id="serch">
 		<div class="search">
-		<select name="status">
+		<select name="status" id="status">
 			<option value="0" selected="selected">판매중</option>
 			<option value="1">예약 완료</option>
 			<option value="2">거래 완료</option>
 		</select>
-		<select name="category">
+		<select name="category" id="category">
 			<option value="-1" selected="selected"><%=bdtoheader.stringCategory(-1)%></option>
 			<option value="0"><%=bdtoheader.stringCategory(0)%></option>
 			<option value="1"><%=bdtoheader.stringCategory(1)%></option>
