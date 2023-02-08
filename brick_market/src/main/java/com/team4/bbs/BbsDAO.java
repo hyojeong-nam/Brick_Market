@@ -85,7 +85,7 @@ public class BbsDAO {
 				deleteBbsBeforeImg(realpath, bbs_idx);
 			}
 			
-			String sql = "update bbs_table set bbs_subject = ?, bbs_content = ?, bbs_price = ?,"+imgsql+"bbs_category = ?, bbs_place = ?, bbs_how = ? where bbs_idx = ?";
+			String sql = "update bbs_table set bbs_subject = ?, bbs_content = ?, bbs_price = ?,"+imgsql+"bbs_category = ?, bbs_place = ?, bbs_how = ?, bbs_status = ? where bbs_idx = ?";
 			ps = conn.prepareStatement(sql);
 			
 			
@@ -113,7 +113,14 @@ public class BbsDAO {
 				how = Integer.parseInt(how_s);
 			}
 			ps.setInt(6, how);
-			ps.setInt(7, bbs_idx);
+			
+			String status_s = mr.getParameter("bbs_status");
+			int status = -1;
+			if(status_s != null && status_s.length() != 0) {
+				status = Integer.parseInt(status_s);
+			}
+			ps.setInt(7, status);
+			ps.setInt(8, bbs_idx);
 
 			int count = ps.executeUpdate();
 			return count;
