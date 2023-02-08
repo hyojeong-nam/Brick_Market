@@ -36,14 +36,15 @@
 	padding: 0px 0px;
 	height:0px;
 	overflow: hidden;
+		
 }
+
 
 .openmenu:hover .openmenu-content ul .openmenu-content ul li{
 	margin: 0px 0px;
 	padding: 0px 0px;
 	overflow: visible;
-	
-	
+		
 }
 .openmenu-content a{
 	display:block;
@@ -52,6 +53,8 @@
 	font-size: 12px;
 	padding: 10px 10px;
 	height: 25px;
+	
+	
 }
 
 .openmenu:hover .openmenu-content{
@@ -61,7 +64,10 @@
 	padding: 0px 0px;
 	height:180px;
 	visibility: visible;
-	transition: all .16s ease;
+	transition: all 1.0s ease;
+}
+.openmenu-content{
+	border:1px solid rgba(243,114,62,0.5);
 }
 
 .openmenu-content a:hover{
@@ -141,8 +147,8 @@ function op() {
 				<a href="/brick_market/member/myPage.jsp">마이페이지</a>
 			</span>
 			<div class="openmenu-content">
-				<ul>
-					<li><a href="/brick_market/member/myPage.jsp">마이페이지</a></li>
+				<ul class="openmenu-content">
+					<li ><a href="/brick_market/member/myPage.jsp">마이페이지</a></li>
 					<li><a href="/brick_market/bbs/myContent.jsp">등록한상품</a></li>
 					<li><a href="/brick_market/bbs/likeList.jsp">관심글목록</a></li>
 					<li><a href="/brick_market/member/pwdCheck.jsp">회원정보 수정</a></li>
