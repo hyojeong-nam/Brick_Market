@@ -264,7 +264,7 @@ function openDel(){
 			<p class="profile_nick"><%=mdto.getMember_nick()%></p>
 			<%
 			int report_cnt = pdao.cntReport(user_idx);
-			String pstr = "확인용";
+			String pstr = "";
 			if(report_cnt >= 5){
 				pstr = "[신고 횟수 "+report_cnt+"회]";
 			}
