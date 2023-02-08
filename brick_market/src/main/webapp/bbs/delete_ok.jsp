@@ -22,7 +22,7 @@ if(result==1){
 	window.close();
 	</script>
 	<%		
-	}else if(result==0){
+	}else if(result==-1){
 			%>
 			<script>
 			window.alert("비밀번호가 틀렸습니다.");
@@ -30,7 +30,7 @@ if(result==1){
 			window.close();
 			</script>
 			<% 
-			}else if(result==-1){
+			}else if(result==0){
 					%>
 					<script>
 					window.alert("게시글이 없습니다.");	
