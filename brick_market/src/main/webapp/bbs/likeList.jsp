@@ -4,6 +4,7 @@
 <%@page import="com.team4.bbs.BbsDTO"%>
 <%@page import="java.util.*"%>
 <jsp:useBean id="ldao" class="com.team4.like.LikeDAO" scope="session"></jsp:useBean>
+<jsp:useBean id="rdao" class="com.team4.reply.ReplyDAO"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,29 +16,47 @@
 fieldset{
 border: 0px;
 }
+div{
+border: solid 1px;;
+}
+
+.mid{
+width: max(80%);
+margin: auto;
+
+}
 .main{
 text-align: left;
 }
 .main .img{
-width: 100px;
-height: 90px;
-margin-left: 40px;
+width: 80px;
+height: 80px;
+margin: 10px;
+float: left;
+margin-left: 0px;
+}
+.main .img img{
+
+width: 80px;
+height: 80px;
+
 }
 .main .subject{
 font-size: 25px;
-float: left;
-margin-top: 20px;
-width: 100px;
-margin-left: 100px;
+width: 400px;
+text-align: center;
+margin-left: 150px;
+margin-top: 30px;
 }
 .mid .main .price{
-text-align: right;
-margin-left: 350px;
+margin-left:500px;
+display: inline-block;
+
 }
 .mid .main .date{
+float:right;
 font-size:  10px;
-text-align: right;
-float: right;
+margin: 10px;
 }
 .button{
 
@@ -51,13 +70,10 @@ z-index: 1;
 .class{
 height: 50px;
 }
-
-</style>
-<script>
-function top_scroll() {
-	document.
+.sub {
+text-align: right;
 }
-</script>
+</style>
 </head>
 <%
 int size = 5;
@@ -94,7 +110,8 @@ int cnt=ldao.totalCnt(midx);
 					for (int i = 0; i < arr.size(); i++) {
 					%>
 					<div class="main">
-					<span class="date">
+							<div class="mid"><a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>"><img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>"></a></div>
+					<div class="date">조회수 : <%=arr.get(i).getBbs_readnum() %> 등록된 댓글 : <%=rdao.totalRef(arr.get(i).getBbs_idx()) %> 게시일 : 
 						<script>
 					var str = '<%=arr.get(i).getBbs_date_s()%>';
 					var strY=str.substring(0,4);
@@ -121,16 +138,19 @@ int cnt=ldao.totalCnt(midx);
 						document.write('일주일 이상');
 					}
 					</script>
-						</span>
-						<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
-							<span class="subject"><%=arr.get(i).getBbs_subject()%></span>
-							<span><img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>"></span>
-							<span class="price"><%=arr.get(i).getBbs_price()%> 원</span></a>
-							<span><input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'" value="좋아요 취소"></span>
+						</div>
+							<div class="subject">
+					<span>	<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
+							<%=arr.get(i).getBbs_subject()%> 
+							</a></span></div><span class="price"><%=arr.get(i).getBbs_price()%> 원</span>
+							
+							
+							<div class="sub"><input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'" value="좋아요 취소"></div>
+						
 					</div>
 					<%
 					}
-					if(cp*list>=cnt){
+					if(cp*list>cnt){
 						
 						
 					}else{
