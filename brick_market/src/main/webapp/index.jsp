@@ -44,10 +44,6 @@ h3 {
 	color: black;
 }
 
-.subject:hover {
-	text-decoration: underline;
-	color: skyblue;
-}
 ul li{
 list-style-type: none;
 }
@@ -63,7 +59,7 @@ padding: 0px;
 .litag{
 float: left;
 width: 250px;
-height: 280px;
+height: 300px;
 margin: auto;
 padding-top: 10px;
 }
@@ -184,6 +180,9 @@ int select = 11;
 int totalcnt = bdao.getTotalCnt();
 ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 %>
+
+
+
 <body>
 	<%@ include file="header.jsp"%>
 	<section class="mid">
@@ -197,10 +196,11 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 		<%
 		} else {
 		for (int i = 0; i < arr.size(); i++) {
+			
 		%>
 			<a class="subject" href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
 			<li class="litag">
-			<div>
+			<div style="color: black;">
 			<script>
 			var str = '<%=arr.get(i).getBbs_date_s()%>';
 			var msg = articleTime(str);
@@ -208,8 +208,18 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 			</script>
 			</div>
 			<div class="imgarea"><img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>"></div>
-			<div><span><%=arr.get(i).getBbs_subject()%></span></div>
-			<div>
+			<%
+			int status = arr.get(i).getBbs_status();
+			String status_s = "";
+			switch(status){
+			case 0:status_s = "판매중"; break;
+			case 1:status_s = "예약 완료"; break;
+			case 2:status_s = "거래 완료"; break;
+			}
+			%>
+			<div style="color: blue;">[<%=status_s %>]</div>
+			<div><span>[<%=bdao.stringCategory(arr.get(i).getBbs_category()) %>]<%=arr.get(i).getBbs_subject()%></span></div>
+			<div style="color: red;">
 			<%
 			int price = arr.get(i).getBbs_price();
 			String price_s = "";
@@ -217,8 +227,10 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 				price_s = (price / 100000000) + "억 원";
 			}else if(price >= 10000){
 				price_s = (price / 10000) + "만 원";
-			}else {
+			}else if(price > 0){
 				price_s = price + "원";
+			}else {
+				price_s = "무료나눔";
 			}
 			%>
 				<span><%=price_s%></span>

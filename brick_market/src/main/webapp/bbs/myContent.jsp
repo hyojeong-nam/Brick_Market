@@ -16,7 +16,7 @@
 article.content{
 	float: left;
 	width: 250px;
-	height: 280px;
+	height: 300px;
 	margin: auto;
 	padding-top: 10px;
 	display: inline-block;
@@ -53,11 +53,6 @@ h3 {
 .subject {
 	text-decoration: none;
 	color: black;
-}
-
-.subject:hover {
-	text-decoration: underline;
-	color: skyblue;
 }
 </style>
 <script>
@@ -148,8 +143,18 @@ ArrayList<BbsDTO> arr = bdao.bbsMyList(pagenum, size, my_idx);
 			<div class="imgarea">
 				<img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>">
 			</div>
+			<%
+			int status = arr.get(i).getBbs_status();
+			String status_s = "";
+			switch(status){
+			case 0:status_s = "판매중"; break;
+			case 1:status_s = "예약 완료"; break;
+			case 2:status_s = "거래 완료"; break;
+			}
+			%>
+			<div style="color: blue;">[<%=status_s %>]</div>
 			<div>
-				<span><%=arr.get(i).getBbs_subject()%></span>
+				<span>[<%=bdao.stringCategory(arr.get(i).getBbs_category()) %>]<%=arr.get(i).getBbs_subject()%></span>
 			</div>
 			<div>
 			<%
@@ -159,11 +164,13 @@ ArrayList<BbsDTO> arr = bdao.bbsMyList(pagenum, size, my_idx);
 				price_s = (price / 100000000) + "억 원";
 			}else if(price >= 10000){
 				price_s = (price / 10000) + "만 원";
-			}else {
+			}else if(price > 0){
 				price_s = price + "원";
+			}else {
+				price_s = "무료나눔";
 			}
 			%>
-				<span><%=price_s%></span>
+				<span style="color: red;"><%=price_s%></span>
 			</div>
 		</article>
 		</a>

@@ -16,7 +16,7 @@
 article.content{
 	float: left;
 	width: 250px;
-	height: 280px;
+	height: 300px;
 	margin: auto;
 	padding-top: 10px;
 	display: inline-block;
@@ -53,11 +53,6 @@ h3 {
 .subject {
 	text-decoration: none;
 	color: black;
-}
-
-.subject:hover {
-	text-decoration: underline;
-	color: skyblue;
 }
 
 </style>
@@ -187,6 +182,16 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select, keyword, category, s
 		for (int i = 0; i < arr.size(); i++) {
 		%>
 		<article class="content">
+			<%
+			int status2 = arr.get(i).getBbs_status();
+			String status_s2 = "";
+			switch(status){
+			case 0:status_s2 = "판매중"; break;
+			case 1:status_s2 = "예약 완료"; break;
+			case 2:status_s2 = "거래 완료"; break;
+			}
+			%>
+		
 			<div>
 			<script>
 			var str = '<%=arr.get(i).getBbs_date_s()%>';
@@ -198,11 +203,12 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select, keyword, category, s
 			<div class="imgarea">
 				<img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>">
 			</div>
+			<div style="color: blue;">[<%=status_s2 %>]</div>
 			<div>
-				<span><%=arr.get(i).getBbs_subject()%></span>
+				<span>[<%=bdao.stringCategory(arr.get(i).getBbs_category()) %>]<%=arr.get(i).getBbs_subject()%></span>
 			</div>
 			</a>
-			<div>
+			<div style="color: red;">
 			<%
 			int price = arr.get(i).getBbs_price();
 			String price_s = "";
@@ -210,8 +216,10 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select, keyword, category, s
 				price_s = (price / 100000000) + "억 원";
 			}else if(price >= 10000){
 				price_s = (price / 10000) + "만 원";
-			}else {
+			}else if(price > 0){
 				price_s = price + "원";
+			}else {
+				price_s = "무료나눔";
 			}
 			%>
 				<span><%=price_s%></span>

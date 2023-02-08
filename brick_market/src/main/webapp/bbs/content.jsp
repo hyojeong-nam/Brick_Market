@@ -256,8 +256,18 @@ function openDel(){
 	<%@include file="/header.jsp"%>
 	<section class="mid">
 		<article class="container">
+			<%
+			int status = bdto.getBbs_status();
+			String status_s = "";
+			switch(status){
+			case 0:status_s = "판매중"; break;
+			case 1:status_s = "예약 완료"; break;
+			case 2:status_s = "거래 완료"; break;
+			}
+			%>
+		
 			<img class="item_img" alt="test" src="<%=bdto.getBbs_img()%>">
-			<h2 class="title_text"><%=bdto.getBbs_subject()%></h2>
+			<h2 class="title_text"><span style="color: blue;">[<%=status_s %>]</span><span>[<%=bdao.stringCategory(bdto.getBbs_category()) %>]</span><%=bdto.getBbs_subject()%></h2>
 			<p class="price_text"><%=bdto.getBbs_price()%>원</p>
 			<p class="view_text">조회수 <%=bdto.getBbs_readnum()%></p>
 			<img class="profile_img" alt="test" src="<%=mdto.getMember_img()%>">
@@ -272,7 +282,7 @@ function openDel(){
 			ArrayList<ReviewDTO> varr = vdao.selectReview(user_idx);
 			if(varr == null || varr.size() == 0){
 				%>
-				<p class="profile_star">남겨진 리뷰가 없습니다. <%=pstr %></p>
+				<p class="profile_star">남겨진 리뷰가 없습니다. <span style="color: red;"><%=pstr %></span></p>
 				<%
 			}else {
 				int vsum = 0;
@@ -295,14 +305,22 @@ function openDel(){
 					star = "★☆☆☆☆";
 				}
 				%>
-				<p class="profile_star"><%=star %>(<%=varr.size() %> 리뷰) 평점 <%=(double)Math.round((vavg*10))/10 %> <%=pstr %></p>
+				<p class="profile_star"><%=star %>(<%=varr.size() %> 리뷰) 평점 <%=(double)Math.round((vavg*10))/10 %> <span style="color: red;"><%=pstr %></span></p>
 				<%
 			}
 			%>
 			
+			<%
+			int how = bdto.getBbs_how();
+			String how_s = "";
+			switch(how){
+			case 0:how_s = "자유"; break;
+			case 1:how_s = "직거래"; break;
+			case 2:how_s = "택배"; break;
+			}
+			%>
 			
-			
-			<pre class="item_text"><%=bdto.getBbs_content().replaceAll("\n", "<br>")%></pre>
+			<pre class="item_text">거래장소 : <%=bdto.getBbs_place() %><br>거래방법 : <%=how_s %><br><%=bdto.getBbs_content().replaceAll("\n", "<br>")%></pre>
 			<div class="btn">
 			<hr>
 			<%if(midx!=0) {
