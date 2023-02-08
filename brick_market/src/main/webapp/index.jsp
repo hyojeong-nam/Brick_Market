@@ -268,13 +268,13 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 		</div>
 	</section>
 		<section class="left">
-		<span class="btn">
-		<img class="sideimg real" src="img/left.jpg" onclick="javascript:pe();">
+		<span class="btn" onclick="javascript:pe();">
+		<img class="sideimg real" src="img/left.jpg">
 		</span>
 		</section>
 		<section class="right">
-		<span class="btn">
-		<img class="sideimg real" src="img/right.jpg" onclick="javascript:next();">
+		<span class="btn" onclick="javascript:next();">
+		<img class="sideimg real" src="img/right.jpg">
 		</span>
 		</section>
 	<%@ include file="footer.jsp"%>
