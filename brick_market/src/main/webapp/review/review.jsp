@@ -110,7 +110,12 @@ div img{
 }
 
 </style>
-
+<script>
+function popupClose() {
+	location.href='/brick_market/index.jsp';
+	window.close();
+}
+</script>
 </head>
 <body>
 
@@ -134,7 +139,7 @@ div img{
 		<div><textarea rows="20" cols="70" name="review_content" id="review_content"
 			placeholder="거래는 어떠셨나요?"></textarea></div>
 			<span><input type="submit" id="submit" value="등록하기"></span>
-			<span><input type="button" id="cancel" value="취소하기" onclick="location.href='/brick_market/index.jsp'"></span>
+			<span><input type="button" id="cancel" value="취소하기" onclick="popupClose();"></span>
 	</form>
 	</section>
 	

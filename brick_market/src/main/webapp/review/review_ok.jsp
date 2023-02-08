@@ -11,4 +11,5 @@ String msg=result>0?"리뷰등록 성공!":"리뷰등록 실패!";
 <script>
 	alert('<%=msg%>');
 	location.href='/brick_market/index.jsp';
+	window.close();
 </script>
