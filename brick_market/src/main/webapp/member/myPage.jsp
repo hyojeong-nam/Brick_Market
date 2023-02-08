@@ -24,11 +24,16 @@ table {
 	text-align: center;
 	margin: 0px auto;
 }
+table tr .l{
+	text-align: left;
+	line-height: 30px;
+}
 
 .profile_img {
 	height: 150px;
 	width: 150px;
 	object-fit: cover;
+	border:1px solid rgba(243,114,62,1);
 }
 </style>
 <%
@@ -79,19 +84,37 @@ article.list a{
 	text-decoration: none;
 }
 
+.content {
+	display:flex;
+    justify-content:center;
+    align-items:flex-start;
+	margin:0px 0px;
+}
+
 article.list{
 	width:200px;
 	display:inline-table;
+	border:1px solid rgba(243,114,62,1);
 }
 article.info{
 	width:500px;
 	height:400px;
-	display:inline-table;
 }
+
+.mid hr{
+	width:70%;
+	height:2px;
+	border:0px;
+	background-color:rgba(243,114,62,1);
+}
+
 </style>
 <body>
 	<%@include file="/header.jsp"%>
 	<section class="mid">
+		<h2>마이 페이지</h2>
+		<hr>
+		<div class="content">
 		<article class="list">
 			<a href="/brick_market/member/myPage.jsp"><div>마이페이지</div></a>
 			<a href="/brick_market/bbs/myContent.jsp"><div>등록한상품</div></a>
@@ -99,10 +122,7 @@ article.info{
 			<a href="/brick_market/member/pwdCheck.jsp"><div>회원정보수정</div></a>
 		</article>
 		<article class="info">
-			<table border='1'>
-				<tr>
-					<td colspan="2"><h2>마이페이지</h2></td>
-				</tr>
+			<table>
 				<tr>
 					<td><img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
 						</td>
@@ -110,32 +130,32 @@ article.info{
 						</td>
 				</tr>
 				<tr>
-					<td>이름</td>
-					<td><%=dto.getMember_name()%></td>
+					<td >이름</td>
+					<td class="l"><%=dto.getMember_name()%></td>
 				</tr>
 				<tr>
-					<td>아이디</td>
-					<td><%=dto.getMember_id()%></td>
+					<td >아이디</td>
+					<td class="l"><%=dto.getMember_id()%></td>
 				</tr>
 				<tr>
-					<td>비밀번호</td>
-					<td><%=dto.getMember_pwd()%></td>
+					<td >비밀번호</td>
+					<td class="l"><%=dto.getMember_pwd()%></td>
 				</tr>
 				<tr>
-					<td>닉네임</td>
-					<td><%=dto.getMember_nick()%></td>
+					<td >닉네임</td>
+					<td class="l"><%=dto.getMember_nick()%></td>
 				</tr>
 				<tr>
-					<td>이메일</td>
-					<td><%=dto.getMember_email()%></td>
+					<td >이메일</td>
+					<td class="l"><%=dto.getMember_email()%></td>
 				</tr>
 				<tr>
-					<td>별점</td>
+					<td >별점</td>
 					<%	
 					ArrayList<ReviewDTO> varr = vdao.selectReview(user_idx);
 					if(varr == null || varr.size() == 0){
 					%>
-					<td>남겨진 리뷰가 없습니다.</td>
+					<td class="l">남겨진 리뷰가 없습니다.</td>
 					<%
 					}else {
 						int vsum = 0;
@@ -158,13 +178,14 @@ article.info{
 							star = "★☆☆☆☆";
 						}
 						%>
-						<td><%=star %>(<%=varr.size() %> 리뷰) 평점 <%=(double)Math.round((vavg*10))/10 %></td>
+						<td class="l"><%=star %>(<%=varr.size() %> 리뷰) 평점 <%=(double)Math.round((vavg*10))/10 %></td>
 						<%
 					}
 					%>
 				</tr>
 			</table>
 		</article>
+		</div>
 	</section>
 	<%@include file="/footer.jsp"%>
 </body>
