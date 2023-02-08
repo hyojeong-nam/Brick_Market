@@ -76,7 +76,7 @@
 */
 .search{
 	border:2px solid;
-	border-color: red;
+	border-color: rgb(243,114,62);
 	border-radius:5px;
 	padding:5px;
 	width: 454px;
@@ -97,6 +97,7 @@
 	outline: none;
 	border: 0px;
 	width:80px;
+	font-weight: bold;
 }
 .material-symbols-outlined {
 	font-variation-settings:
@@ -107,7 +108,7 @@
 	font-size: 30px;
 }
 .material-symbols-outlined:hover {
-	color: red;
+	color: rgb(243,114,62);
 }
 
 
