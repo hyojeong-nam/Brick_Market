@@ -250,6 +250,14 @@ function openDel(){
 	window.open('delete.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>',
 			+'delPage','width=520,height=250');	
 }
+
+function openRivew() {
+	window.open('/brick_market/review/review.jsp?bbs_idx='+
+			'<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>'
+			+'&bbs_subject=<%=bdto.getBbs_subject()%>'
+			+'&bbs_category=<%=bdto.getBbs_category()%>&bbs_price=<%=bdto.getBbs_price()%>&bbs_img=<%=bdto.getBbs_img()%>',
+			+'reviewPage','width=600,height=800');	
+}
 </script>
 </head>
 <body>
@@ -331,7 +339,7 @@ function openDel(){
 				<a href="#" onclick="openDel();">
 				삭제
 				</a>
-				<a href="/brick_market/review/review.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>">
+				<a href="#" onclick="openRivew();">
 				리뷰 
 				</a>
 				<a href="/brick_market/report/report.jsp?bbs_idx=<%=bbs_idx%>">
