@@ -69,14 +69,34 @@ padding-top: 10px;
 }
 .button{
 margin-top: 50px;
+border-color: green;
 }
 
-.button input:hover {
-	text-decoration: underline;
-	color: skyblue;
-
+.button div {
+display:inline-block;
+ margin: 0 auto;
+        width: 15px;
+        height: 15px;
+        border: 0px;
+        border-radius: 50%;
+   
+background-color:#e9e9e9; 
 }
+div .button1 {
 
+background-color:#808080; 
+}
+.left, .right {
+	display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.img {
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	vertical-align: middle;
+}
 </style>
 <script>
 function articleTime(str){
@@ -104,16 +124,53 @@ function articleTime(str){
 		return '일주일 이상';
 	}
 }
+var page=0;
+var value=0;
+function color() {
+	if(page==0){
+		document.querySelector('.button2').style.backgroundColor='#e9e9e9'; 
+		document.querySelector('.button3').style.backgroundColor='#e9e9e9'; 
+		document.querySelector('.button1').style.backgroundColor='#808080'; 
+			
+		}else if(page==1){
+			document.querySelector('.button1').style.backgroundColor='#e9e9e9'; 
+			document.querySelector('.button3').style.backgroundColor='#e9e9e9'; 
+			document.querySelector('.button2').style.backgroundColor='#808080'; 
+		}else{
+			document.querySelector('.button1').style.backgroundColor='#e9e9e9';
+			document.querySelector('.button2').style.backgroundColor='#e9e9e9';
+			document.querySelector('.button3').style.backgroundColor='#808080'; 
+		}
+	
+}
+function button(page2) {
+	var value=page2*-1000
+	document.querySelector('.ultag').style.transform='translate('+value+'px)';
+	page=page2;
+	color();
 
-function button1() {
-	document.querySelector('.ultag').style.transform='translate(0)';
 }
-function button2() {
-	document.querySelector('.ultag').style.transform='translate(-1000px)';
+
+function next() {
+	page++;
+	if(page>=3){
+		page=0;
+	}
+	value=page*-1000;
+	document.querySelector('.ultag').style.transform='translate('+value+'px)';
+	color();
 }
-function button3() {
-	document.querySelector('.ultag').style.transform='translate(-2000px)';
+function pe() {
+	page--;
+	if(page<=-1){
+		page=2;
+	}
+	value=page*-1000;
+	document.querySelector('.ultag').style.transform='translate('+value+'px)';
+	color();
+	
 }
+
 </script>
 </head>
 <%
@@ -174,14 +231,19 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 		%>
 		</ul>
 		</article>
-		<article class="mid">
 		<div class="button">
-		<input type="button" onclick="javascript:button1();" value="1">
-		<input type="button" onclick="javascript:button2();" value="2">
-		<input type="button" onclick="javascript:button3();" value="3">
+		<div onclick="javascript:button(0);" class="button1"></div>
+		<div onclick="javascript:button(1);" class="button2"></div>
+		<div onclick="javascript:button(2);" class="button3"></div>
 		</div>
-		</article>
 	</section>
+		<section class="left">
+		<img src="img/left.jpg" onclick="javascript:pe();" class="img">
+		</section>
+		<section class="right">
+		<img src="img/right.jpg" onclick="javascript:next();" class="img">
+		
+		</section>
 	<%@ include file="footer.jsp"%>
 </body>
 </html>
