@@ -51,8 +51,8 @@
 	text-decoration: none;
 	color: black;
 	font-size: 12px;
-	padding: 10px 10px;
-	height: 25px;
+	padding: 12px 10px;
+	height: 20px;
 	
 	
 }
@@ -62,7 +62,7 @@
 	display: block;
 	margin: 0px 0px;
 	padding: 0px 0px;
-	height:180px;
+	height:172px;
 	visibility: visible;
 	transition: all 1.0s ease;
 }
@@ -144,7 +144,7 @@ function op() {
 		mdtoheader = mdaoheader.searchIdx(midx);
 		%>
 		<span class="logintext">
-			<%=mdtoheader.getMember_nick()%>님 환영합니다
+			<%=mdtoheader.getMember_nick()%>님 환영합니다&nbsp&nbsp&nbsp&nbsp&nbsp
 		</span>
 		<span>
 		<a href="/brick_market/bbs/write.jsp">상품등록</a>
