@@ -9,6 +9,8 @@
 </ul>
 </nav>
 <div>고객문의:email cs&#64;brick.com tel 02-0000-0000</div>
+<br><br>
+<div>Copyright © Team4. All rights reserved.</div>
 <img>
 <img>
 </footer>
