@@ -99,8 +99,8 @@
 }
 
 .btn a:hover {
-	text-decoration: underline;
-	color: skyblue;
+	text-decoration: none;
+	color: rgb(243,114,62);
 }
 
 
