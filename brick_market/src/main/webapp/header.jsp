@@ -89,6 +89,7 @@
 	width: 454px;
 	height: 30px;
 	display: flex;
+	
 }
 .search #keyword{
 	width: 250px;
@@ -118,7 +119,10 @@
 	color: rgb(243,114,62);
 }
 
-
+.nav *{
+	margin: 0px 0px;
+	padding: 0px 0px;
+}
 </style>
 <script>
 function op() {

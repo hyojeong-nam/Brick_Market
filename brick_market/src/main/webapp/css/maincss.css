@@ -58,12 +58,12 @@ body {
 	width:100%;
 	display:grid;
 	align-items:center;
-	grid-template-columns: 35fr 55fr 30fr;
+	grid-template-columns: 25fr 55fr 30fr;
 	grid-template-rows: 30px 100px 30px 20px;
 	grid-template-areas:
 		"login  login  login "
 		"logo  search  mypage"
-		"nav   nav     report"
+		".     nav     report"
 		"line  line    line  "
 		;
 }
@@ -93,6 +93,7 @@ body {
 	font-size: 15px;}
 .header .nav {
 	grid-area: nav;
+	justify-self:left;
 	font-size: 15px;
 }
 .header ul {
