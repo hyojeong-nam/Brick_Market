@@ -17,7 +17,7 @@ h3 {
 
 table {
 	text-align: center;
-	margin: 0px auto;
+	margin: 20px auto;
 }
 
 section article table img {
@@ -36,6 +36,21 @@ select:invalid{
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.box{
+	border:10px solid;
+	border-color:rgba(243,114,62,0.3);
+	border-radius: 15px;
+	width: 700px;
+	margin: 0 auto;	
+}
+
+article{
+	margin-bottom: 80px;
+}
+table tr td{
+line-height: 30px;
 }
 </style>
 <%
@@ -60,7 +75,7 @@ window.location.href='/brick_market/member/login.jsp';
 	<section class="mid">
 		<h3>상품등록</h3>
 		<article>
-			<form name="imgUpload" 
+			<form name="imgUpload" class="box"
 				action="/brick_market/bbs/write_ok.jsp"method="post" enctype="multipart/form-data">
 				<table border="0">
 					<tr>
