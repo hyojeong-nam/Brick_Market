@@ -44,10 +44,11 @@ margin-top: 30px;
 .mid .main .price{
 margin-left:500px;
 display: inline-block;
+color: red;
 }
 .mid .main .date{
 float:right;
-font-size:  10px;
+font-size:  15px;
 margin: 10px;
 }
 .button{
@@ -62,7 +63,57 @@ z-index: 1;
 height: 50px;
 }
 .sub {
-text-align: right;
+margin-left: 700px;
+
+}
+
+.sub-text{
+	display: none;
+	position: absolute;
+	right: 350px;
+	
+	border-radius: 15px; 
+	width: 100px;
+	padding-top: 15px;
+}
+
+.sub:hover + .sub-text{
+	display: inline;
+	text-align: right;
+	font-weight: bolder;
+	margin-right: 100px;
+}
+
+.sub input{
+	font-size: 30px;
+	outline: none;
+	border: 0px;
+	background-color: transparent;
+	color: red;
+}
+.sub input:hover{
+	font-size: 30px;
+	outline: none;
+	border: 0px;
+	background-color: transparent;
+	color: silver;
+}
+
+h1{
+	text-align: center;
+}
+.won{
+	color: black;
+	font-weight: bold;
+}
+.price{
+	font-weight: bold;
+}
+div .main{
+	border:10px solid;
+	border-color:rgba(243,114,62,0.3);
+	border-radius: 15px;
+	margin-bottom: 5px;
 }
 </style>
 </head>
@@ -92,10 +143,10 @@ int cnt=ldao.totalCnt(midx);
 	ArrayList<BbsDTO> arr = bdao.bbsList(cp, midx);
 	%>
 	<section class="mid">
+	<h1>관심글 목록</h1>
 	<div class="button"  onclick="window.scrollTo(0,0);"><input type="button" value="TOP" class="class"></div>
 		<article>
 			<fieldset>
-				<legend>좋아하는 글 목록</legend>
 				<div>
 					<%if(arr!=null&&arr.size()!=0){
 					for (int i = 0; i < arr.size(); i++) {
@@ -133,8 +184,9 @@ int cnt=ldao.totalCnt(midx);
 							<div class="subject">
 					<span>	<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
 							<%=arr.get(i).getBbs_subject()%> 
-							</a></span></div><span class="price"><%=arr.get(i).getBbs_price()%> 원</span>
-							<div class="sub"><input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'" value="좋아요 취소"></div>
+							</a></span></div><span class="price"><%=arr.get(i).getBbs_price()%> <a class="won">원</a></span>
+							<span class="sub"><input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'" value="♥"></span>
+							<span class="sub-text">관심글 취소!</span>
 					</div>
 					<%
 					}
