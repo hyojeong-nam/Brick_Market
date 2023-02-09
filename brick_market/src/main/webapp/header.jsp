@@ -19,7 +19,7 @@
 	display:inline-block;
 	font-size:15px;
 	line-height:30px;
-	margin: 15px;
+	margin: 10px;
 }
 
 .openmenu-content{
@@ -81,7 +81,7 @@
 	height: 100%;
 }
 
-.search{
+.search_div{
 	border:2px solid;
 	border-color: rgb(243,114,62);
 	border-radius:5px;
@@ -91,7 +91,7 @@
 	display: flex;
 	
 }
-.search #keyword{
+.search_div #keyword{
 	width: 250px;
 	outline:none;
 	border:0px;
@@ -100,7 +100,7 @@
 	font-weight: bold;
 }
 
-.search #status, .search #category{
+.search_div #status, .search_div #category{
 	color: #723838;
 	outline: none;
 	border: 0px;
@@ -146,6 +146,9 @@ function op() {
 		<span class="logintext">
 			<%=mdtoheader.getMember_nick()%>님 환영합니다
 		</span>
+		<span>
+		<a href="/brick_market/bbs/write.jsp">상품등록</a>
+		</span>
 		<nav class="openmenu">
 			<span class="logintext openmenu-btn">
 				<a href="/brick_market/member/myPage.jsp">마이페이지</a>
@@ -166,11 +169,8 @@ function op() {
 	</span>
 	<a class="logo" href="/brick_market/index.jsp"><img 
 		src="/brick_market/img/logo.png" alt="메인로고"></a>
-	<div class="mypage">
-	<a href="/brick_market/bbs/write.jsp">상품등록</a>
-	</div>
-	<form action="/brick_market/bbs/list.jsp" id="serch">
-		<div class="search">
+	<form action="/brick_market/bbs/list.jsp" class="search">
+		<div class="search_div">
 		<select name="status" id="status">
 			<option value="0" selected="selected">판매중</option>
 			<option value="1">예약 완료</option>
@@ -199,10 +199,5 @@ function op() {
 			<li><a href="/brick_market/bbs/list.jsp?status=0&category=4&keyword="><%=bdtoheader.stringCategory(4)%></a></li>
 		</ul>
 	</nav>
-	<span class="report">
-		<ul>
-			<li><a>이용가이드</a></li>
-		</ul>
-	</span>
 	<hr class="line" style="border:0px; height:2px; background-color:rgb(243,114,62);">
 </header>

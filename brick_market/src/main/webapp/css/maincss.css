@@ -58,12 +58,12 @@ body {
 	width:100%;
 	display:grid;
 	align-items:center;
-	grid-template-columns: 25fr 55fr 30fr;
-	grid-template-rows: 30px 100px 30px 20px;
+	grid-template-columns: 25fr 40fr 45fr;
+	grid-template-rows: 15px 60px 40px 20px;
 	grid-template-areas:
-		"login  login  login "
-		"logo  search  mypage"
-		".     nav     report"
+		". . ."
+		"logo  search  login"
+		"logo  nav     ."
 		"line  line    line  "
 		;
 }
