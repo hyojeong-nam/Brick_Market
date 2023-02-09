@@ -113,9 +113,14 @@ border: 0px;
 .main{
 margin-top: 30px;
 margin-bottom: 30px;
-border: 0.5px solid rgb(243,114,62);
+border: 3px solid rgb(243,114,62,0.3);
+padding: 10px 4px;
 }
+.replying{
 
+border: 3px solid rgb(243,114,62,0.3);
+padding: 20px 0px 50px 0px;
+}
 .img{
  width: 50px;
  height: 50px;
@@ -232,8 +237,9 @@ padding-left: 10px;
 }
 div .content{
 word-wrap:break-word;
-border: 0.5px solid rgb(243,114,62);
+
 }
+
 </style>
 <%
 String bbs_idx_s = request.getParameter("bbs_idx");
