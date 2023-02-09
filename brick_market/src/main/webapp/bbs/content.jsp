@@ -414,11 +414,11 @@ function openRivew() {
 			if(midx!=0){
 				like=ldao.checkLike(bbs_idx, midx);
 				if(like==1){
-					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=1" >좋아요 취소</a><% 
+					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=1" >관심글 취소</a><% 
 				}else if(like==0){
-					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=0" >좋아요 &hearts;</a><%
+					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=0" >관심글 &hearts;</a><%
 				}else{
-					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=2" >좋아요 &hearts;</a><%
+					%><a href="likeUpdate_ok.jsp?bbs_idx=<%=bbs_idx %>&user_idx=<%=midx %>&check=2" >관심글 &hearts;</a><%
 				}
 			}else{
 				%><span>로그인후 이용가능</span><% 
