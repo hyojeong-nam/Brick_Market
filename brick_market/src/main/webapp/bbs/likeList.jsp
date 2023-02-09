@@ -63,28 +63,25 @@ z-index: 1;
 height: 50px;
 }
 .sub {
-margin-left: 700px;
+margin-left: 630px;
 
 }
 
 .sub-text{
-	display: none;
-	position: absolute;
-	right: 350px;
-	
 	border-radius: 15px; 
 	width: 100px;
 	padding-top: 15px;
+	color: transparent;
 }
 
-.sub:hover + .sub-text{
+.sub:hover .sub-text{
 	display: inline;
-	text-align: right;
+	color:black;
 	font-weight: bolder;
-	margin-right: 100px;
 }
 
 .sub input{
+	
 	font-size: 30px;
 	outline: none;
 	border: 0px;
@@ -185,8 +182,9 @@ int cnt=ldao.totalCnt(midx);
 					<span>	<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
 							<%=arr.get(i).getBbs_subject()%> 
 							</a></span></div><span class="price"><%=arr.get(i).getBbs_price()%> <a class="won">원</a></span>
-							<span class="sub"><input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'" value="♥"></span>
+							<span class="sub">
 							<span class="sub-text">관심글 취소!</span>
+							<input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'" value="♥"></span>
 					</div>
 					<%
 					}
