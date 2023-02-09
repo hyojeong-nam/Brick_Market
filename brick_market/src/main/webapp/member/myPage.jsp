@@ -15,27 +15,7 @@
 <title>Insert title here</title>
 <link rel="styLesheet" type="text/css"
 	href="/brick_market/css/maincss.css">
-<style>
-h2 {
-	text-align: center;
-}
 
-table {
-	text-align: center;
-	margin: 0px auto;
-}
-table tr .l{
-	text-align: left;
-	line-height: 30px;
-}
-
-.profile_img {
-	height: 150px;
-	width: 150px;
-	object-fit: cover;
-	border:1px solid rgba(243,114,62,1);
-}
-</style>
 <%
 int user_idx = (int) session.getAttribute("midx");
 
@@ -70,8 +50,26 @@ String joindate =sdf.format(original_date);
 
 </head>
 <style>
+h3 {
+	text-align: center;
+}
+
+table {
+	text-align: center;
+	margin: 0px auto;
+}
+table tr .l{
+	text-align: left;
+	line-height: 30px;
+}
+
+.profile_img {
+	height: 150px;
+	width: 150px;
+	object-fit: cover;
+}
 article.list div{
-	margin:5px 0px;
+	margin:0px 0px;
 	padding: 15px 0px;
 }
 
@@ -92,28 +90,28 @@ article.list a{
 }
 
 article.list{
+	margin-top:15px;
 	width:200px;
 	display:inline-table;
-	border:1px solid rgba(243,114,62,1);
+	border:2px solid rgba(243,114,62,1);
 }
 article.info{
-	width:500px;
-	height:400px;
+	margin-top:15px;
+	margin-left:15px;
+	margin-bottom:20px;
+	width:400px;
+	height:auto;
+	border:2px solid rgba(243,114,62,1);
 }
 
-.mid hr{
-	width:70%;
-	height:2px;
-	border:0px;
-	background-color:rgba(243,114,62,1);
+article.info table tr td{
+	line-height:40px;
 }
-
 </style>
 <body>
 	<%@include file="/header.jsp"%>
 	<section class="mid">
 		<h2>마이 페이지</h2>
-		<hr>
 		<div class="content">
 		<article class="list">
 			<a href="/brick_market/member/myPage.jsp"><div>마이페이지</div></a>
@@ -130,27 +128,27 @@ article.info{
 						</td>
 				</tr>
 				<tr>
-					<td >이름</td>
+					<th >이름</th>
 					<td class="l"><%=dto.getMember_name()%></td>
 				</tr>
 				<tr>
-					<td >아이디</td>
+					<th >아이디</th>
 					<td class="l"><%=dto.getMember_id()%></td>
 				</tr>
 				<tr>
-					<td >비밀번호</td>
+					<th >비밀번호</th>
 					<td class="l"><%=dto.getMember_pwd()%></td>
 				</tr>
 				<tr>
-					<td >닉네임</td>
+					<th >닉네임</th>
 					<td class="l"><%=dto.getMember_nick()%></td>
 				</tr>
 				<tr>
-					<td >이메일</td>
+					<th >이메일</th>
 					<td class="l"><%=dto.getMember_email()%></td>
 				</tr>
 				<tr>
-					<td >별점</td>
+					<th >별점</th>
 					<%	
 					ArrayList<ReviewDTO> varr = vdao.selectReview(user_idx);
 					if(varr == null || varr.size() == 0){
