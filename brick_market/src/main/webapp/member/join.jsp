@@ -42,12 +42,12 @@
 	border-radius: 3px;
 }
 article form div{
-text-align:left;
-text-weight :bold;
-margin-bottom: 10px;
+	text-align:left;
+	text-weight :bold;
+	margin-bottom: 10px;
 }
 .but{
-text-align:Center;
+	text-align:Center;
 }
 #h {
 	font-size: 30px;

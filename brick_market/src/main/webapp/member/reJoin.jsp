@@ -14,24 +14,48 @@
 <link rel="styLesheet" type="text/css"
 	href="/brick_market/css/maincss.css">
 <style>
+input[type=file]::file-selector-button {
+  float:right;
+  width: 80px;
+  height: 30px;
+  background: #fff;
+  border: 1px solid rgb(77,77,77);
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  }
+}
+.td1{
+text-align: center;
+}
 #h {
 	font-size: 30px;
 	margin-top: 0px;
 	margin-bottom: 30px;
 }
 
-table {
+t1 {
 	text-align: center;
 	margin: 0px auto;
 }
 
+t2{
+	text-align: center;
+	margin: 0px auto;
+}
+t3{
+	margin: 4px;
+	border:2px;
+}
+
 .profile_img {
+	border:1px solid rgba(243,114,62,1);
 	height: 150px;
 	width: 150px;
 	object-fit: cover;
 }
 .textbox {
-	width: 150px;
+	width: 200px;
 	height:10px;
 	margin-bottom: 3px;
 	margin-top: 4px;
@@ -50,7 +74,7 @@ table {
 	font-family: inherit;
 }
 .idbox{
-	width: 150px;
+	width: 200px;
 	height:10px;
 	margin-bottom: 3px;
 	margin-top: 4px;
@@ -81,10 +105,10 @@ table {
 	border-color: transparent;
 	color: white;
 	padding: 8px;
+	margin-top: 30px;
 	margin-bottom: 5px;
 	border-radius: 10px 10px 10px 10px;
 	font-family: inherit;
-	margin-top: 20px;
 }
 #re {
 	width: 80px;
@@ -95,7 +119,9 @@ table {
 	border-radius: 10px 10px 10px 10px;
 	font-family: inherit;
 }
-
+.typeHidden{
+	text-align:right
+}
 </style>
 <%
 int user_idx = (int) session.getAttribute("midx");
@@ -217,38 +243,44 @@ function notice(){
 	<section class="mid">
 		<article id="wrap">
 		<form name="rejoin" id="rejoin" method="post" action="/brick_market/member/reJoin_ok.jsp" enctype="multipart/form-data">
-			<table border="1">
+			
+			
+			<table id="t1">
 			
 			<tr>
-			<td colspan="2"><h2 id="h">회원 정보</h2></td>
+			<td colspan="3"><h2 id="h">회원 정보</h2></td>
 			</tr>
 			
 			<tr>
-			<td><img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
-			<input type="file" name="member_img"/>
+			<td class="td1">
+			<img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
+			<input type="file" id="file" name="member_img"/>
 			</td>
-			<td><%=dto.getMember_nick()%>님은 <%=result%>입니다.
+			<td colspan="2">
+			<%=dto.getMember_nick()%>님은 <%=result%>입니다.
 			<br>가입일: <%=joindate %></td>
 			</tr>
-
+			</table>
+			<br>
+			<table id="t2">
 			<tr>
-			<td>이름</td>
-			<td><input type="text" name="member_name" value="<%=dto.getMember_name()%>" class="textbox" required></td>
+			<td width="120" class="td1">이름</td>
+			<td width="300"><input type="text" name="member_name" value="<%=dto.getMember_name()%>" class="textbox" required></td>
 			</tr>
 			
 			<tr>
-			<td>아이디</td>
+			<td class="td1">아이디</td>
 			<td><input type="text" name="member_id" value="<%=dto.getMember_id()%>" class="idbox" readonly required></td>
 			</tr>
 			
 			<tr>
-			<td> 현재 비밀번호 </td>
+			<td class="td1"> 현재 비밀번호 </td>
 			<td><input type="password" name="pwd" id="pwd1" 
 			value="<%=dto.getMember_pwd()%>" onchange="check_pwd()" class="textbox" required> </td>
 			</tr>
 			
 			<tr>
-			<td>
+			<td class="td1">
 			변경할 비밀번호
 			</td>
 			<td>
@@ -258,13 +290,15 @@ function notice(){
 			</tr>
 			
 			<tr>
-			<td> 닉네임 </td>
+			<td class="td1"> 닉네임 </td>
 			<td><input type="text" name="member_nick" value="<%=dto.getMember_nick()%>" class="textbox" required></td>
 			</tr>
+			</table>
 			
+			<table id="t3">
 			<tr>
-			<td>이메일</td>
-			<td><input type="text" name="member_email" id="email1" value="<%=email_id%>" class="textbox2" required> 
+			<td width="120" class="td1">이메일</td>
+			<td colspan="2" width="400"><input type="text" name="member_email" id="email1" value="<%=email_id%>" class="textbox2" required> 
 					@ <input type="text" name="email2" id="email2" class="textbox2" value="<%=email2%>" required>
 					<select name="email_select" class="box" id="email_select" onChange="checkMail();">
 							<option value="" selected>선택해 주세요</option>
@@ -282,6 +316,7 @@ function notice(){
 				<input type="button" value="취소하기" id="re" onclick="history.back();">
 				</td>
 				</tr>
+				
 			</table>	 
 		  </form>
 		</article>
