@@ -29,11 +29,7 @@ height: 80px;
 margin: 10px;
 float: left;
 margin-left: 0px;
-}
-.main .img img{
-width: 80px;
-height: 80px;
-	object-fit: cover;
+object-fit: cover;
 }
 .main .subject{
 font-size: 25px;

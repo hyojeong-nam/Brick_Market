@@ -206,7 +206,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 
 
 
-<body onload="nextaoto();">
+<body onload="window.setTimeout('nextaoto();',5000);">
 	<%@ include file="header.jsp"%>
 	<section class="mid">
 		<h3>최신글 보기</h3>
