@@ -113,6 +113,7 @@ border: 0px;
 .main{
 margin-top: 30px;
 margin-bottom: 30px;
+border: 0.5px solid rgb(243,114,62);
 }
 
 .img{
@@ -135,7 +136,7 @@ margin-bottom: 30px;
 text-align:left;
 margin-left:150px;
 max-width: 580px;
-
+word-wrap:break-word;
 }
 .tag{
 text-align: right;
@@ -175,6 +176,20 @@ text-align: right;
 margin-top: 20px;
 margin-right: 30px;
 }
+div .tag a:hover{
+	color: rgb(243,114,62);
+}
+div .tag a{
+	text-decoration: none;
+	color: black;
+}
+div .tag span:hover{
+	color: rgb(243,114,62);
+}
+div .tag span{
+	text-decoration: none;
+	color: black;
+}
 .sese input{
 margin-top: 20px;
 }
@@ -184,7 +199,6 @@ float: left;
 margin-left: 20px;
 }
 .replying textarea{
-display: inline-block;
 z-index: 1;
 float: left;
 margin-left: 10px;
@@ -195,9 +209,30 @@ float: left;
 }
 .tag{
 margin-right: 30px;
+
 }
 .page{
 margin-top: 70px;
+}
+textarea {
+padding: 10px;
+margin-left: 20px;
+}
+form{
+}
+.nn textarea {
+	margin-bottom: 20px;
+}
+.nn{
+margin-bottom: 30px;
+}
+.mid #zz textarea {
+margin-left: 0px;
+padding-left: 10px;
+}
+div .content{
+word-wrap:break-word;
+border: 0.5px solid rgb(243,114,62);
 }
 </style>
 <%
@@ -262,6 +297,10 @@ function openDel(){
 	window.open('delete.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>',
 			+'delPage','width=520,height=250');	
 }
+function openReport(){
+	window.open('/brick_market/report/report.jsp?bbs_idx=<%=bbs_idx%>',
+			+'reportPage','width=570,height=300');	
+}
 function openRivew() {
 	window.open('/brick_market/review/review.jsp?bbs_idx='+
 			'<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>'
@@ -269,6 +308,7 @@ function openRivew() {
 			+'&bbs_category=<%=bdto.getBbs_category()%>&bbs_price=<%=bdto.getBbs_price()%>&bbs_img=<%=bdto.getBbs_img()%>',
 			+'reviewPage','width=600,height=800');	
 }
+
 </script>
 </head>
 <body>
@@ -353,7 +393,7 @@ function openRivew() {
 				<a href="#" onclick="openRivew();">
 				리뷰 
 				</a>
-				<a href="/brick_market/report/report.jsp?bbs_idx=<%=bbs_idx%>">
+				<a href="#" onclick="openReport();">
 				신고 
 				</a>
 			<%}else{ %>
@@ -399,7 +439,7 @@ function openRivew() {
 			}
 		//대댓보기 메서드 
 		function rereplyselect(img,date,nick,content,size,idx,ref){
-			var str='<div class="mid">';
+			var str='<div class="mid" id="zz">';
 			for( i=0;i<size;i++){
 				str+='<div class="arrow">&hookrightarrow;</div>'+
 				'<div><img class="img" src="'+img[i]+'"></div>'+
@@ -409,12 +449,12 @@ function openRivew() {
 				'<div class="tag">수정 삭제</div>';
 			}
 			str+=submitstr(<%=midx!=0%>,ref,idx);
-			document.querySelector('.rereply'+idx).innerHTML=''+str;
+			document.querySelector('.rereply'+idx).innerHTML=''+str+'';
 		}
 		//대댓 없을경우 대댓보기 메서드
 		function rereply(idx,ref) {
 			 str=submitstr(<%=midx!=0%>,ref,idx);
-			document.querySelector('.rereply'+idx).innerHTML=''+str;
+			document.querySelector('.rereply'+idx).innerHTML='<div class="nn">'+str+'</div><div class="nn">&nbsp;</div>';
 		}
 		//대댓 숨기기 메서드
 		function noreply(idx) {
@@ -460,22 +500,22 @@ function openRivew() {
 				<div class="tag">
 				<%if(rereply.size()!=0){
 					%>
-					<span onclick="javascript:rereplyselect(img<%=rearr.get(i).getReply_idx()%>,date<%=rearr.get(i).getReply_idx()%>,nick<%=rearr.get(i).getReply_idx()%>,content<%=rearr.get(i).getReply_idx()%>,<%=rereply.size()%>,<%=rearr.get(i).getReply_idx()%>,<%=rearr.get(i).getReply_ref()%>);">등록된답글<%=rereply.size()%></span>
+					<a href="#;"><span onclick="javascript:rereplyselect(img<%=rearr.get(i).getReply_idx()%>,date<%=rearr.get(i).getReply_idx()%>,nick<%=rearr.get(i).getReply_idx()%>,content<%=rearr.get(i).getReply_idx()%>,<%=rereply.size()%>,<%=rearr.get(i).getReply_idx()%>,<%=rearr.get(i).getReply_ref()%>);">등록된답글<%=rereply.size()%></span></a>
 					<%
 				}else{
-					%><span class="pl"><a onclick="javascript:rereply(<%=rearr.get(i).getReply_idx()%>,<%=rearr.get(i).getReply_ref()%>);">등록된답글<%=rereply.size() %></a></span> <%
+					%><span class="pl"><a href="#;" onclick="javascript:rereply(<%=rearr.get(i).getReply_idx()%>,<%=rearr.get(i).getReply_ref()%>);">등록된답글<%=rereply.size() %></a></span> <%
 				} %>
 				<%if(rearr.get(i).getReply_write_idx()==midx){
 					%>
 					<script>
 					//수정캔슬
 					function cancelupdatereply<%=rearr.get(i).getReply_idx()%>(idx,content){
-						document.querySelector('.up'+idx).innerHTML='<a onclick="javascript:updatereply<%=rearr.get(i).getReply_idx()%>(\'<%=rearr.get(i).getReply_content()%>\',<%=rearr.get(i).getReply_idx()%>);">수정</a>';
+						document.querySelector('.up'+idx).innerHTML='<a href="#;" onclick="javascript:updatereply<%=rearr.get(i).getReply_idx()%>(\'<%=rearr.get(i).getReply_content()%>\',<%=rearr.get(i).getReply_idx()%>);">수정</a>';
 						document.querySelector('.updatereply'+idx).innerHTML=''+content;
 					}
 					//수정하기 메서드
 					function updatereply<%=rearr.get(i).getReply_idx()%>(content,idx) {
-						document.querySelector('.up'+idx).innerHTML='<a onclick="javascript:cancelupdatereply<%=rearr.get(i).getReply_idx()%>('+idx+',\''+content+'\');">취소</a>';
+						document.querySelector('.up'+idx).innerHTML='<a href="#;" onclick="javascript:cancelupdatereply<%=rearr.get(i).getReply_idx()%>('+idx+',\''+content+'\');">취소</a>';
 						document.querySelector('.updatereply'+idx).innerHTML=''+
 						'<form action="updateReply.jsp" method="post">'+
 						'<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="content" required>'+content+
@@ -486,8 +526,8 @@ function openRivew() {
 						'<div class="sese"><input type="submit" value="등록"></div></form>';
 					}
 					</script>
-					<span class="up<%=rearr.get(i).getReply_idx()%>"><a onclick="javascript:updatereply<%=rearr.get(i).getReply_idx()%>('<%=rearr.get(i).getReply_content()%>',<%=rearr.get(i).getReply_idx()%>);">수정</a></span>
-					<span><a onclick="javascript:delete_reply(<%=rearr.get(i).getReply_ref()%>);">삭제</a></span>
+					<span class="up<%=rearr.get(i).getReply_idx()%>"><a href="#;" onclick="javascript:updatereply<%=rearr.get(i).getReply_idx()%>('<%=rearr.get(i).getReply_content()%>',<%=rearr.get(i).getReply_idx()%>);">수정</a></span>
+					<span><a href="#;" onclick="javascript:delete_reply(<%=rearr.get(i).getReply_ref()%>);">삭제</a></span>
 					<% 
 					}
 				%>
@@ -504,6 +544,7 @@ function openRivew() {
 					<%
 					} else {
 					%>
+					<hr>
 						<div class="replying"><img class="img" src="<%=mdtoheader.getMember_img()%>" alt="내사진">
 							<div class="nick"><%=mdtoheader.getMember_nick()%></div>
 							<textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required ></textarea>
