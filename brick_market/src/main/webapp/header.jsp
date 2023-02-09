@@ -64,7 +64,7 @@
 	padding: 0px 0px;
 	height:180px;
 	visibility: visible;
-	transition: all 0.7s ease;
+	transition: all 1.0s ease;
 }
 .openmenu-content{
 	border:1px solid rgba(243,114,62,0.5);
@@ -74,7 +74,6 @@
 	color: black;
 	text-decoration: none;
 	background-color : rgba(243,114,62,0.3);
-	
 }
 
 
@@ -84,7 +83,7 @@
 
 .search{
 	border:2px solid;
-	border-color: rgb(243,114,62);http://localhost:9090/brick_market/bbs/content.jsp?bbs_idx=68
+	border-color: rgb(243,114,62);
 	border-radius:5px;
 	padding:5px;
 	width: 454px;
@@ -114,14 +113,12 @@
 	'GRAD' 0,
 	'opsz' 48;
 	font-size: 30px;
-	cursor: pointer;
 }
 .material-symbols-outlined:hover {
 	color: rgb(243,114,62);
 }
-.line-top{
-	opacity: 0.2;
-}
+
+
 </style>
 <script>
 function op() {
@@ -190,7 +187,6 @@ function op() {
 		</div>
 	</form>
 	<nav class="nav">
-	<hr class="line-top">
 		<ul>
 			<li><a href="/brick_market/bbs/list.jsp?status=0&category=0&keyword="><%=bdtoheader.stringCategory(0)%></a></li>
 			<li><a href="/brick_market/bbs/list.jsp?status=0&category=1&keyword="><%=bdtoheader.stringCategory(1)%></a></li>
@@ -200,7 +196,6 @@ function op() {
 		</ul>
 	</nav>
 	<span class="report">
-	<hr class="line-top">
 		<ul>
 			<li><a>이용가이드</a></li>
 		</ul>

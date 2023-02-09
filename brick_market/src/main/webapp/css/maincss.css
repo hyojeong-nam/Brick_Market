@@ -10,17 +10,17 @@ body {
 	font-family: 'NanumBarunGothic';
 	text-align:center;
 	margin:0px auto;
-	width:1200px;
+	width: 100%;
+	min-height: 100%;
 	display:grid;
-	grid-template-columns: 100px 1000px 100px;
-	grid-template-rows: 160px 20px 50px minmax(400px, auto) 50px 150px;
+	grid-template-columns: 1fr 100px 1000px 100px 1fr;
+	grid-template-rows: 160px 20px 50px minmax(400px, auto) 150px;
 	grid-template-areas:
-		"header header header"
-		"line   line   line  "
-		".      .      .     "
-		"left   mid    right "
-		".      .      .     "
-		"footer footer footer"
+		"header header header header header"
+		". line   line   line  ."
+		". .      .      .     ."
+		". left   mid    right ."
+		"footer footer footer footer footer"
 		;
 }
 
@@ -55,9 +55,10 @@ body {
 	grid-area: header;
 	justify-items: stretch;
 	margin:0px auto;
+	width:100%;
 	display:grid;
 	align-items:center;
-	grid-template-columns: 350px 550px 300px;
+	grid-template-columns: 35fr 55fr 30fr;
 	grid-template-rows: 30px 100px 30px 20px;
 	grid-template-areas:
 		"login  login  login "
@@ -72,15 +73,17 @@ body {
 	width: 250px;
 	object-fit: cover;}
 .header .login {
-	margin: 0px 0px;
+	margin:0px 0px;
 	grid-area: login;
 	justify-self:right;
-	font-size: 15px;}
+	font-size: 15px;
+	padding-right: 35px;}
 .header .mypage {
 	margin: 0px 0px;
 	grid-area: mypage;
 	justify-self:right;
-	font-size: 15px;}
+	font-size: 15px;
+	padding-right: 50px;}
 .header .search {
 	grid-area: search;
 	justify-self:left;
