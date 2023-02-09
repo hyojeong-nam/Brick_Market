@@ -117,7 +117,7 @@ window.location.href='/brick_market/member/login.jsp';
 					</tr>
 					<tr colspan="3">
 						<td colspan="4"><input type="file" name="bbs_img"
-							value="이미지 첨부하기" accept=".jpg, .png"></td>
+							value="이미지 첨부하기" accept="image/png, image/jpeg, image/jpg"></td>
 					</tr>
 					<tr>
 						<td colspan="2"><input type="submit" value="등록하기"></td>

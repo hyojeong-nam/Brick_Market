@@ -46,6 +46,7 @@ t2{
 t3{
 	margin: 4px;
 	border:2px;
+	padding: 5px;
 }
 
 .profile_img {
@@ -254,7 +255,7 @@ function notice(){
 			<tr>
 			<td class="td1">
 			<img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
-			<input type="file" id="file" accept=".jpg, .png" name="member_img"/>
+			<input type="file" id="file" accept="image/png, image/jpeg, image/jpg" name="member_img"/>
 			</td>
 			<td colspan="2">
 			<%=dto.getMember_nick()%>님은 <%=result%>입니다.
@@ -297,7 +298,7 @@ function notice(){
 			
 			<table id="t3">
 			<tr>
-			<td width="120" class="td1">이메일</td>
+			<td width="120" class="td1" >이메일</td>
 			<td colspan="2" width="400"><input type="text" name="member_email" id="email1" value="<%=email_id%>" class="textbox2" required> 
 					@ <input type="text" name="email2" id="email2" class="textbox2" value="<%=email2%>" required>
 					<select name="email_select" class="box" id="email_select" onChange="checkMail();">
