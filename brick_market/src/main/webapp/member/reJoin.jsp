@@ -254,7 +254,7 @@ function notice(){
 			<tr>
 			<td class="td1">
 			<img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
-			<input type="file" id="file" name="member_img"/>
+			<input type="file" id="file" accept=".jpg, .png" name="member_img"/>
 			</td>
 			<td colspan="2">
 			<%=dto.getMember_nick()%>님은 <%=result%>입니다.

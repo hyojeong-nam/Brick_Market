@@ -95,8 +95,8 @@ window.location.href='/brick_market/member/login.jsp';
 								<option value="3"><%=bdao.stringCategory(3) %></option>
 								<option value="4"><%=bdao.stringCategory(4) %></option>
 						</select></td>
-						<td colspan="4" rowspan="3"><img
-							src="/brick_market/img/disk.png" alt="이미지 첨부">
+						<td colspan="4" rowspan="3">
+						<img src="/brick_market/img/disk.png" alt="이미지 첨부">
 							<div>이미지 첨부하기</div>
 							<div>(jpg,png 파일만 가능)</div></td>
 					</tr>
@@ -117,7 +117,7 @@ window.location.href='/brick_market/member/login.jsp';
 					</tr>
 					<tr colspan="3">
 						<td colspan="4"><input type="file" name="bbs_img"
-							value="이미지 첨부하기"></td>
+							value="이미지 첨부하기" accept=".jpg, .png"></td>
 					</tr>
 					<tr>
 						<td colspan="2"><input type="submit" value="등록하기"></td>
