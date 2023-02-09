@@ -299,6 +299,12 @@ function delete_reply(ref) {
 		location.href='deleteReply.jsp?ref='+ref+'&bbs_idx=<%=bbs_idx%>';
 	}
 }
+function delete_rereply(idx,widx) {
+	var bl =window.confirm('삭제하시겠습니까?');
+	if(bl){
+		location.href='deleteReply.jsp?idx='+idx+'&bbs_idx=<%=bbs_idx%>';
+	}
+}
 function openDel(){
 	window.open('delete.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>',
 			+'delPage','width=520,height=250');	
@@ -444,16 +450,17 @@ function openRivew() {
 				}
 			}
 		//대댓보기 메서드 
-		function rereplyselect(img,date,nick,content,size,idx,ref){
+		function rereplyselect(img,date,nick,content,size,idx,ref,widx,reidx){
 			var str='<div class="mid" id="zz">';
 			for( i=0;i<size;i++){
 				str+='<div class="arrow">&hookrightarrow;</div>'+
 				'<div><img class="img" src="'+img[i]+'"></div>'+
 				'<div class= "date">'+date[i]+'</div>'+
-				'<div class="nick">'+nick[i]+'</div>'+
-				'<div class="content">'+content[i]+'</div>'+
-				'<div class="tag">수정 삭제</div>';
+				'<div class="nick">'+nick[i]+'</div>'
+				+'<div class="content">'+content[i]+'</div>';
+				
 			}
+			
 			str+=submitstr(<%=midx!=0%>,ref,idx);
 			document.querySelector('.rereply'+idx).innerHTML=''+str+'';
 		}
@@ -506,7 +513,7 @@ function openRivew() {
 				<div class="tag">
 				<%if(rereply.size()!=0){
 					%>
-					<a href="#;"><span onclick="javascript:rereplyselect(img<%=rearr.get(i).getReply_idx()%>,date<%=rearr.get(i).getReply_idx()%>,nick<%=rearr.get(i).getReply_idx()%>,content<%=rearr.get(i).getReply_idx()%>,<%=rereply.size()%>,<%=rearr.get(i).getReply_idx()%>,<%=rearr.get(i).getReply_ref()%>);">등록된답글<%=rereply.size()%></span></a>
+					<a href="#;"><span onclick="javascript:rereplyselect(img<%=rearr.get(i).getReply_idx()%>,date<%=rearr.get(i).getReply_idx()%>,nick<%=rearr.get(i).getReply_idx()%>,content<%=rearr.get(i).getReply_idx()%>,<%=rereply.size()%>,<%=rearr.get(i).getReply_idx()%>,<%=rearr.get(i).getReply_ref()%>,<%=rearr.get(i).getReply_write_idx()%>);">등록된답글<%=rereply.size()%></span></a>
 					<%
 				}else{
 					%><span class="pl"><a href="#;" onclick="javascript:rereply(<%=rearr.get(i).getReply_idx()%>,<%=rearr.get(i).getReply_ref()%>);">등록된답글<%=rereply.size() %></a></span> <%

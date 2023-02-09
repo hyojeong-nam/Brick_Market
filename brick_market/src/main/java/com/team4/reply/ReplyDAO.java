@@ -269,5 +269,30 @@ public class ReplyDAO {
 			}
 		}
 	}
+	public int dedleteRereply(int idx) {
+		try {
+			conn = com.team4.db.Team4DB.getConn();
+			String sql="delete from reply_table where reply_idx=?";
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, idx);
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return -1;
+			
+		}finally {
+			try {
+				
+				
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+	}
 
 }
