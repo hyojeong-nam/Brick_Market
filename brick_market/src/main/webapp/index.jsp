@@ -113,6 +113,10 @@ background-color:#808080;
 }
 </style>
 <script>
+function nextaoto() {
+	window.setTimeout('nextaoto();',5000);
+	next();
+}
 function articleTime(str){
 	var strY=str.substring(0,4);
 	var strM=parseInt(str.substring(5,7))-1;
@@ -185,6 +189,7 @@ function pe() {
 	
 }
 
+
 </script>
 </head>
 <%
@@ -201,7 +206,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 
 
 
-<body>
+<body onload="nextaoto();">
 	<%@ include file="header.jsp"%>
 	<section class="mid">
 		<h3>최신글 보기</h3>
