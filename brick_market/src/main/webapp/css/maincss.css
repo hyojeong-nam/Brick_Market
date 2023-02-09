@@ -14,7 +14,7 @@ body {
 	min-height: 100%;
 	display:grid;
 	grid-template-columns: 1fr 100px 1000px 100px 1fr;
-	grid-template-rows: 160px 20px 50px minmax(400px, auto) 150px;
+	grid-template-rows: 160px 20px 50px minmax(460px, auto) 150px;
 	grid-template-areas:
 		"header header header header header"
 		". line   line   line  ."
@@ -108,7 +108,7 @@ body {
 }
 
 .footer {
-	background-color: rgb(243,114,62);
+	background-color: #eeeeee;
 	grid-area: footer;
 }
 

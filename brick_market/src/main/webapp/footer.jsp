@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <footer class="footer">
-<hr>
+<hr style="border:0px; height:2px; background-color:#bcbcbc;">
 <nav class="nav">
 <ul>
 <li>사이트소개</li>

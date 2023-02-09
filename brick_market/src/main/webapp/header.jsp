@@ -200,5 +200,5 @@ function op() {
 			<li><a>이용가이드</a></li>
 		</ul>
 	</span>
-	<hr class="line">
+	<hr class="line" style="border:0px; height:2px; background-color:rgb(243,114,62);">
 </header>
