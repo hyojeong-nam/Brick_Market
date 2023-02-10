@@ -69,10 +69,10 @@ if(widx!=uidx){
 	<script>
 	window.alert("수정권한이 없습니다.");
 	location.href='/brick_market/bbs/content.jsp?bbs_idx=<%=bbs_idx%>';
-	window.self.close();
+	window.close();
 	</script>
 	<% 
-
+	return;
 }%>
 </head>
 <body>

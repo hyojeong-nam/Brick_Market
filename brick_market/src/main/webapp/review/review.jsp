@@ -123,7 +123,7 @@ function popupClose() {
 	%>
 	<script>
 	window.alert("리뷰 등록 권한이 없습니다");
-	window.close();
+	window.self.close();
 	</script>
 	 <% 
 	return;
