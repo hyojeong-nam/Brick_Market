@@ -71,6 +71,7 @@ h3 {
 }
 .left .btn:hover .real,.right .btn:hover .real{
 	opacity: 100%;
+	cursor: pointer;
 	transform: scale(1.2);
 }
 

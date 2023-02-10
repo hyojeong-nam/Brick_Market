@@ -60,6 +60,7 @@ margin: 0px 0px;
 padding: 0px;
 }
 .litag{
+transition-duration: 0.3s;
 float: left;
 width: 250px;
 height: 300px;
@@ -113,10 +114,12 @@ background-color:#808080;
 }
 .real{
 	opacity: 50%;
+	transition-duration: 0.2s;
 }
 .left .btn:hover .real,.right .btn:hover .real{
 	opacity: 100%;
 	cursor: pointer;
+	transform: scale(1.2);
 }
 .sideimg {
 	width: 50px;

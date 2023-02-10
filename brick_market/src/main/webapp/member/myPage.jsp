@@ -186,7 +186,6 @@ article.info table tr td{
 			</table>
 		</article>
 		<article class="list">
-			<a href="/brick_market/member/myPage.jsp"><div>마이페이지</div></a>
 			<a href="/brick_market/bbs/myContent.jsp"><div>등록한상품</div></a>
 			<a href="/brick_market/bbs/likeList.jsp"><div>관심글목록</div></a>
 			<a href="/brick_market/member/pwdCheck.jsp"><div>회원정보수정</div></a>

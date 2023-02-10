@@ -64,7 +64,7 @@
 	padding: 0px 0px;
 	height:172px;
 	visibility: visible;
-	transition: all 1.0s ease;
+	transition: all 0.6s ease;
 }
 .openmenu-content{
 	border:1px solid rgba(243,114,62,0.5);
