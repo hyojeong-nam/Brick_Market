@@ -130,7 +130,7 @@
 </style>
 <script>
 function op() {
-	document.getElementById('serch').submit();
+	document.getElementById('search').submit();
 }
 </script>
 <header class="header">
@@ -173,7 +173,7 @@ function op() {
 	</span>
 	<a class="logo" href="/brick_market/index.jsp"><img 
 		src="/brick_market/img/logo.png" alt="메인로고"></a>
-	<form action="/brick_market/bbs/list.jsp" class="search">
+	<form action="/brick_market/bbs/list.jsp" class="search" id="search">
 		<div class="search_div">
 		<select name="status" id="status">
 			<option value="0" selected="selected">판매중</option>
