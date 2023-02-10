@@ -71,6 +71,15 @@ article form div{
   align-items:center;
   min-height: 50vh;
 }
+#join{
+	border:10px solid;
+	border-color:rgba(243,114,62,0.3);
+	border-radius: 15px;
+	width: 600px;
+	margin-bottom: 80px;
+	padding-left: 5%;
+	
+}
 </style>
 <script>
 	function open_idcheck() {
@@ -159,7 +168,7 @@ article form div{
 		join.action = "join_ok.jsp";
 		join.method = "post";
 		join.submit();
-	}
+	}	
 </script>
 </head>
 <body>
