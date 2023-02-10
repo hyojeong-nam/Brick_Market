@@ -101,6 +101,7 @@ background-color:#808080;
 }
 .left .btn:hover .real,.right .btn:hover .real{
 	opacity: 100%;
+	cursor: pointer;
 }
 .sideimg {
 	width: 50px;
