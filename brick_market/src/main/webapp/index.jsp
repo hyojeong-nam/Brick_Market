@@ -14,7 +14,10 @@
 <style type="text/css">
 
 article.content .litag:hover{
-	box-shadow: 0px 0px 3px 2px gray;
+	
+	background-color:white;
+	transform: scale(1.13);
+	z-index:1;
 }
 
 
