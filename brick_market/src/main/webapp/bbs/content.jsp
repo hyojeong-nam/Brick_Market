@@ -36,10 +36,11 @@
 }
 
 .item_img {
-	height: 400px;
-	width: 400px;
+	height: 350px;
+	width: 350px;
 	object-fit: cover;
 	grid-area: item;
+	
 }
 
 .title_text {
