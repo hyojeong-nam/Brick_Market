@@ -15,7 +15,6 @@ if(request.getParameter("bbs_idx")!=null&&request.getParameter("ref")!=null){
 		
 		%>
 		<script>
-		alert(<%=ref%>);
 		window.location.href ='content.jsp?bbs_idx=<%=bbs_idx%>';
 		</script><%
 		}else{
@@ -24,26 +23,8 @@ if(request.getParameter("bbs_idx")!=null&&request.getParameter("ref")!=null){
 		window.location.href ='content.jsp?bbs_idx=<%=bbs_idx%>';
 		</script><% 
 		}
-}else if(request.getParameter("bbs_idx")!=null&&request.getParameter("idx")!=null){
-	
-	bbs_idx=Integer.parseInt(request.getParameter("bbs_idx"));
-	idx=Integer.parseInt(request.getParameter("idx"));
-	int resert=rdao.dedleteRereply(idx);
-if(resert>=1){
-		
-		%>
-		<script>
-		window.location.href ='content.jsp?bbs_idx=<%=bbs_idx%>';
-		</script><%
-		}else{
-		%><script>
-		window.alert('삭제실패');
-		window.location.href ='content.jsp?bbs_idx=<%=bbs_idx%>';
-		</script><% 
-		}
-}
 
-else{
+	}else{
 	%>
 	<script>window.alert('잘못된 접근입니다');
 	window.location.href = '/brick_market/index.jsp';
