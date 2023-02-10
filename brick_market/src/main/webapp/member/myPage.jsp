@@ -60,6 +60,7 @@ table {
 }
 table tr .l{
 	text-align: left;
+	width:300px;
 	line-height: 30px;
 }
 
@@ -94,17 +95,21 @@ article.list{
 	display:block;
 	margin-top:15px;
 	width:400px;
-	border:2px solid rgba(243,114,62,1);
+	border:10px solid;
+	border-color:rgba(243,114,62,0.3);
+	border-radius: 15px;
 	margin-bottom:30px;
 }
 article.info{
 	display:block;
-	margin-top:15px;
-	margin-left:15px;
-	margin-bottom:20px;
-	width:400px;
+	margin-top: 30px;
+	margin-left: 15px;
+	margin-bottom: 20px;
 	height:auto;
-	border:2px solid rgba(243,114,62,1);
+	border:10px solid;
+	border-color:rgba(243,114,62,0.3);
+	border-radius: 15px;
+	width: 600px;
 }
 
 article.info table tr td{
@@ -114,9 +119,9 @@ article.info table tr td{
 <body>
 	<%@include file="/header.jsp"%>
 	<section class="mid">
-		<h2>마이 페이지</h2>
 		<div class="content">
 		<article class="info">
+			<h2>마이 페이지</h2>
 			<table>
 				<tr>
 					<td><img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
