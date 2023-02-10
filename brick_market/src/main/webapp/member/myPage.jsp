@@ -85,17 +85,20 @@ article.list a{
 .content {
 	display:flex;
     justify-content:center;
-    align-items:flex-start;
+    align-items:center;
+    flex-direction:column;
 	margin:0px 0px;
 }
 
 article.list{
+	display:block;
 	margin-top:15px;
-	width:200px;
-	display:inline-table;
+	width:400px;
 	border:2px solid rgba(243,114,62,1);
+	margin-bottom:30px;
 }
 article.info{
+	display:block;
 	margin-top:15px;
 	margin-left:15px;
 	margin-bottom:20px;
@@ -113,12 +116,6 @@ article.info table tr td{
 	<section class="mid">
 		<h2>마이 페이지</h2>
 		<div class="content">
-		<article class="list">
-			<a href="/brick_market/member/myPage.jsp"><div>마이페이지</div></a>
-			<a href="/brick_market/bbs/myContent.jsp"><div>등록한상품</div></a>
-			<a href="/brick_market/bbs/likeList.jsp"><div>관심글목록</div></a>
-			<a href="/brick_market/member/pwdCheck.jsp"><div>회원정보수정</div></a>
-		</article>
 		<article class="info">
 			<table>
 				<tr>
@@ -182,6 +179,12 @@ article.info table tr td{
 					%>
 				</tr>
 			</table>
+		</article>
+		<article class="list">
+			<a href="/brick_market/member/myPage.jsp"><div>마이페이지</div></a>
+			<a href="/brick_market/bbs/myContent.jsp"><div>등록한상품</div></a>
+			<a href="/brick_market/bbs/likeList.jsp"><div>관심글목록</div></a>
+			<a href="/brick_market/member/pwdCheck.jsp"><div>회원정보수정</div></a>
 		</article>
 		</div>
 	</section>
