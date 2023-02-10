@@ -52,6 +52,10 @@ article{
 table tr td{
 line-height: 30px;
 }
+
+textarea{
+	resize: none;
+}
 </style>
 <%
 int user_idx = 0;

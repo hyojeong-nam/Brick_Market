@@ -108,6 +108,9 @@ div img{
 	margin-left: 150px ;
 	
 }
+textarea{
+	resize: none;
+}
 
 </style>
 <script>
@@ -116,6 +119,15 @@ function popupClose() {
 	window.close();
 }
 </script>
+<%if(midx==sidx){
+	%>
+	<script>
+	window.alert("리뷰 등록 권한이 없습니다");
+	window.close();
+	</script>
+	 <% 
+	return;
+} %>
 </head>
 <body>
 
