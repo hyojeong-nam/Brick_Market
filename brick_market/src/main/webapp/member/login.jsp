@@ -30,7 +30,7 @@ margin-bottom: 40px;
     background-color: rgb(245,147,109);
     border-color: transparent;
     color: white;
-    padding: 8px;
+    padding: 8px 50px;
     margin-top: 8px;
     margin-bottom: 5px;
     border-radius:10px 10px 10px 10px;
@@ -79,7 +79,7 @@ margin-bottom: 10px;
 			
 			<label><input type="submit" id="login" value="로그인"></label>
 			
-			<label><input type="button" id="idk" value="아이디/비밀번호 찾기"></label>
+			<label><a href="/brick_market/member/join.jsp"><input type="button" id="idk" value="회원가입"></a></label>
 			</div>
 		</form>
 		</article>

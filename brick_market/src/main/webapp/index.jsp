@@ -81,8 +81,23 @@ display:inline-block;
    
 background-color:#e9e9e9; 
 }
-div .button1 {
 
+.newbutton{
+position:inherit;
+margin-right:10px;
+width: 30px;
+height: 30px;
+padding:2px 2px;
+border-radius: 50%;
+background-color:red;
+font-size: 13px;
+color: white;
+line-height: 17px;
+font-weight: bold;
+}
+
+
+div .button1 {
 background-color:#808080; 
 }
 .left .btn, .right .btn{
@@ -132,13 +147,13 @@ function articleTime(str){
 	var today=new Date();
 	var dayma= today-date;
 	if(dayma<60*1000){//1분
-		return '방금전';
+		return '<span class="newbutton">&nbsp;N&nbsp;</span>방금전';
 	}else if(dayma<1000*60*60){//1시간
 		var mi=Math.floor(dayma/(1000*60));//분구하기
-		return mi+'분전';
+		return '<span class="newbutton">&nbsp;N&nbsp;</span>'+mi+'분전';
 	}else if(dayma<1000*60*60*24){//24시간
 		var h=Math.floor(dayma/(1000*60*60));//시간구하기
-		return h+'시간전';
+		return '<span class="newbutton">&nbsp;N&nbsp;</span>'+h+'시간전';
 	}else if(dayma<1000*60*60*24*7){
 		var d=Math.floor(dayma/(1000*60*60*24));
 		return d+'일전';
@@ -227,7 +242,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select);
 		%>
 			<a class="subject" href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
 			<li class="litag">
-			<div style="color: black;">
+			<div class="date" style="color: black;">
 			<script>
 			var str = '<%=arr.get(i).getBbs_date_s()%>';
 			var msg = articleTime(str);

@@ -72,11 +72,14 @@
 .profile_nick {
 	grid-area: nick;
 	text-align: left;
+	margin-left: 15px;
+	font-weight: bold;
 }
 
 .profile_star {
 	grid-area: star;
 	text-align: left;
+	margin-left: 15px;
 }
 
 .item_text {
@@ -104,12 +107,17 @@
 	color: rgb(243,114,62);
 }
 
+hr {
+	width: 800px;
+	background-color: rgb(243,114,62);
+	border: 0px;
+	height: 1px;
+}
 
 fieldset {
 	width: 800px;
-margin: auto;
-border: 0px;
-
+	margin: auto;
+	border: 0px;
 }
 .main{
 margin-top: 30px;
@@ -337,7 +345,24 @@ function openRivew() {
 			%>
 			<img class="item_img" alt="test" src="<%=bdto.getBbs_img()%>">
 			<h2 class="title_text"><span style="color: blue;">[<%=status_s %>]</span><span>[<%=bdao.stringCategory(bdto.getBbs_category()) %>]</span><%=bdto.getBbs_subject()%></h2>
-			<p class="price_text"><%=bdto.getBbs_price()%>원</p>
+			<%
+			int price = bdto.getBbs_price();
+			String price_s = "";
+			while(price >= 1000){
+				int div = price % 1000;
+				if(div > 100){
+					price_s = "," + div + price_s;
+				}else if(div > 10){
+					price_s = ",0" + div + price_s;
+				}else{
+					price_s = ",00" + div + price_s;
+				}
+				price = price / 1000;
+			}
+			price_s = price + price_s + "원";
+			%>
+			
+			<p class="price_text"><%=price_s %></p>
 			<p class="view_text">조회수 <%=bdto.getBbs_readnum()%></p>
 			<img class="profile_img" alt="test" src="<%=mdto.getMember_img()%>">
 			<p class="profile_nick"><%=mdto.getMember_nick()%></p>

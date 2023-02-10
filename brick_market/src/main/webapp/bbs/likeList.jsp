@@ -178,7 +178,23 @@ int cnt=ldao.totalCnt(midx);
 							<div class="subject">
 					<span>	<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
 							<%=arr.get(i).getBbs_subject()%> 
-							</a></span></div><span class="price"><%=arr.get(i).getBbs_price()%> <a class="won">원</a></span>
+										<%
+										int price = arr.get(i).getBbs_price();
+										String price_s = "";
+										while(price >= 1000){
+											int div = price % 1000;
+											if(div > 100){
+												price_s = "," + div + price_s;
+											}else if(div > 10){
+												price_s = ",0" + div + price_s;
+											}else{
+												price_s = ",00" + div + price_s;
+											}
+											price = price / 1000;
+										}
+										price_s = price + price_s;
+										%>
+							</a></span></div><span class="price"><%=price_s%> <a class="won">원</a></span>
 							<span class="sub">
 							<span class="sub-text">관심글 취소!</span>
 							<input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'" value="♥"></span>
