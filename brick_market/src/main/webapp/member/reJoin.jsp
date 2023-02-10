@@ -123,6 +123,25 @@ t3{
 .typeHidden{
 	text-align:right
 }
+#rejoin{
+	border:10px solid;
+	border-color:rgba(243,114,62,0.3);
+	border-radius: 15px;
+	width: 600px;
+	margin-bottom: 80px;
+	padding-left: 10%;
+}
+table{
+	padding-left:-10%;
+	padding-bottom: 10px;
+}
+tbody tr td h2{
+	padding-top: 10%
+}
+#t3_bottom{
+	padding-bottom: 10%
+}
+
 </style>
 <%
 int user_idx = (int) session.getAttribute("midx");
@@ -313,7 +332,7 @@ function notice(){
 				</td>
 				</tr>
 				<tr>
-				<td colspan="2"><input type="submit" value="수정하기" id="go" onclick="notice();"> 
+				<td colspan="2" id="t3_bottom"><input type="submit" value="수정하기" id="go" onclick="notice();"> 
 				<input type="button" value="취소하기" id="re" onclick="history.back();">
 				</td>
 				</tr>
