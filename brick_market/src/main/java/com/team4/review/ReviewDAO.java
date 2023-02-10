@@ -9,7 +9,10 @@ public class ReviewDAO {
 	PreparedStatement ps;
 	ResultSet rs;
 	
-	/**리뷰쓰기 메서드*/
+	/**리뷰쓰기 메서드
+	 * @param dto 리뷰정보를 담은 DTO
+	 * @return 1이 나온다면 정상, -1이 나온다면 등록 실패 
+	 * */
 	public int reviewWrite(ReviewDTO dto) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -37,7 +40,10 @@ public class ReviewDAO {
 		
 	}
 	
-	/**리뷰 조회 관련 매서드*/
+	/**리뷰 조회 관련 매서드
+	 * @param review_seller_idx 리뷰를 받은 판매자의 idx
+	 * @return 찾은 리뷰정보를 ReviewDTO에 담아 ArrayList 배열로 반환
+	 * */
 	public ArrayList<ReviewDTO> selectReview(int review_seller_idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
