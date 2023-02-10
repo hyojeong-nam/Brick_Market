@@ -20,12 +20,15 @@ article.content{
 	margin: auto;
 	padding-top: 10px;
 	display: inline-block;
+	transition-duration: 0.3s;
 }
 
 article.content:hover{
 	box-shadow: 0px 0px 3px 2px gray;
+	background-color:white;
+	transform: scale(1.1);
+	z-index:1;
 }
-
 .imgarea {
 	line-height: 200px;
 }
