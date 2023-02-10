@@ -59,13 +59,13 @@ h3 {
     justify-content:center;
     align-items:center;
 	margin:0px 0px;
-	transition-duration: 0.2s;
 	
 }
 .fake{
 	opacity: 10%;
 }
 .real{
+	transition-duration: 0.2s;
 	opacity: 50%;
 }
 .left .btn:hover .real,.right .btn:hover .real{
