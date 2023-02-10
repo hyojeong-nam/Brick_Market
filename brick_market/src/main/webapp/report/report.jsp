@@ -92,7 +92,7 @@ if (widx == user_idx) {
 %>
 <script>
 	window.alert('자신이 작성한 글은 신고할 수 없습니다.');
-	window.history.back();
+	window.close();
 </script>
 <%
 return;

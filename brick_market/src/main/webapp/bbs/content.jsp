@@ -240,7 +240,10 @@ div .content{
 word-wrap:break-word;
 
 }
-
+.b_content{
+	white-space:normal;
+	width: 350px;
+}
 </style>
 <%
 String bbs_idx_s = request.getParameter("bbs_idx");
@@ -378,7 +381,7 @@ function openRivew() {
 			case 2:how_s = "택배"; break;
 			}
 			%>
-			<pre class="item_text">거래장소 : <%=bdto.getBbs_place() %><br>거래방법 : <%=how_s %><br><%=bdto.getBbs_content().replaceAll("\n", "<br>")%></pre>
+			<pre class="item_text">거래장소 : <%=bdto.getBbs_place() %><br>거래방법 : <%=how_s %><br><div class="b_content"><%=bdto.getBbs_content().replaceAll("\n", "<br>")%></div></pre>
 			<div class="btn">
 			<hr>
 			<%if(midx!=0) {%>
