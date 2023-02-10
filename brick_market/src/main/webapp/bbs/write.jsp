@@ -53,8 +53,44 @@ table tr td{
 line-height: 30px;
 }
 
-textarea{
+input, textarea, select{
+	border-color:rgba(243,114,62,0.3);
 	resize: none;
+}
+.go{
+	width: 80px;
+	background-color: rgb(245,147,109);
+	border-color: transparent;
+	color: white;
+	padding: 8px;
+	margin-bottom: 5px;
+	border-radius: 10px 10px 10px 10px;
+	font-family: inherit;
+	margin-top: 13px;
+	margin-right: 0px;
+}
+.re {
+	width: 80px;
+	background-color: lightgrey;
+	border-color: transparent;
+	color: black;
+	padding: 8px;
+	margin-bottom: 5px;
+	border-radius: 10px 10px 10px 10px;
+	margin-top: 13px;
+	font-family: inherit;
+}
+
+input[type=file]::file-selector-button{
+	width: 80px;
+	background-color: #7BA87B;
+	border-color: transparent;
+	color: white;
+	padding: 8px;
+	
+	border-radius: 10px 10px 10px 10px;
+	font-family: inherit;
+	margin-top: 2px;
 }
 </style>
 <%
@@ -139,8 +175,8 @@ window.location.href='/brick_market/member/login.jsp';
 							value="이미지 첨부하기" accept="image/png, image/jpeg, image/jpg"></td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="submit" value="등록하기"></td>
-						<td colspan="2"><input type="button" value="취소하기"
+						<td colspan="2" class="button"><input type="submit" class="go" value="등록하기"></td>
+						<td colspan="2" class="button"><input type="button" class="re" value="취소하기"
 							onclick="location.href='/brick_market/index.jsp'"></td>
 					</tr>
 				</table>
