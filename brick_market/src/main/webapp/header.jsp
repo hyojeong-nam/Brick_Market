@@ -158,7 +158,7 @@ function op() {
 		</span>
 		<nav class="openmenu">
 			<span class="logintext openmenu-btn">
-				<a href="/brick_market/member/myPage.jsp">마이페이지</a>
+				<a href="/brick_market/member/myPage.jsp">마이메뉴</a>
 			</span>
 			<div class="openmenu-content">
 				<ul class="openmenu-content">
