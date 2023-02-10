@@ -60,6 +60,8 @@ h3 {
     justify-content:center;
     align-items:center;
 	margin:0px 0px;
+	transition-duration: 0.2s;
+	
 }
 .fake{
 	opacity: 10%;
@@ -69,8 +71,8 @@ h3 {
 }
 .left .btn:hover .real,.right .btn:hover .real{
 	opacity: 100%;
+	transform: scale(1.2);
 }
-
 </style>
 <script>
 function articleTime(str){
