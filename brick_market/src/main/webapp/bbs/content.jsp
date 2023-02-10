@@ -149,7 +149,7 @@ text-align: right;
 }
 .arrow{
 text-align: left;
-margin-top: 10px;
+margin-top: 20px;
 }
 div .mid .img{
 display:inline-block;
@@ -223,9 +223,9 @@ margin-top: 70px;
 textarea {
 padding: 10px;
 margin-left: 20px;
+resize: none;
 }
-form{
-}
+
 .nn textarea {
 	margin-bottom: 20px;
 }
@@ -292,18 +292,11 @@ userGroup--;
 ArrayList<ReplyDTO> arr = rdao.replyList(bbs_idx,listSize,cp);//댓글 가져오는 기능
 %>
 <script>
-
 //댓글삭제 메서드
 function delete_reply(ref) {
 	var bl =window.confirm('삭제하시겠습니까?');
 	if(bl){
 		location.href='deleteReply.jsp?ref='+ref+'&bbs_idx=<%=bbs_idx%>';
-	}
-}
-function delete_rereply(idx,widx) {
-	var bl =window.confirm('삭제하시겠습니까?');
-	if(bl){
-		location.href='deleteReply.jsp?idx='+idx+'&bbs_idx=<%=bbs_idx%>';
 	}
 }
 function openDel(){
@@ -321,7 +314,6 @@ function openRivew() {
 			+'&bbs_category=<%=bdto.getBbs_category()%>&bbs_price=<%=bdto.getBbs_price()%>&bbs_img=<%=bdto.getBbs_img()%>',
 			+'reviewPage','width=600,height=800');	
 }
-
 </script>
 </head>
 <body>
@@ -337,7 +329,6 @@ function openRivew() {
 			case 2:status_s = "거래 완료"; break;
 			}
 			%>
-		
 			<img class="item_img" alt="test" src="<%=bdto.getBbs_img()%>">
 			<h2 class="title_text"><span style="color: blue;">[<%=status_s %>]</span><span>[<%=bdao.stringCategory(bdto.getBbs_category()) %>]</span><%=bdto.getBbs_subject()%></h2>
 			<p class="price_text"><%=bdto.getBbs_price()%>원</p>
@@ -350,7 +341,6 @@ function openRivew() {
 			if(report_cnt >= 5){
 				pstr = "[신고 횟수 "+report_cnt+"회]";
 			}
-			
 			ArrayList<ReviewDTO> varr = vdao.selectReview(user_idx);
 			if(varr == null || varr.size() == 0){
 				%>
@@ -380,9 +370,6 @@ function openRivew() {
 				<p class="profile_star"><%=star %>(<%=varr.size() %> 리뷰) 평점 <%=(double)Math.round((vavg*10))/10 %> <span style="color: red;"><%=pstr %></span></p>
 				<%
 			}
-			%>
-			
-			<%
 			int how = bdto.getBbs_how();
 			String how_s = "";
 			switch(how){
@@ -391,12 +378,10 @@ function openRivew() {
 			case 2:how_s = "택배"; break;
 			}
 			%>
-			
 			<pre class="item_text">거래장소 : <%=bdto.getBbs_place() %><br>거래방법 : <%=how_s %><br><%=bdto.getBbs_content().replaceAll("\n", "<br>")%></pre>
 			<div class="btn">
 			<hr>
-			<%if(midx!=0) {
-			%>
+			<%if(midx!=0) {%>
 				<a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>">
 				수정
 				</a>
@@ -409,7 +394,6 @@ function openRivew() {
 				<a href="#" onclick="openReport();">
 				신고 
 				</a>
-			<%}else{ %>
 			<%}
 			int like=-1;
 			if(midx!=0){
@@ -459,9 +443,7 @@ function openRivew() {
 				'<div class= "date">'+date[i]+'</div>'+
 				'<div class="nick">'+nick[i]+'</div>'
 				+'<div class="content">'+content[i]+'</div>';
-				
 			}
-			
 			str+=submitstr(<%=midx!=0%>,ref,idx);
 			document.querySelector('.rereply'+idx).innerHTML=''+str+'';
 		}
@@ -512,8 +494,7 @@ function openRivew() {
 				<div class="nick"><%=replyMember.getMember_nick() %></div>
 				<div id="content" class="updatereply<%=rearr.get(i).getReply_idx()%>"><%=rearr.get(i).getReply_content() %></div>
 				<div class="tag">
-				<%if(rereply.size()!=0){
-					%>
+				<%if(rereply.size()!=0){%>
 					<a href="#;"><span onclick="javascript:rereplyselect(img<%=rearr.get(i).getReply_idx()%>,date<%=rearr.get(i).getReply_idx()%>,nick<%=rearr.get(i).getReply_idx()%>,content<%=rearr.get(i).getReply_idx()%>,<%=rereply.size()%>,<%=rearr.get(i).getReply_idx()%>,<%=rearr.get(i).getReply_ref()%>,<%=rearr.get(i).getReply_write_idx()%>);">등록된답글<%=rereply.size()%></span></a>
 					<%
 				}else{
