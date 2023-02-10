@@ -20,10 +20,14 @@ article.content{
 	margin: auto;
 	padding-top: 10px;
 	display: inline-block;
+	transition-duration: 0.3s;
 }
 
 article.content:hover{
 	box-shadow: 0px 0px 3px 2px gray;
+	background-color:white;
+	transform: scale(1.1);
+	z-index:1;
 }
 
 .imgarea {
@@ -56,6 +60,8 @@ h3 {
     justify-content:center;
     align-items:center;
 	margin:0px 0px;
+	transition-duration: 0.2s;
+	
 }
 .fake{
 	opacity: 10%;
@@ -65,8 +71,8 @@ h3 {
 }
 .left .btn:hover .real,.right .btn:hover .real{
 	opacity: 100%;
+	transform: scale(1.2);
 }
-
 </style>
 <script>
 function articleTime(str){

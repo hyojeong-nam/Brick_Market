@@ -107,6 +107,9 @@
 	width:80px;
 	font-weight: bold;
 }
+#category:hover, #status:hover{
+	cursor: pointer;
+}
 .material-symbols-outlined {
 	font-variation-settings:
 	'FILL' 0,
@@ -117,6 +120,7 @@
 }
 .material-symbols-outlined:hover {
 	color: rgb(243,114,62);
+	cursor: pointer;
 }
 
 .nav *{
@@ -144,7 +148,7 @@ function op() {
 		mdtoheader = mdaoheader.searchIdx(midx);
 		%>
 		<span class="logintext">
-			<%=mdtoheader.getMember_nick()%>님 환영합니다&nbsp&nbsp&nbsp&nbsp&nbsp
+			<a href="/brick_market/member/myPage.jsp"><%=mdtoheader.getMember_nick()%>님</a> 환영합니다&nbsp&nbsp&nbsp&nbsp&nbsp
 		</span>
 		<span>
 		<a href="/brick_market/bbs/write.jsp">상품등록</a>

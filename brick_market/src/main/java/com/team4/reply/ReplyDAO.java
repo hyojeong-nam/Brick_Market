@@ -8,7 +8,13 @@ public class ReplyDAO {
 	PreparedStatement ps;
 	ResultSet rs;
 
-	/** 댓글조회 */
+	/** 
+	 * 댓글조회 
+	 * @param 게시글idx
+	 * @param 보여줄 게시글수
+	 * @param 유저 위치
+	 * @return ArrList<ReplyDTO> 댓글
+	 * */
 	public ArrayList<ReplyDTO> replyList(int bbs_idx ,int ls ,int cp) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -55,8 +61,11 @@ public class ReplyDAO {
 			}
 		}
 	}
+		/**
+		 * @return  댓글 테이플의 ref max수치
+		 * */
 
-	public int getMaxRef() {//해당 게시글에 max ref구하기
+	public int getMaxRef() {
 		try {
 			String sql = "select max(reply_ref) from reply_table";
 			ps = conn.prepareStatement(sql);
@@ -81,6 +90,9 @@ public class ReplyDAO {
 			}
 		}
 	}
+	/**
+	 * @param 댓글의 ref값
+	 * @return 해당 댓글의 sunbun최대값*/
 	public int getMaxSunbun(int ref) {
 		try {
 			String sql="select max(reply_sunbun) from reply_table where reply_ref=?";
@@ -105,6 +117,14 @@ public class ReplyDAO {
 		}
 		}
 	}
+	/**
+	 * @param 게시글 idx
+	 * @param 게시자 idx
+	 * @param 댓글내용
+	 * @param 본댓글인지 여부
+	 * @param 본댓글인지 여부
+	 * @return 성공여부
+	 * */
 	public int replyWrite(int bbs_idx, int write_idx, String reply_content,int lev,int ref) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -144,6 +164,10 @@ public class ReplyDAO {
 		}
 	}
 
+	/**
+	 * @param 게시글 idx
+	 * @return 게시글의 본댓글수
+	 * */
 	public int totalRef(int bbs_idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -170,7 +194,13 @@ public class ReplyDAO {
 				// TODO: handle exception
 			}
 		}
-	}public int updateReply(String content,int idx) {
+	}
+	/**
+	 * @param 변경할 댓글내용 
+	 * @param  변경할 댓글의 idx
+	 * @return 성공여부
+	 * */
+	public int updateReply(String content,int idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
 			String sql="update reply_table set reply_content =? where reply_idx=?";
@@ -196,6 +226,10 @@ public class ReplyDAO {
 			}
 		}
 	}
+	/**
+	 * @param 해당 본댓글의 ref값
+	 * @param 게시글idx
+	 * */
 	public int dedleteReply(int ref, int bbs_idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -222,7 +256,11 @@ public class ReplyDAO {
 			}
 		}
 	}
-	/** 댓글조회 */
+	/** 대댓글조회
+	 * @param 게시글 idx
+	 * @param 본댓글의 위치
+	 * @return 대댓내용
+	 *  */
 	public ArrayList<ReplyDTO> rereplyList(int bbs_idx,int ref) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -269,30 +307,6 @@ public class ReplyDAO {
 			}
 		}
 	}
-	public int dedleteRereply(int idx) {
-		try {
-			conn = com.team4.db.Team4DB.getConn();
-			String sql="delete from reply_table where reply_idx=?";
-			ps=conn.prepareStatement(sql);
-			ps.setInt(1, idx);
-			return ps.executeUpdate();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return -1;
-			
-		}finally {
-			try {
-				
-				
-				if (ps != null)
-					ps.close();
-				if (conn != null)
-					conn.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
-		}
-	}
+
 
 }

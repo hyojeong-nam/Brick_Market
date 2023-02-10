@@ -14,7 +14,10 @@
 <style type="text/css">
 
 article.content .litag:hover{
-	box-shadow: 0px 0px 3px 2px gray;
+	
+	background-color:white;
+	transform: scale(1.13);
+	z-index:1;
 }
 
 
@@ -98,6 +101,7 @@ background-color:#808080;
 }
 .left .btn:hover .real,.right .btn:hover .real{
 	opacity: 100%;
+	cursor: pointer;
 }
 .sideimg {
 	width: 50px;

@@ -7,7 +7,11 @@ public class LikeDAO {
 	Connection conn;
 	PreparedStatement ps;
 	ResultSet rs;
-
+	/**첫관심글등록
+	 * @param 댓글 idx
+	 * @param 유저 idx
+	 * @return 성공여부
+	 * */
 	public int insertLike(int bbs_idx,int user_idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -30,6 +34,12 @@ public class LikeDAO {
 			}
 		}
 	}
+	/**관심여부 변경
+	 * @param 관심글 등록 여부 1이면 0으로 0이면 1로 ok페이지에서 변환되서 들어옴 
+	 *  @param 게시글 idx
+	 *  @param 유저 idx
+	 *  @return 성공여부
+	 * */
 
 	public int updateLike(int check,int bbs_idx,int user_idx) {
 		try {
@@ -54,6 +64,11 @@ public class LikeDAO {
 			}
 		}
 	}
+	/**관심글 등록 여부
+	 * @param 게시글 idx
+	 * @param 유저 idx
+	 * @return 1이면 등록중 0이면 등록취소 상태 -1 에러 2 등록한적 없음
+	 * */
 	public int checkLike(int bbs_idx,int user_idx) {
 		try {
 			conn = com.team4.db.Team4DB.getConn();
@@ -81,6 +96,10 @@ public class LikeDAO {
 			}
 		}
 	}
+	/**좋아요 중인 페이지 
+	 * @param 유저의 idx
+	 * @return 좋아요 중인 페이지 수
+	 * */
 	public int totalCnt(int user_idx) {
 		try {
 			conn=com.team4.db.Team4DB.getConn();
