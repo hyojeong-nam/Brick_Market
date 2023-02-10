@@ -204,9 +204,7 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select, keyword, category, s
 		<%
 		if (arr == null || arr.size() == 0) {
 		%>
-		<article class="content">
-			<div>검색된 글이 없습니다.</div>
-		</article>
+		<div style="margin-top: 10%;">검색된 글이 없습니다.</div>
 		<%
 		} else {
 		for (int i = 0; i < arr.size(); i++) {
