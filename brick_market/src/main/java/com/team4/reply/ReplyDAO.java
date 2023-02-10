@@ -20,7 +20,7 @@ public class ReplyDAO {
 			conn = com.team4.db.Team4DB.getConn();
 			int start = (cp - 1) * ls + 1;
 			int end = cp * ls;
-			String sql = "select * from (select rownum as rnum, a.* from (select * from reply_table where reply_bbs_idx=? and reply_lev=0 order by reply_ref desc)a)b where rnum >= ? and rnum <= ? ";
+			String sql = "select * from (select rownum as rnum, a.* from (select * from reply_table where reply_bbs_idx=? and reply_lev=0 order by reply_ref asc)a)b where rnum >= ? and rnum <= ? ";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, bbs_idx);
 			ps.setInt(2, start);
