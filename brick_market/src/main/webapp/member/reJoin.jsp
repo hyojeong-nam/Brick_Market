@@ -263,14 +263,10 @@ function notice(){
 	<section class="mid">
 		<article id="wrap">
 		<form name="rejoin" id="rejoin" method="post" action="/brick_market/member/reJoin_ok.jsp" enctype="multipart/form-data">
-			
-			
 			<table id="t1">
-			
 			<tr>
 			<td colspan="3"><h2 id="h">회원 정보</h2></td>
 			</tr>
-			
 			<tr>
 			<td class="td1">
 			<img class="profile_img" alt="profile" src="<%=dto.getMember_img()%>"><br> 
@@ -332,7 +328,7 @@ function notice(){
 				</td>
 				</tr>
 				<tr>
-				<td colspan="2" id="t3_bottom"><input type="submit" value="수정하기" id="go" onclick="notice();"> 
+				<td colspan="2" id="t3_bottom"><input type="submit" value="수정하기" id="go"> 
 				<input type="button" value="취소하기" id="re" onclick="history.back();">
 				</td>
 				</tr>
