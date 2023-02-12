@@ -109,6 +109,14 @@ div .main{
 	border-radius: 15px;
 	margin-bottom: 5px;
 }
+/*임시로 넣어둠*/
+a{
+text-decoration-line: none;
+color: black;
+}
+a:hover { 
+color: rgb(243,114,62);
+}
 </style>
 </head>
 <%
@@ -147,7 +155,7 @@ int cnt=ldao.totalCnt(midx);
 					%>
 					<div class="main">
 							<div class="mid"><a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>"><img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>"></a></div>
-					<div class="date">조회수 : <%=arr.get(i).getBbs_readnum() %> 등록된 댓글 : <%=rdao.totalRef(arr.get(i).getBbs_idx()) %> 게시일 : 
+					<div class="date">조회수 : <%=arr.get(i).getBbs_readnum() %> | 등록된 댓글 : <%=rdao.totalRef(arr.get(i).getBbs_idx()) %> | 게시일 : 
 						<script>
 					var str = '<%=arr.get(i).getBbs_date_s()%>';
 					var strY=str.substring(0,4);
