@@ -102,7 +102,7 @@ article.list{
 }
 article.info{
 	display:block;
-	margin-top: 30px;
+	margin-top: 0px;
 	margin-left: 15px;
 	margin-bottom: 20px;
 	height:auto;
@@ -136,10 +136,6 @@ article.info table tr td{
 				<tr>
 					<th >아이디</th>
 					<td class="l"><%=dto.getMember_id()%></td>
-				</tr>
-				<tr>
-					<th >비밀번호</th>
-					<td class="l"><%=dto.getMember_pwd()%></td>
 				</tr>
 				<tr>
 					<th >닉네임</th>
