@@ -319,7 +319,7 @@ function openDel(){
 }
 function openReport(){
 	window.open('/brick_market/report/report.jsp?bbs_idx=<%=bbs_idx%>',
-			+'reportPage','width=570,height=300');	
+			+'reportPage','width=570,height=390');	
 }
 function openRivew() {
 	window.open('/brick_market/review/review.jsp?bbs_idx='+
