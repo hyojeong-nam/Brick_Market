@@ -369,7 +369,7 @@ function openRivew() {
 			<%
 			int report_cnt = pdao.cntReport(user_idx);
 			String pstr = "";
-			if(report_cnt >= 5){
+			if(report_cnt >= 1){
 				pstr = "[신고 횟수 "+report_cnt+"회]";
 			}
 			ArrayList<ReviewDTO> varr = vdao.selectReview(user_idx);
@@ -413,18 +413,10 @@ function openRivew() {
 			<div class="btn">
 			<hr>
 			<%if(midx!=0) {%>
-				<a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>">
-				수정
-				</a>
-				<a href="#" onclick="openDel();">
-				삭제
-				</a>
-				<a href="#" onclick="openRivew();">
-				리뷰 
-				</a>
-				<a href="#" onclick="openReport();">
-				신고 
-				</a>
+				<a href="reWrite.jsp?bbs_idx=<%=bbs_idx%>&bbs_writer_idx=<%=bdto.getBbs_writer_idx()%>">수정</a>
+				<a href="#" onclick="openDel();">삭제</a>
+				<a href="#" onclick="openRivew();">리뷰</a>
+				<a href="#" onclick="openReport();">신고</a>
 			<%}
 			int like=-1;
 			if(midx!=0){
