@@ -127,7 +127,7 @@
 	margin: 0px 0px;
 	padding: 0px 0px;
 }
-#nick{
+#header_nick{
 	font-weight: bold;
 }
 </style>
@@ -151,7 +151,7 @@ function op() {
 		mdtoheader = mdaoheader.searchIdx(midx);
 		%>
 		<span class="logintext">
-			<a href="/brick_market/member/myPage.jsp" id="nick"><%=mdtoheader.getMember_nick()%>님</a> 환영합니다&nbsp&nbsp&nbsp&nbsp&nbsp
+			<a href="/brick_market/member/myPage.jsp" id="header_nick"><%=mdtoheader.getMember_nick()%>님</a> 환영합니다&nbsp&nbsp&nbsp&nbsp&nbsp
 		</span>
 		<span>
 		<a href="/brick_market/bbs/write.jsp">상품등록</a>
