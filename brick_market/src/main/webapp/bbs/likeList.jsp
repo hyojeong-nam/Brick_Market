@@ -185,6 +185,7 @@ int cnt=ldao.totalCnt(midx);
 						</div>
 							<div class="subject">
 					<span>	<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
+							</a>
 							<%=arr.get(i).getBbs_subject()%> 
 										<%
 										int price = arr.get(i).getBbs_price();
@@ -202,7 +203,7 @@ int cnt=ldao.totalCnt(midx);
 										}
 										price_s = price + price_s;
 										%>
-							</a></span></div><span class="price"><%=price_s%> <a class="won">원</a></span>
+							</span></div><span class="price"><%=price_s%>원</span>
 							<span class="sub">
 							<span class="sub-text">관심글 취소!</span>
 							<input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'" value="♥"></span>
