@@ -442,22 +442,38 @@ public class BbsDAO {
 			if(!(keyword.equals("") || keyword.length() == 0)) {
 				keywordsql1 = ", instr(bbs_subject,'"
 			+keyword+"') as result "; 
-				keywordsql2 = " and result > 0";
+				keywordsql2 = " where result > 0 ";
 			}
 			String categorysql = "";
 			if(category != -1) {
-				categorysql = " and bbs_category = "+String.valueOf(category);
+				categorysql = " and bbs_category = "+String.valueOf(category)+" ";
 			}
 			String statussql = "";
 			if(status != -1) {
-				statussql = " and bbs_status = "+String.valueOf(status);
+				statussql = " and bbs_status = "+String.valueOf(status)+" ";
 			}
 			conn = com.team4.db.Team4DB.getConn();
-			String sql = "select * from "
-					+ "(select rownum as rnum, a.* "+keywordsql1+" from "
-					+ "(select * from bbs_table where bbs_idx > 0 " +categorysql+statussql
-					+ " order by bbs_idx desc)a)b "
-					+ "where rnum >= ? and rnum <= ?"+keywordsql2;
+			String sql = "select c.* from"
+					+ "(select b.* , rownum as rnum "
+					+ "  from ("
+					+ "        select"
+					+ "               a.*"
+					+				  keywordsql1
+					+ "          from ("
+					+ "                select * "
+					+ "                  from bbs_table "
+					+ "                 where bbs_idx > 0"
+					+ 					statussql
+					+ 					categorysql
+					+ "                 order by bbs_idx desc"
+					+ "               )a"
+					+ "       )b "
+					+ 	keywordsql2
+					+ " )c "
+					+ " where  rnum >= ?"
+					+ "   and rnum <= ?";
+			
+			
 			ps = conn.prepareStatement(sql);
 			int start = (page - 1) * size + 1;
 			int end = page * size + extra;
@@ -465,26 +481,32 @@ public class BbsDAO {
 			ps.setInt(2, end);
 			rs = ps.executeQuery();
 			ArrayList<BbsDTO> arr = new ArrayList<BbsDTO>();
-			while(rs.next()) {
-				int bbs_idx = rs.getInt("bbs_idx");
-				String bbs_subject = rs.getString("bbs_subject");
-				String bbs_content = rs.getString("bbs_content");
-				int bbs_price = rs.getInt("bbs_price");
-				String bbs_img = rs.getString("bbs_img");
-				String bbs_date_s = rs.getString("bbs_date");
-				java.sql.Date bbs_date=rs.getDate("bbs_date");
-				int bbs_readnum = rs.getInt("bbs_readnum");
-				int bbs_writer_idx = rs.getInt("bbs_writer_idx");
-				int bbs_category = rs.getInt("bbs_category");
-				int bbs_status = rs.getInt("bbs_status");
-				String bbs_place = rs.getString("bbs_place");
-				int bbs_how = rs.getInt("bbs_how");
-				BbsDTO dto = new BbsDTO(bbs_idx, bbs_subject, bbs_content, bbs_price, bbs_img, bbs_date, bbs_readnum, bbs_writer_idx, bbs_category, bbs_status, bbs_place, bbs_how,bbs_date_s);
-				arr.add(dto);
+			if(rs.next()) {
+				do {
+					int bbs_idx = rs.getInt("bbs_idx");
+					String bbs_subject = rs.getString("bbs_subject");
+					String bbs_content = rs.getString("bbs_content");
+					int bbs_price = rs.getInt("bbs_price");
+					String bbs_img = rs.getString("bbs_img");
+					String bbs_date_s = rs.getString("bbs_date");
+					java.sql.Date bbs_date=rs.getDate("bbs_date");
+					int bbs_readnum = rs.getInt("bbs_readnum");
+					int bbs_writer_idx = rs.getInt("bbs_writer_idx");
+					int bbs_category = rs.getInt("bbs_category");
+					int bbs_status = rs.getInt("bbs_status");
+					String bbs_place = rs.getString("bbs_place");
+					int bbs_how = rs.getInt("bbs_how");
+					BbsDTO dto = new BbsDTO(bbs_idx, bbs_subject, bbs_content, bbs_price, bbs_img, bbs_date, bbs_readnum, bbs_writer_idx, bbs_category, bbs_status, bbs_place, bbs_how,bbs_date_s);
+					arr.add(dto);
+				}
+				while(rs.next());
+			}else {
+				System.out.println("검색결과 없음");
 			}
 			return arr;
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("검색 안됨");
 			return null;
 		} finally {
 			try {

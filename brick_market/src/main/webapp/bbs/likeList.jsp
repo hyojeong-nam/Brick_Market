@@ -185,8 +185,8 @@ int cnt=ldao.totalCnt(midx);
 						</div>
 							<div class="subject">
 					<span>	<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
-							</a>
 							<%=arr.get(i).getBbs_subject()%> 
+							</a>
 										<%
 										int price = arr.get(i).getBbs_price();
 										String price_s = "";
