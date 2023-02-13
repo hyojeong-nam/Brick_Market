@@ -20,6 +20,7 @@ int size = 1024*1024*15;
 MultipartRequest mr = new MultipartRequest(request,savepath,size,"UTF-8",new DefaultFileRenamePolicy());
 
 String email2="@"+mr.getParameter("email2");
+
 int result=mdao.joinUpdate(mr, user_idx, email2, savepath+"\\");
 
 String msg=result>0?"회원 정보가 수정되었습니다.":"회원 정보 수정 실패했습니다.";

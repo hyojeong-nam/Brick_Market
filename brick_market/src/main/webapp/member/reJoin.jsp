@@ -26,7 +26,7 @@ input[type=file]::file-selector-button {
   }
 }
 .td1{
-text-align: center;
+	text-align: center;
 }
 #h {
 	font-size: 30px;
@@ -111,8 +111,28 @@ t3{
 	border-radius: 10px 10px 10px 10px;
 	font-family: inherit;
 }
+#go2 {
+	width: 50px;
+	background-color: rgb(245,147,109);
+	border-color: transparent;
+	color: white;
+	padding: 8px;
+	margin-top: 3px;
+	margin-bottom: 5px;
+	border-radius: 10px 10px 10px 10px;
+	font-family: inherit;
+}
 #re {
 	width: 80px;
+	background-color: lightgrey;
+	border-color: transparent;
+	color: black;
+	padding: 8px;
+	border-radius: 10px 10px 10px 10px;
+	font-family: inherit;
+}
+#re2 {
+	width: 50px;
 	background-color: lightgrey;
 	border-color: transparent;
 	color: black;
@@ -140,6 +160,14 @@ tbody tr td h2{
 }
 #t3_bottom{
 	padding-bottom: 10%
+}
+
+summary::marker{
+	font-size:0;
+    font-family: inherit;
+    width: 120px;
+    margin-top: 5px;
+    margin-botton: 5px;
 }
 
 </style>
@@ -185,77 +213,34 @@ String joindate =sdf.format(original_date);
 			rejoin.email2.value = rejoin.email_select.value;
 		}
 	}
-</script>
-<script>
-function check_pwd() {
-	var pwd1 = document.getElementById('pwd1').value;
-	var pwd2 = document.getElementById('pwd2').value;
-
-	if (pwd1 != '' && pwd2 != '') {
-		if (pwd1 == pwd2) {
-			document.getElementById('check').innerHTML = '새로운 비밀번호를 입력해 주세요.'
-			document.getElementById('check').style.color = 'red';
-			return false;
-		}
-	}
 	
-function notice(){
-	var pwd2 = document.getElementById('pwd2').value;
-	if (pwd2 == ''){
-		alert("변경된 비밀번호가 없습니다.");
-		return false;
-	}
-}
-
-	function update_check(){
+	function noticePwd() {
 		var pwd1 = document.getElementById('pwd1').value;
 		var pwd2 = document.getElementById('pwd2').value;
 
-		if (document.getElementById('name').value == null
-				|| document.getElementById('name').value == "") {
-
-			alert("이름을 입력해주세요.");
-			return false;
-		}
-
-		if (document.getElementById('id').value == null
-				|| document.getElementById('id').value == "") {
-
-			alert("아이디를 입력해주세요.");
-			return false;
-		}
-		if (document.getElementById('pwd1').value == null
-				|| document.getElementById('pwd1').value == "") {
-
-			alert("비밀번호를 입력해주세요.");
-			return false;
-		}
-		if (pwd1 != pwd2) {
-			alert("비밀번호를 확인해 주세요.");
-			return false;
-		}
-
-		if (document.getElementById('nick').value == null
-				|| document.getElementById('nick').value == "") {
-
-			alert("닉네임을 입력해주세요.");
-			return false;
-		}
-
-		if (document.getElementById('email1').value == null
-				|| document.getElementById('email1').value == "") {
-
-			alert("이메일을 입력해주세요.");
-			return false;
-		}
-		if (document.getElementById('email2').value == null
-				|| document.getElementById('email2').value == "") {
-
-			alert("도메인을 선택해주세요.");
-			return false;
+		if (pwd1 != '' && pwd2 != '') {
+			if (pwd1 == pwd2) {
+				document.getElementById('check').innerHTML = '비밀번호가 일치합니다.'
+				document.getElementById('check').style.color = 'blue';
+				return true;
+			} else {
+				document.getElementById('check').innerHTML = '비밀번호가 일치하지 않습니다.';
+				document.getElementById('check').style.color = 'red';
+				return false;
+			}
 		}
 	}
-}
+	
+	function closeDetails() {
+	    document.getElementById("details").removeAttribute("open");
+	    window.location = "#details";
+	}
+</script>
+<script>
+	function pwdChange(){
+		document.rejoin.action="reJoinPwd.jsp";
+		document.rejoin.submit();
+	}
 </script>
 </head>
 <body>
@@ -290,18 +275,26 @@ function notice(){
 			</tr>
 			
 			<tr>
-			<td class="td1"> 현재 비밀번호 </td>
-			<td><input type="password" name="pwd" id="pwd1" 
-			value="<%=dto.getMember_pwd()%>" onchange="check_pwd()" class="textbox" required> </td>
-			</tr>
 			
-			<tr>
-			<td class="td1">
-			변경할 비밀번호
+			<td width="120">
+			비밀번호
 			</td>
-			<td>
-			 <input type="password" name="member_pwd" id="pwd2" onchange="check_pwd()" class="textbox"> 
-			<br><span id="check"></span>
+			
+			<td class="td1">
+			<details id="details">
+    			<summary>비밀번호 변경하기</summary>
+   	 		<p>
+   	 		변경할 비밀번호<br><input type="password" name="member_pwd" id="pwd1" onchange="noticePwd()" class="textbox"> 
+			<br>
+			변경할 비밀번호 확인<br>
+			<input type="password" name="member_pwd2" id="pwd2" onchange="noticePwd()" class="textbox">
+			<br>
+			<span id="check"></span>
+			<br>
+			<input type="button" value="변경" id="go2" onclick="pwdChange()"> 
+			<input type="button" value="취소" id="re2" onclick="closeDetails()">
+   	 		</p>
+			</details>
 			</td>
 			</tr>
 			
@@ -327,13 +320,13 @@ function notice(){
 						</select>
 				</td>
 				</tr>
-				<tr>
-				<td colspan="2" id="t3_bottom"><input type="submit" value="수정하기" id="go"> 
-				<input type="button" value="취소하기" id="re" onclick="history.back();">
-				</td>
-				</tr>
-				
-			</table>	 
+		
+			<tr>
+			<td colspan="2" id="t3_bottom"><input type="submit" value="수정하기" id="go"> 
+			<input type="button" value="취소하기" id="re" onclick="history.back();">
+			</td>
+			</tr>	
+			</table>
 		  </form>
 		</article>
 	</section>

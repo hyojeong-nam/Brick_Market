@@ -190,7 +190,7 @@ public class MemberDAO {
 	 * @param email2 이메일 주소 뒷자리
 	 * @param realpath 파일 삭제를 위한 이미지 경로
 	 * @return 1이 반환될 경우 정상 수정 완료, -1이 반환된 경우 수정 실패
-	 * */
+	 * 
 	public int joinUpdate(MultipartRequest mr, int idx, String email2, String realpath) {
 		try {
 			conn=com.team4.db.Team4DB.getConn();
@@ -246,6 +246,93 @@ public class MemberDAO {
 
 		}
 	}
+	*/
+	
+	public int joinUpdate(MultipartRequest mr, int idx, String email2, String realpath) {
+		try {
+			conn=com.team4.db.Team4DB.getConn();
+
+			String imgname=mr.getFilesystemName("member_img");
+			String img="/brick_market/member/img/"+imgname;
+			String imgsql="member_img='"+img+"',";
+			
+			
+			if(imgname==null) {
+				imgsql="";
+			}else {
+				deleteMemberBeforeImg(realpath, idx);
+			}
+			
+			
+			String sql = "update member_table set "
+					+ "member_name=?, member_nick=?,"+imgsql+"member_email=? "
+					+ "where member_idx="+idx;
+			ps = conn.prepareStatement(sql);
+			
+			String name=mr.getParameter("member_name");
+			ps.setString(1, name);
+			
+			String nick=mr.getParameter("member_nick");
+			ps.setString(2, nick);
+			
+			String email=mr.getParameter("member_email")+email2;
+			ps.setString(3, email);
+			
+			int count = ps.executeUpdate();
+			return count;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+
+		} finally {
+			try {
+				if (ps != null) ps.close();
+				if (conn != null) conn.close();
+
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+
+		}
+	}
+	
+	/**회원 정보 수정 관련 메서드
+	 * @param mr MultipartRequest
+	 * @param idx 정보를 수정할 회원의 고유 번호
+	 * @param updatepwd 변경할 비밀번호
+	 * @return count 반환될 경우 정상 수정 완료, -1이 반환된 경우 수정 실패
+	 * */
+	public int pwdUpdate(MultipartRequest mr, int idx, String updatepwd) {
+		try {
+			conn=com.team4.db.Team4DB.getConn();
+
+			String sql = "update member_table set "
+					+ "member_pwd=? "
+					+ "where member_idx="+idx;
+			ps = conn.prepareStatement(sql);
+			
+			String pwd=mr.getParameter("member_pwd");
+			ps.setString(1, pwd);
+			
+			int count=ps.executeUpdate();
+			return count;
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+
+		} finally {
+			try {
+				if (ps != null) ps.close();
+				if (conn != null) conn.close();
+
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+
+		}
+	}
+	
 
 	/** 이전 파일 삭제 메소드 (수정 시 사용)
 	 * @param realpath 삭제할 프로필 사진의 실제 저장 경로
