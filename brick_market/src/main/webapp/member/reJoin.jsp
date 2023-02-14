@@ -238,8 +238,18 @@ String joindate =sdf.format(original_date);
 </script>
 <script>
 	function pwdChange(){
+		var pwd1 = document.getElementById('pwd1').value;
+		var pwd2 = document.getElementById('pwd2').value;
+		if(pwd1 != pwd2){
+			alert("입력한 비밀번호가 다릅니다. 다시 확인해 주세요.");
+			return false;
+		} if else{
+		}
+		
+		else{
 		document.rejoin.action="reJoinPwd.jsp";
 		document.rejoin.submit();
+		}	
 	}
 </script>
 </head>
