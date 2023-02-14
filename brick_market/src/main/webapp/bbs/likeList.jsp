@@ -64,17 +64,16 @@ margin-left: 630px;
 
 }
 
-.sub-text{
-	border-radius: 15px; 
-	width: 100px;
-	padding-top: 15px;
+
+
+.sub-text a{
 	color: transparent;
 }
-
-.sub:hover .sub-text{
+.sub:hover .sub-text a{
 	display: inline;
 	color:black;
 	font-weight: bolder;
+	cursor: pointer; 
 }
 
 .sub input{
@@ -91,6 +90,7 @@ margin-left: 630px;
 	border: 0px;
 	background-color: transparent;
 	color: silver;
+	cursor: pointer;
 }
 
 h1{
@@ -205,7 +205,7 @@ int cnt=ldao.totalCnt(midx);
 										%>
 							</span></div><span class="price"><%=price_s%>원</span>
 							<span class="sub">
-							<span class="sub-text">관심글 취소!</span>
+							<span class="sub-text"><a onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'">관심글 취소!</a></span>
 							<input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'" value="♥"></span>
 					</div>
 					<%
