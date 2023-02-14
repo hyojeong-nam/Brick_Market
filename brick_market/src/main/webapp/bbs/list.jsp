@@ -257,14 +257,15 @@ ArrayList<BbsDTO> arr = bdao.bbsList(size, pagenum, select, keyword, category, s
 			int price = arr.get(i).getBbs_price();
 			String price_s = "";
 			if (price >= 100000000){
-				price_s = (price / 100000000) +"." + (price % 10) + "억 원";
+				price_s = (price / 100000000.0) + "억 원";
 			}else if(price >= 10000){
-				price_s = (price / 10000) +"." + (price % 10) + "만 원";
+				price_s = (price / 10000.0)  + "만 원";
 			}else if(price > 0){
-				price_s = price + "원";
+				price_s = (price) + "원";
 			}else {
 				price_s = "무료나눔";
 			}
+			price_s = price_s.replace(".0", "");
 			%>
 				<span><%=price_s%></span>
 			</div>
