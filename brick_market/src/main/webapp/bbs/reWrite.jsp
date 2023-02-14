@@ -175,7 +175,7 @@ if(widx!=uidx){
 					</tr>
 					<tr>
 						<th>상품가격</th>
-						<td colspan="3"><input type="number" min="0" name="bbs_price" pattern="[0-9]+"
+						<td colspan="3"><input type="number" min="0" name="bbs_price"
 							value="<%=bdto.getBbs_price()%>" required></td>
 					</tr>
 					<tr>
