@@ -29,6 +29,10 @@ table {
 	height: 200px;
 	width: 200px;
 }
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 </style>
 <%
 String bbs_idx_s = request.getParameter("bbs_idx");
@@ -171,7 +175,7 @@ if(widx!=uidx){
 					</tr>
 					<tr>
 						<th>상품가격</th>
-						<td colspan="3"><input type="text" name="bbs_price"
+						<td colspan="3"><input type="number" min="0" name="bbs_price" pattern="[0-9]+"
 							value="<%=bdto.getBbs_price()%>" required></td>
 					</tr>
 					<tr>

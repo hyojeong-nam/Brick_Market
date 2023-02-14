@@ -109,6 +109,9 @@ window.location.href='/brick_market/member/login.jsp';
 	user_idx = (Integer) session.getAttribute("midx");
 }
 %>
+<script>
+
+</script>
 </head>
 <body>
 	<%@include file="/header.jsp"%>
@@ -162,7 +165,7 @@ window.location.href='/brick_market/member/login.jsp';
 					</tr>
 					<tr>
 						<th>상품가격</th>
-						<td colspan="3"><input type="number" name="bbs_price" pattern="[0-9]+"
+						<td colspan="3"><input type="number" id="number" min="0" name="bbs_price" pattern="[0-9]+"
 							placeholder="상품의 가격은 숫자만!" required></td>
 					</tr>
 					<tr>
