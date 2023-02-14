@@ -20,65 +20,75 @@ border: 0px;
 width: max(80%);
 margin: auto;
 }
-.main{
-text-align: left;
+.box{
+	text-align: left;
+	display: grid;
+	border:10px solid;
+	height:150px;
+	border-color:rgba(243,114,62,0.3);
+	border-radius: 15px;
+	margin-bottom: 5px;
+	grid-template-columns: 20% 50% 30%;
+	grid-template-rows: 30% 40% 30%;
+	grid-template-areas:
+	"img  date   date" 
+	"img  title  price"
+	"img  .      sub" ;
 }
 .main .img{
-width: 80px;
-height: 80px;
-margin: 10px;
-float: left;
-margin-left: 0px;
+width: 120px;
+height: 120px;
+margin:15px 15px;
 object-fit: cover;
+grid-area: img;
+
 }
-.main .subject{
+.subject{
+margin:15px 15px;
 font-size: 25px;
-width: 400px;
-text-align: center;
-margin-left: 150px;
-margin-top: 30px;
+text-align: left;
+grid-area: title;
+
 }
-.mid .main .price{
-margin-left:500px;
-display: inline-block;
+.main .price{
+margin:15px 15px;
+font-size: 20px;
 color: red;
+grid-area: price;
+text-align: right;
+
 }
-.mid .main .date{
-float:right;
+.main .date{
+margin:15px 15px;
+text-align:right;
 font-size:  15px;
-margin: 10px;
+grid-area: date;
+
 }
 .button{
 z-index: 1;
-  width: 150px;
-  height: 200px;
  right: 0px;
  position: fixed;
- top:70%;
-}
-.class{
-height: 50px;
 }
 .sub {
-margin-left: 630px;
-
+margin-right:10px;
+grid-area: sub;
+text-align: right;
 }
 
-.sub-text{
-	border-radius: 15px; 
-	width: 100px;
-	padding-top: 15px;
+
+
+.sub-text a{
 	color: transparent;
 }
-
-.sub:hover .sub-text{
+.sub:hover .sub-text a{
 	display: inline;
 	color:black;
 	font-weight: bolder;
+	cursor: pointer; 
 }
 
 .sub input{
-	
 	font-size: 30px;
 	outline: none;
 	border: 0px;
@@ -91,6 +101,7 @@ margin-left: 630px;
 	border: 0px;
 	background-color: transparent;
 	color: silver;
+	cursor: pointer;
 }
 
 h1{
@@ -102,12 +113,6 @@ h1{
 }
 .price{
 	font-weight: bold;
-}
-div .main{
-	border:10px solid;
-	border-color:rgba(243,114,62,0.3);
-	border-radius: 15px;
-	margin-bottom: 5px;
 }
 /*임시로 넣어둠*/
 a{
@@ -146,67 +151,69 @@ int cnt=ldao.totalCnt(midx);
 	%>
 	<section class="mid">
 	<h1>관심글 목록</h1>
-	<div class="button"  onclick="window.scrollTo(0,0);"><input type="button" value="TOP" class="class"></div>
 		<article>
 			<fieldset>
-				<div>
 					<%if(arr!=null&&arr.size()!=0){
 					for (int i = 0; i < arr.size(); i++) {
 					%>
-					<div class="main">
-							<div class="mid"><a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>"><img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>"></a></div>
-					<div class="date">조회수 : <%=arr.get(i).getBbs_readnum() %> | 등록된 댓글 : <%=rdao.totalRef(arr.get(i).getBbs_idx()) %> | 게시일 : 
+					<div class="main box">
+					<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
+					<img class="img" src="<%=arr.get(i).getBbs_img()%>" alt="<%=arr.get(i).getBbs_subject()%>">
+					</a>
+					<span class="date">조회수 : <%=arr.get(i).getBbs_readnum() %> | 등록된 댓글 : <%=rdao.totalRef(arr.get(i).getBbs_idx()) %> | 게시일 : 
 						<script>
-					var str = '<%=arr.get(i).getBbs_date_s()%>';
-					var strY=str.substring(0,4);
-					var strM=parseInt(str.substring(5,7))-1;
-					var strD=str.substring(8,10);
-					var strH=str.substring(11,13);
-					var strMi=str.substring(14,16);
-					var strS=str.substring(17,19);
-					var date=new Date(strY,strM,strD,strH,strMi,strS);
-					var today=new Date();
-					var dayma= today-date;
-					if(dayma<60*1000){//1분
-						document.write('방금전');
-					}else if(dayma<1000*60*60){//1시간
-						var mi=Math.floor(dayma/(1000*60));//분구하기
-						document.write(mi+'분전');
-					}else if(dayma<1000*60*60*24){//24시간
-						var h=Math.floor(dayma/(1000*60*60));//시간구하기
-						document.write(h+'시간전');
-					}else if(dayma<1000*60*60*24*7){
-						var d=Math.floor(dayma/(1000*60*60*24));
-						document.write(d+'일전');
-					}else{
-						document.write('일주일 이상');
-					}
-					</script>
-						</div>
-							<div class="subject">
-					<span>	<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
-							<%=arr.get(i).getBbs_subject()%> 
-							</a>
-										<%
-										int price = arr.get(i).getBbs_price();
-										String price_s = "";
-										while(price >= 1000){
-											int div = price % 1000;
-											if(div > 100){
-												price_s = "," + div + price_s;
-											}else if(div > 10){
-												price_s = ",0" + div + price_s;
-											}else{
-												price_s = ",00" + div + price_s;
-											}
-											price = price / 1000;
-										}
-										price_s = price + price_s;
-										%>
-							</span></div><span class="price"><%=price_s%>원</span>
-							<span class="sub">
-							<span class="sub-text">관심글 취소!</span>
-							<input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'" value="♥"></span>
+						var str = '<%=arr.get(i).getBbs_date_s()%>';
+						var strY=str.substring(0,4);
+						var strM=parseInt(str.substring(5,7))-1;
+						var strD=str.substring(8,10);
+						var strH=str.substring(11,13);
+						var strMi=str.substring(14,16);
+						var strS=str.substring(17,19);
+						var date=new Date(strY,strM,strD,strH,strMi,strS);
+						var today=new Date();
+						var dayma= today-date;
+						if(dayma<60*1000){//1분
+							document.write('방금전');
+						}else if(dayma<1000*60*60){//1시간
+							var mi=Math.floor(dayma/(1000*60));//분구하기
+							document.write(mi+'분전');
+						}else if(dayma<1000*60*60*24){//24시간
+							var h=Math.floor(dayma/(1000*60*60));//시간구하기
+							document.write(h+'시간전');
+						}else if(dayma<1000*60*60*24*7){
+							var d=Math.floor(dayma/(1000*60*60*24));
+							document.write(d+'일전');
+						}else{
+							document.write('일주일 이상');
+						}
+						</script>
+					</span>
+					<span class="subject">
+						<a href="/brick_market/bbs/content.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>">
+						<%=arr.get(i).getBbs_subject()%> 
+						</a>
+						<%
+						int price = arr.get(i).getBbs_price();
+						String price_s = "";
+						while(price >= 1000){
+							int div = price % 1000;
+							if(div > 100){
+								price_s = "," + div + price_s;
+							}else if(div > 10){
+								price_s = ",0" + div + price_s;
+							}else{
+								price_s = ",00" + div + price_s;
+							}
+							price = price / 1000;
+						}
+						price_s = price + price_s;
+						%>
+					</span>
+					<span class="price"><%=price_s%>원</span>
+					<span class="sub">
+						<span class="sub-text"><a onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'">관심글 취소!</a></span>
+						<input type="button" onclick="javascript:location.href='likeUpdate_ok.jsp?bbs_idx=<%=arr.get(i).getBbs_idx()%>&user_idx=<%=midx%>&check=1&cp=<%=cp%>'" value="♥">
+					</span>
 					</div>
 					<%
 					}
@@ -224,11 +231,10 @@ int cnt=ldao.totalCnt(midx);
 					<%
 					}
 					%>
-				</div>
 			</fieldset>
 			
+			<div class="button"  onclick="window.scrollTo(0,0);"><input type="button" value="TOP" class="class"></div>
 		</article>
-		
 	</section>
 	<%@include file="/footer.jsp"%>
 </body>
