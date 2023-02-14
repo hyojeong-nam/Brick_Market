@@ -204,22 +204,23 @@ div .tag span{
 	text-decoration: none;
 	color: black;
 }
+div .a:hover{
+	color: rgb(243,114,62);
+}
 .sese input{
 margin-top: 20px;
 }
 .replying .nick{
 display: block;
-float: left;
-margin-left: 20px;
+margin-left: 80px;
 }
 .replying textarea{
 z-index: 1;
 float: left;
-margin-left: 10px;
+margin-left: 30px;
 }
 .rereplying textarea{
 display: inline-block;
-float: left;
 }
 .tag{
 margin-right: 30px;
@@ -232,6 +233,7 @@ textarea {
 padding: 10px;
 margin-left: 20px;
 resize: none;
+height: max(300%);
 }
 
 .nn textarea {
@@ -444,13 +446,13 @@ function openRivew() {
 			var submitstr='<div class="rereplying"><form action="rereply_ok.jsp?" method="post">'+
 			'<div class="arrow">&nbsp;&nbsp;&nbsp;&hookrightarrow;</div>'+
 			'<div><img class="img" src="<%=mdtoheader.getMember_img()%>"></div>'+
-			'<div class="content"><textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea></div>'+
+			'<div class="content"><textarea rows="4" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required></textarea></div>'+
 			'<input type="hidden" name="reply_write_idx" value="<%=midx%>">'+
 			'<input type="hidden" name="ref" value="'+ref+'">'+
 			'<input type="hidden" name="cp" value="<%=cp%>">'+
 			'<input type="hidden" name="bbs_idx" value="<%=bbs_idx%>">'+
-			'<div onclick="javascript:noreply('+idx+');">숨기기</div>'+
-			'<div class="tag"><input type="submit" class="submit" value="등록"></div></form></div>';
+			'<div class="tag" onclick="javascript:noreply('+idx+');"><a href="#;">숨기기 </a>'+
+			'<input type="submit" class="submit" value="등록"></div></form></div>';
 			return submitstr;
 				}else{
 				var submitstr='<div>로그인후 댓글입력 가능</div>';
@@ -565,7 +567,7 @@ function openRivew() {
 					<hr>
 						<div class="replying"><img class="img" src="<%=mdtoheader.getMember_img()%>" alt="내사진">
 							<div class="nick"><%=mdtoheader.getMember_nick()%></div>
-							<textarea rows="5" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required ></textarea>
+							<textarea rows="4" cols="80" placeholder="답글을 입력해보세요" name="reply_content" required ></textarea>
 							<div class="sese">
 							<input class="submit" type="submit" value="등록">
 							</div>
