@@ -239,9 +239,7 @@ height: max(300%);
 .nn textarea {
 	margin-bottom: 20px;
 }
-.nn{
-margin-bottom: 30px;
-}
+
 .mid #zz textarea {
 margin-left: 0px;
 padding-left: 10px;
@@ -451,7 +449,7 @@ function openRivew() {
 			'<input type="hidden" name="ref" value="'+ref+'">'+
 			'<input type="hidden" name="cp" value="<%=cp%>">'+
 			'<input type="hidden" name="bbs_idx" value="<%=bbs_idx%>">'+
-			'<div class="tag" onclick="javascript:noreply('+idx+');"><a href="#;">숨기기 </a>'+
+			'<div class="tag"><a href="#;" onclick="javascript:noreply('+idx+');">숨기기 </a>'+
 			'<input type="submit" class="submit" value="등록"></div></form></div>';
 			return submitstr;
 				}else{
