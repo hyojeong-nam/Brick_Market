@@ -179,7 +179,7 @@ function op() {
 	<form action="/brick_market/bbs/list.jsp" class="search" id="search">
 		<div class="search_div">
 		<select name="status" id="status">
-			<option value="0" selected="selected">판매중</option>
+			<option value="0" selected="selected">판매 중</option>
 			<option value="1">예약 완료</option>
 			<option value="2">거래 완료</option>
 		</select>
